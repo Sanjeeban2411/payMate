@@ -1,0 +1,26 @@
+{
+  "name": "paymate",
+  "version": "1.0.0",
+  "description": "\"# payMate\"",
+  "main": "index.js",
+  "scripts": {
+    "dev":"nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sanjeeban2411/payMate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sanjeeban2411/payMate/issues"
+  },
+  "homepage": "https://github.com/Sanjeeban2411/payMate#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.0",
+    "validator": "^13.7.0"
+  }
+}
