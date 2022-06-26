@@ -1,5 +1,9 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+require('../db')
+const Task = require('./expense')
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -24,9 +28,31 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true,
         // minLength: 6,
+    },
+    token:{
+        type: String,
+        required: true
     }
 })
 
+userSchema.virtual('expense',{
+    ref:'Expense',
+    localField:'_id',
+    foreignField:'owner'
+})
+
+userSchema.pre('save', async function (next){
+    this.password = await bcrypt.hash(this.password,8)
+    next()
+})
+
+
+userSchema.methods.generateAuthToken = async function(){
+    const token =  jwt.sign({_id:this._id.toString()}, "secretcode")
+    this.token = token
+    return token
+}
+
+
 const User = mongoose.model('User', userSchema)
 module.exports = User
-
