@@ -29,6 +29,9 @@ const userSchema = new mongoose.Schema({
         trim: true,
         // minLength: 6,
     },
+    dp:{
+        type: Buffer
+    },
     token:{
         type: String,
         required: true

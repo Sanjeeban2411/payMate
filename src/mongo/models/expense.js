@@ -15,7 +15,7 @@ const expenseSchema = new mongoose.Schema({
     owner:{
         type:String,
         required:true,
-        ref: "user"
+        ref: "Users"
     }
 },{
     timestamps:true
