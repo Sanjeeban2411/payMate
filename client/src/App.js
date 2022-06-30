@@ -1,11 +1,20 @@
-import Home from "./components/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
     <>
-      <Navbar/>
-      <Home/>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/signup" element={<Signup />} />
+          {/* <Route path="*" element={<NoPage />} /> */}
+        </Routes>
+      </BrowserRouter>
+      {/* <Home/> */}
     </>
   );
 }

@@ -4,29 +4,22 @@ const Home = () => {
 
   const [data, setData] = React.useState(null);
 
-  // React.useEffect(() => {
-  //   const res =  fetch("/api")
-  //   setData(res)
-  //   .then((res) => res.json())
-  //   .then((data) => setData(data.message));
-  //   // console.log(res)
-  // }, [setData]);
 
-  React.useEffect(() => {
-    const url = "/test?Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmJiMjNmYTkxMGM0OTk4NGM0ZWIyYjciLCJpYXQiOjE2NTY0MzE2MTB9.qC9DWNmwSZpt_q4LcEpmt1i9W6_2FNh8hQjKmI2ZAyk";
+//   React.useEffect(() => {
+//     const url = "/test";
 
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url)
-        const json = await response.json()
-        console.log(json)
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
+//     const fetchData = async () => {
+//       try {
+//         const response = await fetch(url)
+//         const json = await response.json()
+//         console.log(json)
+//       } catch (error) {
+//         console.log("error", error);
+//       }
+//     };
 
-    fetchData();
-  }, []);
+//     fetchData();
+//   }, []);
 
   console.log(data)
 
