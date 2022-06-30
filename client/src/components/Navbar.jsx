@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import { FaUserAlt, FaMoneyBillWave } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai'
 import { AiOutlineMenu } from 'react-icons/ai'
@@ -6,6 +6,8 @@ import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
 
 
 const Navbar = () => {
+
+    
     const [nav, setNav] = useState(false)
     const [logo, setLogo] = useState(false)
     const handleNav = () => {

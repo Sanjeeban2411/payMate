@@ -62,9 +62,13 @@ router.post('/addavatar', auth, upload.single('avatar'), async(req, res)=>{
     // res.send(req.file.buffer)
 })
 
-router.get('/',auth, async(req,res)=>{
-    res.send(`Hiii, ${req.user.name}`)
+router.get('/test', auth, (req,res)=>{
+    // res.json({msg:"Hiii"})
+    res.json(req.user)
 })
 
+router.get("/api", (req, res) => {
+    res.json({ message: "Hello from server!" });
+  });
 
 module.exports = router
