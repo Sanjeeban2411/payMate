@@ -29,7 +29,7 @@ const Navbar = () => {
                 </ul>
                 <div className=' hidden md:flex md:pr-3 justify-between items-center  cursor-pointer'>
                     <button className='rounded-full p-3 bg-black text-white'><FaUserAlt /></button>
-                    <h2 className='text-2xl font-bold m-2 text-red-500'>Login</h2>
+                    {/* <h2 className='text-2xl font-bold m-2 text-red-500'>Login</h2> */}
                 </div>
                 <div className='hidden md:h-3'><hr/></div>
                 <div className='md:hidden z-10 text-red-500' onClick={handleNav}>
