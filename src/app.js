@@ -12,9 +12,13 @@ const server = http.createServer(app)
 // const io = socket(server)
 const io = new socket.Server(server,{
     cors:{
-        origin:"http://127.0.0.1:3000",
+        origin:"http://localhost:3000",
         methods:["GET", "POST"]
     }
+})
+
+io.on("connection",(socket)=>{
+    console.log("User connected: ", socket.id)
 })
 
 // const room = require('./routes/room')(io)
