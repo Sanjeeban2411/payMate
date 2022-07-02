@@ -1,7 +1,7 @@
 const express = require('express')
 const http = require('http')
 const socket = require('socket.io')
-
+const cors = require('cors')
 require('./mongo/db')
 
 const userRouter = require('./routes/userRouter')
@@ -9,10 +9,17 @@ const expenseRouter = require('./routes/expenseRouter')
 
 const app = express()
 const server = http.createServer(app)
-const io = socket(server)
+// const io = socket(server)
+const io = new socket.Server(server,{
+    cors:{
+        origin:"http://127.0.0.1:3000",
+        methods:["GET", "POST"]
+    }
+})
 
 // const room = require('./routes/room')(io)
 
+app.use(cors())
 app.use(express.json())
 app.use(express.static('../client'))
 app.use(userRouter)  
