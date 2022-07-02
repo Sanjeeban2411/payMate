@@ -4,6 +4,8 @@ import User from "./pages/User";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
+import Analysis from "./pages/Analysis";
+import Rooms from "./pages/Rooms";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/user" element={<User />} />
+          <Route exact path="/analysis" element={<Analysis />} />
+          <Route exact path="/rooms" element={<Rooms />} />
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
       </BrowserRouter>
