@@ -17,6 +17,7 @@ router.post('/signup', async (req,res)=>{
         res.send({user})
     }
     catch(e){
+        console.log(e)
         res.status(500).send(e)
     }
 })
@@ -26,12 +27,15 @@ router.post('/login', async(req, res)=>{
     const user =await User.findOne({email})
     if(!user){
         res.status(404).send("Wrong credentials")
+        // console.log("not here")
     }
     else{
+        // console.log(user)
         const isMatch = await bcrypt.compare(req.body.password, user.password)
         if(isMatch){
             await user.generateAuthToken()
-            res.status(200).send(user)
+            console.log(user)
+            res.send({user})
         }
         else{
             res.status(404).send("Wrong credentials")
@@ -64,6 +68,7 @@ router.post('/addavatar', auth, upload.single('avatar'), async(req, res)=>{
 
 router.get('/test', auth, (req,res)=>{
     // res.json({msg:"Hiii"})
+    console.log("test api", req.user)
     res.json(req.user)
 })
 

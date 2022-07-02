@@ -6,54 +6,68 @@ require('../db')
 const Task = require('./expense')
 
 const userSchema = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
         required: true,
         trim: true
     },
-    email:{
+    email: {
         type: String,
         required: true,
         trim: true,
         unique: true,
         lowercase: true,
-        validate(value){
-            if(!validator.isEmail(value)){
+        validate(value) {
+            if (!validator.isEmail(value)) {
                 throw new Error("Enter a valid email")
             }
         }
     },
-    password:{
+    password: {
         type: String,
         required: true,
         trim: true,
         // minLength: 6,
     },
-    dp:{
+    dp: {
         type: Buffer
     },
-    token:{
+    token: {
         type: String,
         required: true
     }
 })
 
-userSchema.virtual('expense',{
-    ref:'Expense',
-    localField:'_id',
-    foreignField:'owner'
+userSchema.virtual('expense', {
+    ref: 'Expense',
+    localField: '_id',
+    foreignField: 'owner'
 })
 
-userSchema.pre('save', async function (next){
-    this.password = await bcrypt.hash(this.password,8)
+userSchema.pre('save', async function (next) {
+    this.password = await bcrypt.hash(this.password, 8)
     next()
 })
 
 
-userSchema.methods.generateAuthToken = async function(){
-    const token =  jwt.sign({_id:this._id.toString()}, "secretcode")
-    this.token = token
-    return token
+userSchema.methods.generateAuthToken = async function () {
+    console.log("pehle",this.token)
+    if (!this.token) {
+        const token = jwt.sign({ _id: this._id.toString() }, "secretcode", { expiresIn: '1h' })
+        this.token = token
+        return token
+    }
+
+    jwt.verify(this.token, "secretcode", (err) => {
+        if (err) {
+            console.log("expire", err)
+            const token = jwt.sign({ _id: this._id.toString() }, "secretcode", { expiresIn: '1h' })
+            this.token = token
+            return token
+        }
+    })
+    console.log("baadme",this.token)
+
 }
 
 

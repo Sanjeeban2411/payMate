@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+
 export default function Signup() {
+    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -10,8 +13,9 @@ export default function Signup() {
         setData({
             "name": name,
             "email": email,
-            "password": password.toString
+            "password": password.toString()
         })
+        
         console.log(data)
         axios({
             method: 'post',
@@ -19,7 +23,9 @@ export default function Signup() {
             data: data
         })
             .then(function (response) {
+                localStorage.setItem("jwt_token",response.data.user.token)
                 console.log(response);
+                navigate(`/user`)
             })
             .catch(function (error) {
                 console.log(error);
