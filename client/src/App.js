@@ -8,9 +8,20 @@ import Room from "./pages/Room";
 import Analysis from "./pages/Analysis";
 import Rooms from "./pages/Rooms";
 
+// import io from 'socket.io-client'
+
+// import { socket, SocketContext } from './context/socket';
+
+
 function App() {
+  // const socket = io("http://127.0.0.1:8000")
+  // socket.on('connection',()=>{
+  //   console.log("I'm connected")
+  // })
   return (
     <>
+    		{/* <SocketContext.Provider  value={socket}>  */}
+
       <BrowserRouter>
         {/* <Navbar /> */}
         <Routes>
@@ -24,6 +35,7 @@ function App() {
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
       </BrowserRouter>
+      {/* </SocketContext.Provider> */}
       {/* <Home/> */}
     </>
   );
