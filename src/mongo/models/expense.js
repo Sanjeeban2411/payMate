@@ -16,6 +16,11 @@ const expenseSchema = new mongoose.Schema({
         type:String,
         required:true,
         ref: "Users"
+    },
+    room:{
+        type:String,
+        trim:true,
+        ref:"Rooms"
     }
 },{
     timestamps:true

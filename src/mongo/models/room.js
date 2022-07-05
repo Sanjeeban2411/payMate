@@ -13,10 +13,21 @@ const roomSchema = new mongoose.Schema({
         required:true,
         trim:true
     },
-    users:[{
-        user:{
-            type:String,
-            required:true
-        }
-    }]
+    users:[String]
 })
+
+roomSchema.virtual('expense', {
+    ref: 'Expense',
+    localField: '_id',
+    foreignField: 'room'
+})
+
+roomSchema.virtual('user', {
+    ref: 'Users',
+    localField: '_id',
+    foreignField: 'room'
+})
+
+const Room = mongoose.model('Room', roomSchema)
+
+module.exports = Room

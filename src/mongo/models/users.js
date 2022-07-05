@@ -35,13 +35,20 @@ const userSchema = new mongoose.Schema({
     token: {
         type: String,
         required: true
-    }
+    },
+    rooms:[String]
 })
 
 userSchema.virtual('expense', {
     ref: 'Expense',
     localField: '_id',
     foreignField: 'owner'
+})
+
+userSchema.virtual('room', {
+    ref: 'Room',
+    localField: '_id',
+    foreignField: 'user'
 })
 
 userSchema.pre('save', async function (next) {
@@ -51,7 +58,7 @@ userSchema.pre('save', async function (next) {
 
 
 userSchema.methods.generateAuthToken = async function () {
-    console.log("pehle",this.token)
+    // console.log("pehle",this.token)
     if (!this.token) {
         const token = jwt.sign({ _id: this._id.toString() }, "secretcode", { expiresIn: '1h' })
         this.token = token
@@ -66,7 +73,7 @@ userSchema.methods.generateAuthToken = async function () {
             return token
         }
     })
-    console.log("baadme",this.token)
+    // console.log("baadme",this.token)
 
 }
 

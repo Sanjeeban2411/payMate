@@ -30,4 +30,8 @@ router.get('/getallexpenses', auth, async(req,res)=>{
     res.send(expenses)
 })
 
+router.post('/:room/addexpense', auth, async(req,res)=>{
+    
+})
+
 module.exports = router

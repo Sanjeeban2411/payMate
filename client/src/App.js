@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Room from "./pages/Room";
 import Analysis from "./pages/Analysis";
 import Rooms from "./pages/Rooms";
+import JoinRoom from "./pages/JoinRoom";
 
 // import io from 'socket.io-client'
 
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/room" element={<Room />} />
           <Route exact path="/analysis" element={<Analysis />} />
           <Route exact path="/rooms" element={<Rooms />} />
+          <Route exact path="/join" element={<JoinRoom />} />
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
       </BrowserRouter>

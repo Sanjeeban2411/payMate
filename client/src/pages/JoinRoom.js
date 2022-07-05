@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react';
 import axios from 'axios';
-const Room = () => {
 
+export default function JoinRoom() {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [data, setData] = useState('');
@@ -15,7 +15,7 @@ const Room = () => {
         console.log(data)
         axios({
             method: 'post',
-            url: '/room/create',
+            url: '/room/join',
             data: data
         })
         .then((response) => {
@@ -27,10 +27,10 @@ const Room = () => {
         .catch(error => console.log(error))
     }
 
-
-    return (
+  return (
+    <div>
         <form action='submit' className='max-w-[400px] w-full mx-auto bg-white p-8'>
-                    <h2 className='text-4xl font-bold text-center py-8'>LOGIN</h2>
+                    <h2 className='text-4xl font-bold text-center py-8'>JOIN ROOM</h2>
                     <div className='flex flex-col mb-4'>
                         <label>Room</label>
                         <input className=' border relative bg-gray-100 p-2'
@@ -54,7 +54,6 @@ const Room = () => {
                     <button className='bg-[#E18A07] relative text-white font-extrabold text-xl w-full py-3 mt-8' onClick={handleSubmit}  >create room</button>
                     {/* <p className='flex items-center mt-2'><input className='mr-2' type="checkbox" />Remember Me</p> */}
                 </form>
-    );
+    </div>
+  )
 }
-
-export default Room;

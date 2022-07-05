@@ -6,6 +6,7 @@ require('./mongo/db')
 
 const userRouter = require('./routes/userRouter')
 const expenseRouter = require('./routes/expenseRouter')
+const roomRouter = require('./routes/roomRouter')
 
 const app = express()
 // const server = http.createServer(app)
@@ -28,6 +29,7 @@ app.use(express.json())
 app.use(express.static('../client'))
 app.use(userRouter)  
 app.use(expenseRouter)
+app.use(roomRouter)
 // app.use(room)  
 
 
