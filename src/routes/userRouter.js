@@ -26,6 +26,7 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
     const email = req.body.email
     const user = await User.findOne({ email })
+    console.log(user)
     if (!user) {
         res.status(404).send("Wrong credentials")
         // console.log("not here")
@@ -33,6 +34,7 @@ router.post('/login', async (req, res) => {
     else {
         // console.log(user)
         const isMatch = await bcrypt.compare(req.body.password, user.password)
+        console.log(isMatch)
         if (isMatch) {
             await user.generateAuthToken()
             console.log(user)

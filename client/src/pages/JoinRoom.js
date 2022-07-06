@@ -1,30 +1,40 @@
 import React,{useEffect, useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 export default function JoinRoom() {
+    const navigate = useNavigate()
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [data, setData] = useState('');
 
-    const handleSubmit = (e) => {
+    const create = (e) => {
         e.preventDefault()
+        const x = localStorage.getItem("jwt_token")
+        console.log(x)
         setData({
             "name": name,
             "password": password.toString()
         })
         console.log(data)
-        axios({
-            method: 'post',
-            url: '/room/join',
-            data: data
-        })
-        .then((response) => {
-            localStorage.setItem("jwt_token",response.data.user.token)
-            // navigate('/user')
-            console.log(response)
-            console.log(response.data.user.token)
-        })
-        .catch(error => console.log(error))
+
+        // useEffect(() => {
+            axios({
+                method: 'post',
+                url: '/room/join',
+                data: data,
+                headers: {
+                    'Authorization': `Bearer ${x}`
+                }
+            })
+            .then((response) => {
+                // localStorage.setItem("jwt_token",response.data.user.token)
+                navigate(`/details`)
+                console.log(response)
+                console.log(response.data.user.token)
+            })
+            .catch(error => console.log(error))
+        // }, []);
     }
 
   return (
@@ -51,7 +61,7 @@ export default function JoinRoom() {
                             value={password}
                         />
                     </div>
-                    <button className='bg-[#E18A07] relative text-white font-extrabold text-xl w-full py-3 mt-8' onClick={handleSubmit}  >create room</button>
+                    <button className='bg-[#E18A07] relative text-white font-extrabold text-xl w-full py-3 mt-8' onClick={create}  >create room</button>
                     {/* <p className='flex items-center mt-2'><input className='mr-2' type="checkbox" />Remember Me</p> */}
                 </form>
     </div>

@@ -1,13 +1,16 @@
 import React,{useEffect, useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-const Room = () => {
-
+const CreateRoom = () => {
+    const navigate = useNavigate()
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [data, setData] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        const x = localStorage.getItem("jwt_token")
+        console.log(x)
         setData({
             "name": name,
             "password": password.toString()
@@ -16,11 +19,14 @@ const Room = () => {
         axios({
             method: 'post',
             url: '/room/create',
-            data: data
+            data: data,
+            headers: {
+                'Authorization': `Bearer ${x}`
+            }
         })
         .then((response) => {
-            localStorage.setItem("jwt_token",response.data.user.token)
-            // navigate('/user')
+            // localStorage.setItem("jwt_token",response.data.user.token)
+            navigate(`/details`)
             console.log(response)
             console.log(response.data.user.token)
         })
@@ -30,7 +36,7 @@ const Room = () => {
 
     return (
         <form action='submit' className='max-w-[400px] w-full mx-auto bg-white p-8'>
-                    <h2 className='text-4xl font-bold text-center py-8'>LOGIN</h2>
+                    <h2 className='text-4xl font-bold text-center py-8'>Create Room</h2>
                     <div className='flex flex-col mb-4'>
                         <label>Room</label>
                         <input className=' border relative bg-gray-100 p-2'
@@ -57,4 +63,4 @@ const Room = () => {
     );
 }
 
-export default Room;
+export default CreateRoom;

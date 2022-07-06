@@ -9,7 +9,7 @@ const router = new express.Router()
 
 // create room
 router.post('/room/create', auth, async (req, res) => {
-    // console.log("hi")
+    console.log("hi")
     const user = req.user
     try {
         const room = new Room(req.body)

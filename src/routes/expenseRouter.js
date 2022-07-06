@@ -30,8 +30,10 @@ router.get('/getallexpenses', auth, async(req,res)=>{
     res.send(expenses)
 })
 
-router.post('/:room/addexpense', auth, async(req,res)=>{
-    
+router.get('/:room', auth, async(req,res)=>{
+    // Room.find(req.params.room)
+    console.log(req.params.room)
 })
+
 
 module.exports = router
