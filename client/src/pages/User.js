@@ -44,7 +44,28 @@ const User = () => {
           <div className='flex-row pt-8'>
             <div className=' w-[30%] h-9 bg-[#D9D9D9]'><div className=' w-[50%] h-9 bg-black'></div></div>
           </div>
-          <div className='text-black text-xl pt-12 '>“You are doing great and wont exceed your budget”</div>
+          <div className='flex flex-col justify-center items-center h-full '>
+                <form className='max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-8 mt-12'>
+                <h2 className='text-4xl font-bold text-center py-6'>ENTER YOUR EXPENSES</h2>
+                <div className='flex flex-row justify-between'>
+                <div className='flex flex-col mb-4'>
+                        <label className='text-center'>Amount</label>
+                        <input className='relative border-2 border-black bg-gray-100 p-2 w-[300px]'
+                            type="number"
+                            placeholder='$ Amount'
+                        />
+                    </div>
+                    <div className='flex flex-col mb-4'>
+                        <label className='text-center'>Category</label>
+                        <input className='border-2 border-black relative bg-gray-100 p-2 w-[300px]'
+                            type="text"
+                            placeholder='Food'
+                        />
+                    </div>
+                    </div>
+                    <button className='flex justify-center items-center bg-black text-white mx-auto p-2 rounded-md my-2'>Add Spend</button>
+                </form>
+            </div>
         </div>
         <img className=' pl-[50%] h-[446px] pt-[5rem]' src='/assests/home.png' alt="try" />
       </div>)
