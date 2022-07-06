@@ -38,9 +38,9 @@ const Navbar = () => {
                 <div onClick={handleNav} className={nav ? 'absolute left-0 top-0 w-full bg-gray-100/90 px-4 py-6 flex flex-col' : 'absolute left-[-100%]'}>
                     <ul>
                         <li className='text-3xl font-bold'>Paymate</li>
-                        <li className='p-4 font-bold text-1xl border-b'>Home</li>
-                        <li className='p-4 font-bold text-1xl border-b'>Analysis</li>
-                        <li className='p-4 font-bold text-1xl border-b'>Rooms</li>
+                        <li className='p-4 font-bold text-1xl border-b'><a href='/user'>Home</a></li>
+                        <li className='p-4 font-bold text-1xl border-b'><a href='/analysis'>Analysis</a></li>
+                        <li className='p-4 font-bold text-1xl border-b'><a href='/rooms'>Rooms</a></li>
                         <li className='p-4 font-bold text-1xl border-b'>About Us</li>
                     </ul>
                     <div className='flex flex-col pb-4'>

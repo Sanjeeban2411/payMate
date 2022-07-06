@@ -2,7 +2,7 @@ const express = require('express')
 
 const auth = require('../middlewares/auth')
 const User = require('../mongo/models/users')
-// const Expense = require('../mongo/models/expense')
+const Expense = require('../mongo/models/expense')
 const Room = require('../mongo/models/room')
 
 const router = new express.Router()
@@ -17,7 +17,7 @@ router.post('/room/create', auth, async (req, res) => {
         room.users.push(user._id)
         await room.save()
 
-        const ourUser  = await User.findById(user._id)
+        const ourUser = await User.findById(user._id)
         ourUser.rooms.push(room._id)
         await ourUser.save()
         console.log(ourUser)
@@ -46,15 +46,30 @@ router.post('/room/join', auth, async (req, res) => {
                     ourUser.rooms.push(room._id)
                     await ourUser.save()
                 }
-                res.send({room,user})
+                res.send({ room, user })
             }
             else {
                 res.status(404).send("Room not found")
             }
         }
     } catch (error) {
-
+        res.status(500).send(error)
     }
 })
+
+
+router.get('/:room/users', auth, async (req, res) => {
+    console.log(req.params.room)
+    const room = await Room.findOne({ name: req.params.room })
+    console.log(room)
+    if(room){
+        res.send(room.users)
+    }
+    else{
+        res.status(404).send("No room found")
+    }
+})
+
+
 
 module.exports = router
