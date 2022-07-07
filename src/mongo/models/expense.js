@@ -13,14 +13,14 @@ const expenseSchema = new mongoose.Schema({
         required:true
     },
     owner:{
-        type:String,
+        type:mongoose.Schema.Types.ObjectId,
         required:true,
-        ref: "Users"
+        ref: "User"
     },
     room:{
-        type:String,
-        trim:true,
-        ref:"Rooms"
+        type:mongoose.Schema.Types.ObjectId,
+        // trim:true,
+        ref:"Room"
     }
 },{
     timestamps:true

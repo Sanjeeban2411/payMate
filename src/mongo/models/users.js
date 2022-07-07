@@ -36,7 +36,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    rooms:[String]
+    rooms:[{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Room' 
+    }]
 })
 
 userSchema.virtual('expense', {

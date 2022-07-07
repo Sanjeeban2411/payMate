@@ -24,12 +24,13 @@ export default function JoinRoom() {
                 url: '/room/join',
                 data: data,
                 headers: {
-                    'Authorization': `Bearer ${x}`
+                    'Authorization': `Bearer ${x}`,
+                    'params': {name}
                 }
             })
             .then((response) => {
-                // localStorage.setItem("jwt_token",response.data.user.token)
-                navigate(`/details`)
+                localStorage.setItem("room",name)
+                navigate(`/createdroom `)
                 console.log(response)
                 console.log(response.data.user.token)
             })

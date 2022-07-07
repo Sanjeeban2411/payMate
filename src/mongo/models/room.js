@@ -2,18 +2,23 @@ const mongoose = require('mongoose')
 require('../db')
 
 const roomSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
-        trim:true,
+    name: {
+        type: String,
+        required: true,
+        trim: true,
         unique: true
     },
-    password:{
-        type:String,
-        required:true,
-        trim:true
+    password: {
+        type: String,
+        required: true,
+        trim: true
     },
-    users:[String]
+    users: [{
+        // user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        // }
+    }]
 })
 
 roomSchema.virtual('expense', {

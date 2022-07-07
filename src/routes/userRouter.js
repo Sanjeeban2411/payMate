@@ -73,9 +73,15 @@ router.get('/showrooms', auth, async (req, res) => {
     try {
         // const user = req.user
         const user = await User.findOne({ _id: req.user._id })
-        const rooms = user.rooms
-
-        res.send(rooms)
+        const rooms = await user.populate("rooms")
+        // const rooms = user.rooms
+        const roomNames = []
+        for (let i =0; i<rooms.rooms.length;i++){
+            // res.send(rooms.rooms[i])
+            roomNames.push(rooms.rooms[i].name)
+        }
+        res.send(roomNames)
+        // res.send(user)
 
     } catch (error) {
         res.send(error)
@@ -91,5 +97,9 @@ router.get('/test', auth, (req, res) => {
 router.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });
 });
+
+// router.get('/',(req,res)=>{
+//     res.send("hello world")
+// })
 
 module.exports = router

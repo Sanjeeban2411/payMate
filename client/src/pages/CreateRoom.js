@@ -26,7 +26,7 @@ const CreateRoom = () => {
         })
         .then((response) => {
             // localStorage.setItem("jwt_token",response.data.user.token)
-            navigate(`/details`)
+            navigate(`/createdroom`)
             console.log(response)
             console.log(response.data.user.token)
         })
