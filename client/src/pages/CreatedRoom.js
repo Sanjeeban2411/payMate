@@ -43,7 +43,7 @@ const CreatedRoom = () => {
                                 <label className='text-center'>Amount</label>
                                 <input className='relative border-2 border-black bg-gray-100 p-2 w-[300px]'
                                     type="number"
-                                    placeholder='$ Amount'
+                                    placeholder='₹ Amount'
                                 />
                             </div>
                             <div className='flex flex-col mb-4'>

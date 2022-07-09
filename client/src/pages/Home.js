@@ -1,4 +1,5 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
 // import axios from 'axios'
 export default function Home() {
     // const [data, setdata] = useState("");
@@ -24,7 +25,7 @@ export default function Home() {
 
     return (
         <div>
-            <h1>Hii</h1>
+            <Navbar/>
             {/* <h1>{data.email}</h1> */}
         </div>
     )

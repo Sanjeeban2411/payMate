@@ -18,7 +18,7 @@ const Navbar = () => {
         <div>
             <div className='flex w-full justify-between items-center h-20 px-10 absolute z-10 font-Montserrat '>
                 <div className='text-black' >
-                    <h1 onClick={handleNav} className={logo ? ' hidden' : 'flex text-3xl font-black  '} >Paymate <div className='p-2 m-auto'><FaMoneyBillWave /></div></h1>
+                    <h1 onClick={handleNav} className={logo ? ' hidden' : 'flex text-3xl font-black  '} ><a href='/'>Paymate</a> <div className='p-2 m-auto'><FaMoneyBillWave /></div></h1>
                 </div>
 
                 <ul className='hidden md:flex'>
