@@ -69,7 +69,7 @@ router.get('/:room/users', auth, async (req, res) => {
             // res.send(rooms.rooms[i])
             userNames.push(users.users[i].name)
         }
-        res.send(userNames)
+        res.send({room:room.name,userNames})
     }
     else{
         res.status(404).send("No room found")

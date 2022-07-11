@@ -21,11 +21,13 @@ const CreateRoom = () => {
             url: '/room/create',
             data: data,
             headers: {
-                'Authorization': `Bearer ${x}`
+                'Authorization': `Bearer ${x}`,
+                'params': {name}
             }
         })
         .then((response) => {
             // localStorage.setItem("jwt_token",response.data.user.token)
+            localStorage.setItem("room",name)
             navigate(`/createdroom`)
             console.log(response)
             console.log(response.data.user.token)
