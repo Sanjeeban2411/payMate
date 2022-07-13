@@ -88,7 +88,7 @@ router.get('/showrooms', auth, async (req, res) => {
     }
 })
 
-router.get('/test', auth, (req, res) => {
+router.get('/user', auth, (req, res) => {
     // res.json({msg:"Hiii"})
     console.log("test api", req.user)
     res.json(req.user)

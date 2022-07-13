@@ -23,7 +23,7 @@ router.post('/addexpense', auth, async (req, res) => {
     }
 })
 
-router.get('/getallexpenses', auth, async (req, res) => {
+router.get('/getexpenses', auth, async (req, res) => {
     const user = req.user
 
     const expenses = await Expense.find({ owner: user._id })
@@ -35,26 +35,30 @@ router.get('/getallexpenses', auth, async (req, res) => {
     res.send(expenses)
 })
 
-router.post('/:room/addexpenses', auth, async (req, res) => {
+router.post('/:room/addexpense', auth, async (req, res) => {
     const room = await Room.findOne({ name: req.params.room })
     const inp = req.body
     console.log(room)
-    if (room) {
-        if (room.users.includes(req.user._id)) {
-            const expense = new Expense({
-                ...inp,
-                owner: req.user._id,
-                room: room._id
-            })
-            await expense.save()
-            res.send(expense)
+    try {
+        if (room) {
+            if (room.users.includes(req.user._id)) {
+                const expense = new Expense({
+                    ...inp,
+                    owner: req.user._id,
+                    room: room._id
+                })
+                await expense.save()
+                res.send(expense)
+            }
+            else{
+                res.status(404).send("Not your room")
+            }
         }
-        else{
-            res.status(404).send("Not your room")
+        else {
+            res.status(404).send("No room found")
         }
-    }
-    else {
-        res.status(404).send("No room found")
+    } catch (error) {
+        res.status(500).send(error)
     }
 })
 
