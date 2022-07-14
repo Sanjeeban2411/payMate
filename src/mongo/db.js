@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://127.0.0.1:27017/paymate')
+const URI = "mongodb+srv://Sanjeeban:mernbelove@cluster0.hkluhpk.mongodb.net/?retryWrites=true&w=majority"
+
+mongoose.connect(URI)
 .then(console.log("Connected to MongoDB"))
