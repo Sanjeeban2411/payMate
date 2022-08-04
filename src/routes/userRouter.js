@@ -19,6 +19,9 @@ router.post('/signup', async (req, res) => {
     }
     catch (e) {
         console.log(e)
+        if(e.code = 11000){
+            return res.status(400).send("User already registered")
+        }
         res.status(500).send(e)
     }
 })
@@ -65,7 +68,7 @@ router.post('/addavatar', auth, upload.single('avatar'), async (req, res) => {
     // console.log(req.user)
     await req.user.save()
     // res.send(req.user.dp.toString('base64'))
-    res.send('Uploaded')
+    res.send(buffer.toString('base64'))
     // res.send(req.file.buffer)
 })
 
@@ -81,6 +84,7 @@ router.get('/showrooms', auth, async (req, res) => {
             roomNames.push(rooms.rooms[i].name)
         }
         res.send(roomNames)
+        console.log(roomNames)
         // res.send(user)
 
     } catch (error) {

@@ -3,7 +3,8 @@ import axios from 'axios'
 import Navbar from '../components/Navbar'
 
 const Rooms = () => {
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
+  console.log("userNames", data)
   const x = localStorage.getItem("jwt_token")
   useEffect(() => {
     axios({
@@ -13,13 +14,14 @@ const Rooms = () => {
         'Authorization': `Bearer ${x}`
       }
     })
-    .then((response)=>{
-      setData(response)
-      console.log(response)
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
+      .then((response) => {
+        setData(response.data)
+        // console.log(response)
+      })
+
+      .catch((err) => {
+        console.log(err)
+      })
 
   }, []);
   return (
@@ -31,8 +33,18 @@ const Rooms = () => {
           {/* <div className='flex flex-col bg-gray-400'><div>Abode A306</div><div>5 Members</div> </div> */}
         </div>
         <div className='mt-8 bg-black text-white m-auto rounded-lg p-2 hover:bg-gray-400 hover:text-black'><a href="/joinroom">Join a Room</a></div>
-
       </div>
+      <div>
+        <h2>Rooms</h2>
+        {
+          data.map((name) => {
+            return (
+              <h1>{name}</h1>
+            )
+          })
+        }
+      </div>
+
     </div>
   )
 }

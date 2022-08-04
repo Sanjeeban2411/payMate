@@ -71,6 +71,15 @@ router.get('/:room/getexpenses', auth, async (req, res) => {
         console.log(expense)
         // const ofRoom = await expense.populated()
         // console.log(ofRoom)
+        
+        // const required = []
+        // expense.forEach((val)=>{
+        //     const obj = {
+        //         amount:val.amount,
+        //         purpose:val.purpose,
+
+        //     }
+        // })
         res.send(expense)
     }
     else {

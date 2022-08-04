@@ -60,19 +60,29 @@ router.post('/room/join', auth, async (req, res) => {
 router.get('/:room/users', auth, async (req, res) => {
     // console.log(req.params.room)
     const room = await Room.findOne({ name: req.params.room })
-    
-    if(room){
+
+    if (room) {
         const users = await room.populate('users')
         // console.log(users)
         const userNames = []
-        for (let i =0; i<users.users.length;i++){
+        for (let i = 0; i < users.users.length; i++) {
             // res.send(rooms.rooms[i])
             userNames.push(users.users[i].name)
         }
-        res.send({room:room.name,userNames})
+        res.send({ room: room.name, userNames })
+        // console.log({ room: room.name, userNames })
     }
-    else{
+    else {
         res.status(404).send("No room found")
+    }
+})
+
+router.get('/:room/analyze', auth, async (req, res) => {
+    const room = await Room.findOne({ name: req.params.room })
+    if (room) {
+        // const expense = await Expense.find({ room: room._id }).populate('owner')
+        const expense = await Expense.find({ room: room._id })
+        res.send(expense)
     }
 })
 
