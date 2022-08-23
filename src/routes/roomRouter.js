@@ -4,6 +4,8 @@ const auth = require('../middlewares/auth')
 const User = require('../mongo/models/users')
 const Expense = require('../mongo/models/expense')
 const Room = require('../mongo/models/room')
+const Total = require('../mongo/models/total')
+
 
 const router = new express.Router()
 
@@ -21,6 +23,13 @@ router.post('/room/create', auth, async (req, res) => {
         ourUser.rooms.push(room._id)
         await ourUser.save()
         console.log(ourUser)
+
+        const total = new Total({
+            room: room._id,
+            user: user._id
+        })
+        await total.save()
+
         res.send(room)
     } catch (error) {
         res.status(500).send(error)
@@ -43,8 +52,15 @@ router.post('/room/join', auth, async (req, res) => {
                 if (!room.users.includes(user._id)) {
                     room.users.push(user._id)
                     await room.save()
+
                     ourUser.rooms.push(room._id)
                     await ourUser.save()
+
+                    const total = new Total({
+                        room: room._id,
+                        user: user._id
+                    })
+                    await total.save()
                 }
                 res.send({ room, user })
             }
@@ -82,7 +98,8 @@ router.get('/:room/analyze', auth, async (req, res) => {
     if (room) {
         // const expense = await Expense.find({ room: room._id }).populate('owner')
         const expense = await Expense.find({ room: room._id })
-        res.send(expense)
+        const total = await Total.find({ room: room._id })
+        res.send({expense, total})
     }
 })
 

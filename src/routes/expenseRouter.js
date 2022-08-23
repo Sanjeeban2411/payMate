@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 // const User = require('../mongo/models/users')
 const Room = require('../mongo/models/room')
 const Expense = require('../mongo/models/expense')
+const Total = require('../mongo/models/total')
 const auth = require('../middlewares/auth')
 
 
@@ -38,8 +39,8 @@ router.get('/getexpenses', auth, async (req, res) => {
 router.post('/:room/addexpense', auth, async (req, res) => {
     const room = await Room.findOne({ name: req.params.room })
     const inp = req.body
-    console.log(room)
-    try {
+    // console.log(room)
+    // try {
         if (room) {
             if (room.users.includes(req.user._id)) {
                 const expense = new Expense({
@@ -48,7 +49,12 @@ router.post('/:room/addexpense', auth, async (req, res) => {
                     room: room._id
                 })
                 await expense.save()
-                res.send(expense)
+
+                const tot = await Total.findOne({$and:[{room:room._id}, {user:req.user._id}]})
+                tot.total = tot.total + inp.amount
+                await tot.save()
+                console.log(tot)
+                res.send({expense})
             }
             else{
                 res.status(404).send("Not your room")
@@ -57,9 +63,9 @@ router.post('/:room/addexpense', auth, async (req, res) => {
         else {
             res.status(404).send("No room found")
         }
-    } catch (error) {
-        res.status(500).send(error)
-    }
+    // } catch (error) {
+    //     res.status(500).send(error)
+    // }
 })
 
 router.get('/:room/getexpenses', auth, async (req, res) => {
@@ -80,6 +86,9 @@ router.get('/:room/getexpenses', auth, async (req, res) => {
 
         //     }
         // })
+        const tot = await Total.find({$and:[{room:"62ed3143a5dcd9cd7c299670"}, {user:"62ed3122a5dcd9cd7c29966d"}]})
+        // const tot = await Total.find({user:"62ed3122a5dcd9cd7c29966d"})
+        console.log("total", tot)
         res.send(expense)
     }
     else {
