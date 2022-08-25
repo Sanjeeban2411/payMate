@@ -33,18 +33,19 @@ const Rooms = () => {
           {/* <div className='flex flex-col bg-gray-400'><div>Abode A306</div><div>5 Members</div> </div> */}
         </div>
         <div className='mt-8 bg-black text-white m-auto rounded-lg p-2 hover:bg-gray-400 hover:text-black'><a href="/joinroom">Join a Room</a></div>
-      </div>
-      <div>
-        <h2>Rooms</h2>
-        {
-          data.map((name) => {
-            return (
-              <h1>{name}</h1>
+        <div className='mt-12 font-extrabold'>Your Rooms</div>
+        <div className='grid grid-cols-3 gap-4'>
+          {/* {data.map(card)} */}
+          {data.map((val)=>{
+            return(
+              <div className='flex flex-col border-2 border-black'>
+        <div className='p-4 text-center'>{val}</div>
+        <button className='bg-black text-white mx-auto p-2 my-3 rounded-md'>Enter</button>
+       </div>
             )
-          })
-        }
+          })}
+        </div>
       </div>
-
     </div>
   )
 }

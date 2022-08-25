@@ -59,7 +59,7 @@ const CreateRoom = () => {
                             value={password}
                         />
                     </div>
-                    <button className='bg-[#E18A07] relative text-white font-extrabold text-xl w-full py-3 mt-8' onClick={handleSubmit}  >create room</button>
+                    <button className='bg-[#E18A07] relative text-white font-extrabold text-xl w-full py-3 mt-8' onClick={handleSubmit}  >Create Room</button>
                     {/* <p className='flex items-center mt-2'><input className='mr-2' type="checkbox" />Remember Me</p> */}
                 </form>
     );
