@@ -12,7 +12,7 @@ const User = () => {
 
   const x = localStorage.getItem("jwt_token");
   // console.log(x)
-  console.log("aaa", allExpenses);
+  // console.log("aaa", allExpenses);
   useEffect(() => {
     axios({
       method: "get",
@@ -67,7 +67,7 @@ const User = () => {
   };
 
   const total = allExpenses.map(item => item.amount).reduce((prev, curr) => prev + curr, 0);
-  console.log("tt",total)
+  // console.log("tt",total)
 
   return (
     <>

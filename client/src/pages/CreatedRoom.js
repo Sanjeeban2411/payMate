@@ -16,7 +16,7 @@ const CreatedRoom = () => {
   const x = localStorage.getItem("jwt_token");
   const room = localStorage.getItem("room");
   // console.log(x)
-  console.log("aaa");
+//   console.log("aaa");
   useEffect(() => {
     axios({
       method: "get",
@@ -68,13 +68,14 @@ const CreatedRoom = () => {
     })
       .then((response) => {
         // getExp()
+        setExpenseData({})
         console.log(response);
       })
       .catch((error) => console.log(error));
   };
 
   // console.log("dataexp",roomName)
-  console.log("user", userNames);
+//   console.log("user", userNames);
   return (
     <>
       <Navbar />

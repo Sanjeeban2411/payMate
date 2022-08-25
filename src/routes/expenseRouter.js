@@ -40,7 +40,7 @@ router.post('/:room/addexpense', auth, async (req, res) => {
     const room = await Room.findOne({ name: req.params.room })
     const inp = req.body
     // console.log(room)
-    // try {
+    try {
         if (room) {
             if (room.users.includes(req.user._id)) {
                 const expense = new Expense({
@@ -51,7 +51,16 @@ router.post('/:room/addexpense', auth, async (req, res) => {
                 await expense.save()
 
                 const tot = await Total.findOne({$and:[{room:room._id}, {user:req.user._id}]})
-                tot.total = tot.total + inp.amount
+                if(!tot){
+                    const newTot = new Total({
+                        room: room._id,
+                        user: req.user._id,
+                        total: req.body.amount
+                    })
+                    await newTot.save()
+                    return res.send({expense})
+                }
+                tot.total = Number(tot.total) + Number(inp.amount)
                 await tot.save()
                 console.log(tot)
                 res.send({expense})
@@ -63,9 +72,9 @@ router.post('/:room/addexpense', auth, async (req, res) => {
         else {
             res.status(404).send("No room found")
         }
-    // } catch (error) {
-    //     res.status(500).send(error)
-    // }
+    } catch (error) {
+        res.status(500).send(error)
+    }
 })
 
 router.get('/:room/getexpenses', auth, async (req, res) => {
@@ -86,7 +95,7 @@ router.get('/:room/getexpenses', auth, async (req, res) => {
 
         //     }
         // })
-        const tot = await Total.find({$and:[{room:"62ed3143a5dcd9cd7c299670"}, {user:"62ed3122a5dcd9cd7c29966d"}]})
+        const tot = await Total.find({$and:[{room:req.params.room}, {user:"62ed3122a5dcd9cd7c29966d"}]})
         // const tot = await Total.find({user:"62ed3122a5dcd9cd7c29966d"})
         console.log("total", tot)
         res.send(expense)
