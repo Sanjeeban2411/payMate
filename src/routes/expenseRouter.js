@@ -36,46 +36,41 @@ router.get('/getexpenses', auth, async (req, res) => {
     res.send(expenses)
 })
 
-router.post('/:room/addexpense', auth, async (req, res) => {
-    const room = await Room.findOne({ name: req.params.room })
-    const inp = req.body
-    // console.log(room)
-    try {
-        if (room) {
-            if (room.users.includes(req.user._id)) {
-                const expense = new Expense({
-                    ...inp,
-                    owner: req.user._id,
-                    room: room._id
-                })
-                await expense.save()
 
-                const tot = await Total.findOne({$and:[{room:room._id}, {user:req.user._id}]})
-                if(!tot){
-                    const newTot = new Total({
-                        room: room._id,
-                        user: req.user._id,
-                        total: req.body.amount
-                    })
-                    await newTot.save()
-                    return res.send({expense})
-                }
-                tot.total = Number(tot.total) + Number(inp.amount)
-                await tot.save()
-                console.log(tot)
-                res.send({expense})
-            }
-            else{
-                res.status(404).send("Not your room")
-            }
+router.post('/:room/addexpense', auth, async (req, res) => {
+    try {
+        const room = await Room.findOne({ name: req.params.room })
+        if (!room) {
+            return res.status(404).send("No room found")
         }
-        else {
-            res.status(404).send("No room found")
+        if (!room.users.includes(req.user._id)) {
+            return res.status(404).send("Not your room")
         }
-    } catch (error) {
-        res.status(500).send(error)
+
+        const expense = new Expense({
+            purpose: req.body.purpose,
+            amount: req.body.amount,
+            owner: req.user._id,
+            room: room._id
+        })
+        await expense.save()
+
+        const tot = await Total.findOne({ $and: [{ room: room._id }, { user: req.user._id }] })
+        // const tot = await Total.findOne({ room: room._id }, { user: req.user._id })
+        tot.total = tot.total + req.body.amount
+        await tot.save()
+
+        // console.log(tot.total)
+        // console.log(req.body.amount)
+
+        res.send(expense)
+        // res.send("expense")
+
+    } catch (e) {
+        res.status(404).send("No room found")
     }
 })
+
 
 router.get('/:room/getexpenses', auth, async (req, res) => {
     const room = await Room.findOne({ name: req.params.room })
@@ -86,7 +81,7 @@ router.get('/:room/getexpenses', auth, async (req, res) => {
         console.log(expense)
         // const ofRoom = await expense.populated()
         // console.log(ofRoom)
-        
+
         // const required = []
         // expense.forEach((val)=>{
         //     const obj = {
@@ -95,7 +90,7 @@ router.get('/:room/getexpenses', auth, async (req, res) => {
 
         //     }
         // })
-        const tot = await Total.find({$and:[{room:req.params.room}, {user:"62ed3122a5dcd9cd7c29966d"}]})
+        const tot = await Total.find({ $and: [{ room: room._id }, { user: req.user._id }] })
         // const tot = await Total.find({user:"62ed3122a5dcd9cd7c29966d"})
         console.log("total", tot)
         res.send(expense)

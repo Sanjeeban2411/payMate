@@ -37,7 +37,7 @@ router.post('/room/create', auth, async (req, res) => {
 })
 
 router.post('/room/join', auth, async (req, res) => {
-    // console.log('hi')
+    console.log('hi', req.user)
     const user = req.user
 
     try {
@@ -58,7 +58,8 @@ router.post('/room/join', auth, async (req, res) => {
 
                     const total = new Total({
                         room: room._id,
-                        user: user._id
+                        user: user._id,
+                        total: 0
                     })
                     await total.save()
                 }

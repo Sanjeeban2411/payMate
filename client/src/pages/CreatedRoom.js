@@ -35,6 +35,7 @@ const CreatedRoom = () => {
   }, [0]);
   // const getExp = () => {
   // function getExp(){
+    
   useEffect(() => {
     axios({
       method: "get",
@@ -49,14 +50,13 @@ const CreatedRoom = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-  // }
-  // getExp()
+  
 
   const addExpense = (e) => {
     e.preventDefault();
     setExpenseData({
       purpose: purpose,
-      amount: amount,
+      amount: Number(amount),
     });
     axios({
       method: "post",
