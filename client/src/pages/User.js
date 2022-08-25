@@ -133,7 +133,7 @@ const User = () => {
           </div>
           <img
             className=" pl-[60%] h-[370px] pt-[4rem]"
-            src="/assests/homepage.png"
+            src="/assests/home.png"
             alt="try"
           />
         </div>

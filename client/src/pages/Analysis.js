@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import BarChart from './BarChart'
 
 const Analysis = () => {
   return (
@@ -13,8 +14,8 @@ const Analysis = () => {
                   <div className='ml-[300px] text-right rounded-md bg-black w-[200px] text-2xl text-white'><div className='text-center'>Transactions</div><div className='text-center'>↓</div></div>
                 </div>
               <div className='flex flex-col'>
-              <div><img className='w-[600px] h-[260px]' src='/assests/bar.jpg' alt="try" /></div>
-              <div className='text-center font-extrabold'>This Week's Spend</div>
+              <div className='mx-auto'><BarChart/></div>
+              <div className='text-center font-extrabold'></div>
               </div>
               </div>
               <div className='my-4'>

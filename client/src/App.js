@@ -10,6 +10,8 @@ import CreateRoom from "./pages/CreateRoom";
 import JoinRoom from "./pages/JoinRoom";
 import Details from "./pages/Details"
 import CreatedRoom from "./pages/CreatedRoom";
+import About from "./pages/About";
+import Roomlogin from "./pages/Roomlogin";
 
 // import io from 'socket.io-client'
 
@@ -37,7 +39,9 @@ function App() {
           <Route exact path="/createroom" element={<CreateRoom />} />
           <Route exact path="/createdroom" element={<CreatedRoom />} />
           <Route exact path="/joinroom" element={<JoinRoom />} />
+          <Route exact path="/roomlogin" element={<Roomlogin/>} />
           <Route exact path="/details" elements={<Details/>} />
+          <Route exact path="/about" elements={<About/>} />
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
       </BrowserRouter>

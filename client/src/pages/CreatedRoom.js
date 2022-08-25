@@ -80,9 +80,9 @@ const CreatedRoom = () => {
     <>
       <Navbar />
       <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black px-10">
-        <div className="font-extrabold mb-5 pb-4">ROOM - {roomName}</div>
+        <div className="font-extrabold mb-5 pb-10">ROOM - {roomName}</div>
         <div className="flex flex-col justify-center items-center h-full ">
-          <div className="w-[600px] h-[270px] mx-auto">
+          <div className="mx-auto">
             <BarChart />
           </div>
           {/* <BarChart/> */}

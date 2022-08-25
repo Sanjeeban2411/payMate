@@ -40,7 +40,7 @@ const Rooms = () => {
             return(
               <div className='flex flex-col border-2 border-black'>
         <div className='p-4 text-center'>{val}</div>
-        <button className='bg-black text-white mx-auto p-2 my-3 rounded-md'>Enter</button>
+        <button className='bg-black text-white mx-auto p-2 my-3 rounded-md'><a href='/roomlogin'>Enter</a></button>
        </div>
             )
           })}
