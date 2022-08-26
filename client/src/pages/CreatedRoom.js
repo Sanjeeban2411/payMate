@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { FaUserSecret } from "react-icons/fa";
-import BarChart from "./BarChart";
+import BarChart from "../components/BarChart";
 
 const CreatedRoom = () => {
   const [purpose, setpurpose] = useState();
@@ -75,7 +75,7 @@ const CreatedRoom = () => {
   };
 
   // console.log("dataexp",roomName)
-//   console.log("user", userNames);
+  console.log("users", allExpenses);
   return (
     <>
       <Navbar />
@@ -149,12 +149,13 @@ const CreatedRoom = () => {
           <div className="mt-6 border-2 border-black bg-slate-300">
             {allExpenses.map((name) => {
               return (
-                <p>
-                  {name.amount} - {name.purpose}
+                <p className='p-2'>
+                  {name.owner.name}  ===>  ₹{name.amount} - {name.purpose} 
                 </p>
               );
             })}
           </div>
+          <div className='mt-2'></div>
         </div>
       </div>
     </>

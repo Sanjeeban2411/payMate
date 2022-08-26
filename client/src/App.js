@@ -42,7 +42,7 @@ function App() {
           <Route exact path="/joinroom" element={<JoinRoom />} />
           <Route exact path="/roomlogin" element={<Roomlogin/>} />
           <Route exact path="/details" elements={<Details/>} />
-          <Route exact path="/about" elements={<About/>} />
+          <Route exact path="/about" element={<About/>} />
           <Route exact path="/report" element={<Report/>} />
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
