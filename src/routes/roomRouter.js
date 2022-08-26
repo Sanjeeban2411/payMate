@@ -96,12 +96,14 @@ router.get('/:room/users', auth, async (req, res) => {
 
 router.get('/:room/analyze', auth, async (req, res) => {
     const room = await Room.findOne({ name: req.params.room })
-    if (room) {
-        // const expense = await Expense.find({ room: room._id }).populate('owner')
-        const expense = await Expense.find({ room: room._id })
-        const total = await Total.find({ room: room._id })
-        res.send({expense, total})
+
+    if (!room) {
+        return res.status(404).send("Room not found")
     }
+    // const expense = await Expense.find({ room: room._id }).populate('owner')
+    const expense = await Expense.find({ room: room._id })
+    const total = await Total.find({ room: room._id }).populate("room").populate("user")
+    res.send({ expense, total })
 })
 
 module.exports = router
