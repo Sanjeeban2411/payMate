@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 // import Navbar from "../components/Navbar";
 import axios from "axios";
+import Navbar from '../components/Navbar';
 
 export default function RoomAnalysis() {
 
@@ -101,6 +102,8 @@ export default function RoomAnalysis() {
   console.log("data", lenden)
   // console.log(totAmount)
   console.log("new", transactions)
+ 
+
 
   // }
 
@@ -108,7 +111,6 @@ export default function RoomAnalysis() {
   
   return (
     <div>
-      yooo
       {/* {totalData} */}
     </div>
   )

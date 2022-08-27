@@ -85,7 +85,9 @@ const CreatedRoom = () => {
           <div className="mx-auto">
             <BarChart />
           </div>
-          {/* <BarChart/> */}
+          {/* <BarChart/> */}<button className="bg-black text-white mx-auto p-2 my-3 rounded-md">
+                  <a href="/report">Report</a>
+                </button>
           <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-8 mt-12">
             <h2 className="text-4xl font-bold text-center py-6">
               ENTER YOUR EXPENSES
@@ -150,7 +152,7 @@ const CreatedRoom = () => {
             {allExpenses.map((name) => {
               return (
                 <p className='p-2'>
-                  {name.owner.name}  ===>  ₹{name.amount} - {name.purpose} 
+                  {name.owner.name}  ====  ₹{name.amount} - {name.purpose} 
                 </p>
               );
             })}

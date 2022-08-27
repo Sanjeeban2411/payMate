@@ -69,8 +69,6 @@ const Analysis = () => {
       .catch((error) => console.log(error));
   };
 
-  // const total = allExpenses.map(item => item.amount).reduce((prev, curr) => prev + curr, 0);
-  var  monthse = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   function monthname(num) {
       let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -82,7 +80,9 @@ const Analysis = () => {
     );
    })
   //  console.log("date",date)
-  date[5]="September"
+  date[3]="September"
+  date[4]="September"
+  date[5]="October"
    console.log("month",date)
 
    let analyze=allExpenses
@@ -103,13 +103,37 @@ const Analysis = () => {
   const Month=date.filter(onlyUnique)
   console.log("data",Month)
 
-  if(analyze)
+  // let tamt=([])
+  let sum
+  let kharcha = []
+  if(analyze.length>0){
+  sum=analyze[0].amount
+  console.log("amt",analyze[0].createdAt)
+  for(let i=0;i<analyze.length-1;i++){
+    console.log("test",analyze[i].createdAt,analyze[i].amount)
+    console.log("test",analyze[i+1].createdAt,analyze[i+1].amount)
+    if(analyze[i].createdAt===analyze[i+1].createdAt){
+      sum=sum+analyze[i+1].amount
+    }
+    else{
+      kharcha.push(sum)
+      sum = analyze[i+1].amount
+      // kharcha.push(sum)
+    }
+  }
+  kharcha.push(sum)
+}
+  console.log("sm",sum)
+  console.log("y axis",kharcha)
+
+
+
 
   //  const monthName=months[date.getMonth()];
   //  console.log("month",monthName)
   // console.log("data",data)
   // console.log("expensedata",expenseData)
-  console.log("allexpense",allExpenses)
+  // console.log("allexpense",allExpenses)
 
 
   return (
