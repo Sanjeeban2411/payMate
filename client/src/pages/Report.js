@@ -29,8 +29,6 @@ export default function RoomAnalysis() {
 
   // const report = ()=>{
 
-
-
   let lenden = []
   let totAmount = 0
   let transactions = []
@@ -44,10 +42,9 @@ export default function RoomAnalysis() {
   totalData.forEach((e) => {
     let tran = {
       user: e.user.name,
-      amount: e.total - (totAmount / totalData.length),
+      amount: e.total - Math.round(totAmount / totalData.length),
       status: " ", //pay or recieve
-      transact: [] //transaction with
-
+      transact: []  //transaction with
     }
     transactions.push(tran)
   })
@@ -65,6 +62,7 @@ export default function RoomAnalysis() {
   function getMinOfArray(numArray) {
     return Math.min.apply(null, numArray);
   }
+
   let max = getMaxOfArray(lenden)
   let min = getMinOfArray(lenden)
 
@@ -92,11 +90,12 @@ export default function RoomAnalysis() {
       // console.log(max+min)
       // console.log(lenden)
       // console.log("test",totalData[lenden.indexOf(max)])
+
     }
     max = getMaxOfArray(lenden)
     min = getMinOfArray(lenden)
     console.log(max, min)
-    count = lenden.filter(x => x === 0).length
+    count = lenden.filter(x => x < lenden.length).length
   }
 
   console.log("data", lenden)
@@ -111,6 +110,7 @@ export default function RoomAnalysis() {
   
   return (
     <div>
+      yooo
       {/* {totalData} */}
     </div>
   )
