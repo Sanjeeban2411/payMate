@@ -42,7 +42,7 @@ export default function RoomAnalysis() {
   totalData.forEach((e) => {
     let tran = {
       user: e.user.name,
-      amount: e.total - Math.round(totAmount / totalData.length),
+      amount: e.total - totAmount / totalData.length,
       status: " ", //pay or recieve
       transact: []  //transaction with
     }
@@ -82,7 +82,7 @@ export default function RoomAnalysis() {
 
       let tran = {
         user: transactions[lenden.indexOf(min)].user,
-        amount: (max+min) < 0 ? max: min
+        amount: (max + min) < 0 ? max : min
       }
       transactions[lenden.indexOf(max)].transact.push(tran)
       lenden[lenden.indexOf(max)] = (max + min) > 0 ? max + min : 0
@@ -95,19 +95,26 @@ export default function RoomAnalysis() {
     max = getMaxOfArray(lenden)
     min = getMinOfArray(lenden)
     console.log(max, min)
-    count = lenden.filter(x => x < lenden.length).length
+    // count = lenden.filter(x => x < lenden.length).length
+    count = lenden.filter(x => x < 1).length
   }
 
   console.log("data", lenden)
   // console.log(totAmount)
+
+  // transactions.forEach((e)=>{
+  //   e.amount.toPrecision(2)
+  //   console.log(e)
+  // })
+  
   console.log("new", transactions)
- 
+
 
 
   // }
 
   //   FINAL DATA : transactions
-  
+
   return (
     <div>
       yooo
