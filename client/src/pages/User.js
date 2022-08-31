@@ -61,6 +61,8 @@ const User = () => {
       },
     })
       .then((response) => {
+        setamount("")
+        setpurpose("")
         console.log(response);
       })
       .catch((error) => console.log(error));

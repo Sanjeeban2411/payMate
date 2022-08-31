@@ -13,6 +13,9 @@ import CreatedRoom from "./pages/CreatedRoom";
 import About from "./pages/About";
 import Roomlogin from "./pages/Roomlogin";
 import Report from "./pages/Report";
+import EnterRoom from "./pages/EnterRoom";
+import Signin from "./pages/Signin";
+import LogUp from "./pages/LogUp";
 
 // import io from 'socket.io-client'
 
@@ -32,7 +35,8 @@ function App() {
         {/* <Navbar /> */}
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/signup" element={<Signup />} />
+          {/* <Route exact path="/signup" element={<Signup />} /> */}
+          <Route exact path="/signup" element={<LogUp/>} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/user" element={<User />} />
           <Route exact path="/analysis" element={<Analysis />} />
@@ -40,10 +44,12 @@ function App() {
           <Route exact path="/createroom" element={<CreateRoom />} />
           <Route exact path="/createdroom" element={<CreatedRoom />} />
           <Route exact path="/joinroom" element={<JoinRoom />} />
-          <Route exact path="/roomlogin" element={<Roomlogin/>} />
+          {/* <Route exact path="/roomlogin" element={<Roomlogin/>} /> */}
           <Route exact path="/details" elements={<Details/>} />
           <Route exact path="/about" element={<About/>} />
           <Route exact path="/report" element={<Report/>} />
+          <Route exact path="/roomlogin" element={<EnterRoom/>} />
+          <Route exact path="/signin" element={<Signin/>} />
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
       </BrowserRouter>

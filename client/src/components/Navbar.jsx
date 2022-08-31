@@ -28,7 +28,7 @@ const Navbar = () => {
                     <li className='p-7 font-bold text-black cursor-pointer'><a href='/about'>About Us</a></li>
                 </ul>
                 <div className=' hidden md:flex md:pr-3 justify-between items-center  cursor-pointer'>
-                    <button className='rounded-full p-3 bg-black text-white'><a href='/login'><FaUserAlt /></a></button>
+                    <button className='rounded-full p-3 bg-black text-white'><a href='/signin'><FaUserAlt /></a></button>
                     <button className='bg-red-600 px-6 py-2 mx-2 rounded cursor-pointer text-white hover:bg-red-700  hover:font-bold'><a href='/signup'>Sign Up</a></button>
                 </div>
                 <div className='hidden md:h-3'><hr/></div>

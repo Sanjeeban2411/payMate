@@ -69,6 +69,8 @@ const CreatedRoom = () => {
       .then((response) => {
         // getExp()
         setExpenseData({})
+        setamount("")
+        setpurpose("")
         console.log(response);
       })
       .catch((error) => console.log(error));
@@ -85,7 +87,7 @@ const CreatedRoom = () => {
           <div className="mx-auto">
             <BarChart />
           </div>
-          {/* <BarChart/> */}<button className="bg-black text-white mx-auto p-2 my-3 rounded-md">
+          <button className="bg-black text-white mx-auto p-2 my-3 rounded-md">
                   <a href="/report">Report</a>
                 </button>
           <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-8 mt-12">
