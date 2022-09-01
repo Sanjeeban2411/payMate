@@ -10,18 +10,20 @@ const LogUp = () => {
     const [password, setPassword] = useState("");
     const [data, setData] = useState("");
     const handleSubmit = (e) => {
-        e.preventDefault()
-        setData({
-            "name": name,
-            "email": email,
-            "password": password.toString()
-        })
+        e.preventDefault();
+        // setData({
+        //     "name": name,
+        //     "email": email,
+        //     "password": password.toString()
+        // })
         
         console.log(data)
         axios({
             method: 'post',
             url: '/signup',
-            data: data
+            data: {"name": name,
+                "email": email,
+                "password": password.toString()}
         })
             .then(function (response) {
                 localStorage.setItem("jwt_token",response.data.user.token)
@@ -40,7 +42,7 @@ const LogUp = () => {
         <div className='h-screen hidden lg:block md:w-1/2 xl:w-2/3'>
             <img className='w-full h-full object-cover' src="/assests/loginbg.jpg" alt=""/>
         </div>
-        <div className='bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+        <div className='bg-white w-full md:max-w-md lg:max-w-full  md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
           flex items-center justify-center'>
             <div className='w-full h-100'>
                 <h1 className='text-3xl font-bold'>PAYMATE</h1>
@@ -54,7 +56,15 @@ const LogUp = () => {
                             type="text"
                             name='username'
                             placeholder='Name'
-                            onChange={(e) => { setName(e.target.value) }}
+                            onChange={(e) => 
+                                { 
+                                    setName(e.target.value)
+                                    // setData({
+                                    //     "name": e.target.value,
+                                    //     "email": data.email,
+                                    //     "password": data.password
+                                    // });
+                                 }}
                             value={name}
                         />
                     </div>
@@ -64,7 +74,14 @@ const LogUp = () => {
                             type="text"
                             name='email'
                             placeholder='Email'
-                            onChange={(e) => { setEmail(e.target.value) }}
+                            onChange={(e) => { 
+                                setEmail(e.target.value)
+                                // setData({
+                                //     "name": data.name,
+                                //     "email": e.target.value,
+                                //     "password": data.password
+                                // });
+                             }}
                         value={email}
                         />
                     </div>
@@ -75,7 +92,14 @@ const LogUp = () => {
                             type="password"
                             name='password'
                             placeholder='Password'
-                            onChange={(e) => { setPassword(e.target.value) }}
+                            onChange={(e) => { 
+                                setPassword(e.target.value)
+                                // setData({
+                                //     "name": data.name,
+                                //     "email": data.email,
+                                //     "password": e.target.value
+                                // });
+                             }}
                         value={password}
                         />
                     </div>
@@ -87,7 +111,16 @@ const LogUp = () => {
                 px-4 py-3 mt-6' onClick={handleSubmit}  >SignUp</button>
                 </form>
                 <hr className='my-6 border-gray-300 w-full'/>
-                
+                <p className="mt-8">
+              Already had an account?
+              <a
+                href="/signin"
+                className="text-blue-500 hover:text-blue-700 font-semibold"
+              >
+                Login to your account
+              </a>
+            </p>
+
   
         <p className="text-sm text-gray-500 mt-12">&copy; 2022 PayMate - All Rights Reserved.</p>
 

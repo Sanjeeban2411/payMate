@@ -45,17 +45,18 @@ const User = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  
   const addExpense = (e) => {
     e.preventDefault();
-    setExpenseData({
-      purpose: purpose,
-      amount: amount,
-    });
-
+    // setExpenseData({
+    //   purpose: purpose,
+    //   amount: amount,
+    // });
     axios({
       method: "post",
       url: "/addexpense",
-      data: expenseData,
+      data: {purpose: purpose,
+          amount: amount,},
       headers: {
         Authorization: `Bearer ${x}`,
       },
@@ -63,13 +64,17 @@ const User = () => {
       .then((response) => {
         setamount("")
         setpurpose("")
+        // setExpenseData({
+        //   purpose: "",
+        //   amount: "",
+        // })
         console.log(response);
       })
       .catch((error) => console.log(error));
   };
 
   const total = allExpenses.map(item => item.amount).reduce((prev, curr) => prev + curr, 0);
-  // console.log("tt",total)
+  // console.log("tt",purpose)
 
   return (
     <>
@@ -107,6 +112,10 @@ const User = () => {
                       placeholder="₹ Amount"
                       onChange={(e) => {
                         setamount(e.target.value);
+                        // setExpenseData({
+                        //   purpose: expenseData.purpose,
+                        //   amount: e.target.value,
+                        // });
                       }}
                       value={amount}
                     />
@@ -119,6 +128,11 @@ const User = () => {
                       placeholder="Food"
                       onChange={(e) => {
                         setpurpose(e.target.value);
+                        // setExpenseData({
+                        //   purpose: e.target.value,
+                        //   amount: expenseData.amount,
+                        // });
+
                       }}
                       value={purpose}
                     />

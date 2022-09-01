@@ -8,18 +8,19 @@ const CreateRoom = () => {
     const [data, setData] = useState('');
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         const x = localStorage.getItem("jwt_token")
         console.log(x)
-        setData({
-            "name": name,
-            "password": password.toString()
-        })
+        // setData({
+        //     "name": name,
+        //     "password": password.toString()
+        // })
         console.log(data)
         axios({
             method: 'post',
             url: '/room/create',
-            data: data,
+            data: {"name": name,
+                "password": password.toString()},
             headers: {
                 'Authorization': `Bearer ${x}`,
                 'params': {name}
@@ -45,7 +46,13 @@ const CreateRoom = () => {
                             type="text"
                             name='room'
                             placeholder='Name'
-                            onChange={(e) => { setName(e.target.value) }}
+                            onChange={(e) => { 
+                                setName(e.target.value)
+                                // setData({
+                                //     "name": e.target.value,
+                                //     "password": data.password
+                                // });
+                             }}
                             value={name}
                         />
                     </div>
@@ -55,7 +62,13 @@ const CreateRoom = () => {
                             type="password"
                             name='password'
                             placeholder='Password'
-                            onChange={(e) => { setPassword(e.target.value) }}
+                            onChange={(e) => { 
+                                setPassword(e.target.value)
+                                // setData({
+                                //     "name": data.name,
+                                //     "password": e.target.value
+                                // });
+                             }}
                             value={password}
                         />
                     </div>

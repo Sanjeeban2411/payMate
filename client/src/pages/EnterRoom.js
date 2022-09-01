@@ -9,20 +9,21 @@ export default function EnterRoom() {
     const [data, setData] = useState('');
 
     const create = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         const x = localStorage.getItem("jwt_token")
         console.log(x)
-        setData({
-            "name": name,
-            "password": password.toString()
-        })
+        // setData({
+        //     "name": name,
+        //     "password": password.toString()
+        // })
         console.log(data)
 
         // useEffect(() => {
             axios({
                 method: 'post',
                 url: '/room/join',
-                data: data,
+                data: {"name": name,
+                "password": password.toString()},
                 headers: {
                     'Authorization': `Bearer ${x}`,
                     'params': {name}

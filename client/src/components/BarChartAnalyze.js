@@ -78,11 +78,11 @@ const BarChartAnalyze = () => {
     );
    })
   //  console.log("date",date)
-  date[3]="September"
-  date[4]="September"
-  date[5]="September"
-  date[6]="September"
-  date[7]="October"
+  // date[3]="September"
+  // date[4]="September"
+  // date[5]="September"
+  // date[6]="September"
+  // date[7]="October"
    console.log("month",date)
 
    let analyze=allExpenses

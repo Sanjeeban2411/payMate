@@ -54,14 +54,15 @@ const CreatedRoom = () => {
 
   const addExpense = (e) => {
     e.preventDefault();
-    setExpenseData({
-      purpose: purpose,
-      amount: Number(amount),
-    });
+    // setExpenseData({
+    //   purpose: purpose,
+    //   amount: Number(amount),
+    // });
     axios({
       method: "post",
       url: `/${room}/addexpense`,
-      data: expenseData,
+      data: {purpose: purpose,
+        amount: Number(amount),},
       headers: {
         Authorization: `Bearer ${x}`,
       },
