@@ -85,7 +85,7 @@ const CreatedRoom = () => {
       <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black px-10">
         <div className="font-extrabold mb-5 pb-10">ROOM - {roomName}</div>
         <div className="flex flex-col justify-center items-center h-full ">
-          <div className="mx-auto">
+          <div className="mx-auto mt-14 md:mt-6">
             <BarChart />
           </div>
           
@@ -94,11 +94,11 @@ const CreatedRoom = () => {
             <h2 className="text-4xl font-bold text-center py-6">
               ENTER YOUR EXPENSES
             </h2>
-            <div className="flex flex-row justify-between">
-              <div className="flex flex-col mb-4">
+            <div className="flex flex-col md:flex-row justify-between">
+              <div className="flex  flex-col mb-4">
                 <label className="text-center">Amount</label>
                 <input
-                  className="relative border-2 border-black bg-gray-100 p-2 w-[300px]"
+                  className="relative border-2 border-black bg-gray-100 p-2 w-[300px] mx-auto"
                   type="number"
                   placeholder="₹ Amount"
                   onChange={(e) => {
@@ -110,7 +110,7 @@ const CreatedRoom = () => {
               <div className="flex flex-col mb-4">
                 <label className="text-center">Category</label>
                 <input
-                  className="border-2 border-black relative bg-gray-100 p-2 w-[300px]"
+                  className="border-2 border-black relative bg-gray-100 p-2 w-[300px] mx-auto"
                   type="text"
                   placeholder="Food"
                   onChange={(e) => {
@@ -130,8 +130,8 @@ const CreatedRoom = () => {
           </div>
         </div>
 
-        <div className="mt-12 font-extrabold">Members</div>
-        <div className="mt-6 grid grid-cols-3 gap-4">
+        <div className=" mt-32 md:mt-14 font-extrabold">Members</div>
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
           {userNames.map((name) => {
             return (
               <div className="flex flex-col border-2 border-black">
@@ -146,7 +146,7 @@ const CreatedRoom = () => {
             );
           })}
         </div>
-        <button className="bg-black text-white mx-auto p-2 my-3 rounded-md">
+        <button className="bg-black text-white mx-auto p-2 my-4 mt-10 rounded-md">
                   <a href="/report">Report</a>
                 </button>
         <div>

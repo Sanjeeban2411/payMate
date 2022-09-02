@@ -146,15 +146,16 @@ const Analysis = () => {
             <BarChartAnalyze/>
           </div>
           {/* <BarChart/> */}
-          <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-8 mt-12">
+          <div className='max-w-[1150px] mx-auto w-full rounded-md border-2 border-black p-3 mt-12'>
+          <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-8 mt-2">
             <h2 className="text-4xl font-bold text-center py-6">
               ENTER YOUR EXPENSES
             </h2>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-col md:flex-row justify-between">
               <div className="flex flex-col mb-4">
                 <label className="text-center">Amount</label>
                 <input
-                  className="relative border-2 border-black bg-gray-100 p-2 w-[300px]"
+                  className="relative border-2 border-black bg-gray-100 p-2 w-[300px] mx-auto"
                   type="number"
                   placeholder="₹ Amount"
                   onChange={(e) => {
@@ -166,7 +167,7 @@ const Analysis = () => {
               <div className="flex flex-col mb-4">
                 <label className="text-center">Category</label>
                 <input
-                  className="border-2 border-black relative bg-gray-100 p-2 w-[300px]"
+                  className="border-2 border-black relative bg-gray-100 p-2 w-[300px] mx-auto"
                   type="text"
                   placeholder="Food"
                   onChange={(e) => {
@@ -183,11 +184,12 @@ const Analysis = () => {
               Add Spend
             </button>
           </form>
+          </div>
         </div>
 
         
         <div>
-          <div className="mt-8">
+          <div className=" mt-32 md:mt-14">
             <b>Expenses</b>
           </div>
           <div className="mt-6 border-2 border-black bg-slate-300">
