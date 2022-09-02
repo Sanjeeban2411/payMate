@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import Navbar from '../components/Navbar'
 
-const Rooms = () => {
+const Rooms = (props) => {
+  let navigate = useNavigate(); 
   const [data, setData] = useState([]);
   console.log("userNames", data)
   const x = localStorage.getItem("jwt_token")
@@ -25,7 +27,10 @@ const Rooms = () => {
 
   }, []);
 
-  // console.log("xxx",data)
+  console.log("xxx",props.room)
+  // const joinRoom = () =>{
+  //   props.setRoom()
+  // }
   return (
     <div>
       <Navbar />
@@ -38,13 +43,20 @@ const Rooms = () => {
         <div className='mt-12 mb-6 font-extrabold'>Your Rooms</div>
         <div className='grid grid-cols-4 gap-4'>
           {/* {data.map(card)} */}
-          {data.map((val)=>{
-            return(
+          {data.map((val) => {
+            return (
               <div className='flex flex-col bg-black  relative box-border items-center mx-auto rounded-full min-w-[200px] min-h-[200px] border-2 border-black '>
-        <p className='relative text-center my-6 text-white font-extrabold'>{val}</p>
-        {/* <p className='relative text-center my-3 text-white font-extrabold'></p> */}
-        <button className='bg-white hover:bg-slate-500 hover:text-white text-black mx-auto p-2 my-3 rounded-md'><a href='/roomlogin'>Enter</a></button>
-       </div>
+                <p className='relative text-center my-6 text-white font-extrabold'>{val}</p>
+                {/* <p className='relative text-center my-3 text-white font-extrabold'></p> */}
+                <button className='bg-white hover:bg-slate-500 hover:text-white text-black mx-auto p-2 my-3 rounded-md' onClick={()=>{
+                  props.setRoom(val)
+                  navigate('/roomlogin')
+                  }}>
+                  {/* <a href='/roomlogin'> */}
+                    Enter
+                  {/* </a> */}
+                </button>
+              </div>
             )
           })}
         </div>

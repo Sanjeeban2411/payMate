@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import Navbar from "./components/Navbar";
 import User from "./pages/User";
@@ -27,6 +28,7 @@ function App() {
   // socket.on('connection',()=>{
   //   console.log("I'm connected")
   // })
+  const [room, setRoom] = useState("");
   return (
     <>
     		{/* <SocketContext.Provider  value={socket}>  */}
@@ -40,7 +42,7 @@ function App() {
           {/* <Route exact path="/login" element={<Login />} /> */}
           <Route exact path="/user" element={<User />} />
           <Route exact path="/analysis" element={<Analysis />} />
-          <Route exact path="/rooms" element={<Rooms />} />
+          <Route exact path="/rooms" element={<Rooms room={room} setRoom={setRoom}/>} />
           <Route exact path="/createroom" element={<CreateRoom />} />
           <Route exact path="/createdroom" element={<CreatedRoom />} />
           <Route exact path="/joinroom" element={<JoinRoom />} />
@@ -48,7 +50,7 @@ function App() {
           <Route exact path="/details" elements={<Details/>} />
           <Route exact path="/about" element={<About/>} />
           <Route exact path="/report" element={<Report/>} />
-          <Route exact path="/roomlogin" element={<EnterRoom/>} />
+          <Route exact path="/roomlogin" element={<EnterRoom room={room}/>} />
           <Route exact path="/signin" element={<Signin/>} />
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
