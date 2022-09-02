@@ -36,12 +36,12 @@ const Rooms = () => {
         </div>
         <div className='mt-8 bg-black text-white m-auto rounded-lg p-2 hover:bg-gray-400 hover:text-black'><a href="/joinroom">Join a Room</a></div>
         <div className='mt-12 mb-6 font-extrabold'>Your Rooms</div>
-        <div className='grid grid-cols-3 gap-4'>
+        <div className='grid grid-cols-4 gap-4'>
           {/* {data.map(card)} */}
           {data.map((val)=>{
             return(
-              <div className='flex flex-col bg-black relative box-border items-center mr-auto rounded-full min-w-[200px] min-h-[200px] border-2 border-black '>
-        <p className='relative text-center my-3 text-white font-extrabold'>{val}</p>
+              <div className='flex flex-col bg-black  relative box-border items-center mx-auto rounded-full min-w-[200px] min-h-[200px] border-2 border-black '>
+        <p className='relative text-center my-6 text-white font-extrabold'>{val}</p>
         {/* <p className='relative text-center my-3 text-white font-extrabold'></p> */}
         <button className='bg-white hover:bg-slate-500 hover:text-white text-black mx-auto p-2 my-3 rounded-md'><a href='/roomlogin'>Enter</a></button>
        </div>

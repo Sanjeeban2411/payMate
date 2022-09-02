@@ -109,9 +109,9 @@ export default function RoomAnalysis() {
   // }
 
   //   FINAL DATA : transactions
-  if (transactions.length > 0) {
-    console.log("arr->arr", transactions[0].transact[0].user);
-  }
+  // if (transactions.length > 0) {
+  //   console.log("arr->arr", transactions[0].transact[0].user);
+  // }
   return (
     <>
       <Navbar />
@@ -125,7 +125,7 @@ export default function RoomAnalysis() {
                 {name.transact.map((names) => {
             return (
               <div className=' bg-slate-400'>
-               {names.user} -- {Math.abs((names.amount).toFixed(2))}
+               {names.user} -- ₹{Math.abs((names.amount).toFixed(2))}
               </div>
             );
           })}

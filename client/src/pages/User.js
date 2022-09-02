@@ -83,12 +83,12 @@ const User = () => {
         <div>
           <Navbar />
           <div className=" absolute w-full h-[60%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black px-10">
-            <div className=" font-extrabold flex-col text-[#E18A07]">
+            <div className=" font-extrabold flex-col">
               Hey There!
             </div>
 
             <div className="pt-4 text-black text-3xl">
-              <div className="">{data.name}</div>
+              <div className="text-[#E18A07] font-extrabold">{data.name}</div>
             </div>
             {/* <p>{!data ? "Loading..." : data}</p> */}
 
@@ -99,7 +99,8 @@ const User = () => {
             <div className=' w-[30%] h-9 bg-[#D9D9D9]'><div className=' w-[50%] h-9 bg-black'></div></div>
           </div> */}
             <div className="flex flex-col justify-center items-center h-full pt-8">
-              <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-8 mt-12">
+              <div className='max-w-[1150px] mx-auto w-full rounded-md border-2 border-black p-3 mt-12'>
+              <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-3 mt-2">
                 <h2 className="text-4xl font-bold text-center py-6">
                   ENTER YOUR EXPENSES
                 </h2>
@@ -145,6 +146,7 @@ const User = () => {
                   Add Spend
                 </button>
               </form>
+              </div>
             </div>
           </div>
           <img

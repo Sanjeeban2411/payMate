@@ -88,10 +88,9 @@ const CreatedRoom = () => {
           <div className="mx-auto">
             <BarChart />
           </div>
-          <button className="bg-black text-white mx-auto p-2 my-3 rounded-md">
-                  <a href="/report">Report</a>
-                </button>
-          <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-8 mt-12">
+          
+                <div className="max-w-[1150px] mx-auto w-full rounded-md border-2 border-black p-3 mt-12">
+          <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-3 mt-1">
             <h2 className="text-4xl font-bold text-center py-6">
               ENTER YOUR EXPENSES
             </h2>
@@ -128,6 +127,7 @@ const CreatedRoom = () => {
               Add Spend
             </button>
           </form>
+          </div>
         </div>
 
         <div className="mt-12 font-extrabold">Members</div>
@@ -146,7 +146,9 @@ const CreatedRoom = () => {
             );
           })}
         </div>
-
+        <button className="bg-black text-white mx-auto p-2 my-3 rounded-md">
+                  <a href="/report">Report</a>
+                </button>
         <div>
           <div className="mt-8">
             <b>Expenses</b>
