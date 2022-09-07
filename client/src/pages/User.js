@@ -52,6 +52,11 @@ const User = () => {
     //   purpose: purpose,
     //   amount: amount,
     // });
+    if(amount <=0 ){
+      setamount("")
+      setpurpose("")
+      return alert("You cannot enter 0 or negative amount")
+    }
     axios({
       method: "post",
       url: "/addexpense",
@@ -110,6 +115,7 @@ const User = () => {
                     <input
                       className="relative border-2 border-black bg-gray-100 p-2 w-[300px] mx-auto"
                       type="number"
+                      min={0}
                       placeholder="₹ Amount"
                       onChange={(e) => {
                         setamount(e.target.value);
