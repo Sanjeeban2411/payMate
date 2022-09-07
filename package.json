@@ -29,6 +29,7 @@
     "nodemon": "^2.0.19",
     "react-apexcharts": "^1.4.0",
     "react-moment": "^1.1.2",
+    "react-responsive-carousel": "^3.2.23",
     "sharp": "^0.30.7",
     "socket.io": "^4.5.1",
     "validator": "^13.7.0"

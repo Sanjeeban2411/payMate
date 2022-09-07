@@ -41,7 +41,7 @@ const Rooms = (props) => {
         </div>
         <div className='mt-8 bg-black text-white m-auto rounded-lg p-2 hover:bg-gray-400 hover:text-black'><a href="/joinroom">Join a Room</a></div>
         <div className='mt-12 mb-6 font-extrabold'>Your Rooms</div>
-        <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+        <div className='grid grid-cols-2 md:grid-cols-4 gap-4 sm:grid-cols-3'>
           {/* {data.map(card)} */}
           {data.map((val) => {
             return (
