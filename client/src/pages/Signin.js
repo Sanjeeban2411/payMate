@@ -80,7 +80,7 @@ const Signin = () => {
                 <div className="mt-4">
                   {/* <label className="block text-gray-700">E-mail</label> */}
                   <input
-                    className="w-full px-4 py-3 rounded-lg bg-white mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none placeholder-[#40B3BE]"
+                    className="w-full px-4 py-2 rounded-lg bg-white mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none placeholder-[#40B3BE]"
                     type="text"
                     name="email"
                     placeholder="Email"
@@ -100,7 +100,7 @@ const Signin = () => {
                 <div className="mt-4">
                   {/* <label className="block text-gray-700">Password</label> */}
                   <input
-                    className="w-full px-4 py-3 rounded-lg bg-white mt-2 border focus:border-blue-500
+                    className="w-full px-4 py-2 rounded-lg bg-white mt-2 border focus:border-blue-500
                   focus:bg-white focus:outline-none placeholder-[#40B3BE]"
                     type="password"
                     name="password"
@@ -130,14 +130,14 @@ const Signin = () => {
                 {/* <p className=''>Not a member? SignUp Now</p> */}
                 <button
                   className="w-full block bg-[#2176AE] hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
-                px-4 py-3 mt-6"
+                px-4 py-2 mt-6"
                   onClick={handleSubmit}
                 >
                   Login
                 </button>
                 <button
                   className="w-full block bg-white hover:bg-blue-400 focus:bg-blue-400 text-black font-semibold rounded-lg
-                px-4 py-3 mt-6"
+                px-4 py-2 mt-6"
                 >
                   Sign In with Google
                 </button>
