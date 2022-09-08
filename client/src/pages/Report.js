@@ -104,8 +104,20 @@ export default function RoomAnalysis() {
   //   console.log(e)
   // })
 
-  console.log("new", transactions);
+  function compare( a, b ) {
+    if ( a.status < b.status ){
+      return -1;
+    }
+    if ( a.status > b.status ){
+      return 1;
+    }
+    return 0;
+  }
+  
+  transactions.sort( compare );  
+  // transactions.sort( compare ).reverse();  
 
+  console.log("new", transactions);
   // }
 
   //   FINAL DATA : transactions
@@ -120,15 +132,15 @@ export default function RoomAnalysis() {
         <div className="font-extrabold mb-5 pb-10">
           {transactions.map((name) => {
             return (
-              <p>
-                {name.user} has to {name.status} ₹{Math.abs((name.amount).toFixed(2))} 
+              <p className={name.status === 'pay' ? 'bg-yellow-200 pl-10' : 'bg-slate-200'}>
+                {name.user} has to {name.status} ₹{Math.abs((name.amount).toFixed(2))}
                 {name.transact.map((names) => {
-            return (
-              <div className=' bg-slate-400'>
-               {names.user} -- ₹{Math.abs((names.amount).toFixed(2))}
-              </div>
-            );
-          })}
+                  return (
+                    <div className=' bg-slate-400 pl-40'>
+                      {names.user} -- ₹{Math.abs((names.amount).toFixed(2))}
+                    </div>
+                  );
+                })}
               </p>
             );
           })}

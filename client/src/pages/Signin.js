@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { Carousel } from 'react-responsive-carousel';
+// import { Carousel } from 'react-responsive-carousel';
 import axios from "axios";
+
+import CarouselComp from "../components/Carousel";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -42,22 +44,23 @@ const Signin = () => {
       <div className="bg-[#DEF6F9] h-screen px-11 py-8">
         <section className="flex flex-col md:flex-row h-full items-center rounded-2xl bg-white">
           <div className="h-screen hidden lg:w-1/2 md:block xl:w-[60%]">
-            <div className="flex flex-col">
+            <CarouselComp/>
+            {/* <div className="flex flex-col"> */}
           {/* <Carousel > */}
-            <img
+            {/* <img
               className="w-[60%] h-[40%] object-center flex items-center justify-center mt-40 mx-auto"
               src="/assests/log-1.png"
               alt=""
-            />
+            /> */}
             {/* <img
               className="w-[60%] h-[40%] object-center flex items-center justify-center mt-40 mx-auto"
               src="/assests/log-2.png"
               alt=""
             /> */}
             {/* </Carousel> */}
-            </div>
-            <div className="text-center text-[30px] font-extrabold">Split expenses with your <p>friends easily with our <spam className="text-[#02A9EA]">Rooms</spam></p></div>
-            <img src="/assests/indicator.png" alt="" className="mx-auto mt-8"/>
+            {/* </div> */}
+            {/* <div className="text-center text-[30px] font-extrabold">Split expenses with your <p>friends easily with our <spam className="text-[#02A9EA]">Rooms</spam></p></div>
+            <img src="/assests/indicator.png" alt="" className="mx-auto mt-8"/> */}
           </div>
           <div id="bg"
             className=" w-full md:max-w-md lg:max-w-4xl md:mx-0 md:w-2/3 xl:w-[40%] h-[100%] px-2 lg:px-16 xl:px-28
