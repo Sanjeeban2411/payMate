@@ -68,7 +68,7 @@ const LogUp = () => {
                     
                     <div className='mt-4'>
                         {/* <label className='block text-gray-700'>Username</label> */}
-                        <input className=' w-full px-4 py-3 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none'
+                        <input className=' w-full px-4 py-2 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none'
                             type="text"
                             name='username'
                             placeholder='Name'
@@ -86,7 +86,7 @@ const LogUp = () => {
                     </div>
                     <div className='mt-4'>
                         {/* <label className='block text-gray-700'>E-mail</label> */}
-                        <input className='w-full px-4 py-3 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none'
+                        <input className='w-full px-4 py-2 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none'
                             type="text"
                             name='email'
                             placeholder='Email'
@@ -103,7 +103,7 @@ const LogUp = () => {
                     </div>
                     <div className='mt-4'>
                         {/* <label className='block text-gray-700'>Password</label> */}
-                        <input className='w-full px-4 py-3 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500
+                        <input className='w-full px-4 py-2 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500
                   focus:bg-white focus:outline-none'
                             type="password"
                             name='password'
@@ -124,9 +124,15 @@ const LogUp = () => {
           </div> */}
                     
                     <button className='w-full block bg-[#2176AE] hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
-                px-4 py-3 mt-6' onClick={handleSubmit}  >SignUp</button>
+                px-4 py-2 mt-6' onClick={handleSubmit}  >SignUp</button>
+                 <button
+                  className="w-full block bg-white hover:bg-blue-400 focus:bg-blue-400 text-black font-semibold rounded-lg
+                px-4 py-2 mt-6"
+                >
+                  Sign Up with Google
+                </button>
                 </form>
-                <hr className='my-6 border-gray-300 w-full'/>
+                {/* <hr className='my-6 border-gray-300 w-full'/> */}
                 <p className="mt-8">
               Already have an Account?
               <a
@@ -135,6 +141,7 @@ const LogUp = () => {
               >
                 Sign In
               </a>
+             
             </p>
 
   
