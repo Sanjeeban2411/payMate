@@ -17,6 +17,7 @@ import Report from "./pages/Report";
 import EnterRoom from "./pages/EnterRoom";
 import Signin from "./pages/Signin";
 import LogUp from "./pages/LogUp";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import io from 'socket.io-client'
 

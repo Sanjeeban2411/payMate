@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import CarouselComp from '../components/CarouselComp';
 
 const LogUp = () => {
 
@@ -41,14 +42,7 @@ const LogUp = () => {
     <div className="bg-[#DEF6F9] h-screen px-11 py-8">
      <section className='flex flex-col md:flex-row h-full items-center  rounded-2xl bg-white'>
         <div className='h-screen hidden lg:w-1/2 md:block xl:w-[60%]'>
-        <div className="flex flex-col">
-        <img
-              className="w-[60%] h-[40%] object-center flex items-center justify-center mt-40 mx-auto"
-              src="/assests/log-2.png"
-              alt=""
-            />
-
-        </div>
+        <CarouselComp/>
         <div className="text-center text-[30px] font-extrabold">Split expenses with your <p>friends easily with our <spam className="text-[#02A9EA]">Rooms</spam></p></div>
             <img src="/assests/indicator.png" alt="" className="mx-auto mt-8"/>
             {/* <img className='w-full h-full object-cover' src="/assests/loginbg.jpg" alt=""/> */}
@@ -57,14 +51,14 @@ const LogUp = () => {
             className=" w-full md:max-w-md lg:max-w-4xl md:mx-0 md:w-2/3 xl:w-[40%] h-[100%] px-2 lg:px-16 xl:px-28
           flex items-center justify-center rounded-r-2xl">
             <div className='w-full h-100 text-center'>
-            <div className="rounded-full flex items-center justify-center mt-7 bg-white mx-36  relative box-border min-w-[100px] min-h-[100px]">
+            <div className="rounded-full flex items-center justify-center mt-7 bg-white mx-60  relative box-border min-w-[100px] min-h-[100px]">
                 <img src="/assests/logo.png" alt="" className="ml-3"/>
               </div>
               <h1 className="text-3xl font-bold mt-6">Hello There!</h1>
               <h1 className="text-xl md:text-2xl font-bold leading-tight mt-4 text-white">
                 Welcome to Paymate
               </h1>
-                <form action='submit' className='mt-6'>
+                <form action='submit' className='mt-6 px-5'>
                     
                     <div className='mt-4'>
                         {/* <label className='block text-gray-700'>Username</label> */}
@@ -145,7 +139,7 @@ const LogUp = () => {
             </p>
 
   
-        <p className="text-sm text-gray-500 mt-12">&copy; 2022 PayMate - All Rights Reserved.</p>
+        <p className="text-sm text-gray-500 mt-6">&copy; 2022 PayMate - All Rights Reserved.</p>
 
             </div>
         </div>

@@ -3,8 +3,11 @@ import { FaMoneyBillWave } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 // import { Carousel } from 'react-responsive-carousel';
 import axios from "axios";
+import CarouselComp from "../components/CarouselComp";
+import CarouselIndicater from "../components/CarouselIndicater";
 
-import CarouselComp from "../components/Carousel";
+
+
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -59,15 +62,16 @@ const Signin = () => {
             /> */}
             {/* </Carousel> */}
             {/* </div> */}
-            {/* <div className="text-center text-[30px] font-extrabold">Split expenses with your <p>friends easily with our <spam className="text-[#02A9EA]">Rooms</spam></p></div>
-            <img src="/assests/indicator.png" alt="" className="mx-auto mt-8"/> */}
+            <div className="text-center text-[30px] font-extrabold">Split expenses with your <p>friends easily with our <spam className="text-[#02A9EA]">Rooms</spam></p></div>
+            {/* <img src="/assests/indicator.png" alt="" className="mx-auto mt-8"/> */}
+            <CarouselIndicater/>
           </div>
           <div id="bg"
             className=" w-full md:max-w-md lg:max-w-4xl md:mx-0 md:w-2/3 xl:w-[40%] h-[100%] px-2 lg:px-16 xl:px-28
           flex items-center justify-center rounded-r-2xl"
           >
             <div className="w-full h-100 text-center">
-              <div className="rounded-full flex items-center justify-center mt-7 bg-white mx-36  relative box-border min-w-[100px] min-h-[100px]">
+              <div className="rounded-full flex items-center justify-center mt-7 bg-white mx-60  relative box-border min-w-[100px] min-h-[100px]">
                 <img src="/assests/logo.png" alt="" className="ml-3"/>
               </div>
               <h1 className="text-3xl font-bold mt-6">Hello There!</h1>
@@ -75,7 +79,7 @@ const Signin = () => {
                 Welcome to Paymate
               </h1>
 
-              <form action="submit" className="mt-6">
+              <form action="submit" className="mt-6 px-5">
                 {/* <h2 className='text-4xl font-bold text-center py-8'>LOGIN</h2> */}
                 <div className="mt-4">
                   {/* <label className="block text-gray-700">E-mail</label> */}
