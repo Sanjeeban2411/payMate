@@ -40,6 +40,7 @@ router.post('/login', async (req, res) => {
         console.log(isMatch)
         if (!isMatch) {
             await user.generateAuthToken()
+            await user.save()
             console.log(user)
             res.send({ user })
         }

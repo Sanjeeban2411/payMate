@@ -103,7 +103,39 @@ router.get('/:room/analyze', auth, async (req, res) => {
     // const expense = await Expense.find({ room: room._id }).populate('owner')
     const expense = await Expense.find({ room: room._id })
     const total = await Total.find({ room: room._id }).populate("room").populate("user")
+    console.log(req.user)
+    // const user = req.user
     res.send({ expense, total })
+})
+
+router.patch('/:room/settleTransaction', auth, async (req, res) => {
+    try {
+        const room = await Room.findOne({ name: req.params.room })
+        if (!room) {
+            return res.status(404).send("Room not found")
+        }
+
+        const data = {
+            payer: req.body.payer,
+            receiver: req.body.receiver,
+            amount: req.body.amount
+        }
+        console.log("data", data)
+
+        const total = await Total.find({ room: room._id })
+        const payer = await Total.findOne({ $and: [{ room: room._id }, { _id: req.body.payer }] })
+        const receiver = await Total.findOne({ $and: [{ room: room._id }, { _id: req.body.receiver }] })
+        console.log({"payer":payer, "receiver":receiver})
+        payer.total = payer.total + Math.abs(req.body.amount)
+        receiver.total = receiver.total - Math.abs(req.body.amount)
+        await payer.save()
+        await receiver.save()
+
+        res.send({ total, payer, receiver })
+
+    } catch (error) {
+        res.status(500).send(error)
+    }
 })
 
 module.exports = router
