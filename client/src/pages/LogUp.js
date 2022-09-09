@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import CarouselComp from '../components/CarouselComp';
+import CarouselIndicater from '../components/CarouselIndicater';
 
 const LogUp = () => {
 
@@ -44,8 +45,9 @@ const LogUp = () => {
         <div className='h-screen hidden lg:w-1/2 md:block xl:w-[60%]'>
         <CarouselComp/>
         <div className="text-center text-[30px] font-extrabold">Split expenses with your <p>friends easily with our <spam className="text-[#02A9EA]">Rooms</spam></p></div>
-            <img src="/assests/indicator.png" alt="" className="mx-auto mt-8"/>
-            {/* <img className='w-full h-full object-cover' src="/assests/loginbg.jpg" alt=""/> */}
+            {/* <img src="/assests/indicator.png" alt="" className="mx-auto mt-8"/> */}
+            <CarouselIndicater/>
+            
         </div>
         <div id="bg"
             className=" w-full md:max-w-md lg:max-w-4xl md:mx-0 md:w-2/3 xl:w-[40%] h-[100%] px-2 lg:px-16 xl:px-28

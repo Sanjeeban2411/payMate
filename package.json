@@ -31,6 +31,7 @@
     "react-apexcharts": "^1.4.0",
     "react-bootstrap": "^2.5.0",
     "react-elastic-carousel": "^0.11.5",
+    "react-google-login": "^5.2.2",
     "react-moment": "^1.1.2",
     "react-responsive-carousel": "^3.2.23",
     "sharp": "^0.30.7",
