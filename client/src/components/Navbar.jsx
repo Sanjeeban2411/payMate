@@ -18,14 +18,14 @@ const Navbar = () => {
         <div>
             <div className='flex w-full justify-between items-center h-20 px-10 absolute z-10 font-Montserrat '>
                 <div className='text-black' >
-                    <h1 onClick={handleNav} className={logo ? ' hidden' : 'flex text-3xl font-black  '} ><a href='/'>Paymate</a> <div className='p-2 m-auto'><FaMoneyBillWave /></div></h1>
+                    <h1 onClick={handleNav} className={logo ? ' hidden' : 'flex text-3xl font-black  '} ><a href='/' onClick={handleNav} className={logo ? ' hidden' : 'flex text-black text-3xl font-black no-underline  '}>Paymate</a> <div className='p-2 m-auto'><FaMoneyBillWave /></div></h1>
                 </div>
 
                 <ul className='hidden md:flex'>
-                    <li className='p-7 font-bold text-black cursor-pointer'><a href='/user'>Home</a></li>
-                    <li className='p-7 font-bold text-black cursor-pointer'><a href='/analysis'>Analysis</a></li>
-                    <li className='p-7 font-bold text-black cursor-pointer'><a href='/rooms'>Rooms</a></li>
-                    <li className='p-7 font-bold text-black cursor-pointer'><a href='/about'>About Us</a></li>
+                    <li className='p-7' ><a href='/user' className='font-bold text-black cursor-pointer no-underline'>Home</a></li>
+                    <li className='p-7'><a href='/analysis' className=' font-bold text-black cursor-pointer no-underline'>Analysis</a></li>
+                    <li className='p-7'><a href='/rooms' className=' font-bold text-black cursor-pointer no-underline'>Rooms</a></li>
+                    <li className='p-7'><a href='/about' className=' font-bold text-black cursor-pointer no-underline'>About Us</a></li>
                 </ul>
                 
                 <div className=' hidden md:flex md:pr-3 justify-between items-center  cursor-pointer'>

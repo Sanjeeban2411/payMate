@@ -18,6 +18,7 @@ import EnterRoom from "./pages/EnterRoom";
 import Signin from "./pages/Signin";
 import LogUp from "./pages/LogUp";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Googlelogin from "./components/Googlelogin";
 
 // import io from 'socket.io-client'
 
@@ -53,6 +54,7 @@ function App() {
           <Route exact path="/report" element={<Report/>} />
           <Route exact path="/roomlogin" element={<EnterRoom room={room}/>} />
           <Route exact path="/signin" element={<Signin/>} />
+          <Route exact path="/googlesignin" element={<Googlelogin/>} />
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
       </BrowserRouter>
