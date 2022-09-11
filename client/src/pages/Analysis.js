@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import axios, { Axios } from "axios";
 // import BarChart from '../components/BarChart'
 import BarChartAnalyze from '../components/BarChartAnalyze';
+import BarChartWeek from '../components/BarChartWeek';
 
 const Analysis = () => {
 
@@ -74,15 +75,26 @@ const Analysis = () => {
       let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       return months[num-1];
     }
+    function weekname(value){
+      let week = ["Week-1","Week-2","Week-3","Week-4"];
+      return week[value-1];
+    }
   const date=allExpenses.map((totl)=>{
     return(
       monthname(totl.updatedAt.slice(6,7))
     );
    })
+   const weekdata=allExpenses.map((tot)=>{
+    return(
+      // console.log("ccc",tot.updatedAt.slice(9,10))
+      weekname(Math.ceil((tot.updatedAt.slice(8,10))/7))
+    );
+   })
+   console.log("weeknam",weekdata)
   //  console.log("date",date)
-  date[3]="September"
-  date[4]="September"
-  date[5]="October"
+  // date[3]="September"
+  // date[4]="September"
+  // date[5]="October"
    console.log("month",date)
 
    let analyze=allExpenses
@@ -97,11 +109,25 @@ const Analysis = () => {
 
    console.log("analyze",analyze)
 
+   let weeks=allExpenses
+
+  if(weeks.length>0){
+    for(let i=0;i<weeks.length;i++){
+      weeks[i].createdAt=weekdata[i];
+      
+   }
+   console.log("wname",weeks)
+  }
+
+   console.log("analyze",analyze)
+
    function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
   const Month=date.filter(onlyUnique)
   console.log("data",Month)
+  const weedata=weekdata.filter(onlyUnique)
+  console.log("www",weedata)
 
   // let tamt=([])
   let sum
@@ -126,6 +152,29 @@ const Analysis = () => {
   console.log("sm",sum)
   console.log("y axis",kharcha)
 
+// week amt
+
+let weeksum
+  let weekkharcha = []
+  if(weeks.length>0){
+  weeksum=weeks[0].amount
+  console.log("amt",weeks[0].createdAt)
+  for(let i=0;i<weeks.length-1;i++){
+    console.log("weektest",weeks[i].createdAt,weeks[i].amount)
+    console.log("weektesttest",weeks[i+1].createdAt,weeks[i+1].amount)
+    if(weeks[i].createdAt===weeks[i+1].createdAt){
+      weeksum=weeksum+weeks[i+1].amount
+    }
+    else{
+      weekkharcha.push(weeksum)
+      weeksum = weeks[i+1].amount
+      // kharcha.push(sum)
+    }
+  }
+  weekkharcha.push(sum)
+}
+  console.log("sm-week",weeksum)
+  console.log("y axis week",weekkharcha)
 
 
 
@@ -144,6 +193,7 @@ const Analysis = () => {
         <div className="flex flex-col justify-center items-center h-full ">
           <div className="mx-auto">
             <BarChartAnalyze/>
+            <BarChartWeek/>
           </div>
           {/* <BarChart/> */}
           <div className='max-w-[1150px] mx-auto w-full rounded-md border-2 border-black p-3 mt-12'>
