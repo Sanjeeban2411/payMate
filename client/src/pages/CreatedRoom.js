@@ -103,9 +103,33 @@ const CreatedRoom = () => {
     setName(name)
   }
 
-  function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-  }
+  // function onlyUnique(value, index, self) {
+  //   return self.indexOf(value) === index;
+  // }
+
+
+//   let sum
+//   let kharcha = []
+//   if(allExpenses.length>0){
+//   sum=allExpenses[0].amount
+//   console.log("amt",analyze[0].createdAt)
+//   for(let i=0;i<allExpenses.length-1;i++){
+//     console.log("test",analyze[i].createdAt,analyze[i].amount)
+//     console.log("test",analyze[i+1].createdAt,analyze[i+1].amount)
+//     if(allExpenses[i].owner.name===allExpenses[i+1].owner.name){
+//       sum=sum+allExpenses[i+1].amount
+//     }
+//     else{
+//       kharcha.push(sum)
+//       sum = allExpenses[i+1].amount
+//       kharcha.push(sum)
+//     }
+//   }
+//   kharcha.push(sum)
+// }
+// console.log("kkk",kharcha)
+// console.log("sm",sum)
+
 
 
   return (

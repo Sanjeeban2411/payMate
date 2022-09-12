@@ -198,16 +198,69 @@ let weeksum
   return (
     <>
         <Navbar />
-      <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black px-10">
-        <div className="font-extrabold mb-5 pb-10">Monthly Expenses</div>
-        <div className="flex flex-col justify-center items-center h-full ">
-          <div className="mx-auto">
-            <BarChartAnalyze/>
-            <BarChartWeek/>
+      <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black">
+        {/* <div className="font-extrabold mb-5 pb-10">Monthly Expenses</div> */}
+        <div className="flex flex-row justify-between items-center h-screen ">
+          <div className='flex flex-col justify-between  w-full h-[600px] '>
+            <div>
+          <img src='./assests/Vector-14.png' alt="" className='w-80'/>
+            <div className=' font-extrabold ml-12'>
+              
+              <p>All your Expenses</p>
+              <p><span className='text-[#2176AE]'>analysed</span> in one page</p>
+            </div>
+            <img src='./assests/Vector-14.png' alt="" className='w-80 ml-40'/>
+            </div>
+        <div className='w-full h-44' id="spent">
+          <div className=' my-5 ml-12 text-white'>
+            <h2>Amount Spent</h2>
+            <p className='text-black font-extrabold'>$5666</p>
+            </div>
           </div>
-          {/* <BarChart/> */}
-          <div className='max-w-[1150px] mx-auto w-full rounded-md border-2 border-black p-3 mt-12'>
-          <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-8 mt-2">
+          </div>
+          <div className='flex flex-col'>
+          <div className=' rounded-tl-xl p-20 bg-slate-300 ml-3 '>
+            <div className=''>
+          <div className="mx-auto bg-white">
+            <BarChartAnalyze/>
+            {/* <BarChartWeek/> */}
+          </div>
+          </div>
+          
+          </div>
+          <div className='w-[1200px] h-10 ml-3 rounded-bl-3xl bg-black'>
+          </div>
+          </div>
+         
+        </div>
+
+        
+        <div className='border-2  my-24 mx-32 bg-[#E18A07]'>
+          <div className="mt-4">
+            <h2 className='text-center'>Previous Transaction</h2>
+          </div>
+          <div className="mt-6 border-2 border-black bg-slate-300">
+            {allExpenses.map((name) => {
+              return (
+                <p className='p-2'>
+                  ₹{name.amount} - {name.purpose} 
+                </p>
+              );
+            })}
+          </div>
+          {/* <div className='mt-2'></div> */}
+        </div>
+      </div>
+
+    </>
+
+  )
+}
+
+export default Analysis
+
+
+{/* <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-8 mt-2">
             <h2 className="text-4xl font-bold text-center py-6">
               ENTER YOUR EXPENSES
             </h2>
@@ -243,31 +296,4 @@ let weeksum
             >
               Add Spend
             </button>
-          </form>
-          </div>
-        </div>
-
-        
-        <div>
-          <div className=" mt-32 md:mt-14">
-            <b>Expenses</b>
-          </div>
-          <div className="mt-6 border-2 border-black bg-slate-300">
-            {allExpenses.map((name) => {
-              return (
-                <p className='p-2'>
-                  ₹{name.amount} - {name.purpose} 
-                </p>
-              );
-            })}
-          </div>
-          <div className='mt-2'></div>
-        </div>
-      </div>
-
-    </>
-
-  )
-}
-
-export default Analysis
+          </form> */}
