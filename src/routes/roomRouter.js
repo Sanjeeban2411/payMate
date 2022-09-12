@@ -109,33 +109,70 @@ router.get('/:room/analyze', auth, async (req, res) => {
 })
 
 router.patch('/:room/settleTransaction', auth, async (req, res) => {
-    try {
-        const room = await Room.findOne({ name: req.params.room })
-        if (!room) {
-            return res.status(404).send("Room not found")
-        }
-
-        const data = {
-            payer: req.body.payer,
-            receiver: req.body.receiver,
-            amount: req.body.amount
-        }
-        console.log("data", data)
-
-        const total = await Total.find({ room: room._id })
-        const payer = await Total.findOne({ $and: [{ room: room._id }, { _id: req.body.payer }] })
-        const receiver = await Total.findOne({ $and: [{ room: room._id }, { _id: req.body.receiver }] })
-        console.log({"payer":payer, "receiver":receiver})
-        payer.total = payer.total + Math.abs(req.body.amount)
-        receiver.total = receiver.total - Math.abs(req.body.amount)
-        await payer.save()
-        await receiver.save()
-
-        res.send({ total, payer, receiver })
-
-    } catch (error) {
-        res.status(500).send(error)
+    // try {
+    const room = await Room.findOne({ name: req.params.room })
+    if (!room) {
+        return res.status(404).send("Room not found")
     }
+
+    // const total = await Total.find({ room: room._id })
+
+    // if(req.body.command === "settleAllTransactions(aDmin)"){
+    //     total.forEach( async(e)=>{
+    //         e.total = 0
+    //         await e.save()
+    //     })
+    //     return res.send(total)
+    // }
+
+    // const data = {
+    //     payer: req.body.payer,
+    //     receiver: req.body.receiver,
+    //     amount: req.body.amount
+    // }
+
+    // console.log("data", data)
+
+    const payer = await Total.findOne({ $and: [{ room: room._id }, { _id: req.body.payer }] })
+    const receiver = await Total.findOne({ $and: [{ room: room._id }, { _id: req.body.receiver }] })
+    console.log({ "payer": payer, "receiver": receiver })
+    payer.total = payer.total + Math.abs(req.body.amount)
+    receiver.total = receiver.total - Math.abs(req.body.amount)
+    await payer.save()
+    await receiver.save()
+
+    const total = await Total.find({ room: room._id })
+
+    console.log("tot",total)
+    let avg = 0
+    total.forEach((e) => {
+        avg += e.total
+    })
+    avg = avg / total.length
+
+    console.log("avg", avg)
+
+    let count = 0
+    total.forEach((e) => {
+        if (Math.round(e.total) === Math.round(avg)) {
+            count += 1
+        }
+    })
+    console.log("cnt", count)
+    console.log("len", total.length)
+
+    if(count === total.length){
+        const total = await Total.updateMany({total:0})
+        console.log("xxxxx", total)
+        return res.send(total)
+    }
+
+
+    res.send({ total, payer, receiver })
+
+    // } catch (error) {
+    //     res.status(500).send(error)
+    // }
 })
 
 module.exports = router

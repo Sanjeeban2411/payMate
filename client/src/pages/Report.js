@@ -5,9 +5,12 @@ import Navbar from "../components/Navbar";
 
 export default function Report() {
   const [totalData, setTotalData] = useState([]);
+  const [check, setCheck] = useState(false)
+
   console.log("tot", totalData)
   const x = localStorage.getItem("jwt_token");
   const room = localStorage.getItem("room");
+
 
   useEffect(() => {
     axios({
@@ -55,7 +58,7 @@ export default function Report() {
   });
 
   // const lenden = [625, 125, -375, -375]
-  console.log("lenden",lenden);
+  console.log("lenden", lenden);
   function getMaxOfArray(numArray) {
     return Math.max.apply(null, numArray);
   }
@@ -67,14 +70,14 @@ export default function Report() {
   let max = getMaxOfArray(lenden);
   let min = getMinOfArray(lenden);
 
-  // console.log(max, min)
+  console.log(max, min)
 
   let count;
   while (count !== lenden.length) {
     // console.log("test", max)
     // console.log("arr", lenden)
     // console.log("tt", lenden[lenden.indexOf(max)])
-    if (lenden.length > 0) {
+    if (lenden.length > 0 && max !== 0 && min !== 0) {
       transactions[lenden.indexOf(max)].status = "recieve";
       transactions[lenden.indexOf(min)].status = "pay";
 
@@ -134,11 +137,67 @@ export default function Report() {
 
 
 
+
   const handleClick = (event, parent, child) => {
     // console.log(event);
     console.log(parent._id);
     console.log(child._id);
-    
+
+    axios({
+      method: "patch",
+      url: `/${room}/settleTransaction`,
+      headers: {
+        Authorization: `Bearer ${x}`,
+      },
+      //   data: data,
+      data: {
+        payer: child._id,
+        receiver: parent._id,
+        amount: child.amount
+      },
+    })
+      .then((response) => {
+        // localStorage.setItem("jwt_token", response.data.user.token);
+        // navigate("/user");
+        // console.log(".then",data)
+        console.log(response);
+        window.location.reload()
+        // clearTotal()
+        // console.log(response.data.user.token);
+      })
+      .catch((error) => console.log(error));
+
+
+    console.log("after", transactions)
+  };
+  console.log("after", transactions)
+
+
+  // let countDone = 0
+  // transactions.forEach((e) => {
+  //   if (e.amount === 0) {
+  //     countDone += 1
+  //   }
+  // })
+  // console.log(countDone)
+  // console.log(transactions.length)
+
+  // const handleClear = () => {
+
+  // }
+
+  const clearTotal = () => {
+    let countDone = 0
+    transactions.forEach((e) => {
+      if (e.amount === 0) {
+        countDone += 1
+      }
+    })
+    console.log("fnc")
+    console.log(countDone)
+    console.log(transactions.length)
+
+    if (countDone === transactions.length) {
       axios({
         method: "patch",
         url: `/${room}/settleTransaction`,
@@ -146,10 +205,8 @@ export default function Report() {
           Authorization: `Bearer ${x}`,
         },
         //   data: data,
-        data: { 
-          payer: child._id, 
-          receiver: parent._id,
-          amount:  child.amount
+        data: {
+          command: "settleAllTransactions(aDmin)"
         },
       })
         .then((response) => {
@@ -157,13 +214,14 @@ export default function Report() {
           // navigate("/user");
           // console.log(".then",data)
           console.log(response);
-          window.location.reload()
+          // window.location.reload()
           // console.log(response.data.user.token);
         })
         .catch((error) => console.log(error));
-    console.log("after", transactions)
-  };
-  console.log("after", transactions)
+    }
+  }
+
+  // clearTotal()
 
   return (
     <>
@@ -181,7 +239,7 @@ export default function Report() {
                     <div className=' bg-slate-400 pl-40'>
                       {names.user} -- ₹{Math.abs((names.amount).toFixed(2))}
                       <span className={name.token === x ? 'block' : 'hidden'}>
-                        <button value={"abc"} className="bg-black text-white" onClick={event => handleClick(event, name, names)}>
+                        <button className="bg-black text-white" onClick={event => handleClick(event, name, names)}>
                           done
                         </button>
                       </span>
@@ -191,6 +249,13 @@ export default function Report() {
               </div>
             );
           })}
+
+          {/* <span className={countDone === transactions.length ? 'block' : 'hidden'}>
+            <button className="bg-black text-white px-10 py-2" onClick={handleClear}>
+              Clear
+            </button>
+          </span> */}
+
         </div>
       </div>
     </>
