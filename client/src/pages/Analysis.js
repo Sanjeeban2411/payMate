@@ -97,6 +97,7 @@ const Analysis = () => {
   // date[5]="October"
    console.log("month",date)
 
+  //  console.log("m-w",weekdata[0].concat("-",date[0]))
    let analyze=allExpenses
 
   if(analyze.length>0){
@@ -113,7 +114,7 @@ const Analysis = () => {
 
   if(weeks.length>0){
     for(let i=0;i<weeks.length;i++){
-      weeks[i].createdAt=weekdata[i];
+      weeks[i].createdAt=weekdata[i].concat("/",date[i]);
       
    }
    console.log("wname",weeks)
@@ -121,12 +122,21 @@ const Analysis = () => {
 
    console.log("analyze",analyze)
 
+   let w_m=[]
+
+   if(allExpenses.length>0){
+    for(let i=0;i<allExpenses.length;i++){
+      w_m[i]=weekdata[i].concat("/",date[i]);
+    }
+    console.log("w__m",w_m);
+   }
+
    function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
   const Month=date.filter(onlyUnique)
   console.log("data",Month)
-  const weedata=weekdata.filter(onlyUnique)
+  const weedata=w_m.filter(onlyUnique)
   console.log("www",weedata)
 
   // let tamt=([])
@@ -134,10 +144,10 @@ const Analysis = () => {
   let kharcha = []
   if(analyze.length>0){
   sum=analyze[0].amount
-  console.log("amt",analyze[0].createdAt)
+  // console.log("amt",analyze[0].createdAt)
   for(let i=0;i<analyze.length-1;i++){
-    console.log("test",analyze[i].createdAt,analyze[i].amount)
-    console.log("test",analyze[i+1].createdAt,analyze[i+1].amount)
+    // console.log("test",analyze[i].createdAt,analyze[i].amount)
+    // console.log("test",analyze[i+1].createdAt,analyze[i+1].amount)
     if(analyze[i].createdAt===analyze[i+1].createdAt){
       sum=sum+analyze[i+1].amount
     }

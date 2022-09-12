@@ -18,13 +18,14 @@ export default function IndieExpenses(props) {
 
     return (
         <div>
-            IndieExpenses
-            <div>
+            <h1>Expenses</h1>
+            <div className='bg-gray-500'>
                 {indieExpenses.map((e) => {
                     return (
-                        <p>
-                            e
-                        </p>
+                        <div className=' bg-gray-200 '>
+                            
+                            <p>{e.purpose}=={e.amount}</p>                    
+                        </div>
                     )
                 })}
             </div>

@@ -110,20 +110,29 @@ const BarChartWeek = () => {
   
     if(weeks.length>0){
       for(let i=0;i<weeks.length;i++){
-        weeks[i].createdAt=weekdata[i];
+        weeks[i].createdAt=weekdata[i].concat("/",date[i]);
         
      }
      console.log("wname",weeks)
     }
   
      console.log("analyze",analyze)
+
+     let w_m=[]
+
+   if(allExpenses.length>0){
+    for(let i=0;i<allExpenses.length;i++){
+      w_m[i]=weekdata[i].concat("/",date[i]);
+    }
+    console.log("w__m",w_m);
+   }
   
      function onlyUnique(value, index, self) {
       return self.indexOf(value) === index;
     }
     const Month=date.filter(onlyUnique)
     console.log("data",Month)
-    const weedata=weekdata.filter(onlyUnique)
+    const weedata=w_m.filter(onlyUnique)
     console.log("www",weedata)
   
     // let tamt=([])
