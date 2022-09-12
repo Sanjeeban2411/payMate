@@ -160,29 +160,29 @@ const CreatedRoom = () => {
           </div>
         </div>
 
-        {!indie &&
-          <>
-            <div className=" mt-32 md:mt-14 font-extrabold">Members</div>
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-              {userNames.map((name) => {
-                return (
-                  <div className="flex flex-col border-2 border-black">
-                    <div className="m-auto mt-4">
-                      <FaUserSecret />
-                    </div>
-                    <div className="p-4 text-center">{name}</div>
-                    <button className="bg-black text-white mx-auto p-2 my-3 rounded-md" onClick={event => expenseDetails(event, name)}>
-                      Expense Details
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-          </>
-        }
+        {/* {!indie &&
+          <> */}
+        <div className=" mt-32 md:mt-14 font-extrabold">Members</div>
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          {userNames.map((name) => {
+            return (
+              <div className="flex flex-col border-2 border-black">
+                <div className="m-auto mt-4">
+                  <FaUserSecret />
+                </div>
+                <div className="p-4 text-center">{name}</div>
+                <button className="bg-black text-white mx-auto p-2 my-3 rounded-md" onClick={event => expenseDetails(event, name)}>
+                  Expense Details
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        {/* </>
+        } */}
         {indie &&
           <>
-            <IndieExpenses indie={indie} setIndie={setIndie} name={name} all={allExpenses}/>
+            <IndieExpenses indie={indie} setIndie={setIndie} name={name} all={allExpenses} />
           </>
         }
         <button className="bg-black text-white mx-auto p-2 my-4 mt-10 rounded-md">
@@ -192,15 +192,19 @@ const CreatedRoom = () => {
           <div className="mt-8">
             <b>Expenses</b>
           </div>
-          <div className="mt-6 border-2 border-black bg-slate-300">
-            {allExpenses.map((name) => {
-              return (
-                <p className='p-2'>
-                  {name.owner.name}  ====  ₹{name.amount} - {name.purpose}
-                </p>
-              );
-            })}
-          </div>
+          {!indie &&
+            <>
+              <div className="mt-6 border-2 border-black bg-slate-300">
+                {allExpenses.map((name) => {
+                  return (
+                    <p className='p-2'>
+                      {name.owner.name}  ====  ₹{name.amount} - {name.purpose}
+                    </p>
+                  );
+                })}
+              </div>
+            </>
+          }
           <div className='mt-2'></div>
         </div>
       </div>

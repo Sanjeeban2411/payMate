@@ -29,7 +29,9 @@ export default function IndieExpenses(props) {
                     )
                 })}
             </div>
-            <button className='bg-black text-white p-5' onClick={handleClick}>ok</button>
+            <button className='bg-black text-white p-5' onClick={handleClick}>
+                Show All
+            </button>
         </div>
     )
 }
