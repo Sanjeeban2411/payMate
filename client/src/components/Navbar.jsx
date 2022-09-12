@@ -17,20 +17,20 @@ const Navbar = () => {
     return (
         <div>
             <div className='flex w-full justify-between items-center h-20 px-10 absolute z-10 font-Montserrat '>
-                <div className='text-black' >
-                    <h1 onClick={handleNav} className={logo ? ' hidden' : 'flex text-3xl font-black  '} ><a href='/' onClick={handleNav} className={logo ? ' hidden' : 'flex text-black text-3xl font-black no-underline  '}>Paymate</a> <div className='p-2 m-auto'><FaMoneyBillWave /></div></h1>
+                <div className='text-[#2176AE]' >
+                    <h1 onClick={handleNav} className={logo ? ' hidden' : 'flex text-3xl font-black  '} ><a href='/' onClick={handleNav} className={logo ? ' hidden' : 'flex text-[#2176AE] text-3xl font-black no-underline  '}>Paymate</a> <div className='p-2 m-auto'><FaMoneyBillWave /></div></h1>
                 </div>
 
                 <ul className='hidden md:flex'>
-                    <li className='p-7' ><a href='/user' className='font-bold text-black cursor-pointer no-underline'>Home</a></li>
-                    <li className='p-7'><a href='/analysis' className=' font-bold text-black cursor-pointer no-underline'>Analysis</a></li>
-                    <li className='p-7'><a href='/rooms' className=' font-bold text-black cursor-pointer no-underline'>Rooms</a></li>
-                    <li className='p-7'><a href='/about' className=' font-bold text-black cursor-pointer no-underline'>About Us</a></li>
+                    <li className='p-7' ><a href='/user' className='font-bold text-[#2176AE] cursor-pointer no-underline'>Home</a></li>
+                    <li className='p-7'><a href='/analysis' className=' font-bold text-[#2176AE] cursor-pointer no-underline'>Analysis</a></li>
+                    <li className='p-7'><a href='/rooms' className=' font-bold text-[#2176AE] cursor-pointer no-underline'>Rooms</a></li>
+                    <li className='p-7'><a href='/about' className=' font-bold text-[#2176AE] cursor-pointer no-underline'>About Us</a></li>
                 </ul>
                 
                 <div className=' hidden md:flex md:pr-3 justify-between items-center  cursor-pointer'>
-                    <button className='rounded-full p-3 bg-black text-white'><a href='/signin'><FaUserAlt /></a></button>
-                    <button className='bg-red-600 px-6 py-2 mx-2 rounded cursor-pointer text-white hover:bg-red-700  hover:font-bold'><a href='/signup'>Sign Up</a></button>
+                    <button className='rounded-full p-3 bg-black text-white'><a href='/signin' className=' text-white'><FaUserAlt /></a></button>
+                    <button className='bg-red-600 px-6 py-2 mx-2 rounded cursor-pointer text-white hover:bg-red-700  hover:font-bold'><a href='/signup' className=' text-white no-underline'>Sign Up</a></button>
                 </div>
                 
                 <div className='hidden md:h-3'><hr/></div>
