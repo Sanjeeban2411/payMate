@@ -4,7 +4,7 @@ import axios from 'axios'
 import Navbar from '../components/Navbar'
 
 const Rooms = (props) => {
-  let navigate = useNavigate(); 
+  let navigate = useNavigate();
   const [data, setData] = useState([]);
   console.log("userNames", data)
   const x = localStorage.getItem("jwt_token")
@@ -17,8 +17,8 @@ const Rooms = (props) => {
       }
     })
       .then((response) => {
-        setData(response.data)
-        // console.log(response)
+        setData(response.data.r)
+        console.log("res", response)
       })
 
       .catch((err) => {
@@ -27,10 +27,33 @@ const Rooms = (props) => {
 
   }, []);
 
-  console.log("xxx",props.room)
-  // const joinRoom = () =>{
-  //   props.setRoom()
-  // }
+  console.log("xxx", props.room)
+
+  const enterRoom = (event, value) => {
+    // props.setRoom()
+    console.log("v",value)
+    const x = localStorage.getItem("jwt_token")
+
+    axios({
+      method: 'post',
+      url: '/room/join',
+      data: {
+        "name": value.name,
+        "password": value.password
+      },
+      headers: {
+        'Authorization': `Bearer ${x}`,
+        // 'params': { name }
+      }
+    })
+      .then((response) => {
+        localStorage.setItem("room", value.name)
+        navigate(`/createdroom `)
+        console.log(response)
+        console.log(response.data.user.token)
+      })
+      .catch(error => console.log(error))
+  }
   return (
     <div>
       <Navbar />
@@ -46,14 +69,16 @@ const Rooms = (props) => {
           {data.map((val) => {
             return (
               <div className='flex flex-col bg-black  relative box-border items-center mx-auto rounded-full min-w-[200px] min-h-[200px] border-2 border-black '>
-                <p className='relative text-center my-6 text-white font-extrabold'>{val}</p>
+                <p className='relative text-center my-6 text-white font-extrabold'>{val.name}</p>
                 {/* <p className='relative text-center my-3 text-white font-extrabold'></p> */}
-                <button className='bg-white hover:bg-slate-500 hover:text-white text-black mx-auto p-2 my-3 rounded-md' onClick={()=>{
-                  props.setRoom(val)
-                  navigate('/roomlogin')
-                  }}>
-                  {/* <a href='/roomlogin'> */}
-                    Enter
+                <button className='bg-white hover:bg-slate-500 hover:text-white text-black mx-auto p-2 my-3 rounded-md' onClick={event => enterRoom(event, val)}>
+                  {/* () => {
+                   props.setRoom(val)
+                   navigate('/createdroom')
+                   }
+                 }> */}
+                  {/* <a href = '/roomlogin'> */}
+                  Enter
                   {/* </a> */}
                 </button>
               </div>

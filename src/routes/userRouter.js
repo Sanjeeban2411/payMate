@@ -84,7 +84,8 @@ router.get('/showrooms', auth, async (req, res) => {
             // res.send(rooms.rooms[i])
             roomNames.push(rooms.rooms[i].name)
         }
-        res.send(roomNames)
+        const r = rooms.rooms
+        res.send({roomNames, r})
         console.log(roomNames)
         // res.send(user)
 
