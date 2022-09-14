@@ -194,32 +194,43 @@ let weeksum
   // console.log("expensedata",expenseData)
   // console.log("allexpense",allExpenses)
 
+  const total = allExpenses.map(item => item.amount).reduce((prev, curr) => prev + curr, 0);
+
 
   return (
     <>
+    { data && (
+      <div>
         <Navbar />
-      <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black">
+      <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-16 font-Montserrat text-3xl  text-black">
         {/* <div className="font-extrabold mb-5 pb-10">Monthly Expenses</div> */}
+        <div id="anabg">
         <div className="flex flex-row justify-between items-center h-screen ">
           <div className='flex flex-col justify-between  w-full h-[600px] '>
             <div>
           <img src='./assests/Vector-14.png' alt="" className='w-80'/>
-            <div className=' font-extrabold ml-12'>
+            <div className=' font-black text-4xl ml-12'>
               
               <p>All your Expenses</p>
               <p><span className='text-[#2176AE]'>analysed</span> in one page</p>
             </div>
             <img src='./assests/Vector-14.png' alt="" className='w-80 ml-40'/>
             </div>
+            <div>
+            {/* <img src='./assests/Vector-19.png' alt='' className=''/> */}
+              <img src='./assests/Vector-20.png' alt='' className='flex flex-col w-[95%]'/>
         <div className='w-full h-44' id="spent">
-          <div className=' my-5 ml-12 text-white'>
-            <h2>Amount Spent</h2>
-            <p className='text-black font-extrabold'>$5666</p>
+          <div className='  ml-12 text-white'>
+            <div className='p-4'>
+            <h2 className=''>Total Amount Spent</h2>
+            <p className='text-black font-extrabold'>₹{total}</p>
+            </div>
             </div>
           </div>
           </div>
+          </div>
           <div className='flex flex-col'>
-          <div className=' rounded-tl-xl p-20 bg-slate-300 ml-3 '>
+          <div className=' rounded-tl-xl p-16 bg-slate-300 ml-3 '>
             <div className=''>
           <div className="mx-auto bg-white">
             <BarChartAnalyze/>
@@ -228,29 +239,41 @@ let weeksum
           </div>
           
           </div>
-          <div className='w-[1200px] h-10 ml-3 rounded-bl-3xl bg-black'>
+          <div className='w-[1100px] h-10 ml-3 rounded-bl-3xl bg-black'>
           </div>
           </div>
          
         </div>
 
         
-        <div className='border-2  my-24 mx-32 bg-[#E18A07]'>
-          <div className="mt-4">
+        <div className='border-2  my-24 mx-32 rounded-t-xl bg-white' id="tranbg">
+          <div className="p-4 bg-[#E18A07] rounded-t-xl">
             <h2 className='text-center'>Previous Transaction</h2>
           </div>
-          <div className="mt-6 border-2 border-black bg-slate-300">
+          <div className="mt-6  mx-20">
             {allExpenses.map((name) => {
               return (
-                <p className='p-2'>
-                  ₹{name.amount} - {name.purpose} 
-                </p>
-              );
+                <>
+                <div className=' p-2 flex justify-between'>
+                  <div>
+                  {name.purpose}
+                  </div>
+                  <div>
+                    {name.updatedAt}
+                  </div>
+                  <div>₹{name.amount}</div> 
+                </div>
+                <hr className='' />
+                </>
+            );
             })}
+          </div>
           </div>
           {/* <div className='mt-2'></div> */}
         </div>
       </div>
+      </div>
+      )}
 
     </>
 
