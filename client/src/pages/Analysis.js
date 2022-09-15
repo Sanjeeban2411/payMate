@@ -310,11 +310,13 @@ const Analysis = () => {
                     );
                   })}
 
-
-                  <button onClick={() => setLimit(!limit)}>
+                  <div className='border-1 rounded-lg border-black'>
+                  <button onClick={() => setLimit(!limit)} className=" mx-[330px] ">
+                  
                     {limit ? "Show more" : "Show less"}
                     {/* Show All */}
                   </button>
+                  </div>
                 </div>
               </div>
               {/* <div className='mt-2'></div> */}

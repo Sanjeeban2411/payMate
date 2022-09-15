@@ -87,79 +87,28 @@ const User = () => {
       {data && (
         <div>
           <Navbar />
-          <div className=" absolute w-full h-[60%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black px-10">
-            <div className=" font-extrabold flex-col">
-              Hey There!
-            </div>
-
-            <div className="pt-4 text-black text-3xl">
-              <div className="text-[#E18A07] font-extrabold">{data.name}</div>
-            </div>
-            {/* <p>{!data ? "Loading..." : data}</p> */}
-
-            <div className=" pt-12 text-black font-bold">Total Spend</div>
-            <div className=' pt-6 text-black font-bold'><div className='text-[#E18A07]'>₹{total}</div></div>
-
-            {/* <div className='flex-row pt-8'>
-            <div className=' w-[30%] h-9 bg-[#D9D9D9]'><div className=' w-[50%] h-9 bg-black'></div></div>
-          </div> */}
-            <div className="flex flex-col justify-center items-center h-full pt-8">
-              <div className='max-w-[1150px] mx-auto w-full rounded-md border-2 border-black p-3 mt-12'>
-              <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-3 mt-2">
-                <h2 className="text-4xl font-bold text-center py-6">
-                  ENTER YOUR EXPENSES
-                </h2>
-                <div className="flex flex-col md:flex-row justify-between">
-                  <div className="flex flex-col mb-4">
-                    <label className="text-center">Amount</label>
-                    <input
-                      className="relative border-2 border-black bg-gray-100 p-2 w-[300px] mx-auto"
-                      type="number"
-                      min={0}
-                      placeholder="₹ Amount"
-                      onChange={(e) => {
-                        setamount(e.target.value);
-                        // setExpenseData({
-                        //   purpose: expenseData.purpose,
-                        //   amount: e.target.value,
-                        // });
-                      }}
-                      value={amount}
-                    />
-                  </div>
-                  <div className="flex flex-col mb-4">
-                    <label className="text-center">Category</label>
-                    <input
-                      className="border-2 border-black relative bg-gray-100 p-2 w-[300px] mx-auto"
-                      type="text"
-                      placeholder="Food"
-                      onChange={(e) => {
-                        setpurpose(e.target.value);
-                        // setExpenseData({
-                        //   purpose: e.target.value,
-                        //   amount: expenseData.amount,
-                        // });
-
-                      }}
-                      value={purpose}
-                    />
+          <div className=" absolute w-full h-screen top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black">
+            <div className="flex flex-row h-[100vh]">
+              <div className="flex flex-col justify-center  items-center ">
+                <div className="">
+                  <h2 className="ml-16 font-black">“Add all your <span className="text-[#2176AE]">expenses</span> and keep <span className="text-[#2176AE]">keep track</span> of your budget” </h2>
+                </div>
+                <div className=" relative text-white border-2 border-black">
+                  <img src="./assests/wallet.png" alt="" className="top-10  " />
+                  <div className=" absolute top-[60%] right-[35%] ">
+                  <h2 className="p-2">Total Amount Spent</h2>
+                  <p className="text-[#E18A07] font-extrabold">₹{total}</p>
                   </div>
                 </div>
-                <button
-                  className="flex justify-center items-center bg-black text-white mx-auto p-2 rounded-md my-2"
-                  onClick={addExpense}
-                >
-                  Add Spend
-                </button>
-              </form>
               </div>
+              <div className="mx-4">
+                <div className="w-[700px] h-[500px] bg-[#91D9F8] ">
+                  add
+                </div>
+              </div>
+
             </div>
-          </div>
-          <img
-            className=" pl-[60%] h-[370px] pt-[4rem]"
-            src="/assests/home.png"
-            alt="try"
-          />
+            </div>
         </div>
       )} 
     </>
