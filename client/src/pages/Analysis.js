@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import axios, { Axios } from "axios";
 // import BarChart from '../components/BarChart'
@@ -9,10 +9,12 @@ const Analysis = () => {
 
   const [purpose, setpurpose] = useState();
   const [amount, setamount] = useState();
+  const [limit, setLimit] = useState(true);
 
   const [data, setdata] = useState("");
   const [expenseData, setExpenseData] = useState("");
   const [allExpenses, setAllExpenses] = useState([]);
+  // const [pagination, setPagination] = useState([]);
 
   const x = localStorage.getItem("jwt_token");
   // console.log(x)
@@ -44,10 +46,12 @@ const Analysis = () => {
     })
       .then((response) => {
         setAllExpenses(response.data);
+        // setAllExpenses(allExpenses.reverse())
         console.log("paisa", response.data);
       })
       .catch((error) => console.log(error));
   }, []);
+
 
   const addExpense = (e) => {
     e.preventDefault();
@@ -71,120 +75,134 @@ const Analysis = () => {
   };
 
 
+  // if (allExpenses.length > 0) {
+  //   let count = []
+  //   if (limit) {
+  //     for (let i = 0; i < 10; i++) {
+  //       count.push(allExpenses[i])
+  //     }
+  //     // setPagination(count)
+  //   }
+  //   else {
+  //     setPagination(allExpenses)
+  //   }
+  //   console.log("pagination", pagination)
+  // }
+
   function monthname(num) {
-      let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      return months[num-1];
-    }
-    function weekname(value){
-      let week = ["Week-1","Week-2","Week-3","Week-4"];
-      return week[value-1];
-    }
-  const date=allExpenses.map((totl)=>{
-    return(
-      monthname(totl.updatedAt.slice(6,7))
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    return months[num - 1];
+  }
+  function weekname(value) {
+    let week = ["Week-1", "Week-2", "Week-3", "Week-4"];
+    return week[value - 1];
+  }
+  const date = allExpenses.map((totl) => {
+    return (
+      monthname(totl.updatedAt.slice(6, 7))
     );
-   })
-   const weekdata=allExpenses.map((tot)=>{
-    return(
+  })
+  const weekdata = allExpenses.map((tot) => {
+    return (
       // console.log("ccc",tot.updatedAt.slice(9,10))
-      weekname(Math.ceil((tot.updatedAt.slice(8,10))/7))
+      weekname(Math.ceil((tot.updatedAt.slice(8, 10)) / 7))
     );
-   })
-   console.log("weeknam",weekdata)
+  })
+  console.log("weeknam", weekdata)
   //  console.log("date",date)
   // date[3]="September"
   // date[4]="September"
   // date[5]="October"
-   console.log("month",date)
+  console.log("month", date)
 
   //  console.log("m-w",weekdata[0].concat("-",date[0]))
-   let analyze=allExpenses
+  let analyze = allExpenses
 
-  if(analyze.length>0){
-    for(let i=0;i<analyze.length;i++){
-      analyze[i].createdAt=date[i];
-      
-   }
-   console.log("arr",analyze)
-  }
+  if (analyze.length > 0) {
+    for (let i = 0; i < analyze.length; i++) {
+      analyze[i].createdAt = date[i];
 
-   console.log("analyze",analyze)
-
-   let weeks=allExpenses
-
-  if(weeks.length>0){
-    for(let i=0;i<weeks.length;i++){
-      weeks[i].createdAt=weekdata[i].concat("/",date[i]);
-      
-   }
-   console.log("wname",weeks)
-  }
-
-   console.log("analyze",analyze)
-
-   let w_m=[]
-
-   if(allExpenses.length>0){
-    for(let i=0;i<allExpenses.length;i++){
-      w_m[i]=weekdata[i].concat("/",date[i]);
     }
-    console.log("w__m",w_m);
-   }
+    console.log("arr", analyze)
+  }
 
-   function onlyUnique(value, index, self) {
+  console.log("analyze", analyze)
+
+  let weeks = allExpenses
+
+  if (weeks.length > 0) {
+    for (let i = 0; i < weeks.length; i++) {
+      weeks[i].createdAt = weekdata[i].concat("/", date[i]);
+
+    }
+    console.log("wname", weeks)
+  }
+
+  console.log("analyze", analyze)
+
+  let w_m = []
+
+  if (allExpenses.length > 0) {
+    for (let i = 0; i < allExpenses.length; i++) {
+      w_m[i] = weekdata[i].concat("/", date[i]);
+    }
+    console.log("w__m", w_m);
+  }
+
+  function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
-  const Month=date.filter(onlyUnique)
-  console.log("data",Month)
-  const weedata=w_m.filter(onlyUnique)
-  console.log("www",weedata)
+  const Month = date.filter(onlyUnique)
+  console.log("data", Month)
+  const weedata = w_m.filter(onlyUnique)
+  console.log("www", weedata)
 
   // let tamt=([])
   let sum
   let kharcha = []
-  if(analyze.length>0){
-  sum=analyze[0].amount
-  // console.log("amt",analyze[0].createdAt)
-  for(let i=0;i<analyze.length-1;i++){
-    // console.log("test",analyze[i].createdAt,analyze[i].amount)
-    // console.log("test",analyze[i+1].createdAt,analyze[i+1].amount)
-    if(analyze[i].createdAt===analyze[i+1].createdAt){
-      sum=sum+analyze[i+1].amount
+  if (analyze.length > 0) {
+    sum = analyze[0].amount
+    // console.log("amt",analyze[0].createdAt)
+    for (let i = 0; i < analyze.length - 1; i++) {
+      // console.log("test",analyze[i].createdAt,analyze[i].amount)
+      // console.log("test",analyze[i+1].createdAt,analyze[i+1].amount)
+      if (analyze[i].createdAt === analyze[i + 1].createdAt) {
+        sum = sum + analyze[i + 1].amount
+      }
+      else {
+        kharcha.push(sum)
+        sum = analyze[i + 1].amount
+        // kharcha.push(sum)
+      }
     }
-    else{
-      kharcha.push(sum)
-      sum = analyze[i+1].amount
-      // kharcha.push(sum)
-    }
+    kharcha.push(sum)
   }
-  kharcha.push(sum)
-}
-  console.log("sm",sum)
-  console.log("y axis",kharcha)
+  console.log("sm", sum)
+  console.log("y axis", kharcha)
 
-// week amt
+  // week amt
 
-let weeksum
+  let weeksum
   let weekkharcha = []
-  if(weeks.length>0){
-  weeksum=weeks[0].amount
-  console.log("amt",weeks[0].createdAt)
-  for(let i=0;i<weeks.length-1;i++){
-    console.log("weektest",weeks[i].createdAt,weeks[i].amount)
-    console.log("weektesttest",weeks[i+1].createdAt,weeks[i+1].amount)
-    if(weeks[i].createdAt===weeks[i+1].createdAt){
-      weeksum=weeksum+weeks[i+1].amount
+  if (weeks.length > 0) {
+    weeksum = weeks[0].amount
+    console.log("amt", weeks[0].createdAt)
+    for (let i = 0; i < weeks.length - 1; i++) {
+      // console.log("weektest", weeks[i].createdAt, weeks[i].amount)
+      // console.log("weektesttest", weeks[i + 1].createdAt, weeks[i + 1].amount)
+      if (weeks[i].createdAt === weeks[i + 1].createdAt) {
+        weeksum = weeksum + weeks[i + 1].amount
+      }
+      else {
+        weekkharcha.push(weeksum)
+        weeksum = weeks[i + 1].amount
+        // kharcha.push(sum)
+      }
     }
-    else{
-      weekkharcha.push(weeksum)
-      weeksum = weeks[i+1].amount
-      // kharcha.push(sum)
-    }
+    weekkharcha.push(sum)
   }
-  weekkharcha.push(sum)
-}
-  console.log("sm-week",weeksum)
-  console.log("y axis week",weekkharcha)
+  console.log("sm-week", weeksum)
+  console.log("y axis week", weekkharcha)
 
 
 
@@ -196,83 +214,113 @@ let weeksum
 
   const total = allExpenses.map(item => item.amount).reduce((prev, curr) => prev + curr, 0);
 
+  
+  if (allExpenses.length > 0) {
+    let a = new Date(allExpenses[0].updatedAt)
+    console.log("date", a.toLocaleDateString("en-US"))
+  }
 
   return (
     <>
-    { data && (
-      <div>
-        <Navbar />
-      <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-16 font-Montserrat text-3xl  text-black">
-        {/* <div className="font-extrabold mb-5 pb-10">Monthly Expenses</div> */}
-        <div id="anabg">
-        <div className="flex flex-row justify-between items-center h-screen ">
-          <div className='flex flex-col justify-between  w-full h-[600px] '>
-            <div>
-          <img src='./assests/Vector-14.png' alt="" className='w-80'/>
-            <div className=' font-black text-4xl ml-12'>
-              
-              <p>All your Expenses</p>
-              <p><span className='text-[#2176AE]'>analysed</span> in one page</p>
-            </div>
-            <img src='./assests/Vector-14.png' alt="" className='w-80 ml-40'/>
-            </div>
-            <div>
-            {/* <img src='./assests/Vector-19.png' alt='' className=''/> */}
-              <img src='./assests/Vector-20.png' alt='' className='flex flex-col w-[95%]'/>
-        <div className='w-full h-44' id="spent">
-          <div className='  ml-12 text-white'>
-            <div className='p-4'>
-            <h2 className=''>Total Amount Spent</h2>
-            <p className='text-black font-extrabold'>₹{total}</p>
-            </div>
-            </div>
-          </div>
-          </div>
-          </div>
-          <div className='flex flex-col'>
-          <div className=' rounded-tl-xl p-16 bg-slate-300 ml-3 w-[800px] '>
-            <div className=''>
-          <div className="mx-auto bg-white">
-            <BarChartAnalyze/>
-            {/* <BarChartWeek/> */}
-          </div>
-          </div>
-          
-          </div>
-          <div className='w-[800px] h-10 ml-3 rounded-bl-3xl bg-black'>
-          </div>
-          </div>
-         
-        </div>
+      {data && (
+        <div>
+          <Navbar />
+          <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-16 font-Montserrat text-3xl  text-black">
+            {/* <div className="font-extrabold mb-5 pb-10">Monthly Expenses</div> */}
+            <div id="anabg">
+              <div className="flex flex-row justify-between items-center h-screen ">
+                <div className='flex flex-col justify-between  w-full h-[600px] '>
+                  <div>
+                    <img src='./assests/Vector-14.png' alt="" className='w-80' />
+                    <div className=' font-black text-4xl ml-12'>
 
-        
-        <div className='border-2  my-24 mx-32 rounded-t-xl bg-white' id="tranbg">
-          <div className="p-4 bg-[#E18A07] rounded-t-xl">
-            <h2 className='text-center'>Previous Transaction</h2>
-          </div>
-          <div className="mt-6  mx-20">
-            {allExpenses.map((name) => {
-              return (
-                <>
-                <div className=' p-2 flex justify-between'>
-                  <div>
-                  {name.purpose}
+                      <p>All your Expenses</p>
+                      <p><span className='text-[#2176AE]'>analysed</span> in one page</p>
+                    </div>
+                    <img src='./assests/Vector-14.png' alt="" className='w-80 ml-40' />
                   </div>
                   <div>
-                    {name.updatedAt}
+                    {/* <img src='./assests/Vector-19.png' alt='' className=''/> */}
+                    <img src='./assests/Vector-20.png' alt='' className='flex flex-col w-[95%]' />
+                    <div className='w-full h-44' id="spent">
+                      <div className='  ml-12 text-white'>
+                        <div className='p-4'>
+                          <h2 className=''>Total Amount Spent</h2>
+                          <p className='text-black font-extrabold'>₹{total}</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div>₹{name.amount}</div> 
                 </div>
-                <hr className='' />
-                </>
-            );
-            })}
+                <div className='flex flex-col'>
+                  <div className=' rounded-tl-xl p-16 bg-slate-300 ml-3 w-[800px] '>
+                    <div className=''>
+                      <div className="mx-auto bg-white">
+                        <BarChartAnalyze />
+                        {/* <BarChartWeek/> */}
+                      </div>
+                    </div>
+
+                  </div>
+                  <div className='w-[800px] h-10 ml-3 rounded-bl-3xl bg-black'>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div className='border-2  my-24 mx-32 rounded-t-xl bg-white' id="tranbg">
+                <div className="p-4 bg-[#E18A07] rounded-t-xl">
+                  <h2 className='text-center'>Previous Transaction</h2>
+                </div>
+                <div className="mt-6  mx-20">
+                  {/* {limit && pagination.reverse().map((name) => { */}
+                  {limit && allExpenses.reverse().filter((name, idx) => idx < 5).map((name) => {
+                    return (
+                      <>
+                        <div className=' p-2 flex justify-between'>
+                          <div>
+                            {name.purpose}
+                          </div>
+                          <div>
+                            {name.updatedAt}
+                            {/* {new Date(name.updatedAt)} */}
+                          </div>
+                          <div>₹{name.amount}</div>
+                        </div>
+                        <hr className='' />
+                      </>
+                    );
+                  })}
+
+                  {!limit && allExpenses.reverse().map((name) => {
+                    return (
+                      <>
+                        <div className=' p-2 flex justify-between'>
+                          <div>
+                            {name.purpose}
+                          </div>
+                          <div>
+                            {name.updatedAt}
+                          </div>
+                          <div>₹{name.amount}</div>
+                        </div>
+                        <hr className='' />
+                      </>
+                    );
+                  })}
+
+
+                  <button onClick={() => setLimit(!limit)}>
+                    {limit ? "Show more" : "Show less"}
+                    {/* Show All */}
+                  </button>
+                </div>
+              </div>
+              {/* <div className='mt-2'></div> */}
+            </div>
           </div>
-          </div>
-          {/* <div className='mt-2'></div> */}
         </div>
-      </div>
-      </div>
       )}
 
     </>

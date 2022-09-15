@@ -110,8 +110,8 @@ const BarChartAnalyze = () => {
   sum=analyze[0].amount
   console.log("amt",analyze[0].createdAt)
   for(let i=0;i<analyze.length-1;i++){
-    console.log("test",analyze[i].createdAt,analyze[i].amount)
-    console.log("test",analyze[i+1].createdAt,analyze[i+1].amount)
+    // console.log("test",analyze[i].createdAt,analyze[i].amount)
+    // console.log("test",analyze[i+1].createdAt,analyze[i+1].amount)
     if(analyze[i].createdAt===analyze[i+1].createdAt){
       sum=sum+analyze[i+1].amount
     }

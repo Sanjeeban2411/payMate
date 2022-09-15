@@ -27,9 +27,9 @@ router.post('/addexpense', auth, async (req, res) => {
 router.get('/getexpenses', auth, async (req, res) => {
     const user = req.user
 
-    const expenses = await Expense.find({ owner: user._id })
+    const expenses = await Expense.find({ owner: user._id }).populate('room')
     // const owner = await expenses.populate("owner")
-    // const users = await room.populate('users')
+    // const users = await room.populate('room')
 
 
     // console.log(expenses)
