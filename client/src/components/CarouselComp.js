@@ -12,7 +12,7 @@ const CarouselComp = () => {
       <Carousel interval={2500} pause>
       <Carousel.Item>
         <img
-          className="w-[60%] h-[40%] object-center flex items-center justify-center mt-40 mx-auto"
+          className="w-[60%] h-[40%] object-center flex items-center justify-center mt-16 mx-auto"
           src="/assests/log-1.png"
           alt="First slide"
         /> 
@@ -23,7 +23,7 @@ const CarouselComp = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="w-[60%] h-[40%] object-center flex items-center justify-center mt-40 mx-auto"
+          className="w-[60%] h-[40%] object-center flex items-center justify-center mt-16 mx-auto"
           src="/assests/log-2.png"
           alt="Second slide"
         />
@@ -35,7 +35,7 @@ const CarouselComp = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="w-[60%] h-[40%] object-center flex items-center justify-center mt-40 mx-auto"
+          className="w-[60%] h-[40%] object-center flex items-center justify-center mt-16 mx-auto"
           src="/assests/log-3.png"
           alt="Third slide"
         />

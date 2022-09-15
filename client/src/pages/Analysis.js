@@ -230,7 +230,7 @@ let weeksum
           </div>
           </div>
           <div className='flex flex-col'>
-          <div className=' rounded-tl-xl p-16 bg-slate-300 ml-3 '>
+          <div className=' rounded-tl-xl p-16 bg-slate-300 ml-3 w-[800px] '>
             <div className=''>
           <div className="mx-auto bg-white">
             <BarChartAnalyze/>
@@ -239,7 +239,7 @@ let weeksum
           </div>
           
           </div>
-          <div className='w-[1100px] h-10 ml-3 rounded-bl-3xl bg-black'>
+          <div className='w-[800px] h-10 ml-3 rounded-bl-3xl bg-black'>
           </div>
           </div>
          

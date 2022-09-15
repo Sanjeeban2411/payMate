@@ -131,8 +131,8 @@ const BarChartAnalyze = () => {
       <div>
       <Chart
       type="bar"
-      width={900}
-      height={400}
+      width={700}
+      height={300}
 
       series={[{
         name: "Expenses",
