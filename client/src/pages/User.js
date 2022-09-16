@@ -103,7 +103,8 @@ const User = () => {
               </div>
               <div className="mx-4">
                 <div className="w-[700px] h-[500px] bg-[#91D9F8] ">
-                  add
+                <h1>Hey There!!!</h1>
+                <p>{data.name}</p>
                 </div>
               </div>
 

@@ -53,18 +53,18 @@ const LogUp = () => {
             className=" w-full md:max-w-md lg:max-w-4xl md:mx-0 md:w-2/3 xl:w-[40%] h-[100%] px-2 lg:px-16 xl:px-28
           flex items-center justify-center rounded-r-2xl">
             <div className='w-full h-100 text-center'>
-            <div className="rounded-full flex items-center justify-center mt-7 bg-white mx-60  relative box-border min-w-[100px] min-h-[100px]">
-                <img src="/assests/logo.png" alt="" className="ml-3"/>
+            <div className="rounded-full flex items-center justify-center mt-7 bg-white mx-48  relative box-border min-w-[70x] min-h-[70px]">
+                <img src="/assests/logo.png" alt="" className="ml-2 object-cover w-[30%] h-[30%]"/>
               </div>
-              <h1 className="text-3xl font-bold mt-6">Hello There!</h1>
-              <h1 className="text-xl md:text-2xl font-bold leading-tight mt-4 text-white">
+              <h1 className="text-2xl font-bold mt-3">Hello There!</h1>
+              <h1 className="text-lg md:text-xl font-bold leading-tight mt-1 text-white">
                 Welcome to Paymate
               </h1>
                 <form action='submit' className='mt-6 px-5'>
                     
-                    <div className='mt-4'>
+                    <div className=''>
                         {/* <label className='block text-gray-700'>Username</label> */}
-                        <input className=' w-full px-4 py-2 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none'
+                        <input className=' w-full px-4 py-1 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none'
                             type="text"
                             name='username'
                             placeholder='Name'
@@ -80,9 +80,9 @@ const LogUp = () => {
                             value={name}
                         />
                     </div>
-                    <div className='mt-4'>
+                    <div className='mt-3'>
                         {/* <label className='block text-gray-700'>E-mail</label> */}
-                        <input className='w-full px-4 py-2 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none'
+                        <input className='w-full px-4 py-1 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none'
                             type="text"
                             name='email'
                             placeholder='Email'
@@ -97,9 +97,9 @@ const LogUp = () => {
                         value={email}
                         />
                     </div>
-                    <div className='mt-4'>
+                    <div className='mt-3'>
                         {/* <label className='block text-gray-700'>Password</label> */}
-                        <input className='w-full px-4 py-2 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500
+                        <input className='w-full px-4 py-1 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500
                   focus:bg-white focus:outline-none'
                             type="password"
                             name='password'
@@ -120,16 +120,16 @@ const LogUp = () => {
           </div> */}
                     
                     <button className='w-full block bg-[#2176AE] hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
-                px-4 py-2 mt-6' onClick={handleSubmit}  >SignUp</button>
+                px-4 py-1 mt-3' onClick={handleSubmit}  >SignUp</button>
                  <button
                   className="w-full block bg-white hover:bg-blue-400 focus:bg-blue-400 text-black font-semibold rounded-lg
-                px-4 py-2 mt-6"
+                px-4 py-1 mt-3"
                 >
                   Sign Up with Google
                 </button>
                 </form>
                 {/* <hr className='my-6 border-gray-300 w-full'/> */}
-                <p className="mt-8">
+                <p className="mt-4">
               Already have an Account?
               <a
                 href="/signin"
@@ -141,7 +141,7 @@ const LogUp = () => {
             </p>
 
   
-        <p className="text-sm text-gray-500 mt-6">&copy; 2022 PayMate - All Rights Reserved.</p>
+        <p className="text-sm text-gray-500 mt-3">&copy; 2022 PayMate - All Rights Reserved.</p>
 
             </div>
         </div>
