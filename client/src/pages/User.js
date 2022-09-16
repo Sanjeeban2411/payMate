@@ -81,33 +81,49 @@ const User = () => {
   const total = allExpenses.map(item => item.amount).reduce((prev, curr) => prev + curr, 0);
   // console.log("tt",purpose)
 
+  const date = new Date();
+
+let day = date.getDate();
+let month = date.getMonth() + 1;
+let year = date.getFullYear();
+
+let currentDate = `${day}/${month}/${year}`;
+console.log("todays date",currentDate);
+
   return (
     <>
       {/* {data && total && allExpenses && ( */}
       {data && (
         <div>
           <Navbar />
-          <div className=" absolute w-full h-screen top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black">
-            <div className="flex flex-row h-[100vh]">
-              <div className="flex flex-col justify-center  items-center ">
+          <div className=" absolute w-full h-[60%] top-50% flex flex-col mt-24 font-Montserrat text-3xl  text-black">
+            <div className="flex flex-row h-[80vh]">
+              <div className="flex flex-col ">
                 <div className="">
-                  <h2 className="ml-16 font-black">“Add all your <span className="text-[#2176AE]">expenses</span> and keep <span className="text-[#2176AE]">keep track</span> of your budget” </h2>
+                  <h2 className="ml-24 font-black">“Add all your <span className="text-[#2176AE]">expenses</span> and keep <span className="text-[#2176AE]">keep track</span> of your budget” </h2>
                 </div>
-                <div className=" relative text-white border-2 border-black">
-                  <img src="./assests/wallet.png" alt="" className="top-10  " />
-                  <div className=" absolute top-[60%] right-[35%] ">
+                <div className=" relative text-white  h-[400px] ">
+                  <img src="./assests/Wallet-1.jpeg" alt="" className=" h-[420px]" />
+                  <div className=" absolute top-[40%] right-[45%] ">
                   <h2 className="p-2">Total Amount Spent</h2>
-                  <p className="text-[#E18A07] font-extrabold">₹{total}</p>
+                  <p className="text-[#E18A07] text-4xl font-extrabold">₹{total}</p>
                   </div>
                 </div>
               </div>
-              <div className="mx-4 flex flex-col">
-                <div className="w-[700px] h-[100px] bg-[#113248] text-white rounded-tr-lg">
-                <h2 className="ml-4">Hey There!!!</h2>
-                <p className="ml-4">{data.name}</p>
+              <div className=" mx-4 flex flex-row  h-[480px]">
+                <div className=" bg-[#113248] w-[50px] h-[480px] rounded-tl-lg rounded-bl-lg">
+
                 </div>
-                <div className="flex flex-col bg-[#91D9F8] h-[300px] rounded-br-lg">
-                <label className="text-center">Amount</label>
+              <div className=" flex flex-col">
+                <div className="w-[500px] h-[100px] bg-[#113248] text-white rounded-tr-lg" >
+                <h2 className="ml-4 text-[#9FD7FC]">Hey There!!!</h2>
+                <div className=" flex flex-row justify-between mx-3">
+                <p className="">{data.name}</p>
+                <p className="">{currentDate}</p>
+                </div>
+                </div>
+                <div className="flex flex-col  w-[500px] h-[380px] rounded-br-lg " id="bg-form">
+                <label className="mt-10 mx-24">Amount</label>
                     <input
                       className="relative border-b-2 border-black bg-transparent p-2 w-[300px] mx-auto placeholder-white"
                       type="number"
@@ -122,7 +138,7 @@ const User = () => {
                       }}
                       value={amount}
                     />
-                    <label className="text-center">Category</label>
+                    <label className=" mt-8 mx-24 ">Category</label>
                     <input
                       className=" relative border-b-2 border-black bg-transparent p-2 w-[300px] mx-auto placeholder-white"
                       type="text"
@@ -137,9 +153,16 @@ const User = () => {
                       }}
                       value={purpose}
                     />
+                    <button
+                  className="flex justify-center items-center bg-black text-xl text-white mx-auto p-2 px-4 rounded-md my-5"
+                  onClick={addExpense}
+                >
+                  Add Spend
+                </button>
                 </div>
               </div>
-
+              
+              </div>
             </div>
             </div>
         </div>
