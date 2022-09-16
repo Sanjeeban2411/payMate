@@ -4,6 +4,7 @@ import axios, { Axios } from "axios";
 // import BarChart from '../components/BarChart'
 import BarChartAnalyze from '../components/BarChartAnalyze';
 import BarChartWeek from '../components/BarChartWeek';
+import BarChartDaily from '../components/BarChartDaily';
 
 const Analysis = () => {
 
@@ -212,6 +213,16 @@ const Analysis = () => {
   // console.log("expensedata",expenseData)
   // console.log("allexpense",allExpenses)
 
+
+  const [ddd,setDDD]=useState()
+
+  const handleoption=(e)=>{
+    const getvalue=e.target.value
+    let show=getvalue
+    setDDD(show)
+  }
+  console.log(ddd)
+
   const total = allExpenses.map(item => item.amount).reduce((prev, curr) => prev + curr, 0);
 
   
@@ -239,26 +250,31 @@ const Analysis = () => {
                     </div>
                     <img src='./assests/Vector-14.png' alt="" className='w-80 ml-40' />
                   </div>
-                  <div>
-                    {/* <img src='./assests/Vector-19.png' alt='' className=''/> */}
-                    <img src='./assests/Vector-20.png' alt='' className='flex flex-col w-[95%]' />
-                    <div className='w-full h-44' id="spent">
-                      <div className='  ml-12 text-white'>
-                        <div className='p-4'>
-                          <h2 className=''>Total Amount Spent</h2>
-                          <p className='text-black font-extrabold'>₹{total}</p>
-                        </div>
-                      </div>
-                    </div>
+                  <div className=" relative text-white  h-[400px] ">
+                  <img src="./assests/Wallet-1.jpeg" alt="" className=" h-[420px] bg-black" />
+                  <div className=" absolute top-[40%] right-[45%] ">
+                  <h2 className="p-2">Total Amount Spent</h2>
+                  <p className="text-[#E18A07] text-4xl font-extrabold">₹{total}</p>
                   </div>
                 </div>
+                </div>
                 <div className='flex flex-col'>
-                  <div className=' rounded-tl-xl p-16 bg-slate-300 ml-3 w-[800px] '>
+                  <div className=' rounded-tl-xl p-14 bg-slate-300 ml-3 w-[800px] flex flex-col'>
+                    <div className='right-0'>
+                    <select onChange={(e)=>handleoption(e)}>
+        <option value="Monthly">Monthly</option>
+        <option value="Weekly">Weekly</option>
+        <option value="Daily">Daily</option>
+      </select>
+                    </div>
                     <div className=''>
+                      
                       <div className="mx-auto bg-white">
-                        <BarChartAnalyze />
-                        {/* <BarChartWeek/> */}
+                        {/* <BarChartAnalyze /> */}
+                        {/* ({<BarChartWeek/>}) */}
+                        <BarChartDaily/>
                       </div>
+                      
                     </div>
 
                   </div>

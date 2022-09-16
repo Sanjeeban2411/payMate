@@ -55,6 +55,7 @@ function App() {
           <Route exact path="/roomlogin" element={<EnterRoom room={room}/>} />
           <Route exact path="/signin" element={<Signin/>} />
           <Route exact path="/googlesignin" element={<Googlelogin/>} />
+          
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
       </BrowserRouter>
