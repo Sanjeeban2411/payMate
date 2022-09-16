@@ -101,10 +101,42 @@ const User = () => {
                   </div>
                 </div>
               </div>
-              <div className="mx-4">
-                <div className="w-[700px] h-[500px] bg-[#91D9F8] ">
-                <h1>Hey There!!!</h1>
-                <p>{data.name}</p>
+              <div className="mx-4 flex flex-col">
+                <div className="w-[700px] h-[100px] bg-[#113248] text-white rounded-tr-lg">
+                <h2 className="ml-4">Hey There!!!</h2>
+                <p className="ml-4">{data.name}</p>
+                </div>
+                <div className="flex flex-col bg-[#91D9F8] h-[300px] rounded-br-lg">
+                <label className="text-center">Amount</label>
+                    <input
+                      className="relative border-b-2 border-black bg-transparent p-2 w-[300px] mx-auto placeholder-white"
+                      type="number"
+                      min={0}
+                      placeholder="₹"
+                      onChange={(e) => {
+                        setamount(e.target.value);
+                        // setExpenseData({
+                        //   purpose: expenseData.purpose,
+                        //   amount: e.target.value,
+                        // });
+                      }}
+                      value={amount}
+                    />
+                    <label className="text-center">Category</label>
+                    <input
+                      className=" relative border-b-2 border-black bg-transparent p-2 w-[300px] mx-auto placeholder-white"
+                      type="text"
+                      placeholder="Travel"
+                      onChange={(e) => {
+                        setpurpose(e.target.value);
+                        // setExpenseData({
+                        //   purpose: e.target.value,
+                        //   amount: expenseData.amount,
+                        // });
+
+                      }}
+                      value={purpose}
+                    />
                 </div>
               </div>
 
