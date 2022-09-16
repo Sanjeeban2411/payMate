@@ -60,7 +60,7 @@ const LogUp = () => {
               <h1 className="text-lg md:text-xl font-bold leading-tight mt-1 text-white">
                 Welcome to Paymate
               </h1>
-                <form action='submit' className='mt-6 px-5'>
+                <form action='submit' className='mt-2 px-5'>
                     
                     <div className=''>
                         {/* <label className='block text-gray-700'>Username</label> */}
