@@ -214,11 +214,16 @@ const Analysis = () => {
 
   const total = allExpenses.map(item => item.amount).reduce((prev, curr) => prev + curr, 0);
 
-  
+
   if (allExpenses.length > 0) {
     let a = new Date(allExpenses[0].updatedAt)
     console.log("date", a.toLocaleDateString("en-US"))
   }
+
+//  const h = window.screen.availHeight
+//  const w = window.screen.availWidth
+//   console.log("H",h)
+//   console.log("W",w)
 
   return (
     <>
@@ -311,11 +316,11 @@ const Analysis = () => {
                   })}
 
                   <div className='border-1 rounded-lg border-black'>
-                  <button onClick={() => setLimit(!limit)} className=" mx-[330px] ">
-                  
-                    {limit ? "Show more" : "Show less"}
-                    {/* Show All */}
-                  </button>
+                    <button onClick={() => setLimit(!limit)} className=" mx-[330px] ">
+
+                      {limit ? "Show more" : "Show less"}
+
+                    </button>
                   </div>
                 </div>
               </div>

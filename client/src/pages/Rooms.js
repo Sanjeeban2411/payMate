@@ -31,7 +31,7 @@ const Rooms = (props) => {
 
   const enterRoom = (event, value) => {
     // props.setRoom()
-    console.log("v",value)
+    console.log("v", value)
     const x = localStorage.getItem("jwt_token")
 
     axios({
@@ -54,6 +54,13 @@ const Rooms = (props) => {
       })
       .catch(error => console.log(error))
   }
+
+  const shareRoom = (event, val) => {
+    const joinLink = `PayMate/joinroombysharedlink/Room=${val.name}&Password=${val.password}&`
+    // console.log(joinLink)
+    alert(joinLink)
+  }
+
   return (
     <div>
       <Navbar />
@@ -71,7 +78,10 @@ const Rooms = (props) => {
               <div className='flex flex-col bg-black  relative box-border items-center mx-auto rounded-full min-w-[200px] min-h-[200px] border-2 border-black '>
                 <p className='relative text-center my-6 text-white font-extrabold'>{val.name}</p>
                 {/* <p className='relative text-center my-3 text-white font-extrabold'></p> */}
-                <button className='bg-white hover:bg-slate-500 hover:text-white text-black mx-auto p-2 my-3 rounded-md' onClick={event => enterRoom(event, val)}>
+                <button
+                  className='bg-white hover:bg-slate-500 hover:text-white text-black mx-auto p-2 my-3 rounded-md'
+                  onClick={event => enterRoom(event, val)}
+                >
                   {/* () => {
                    props.setRoom(val)
                    navigate('/createdroom')
@@ -80,6 +90,13 @@ const Rooms = (props) => {
                   {/* <a href = '/roomlogin'> */}
                   Enter
                   {/* </a> */}
+                </button>
+
+                <button 
+                className='bg-white'
+                onClick={event => shareRoom(event, val)}
+                >
+                  Share
                 </button>
               </div>
             )
