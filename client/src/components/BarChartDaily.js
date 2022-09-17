@@ -167,8 +167,8 @@ const BarChartDaily = () => {
     sum=analyze[0].amount
     console.log("amt",analyze[0].createdAt)
     for(let i=0;i<analyze.length-1;i++){
-      console.log("test",analyze[i].createdAt,analyze[i].amount)
-      console.log("test",analyze[i+1].createdAt,analyze[i+1].amount)
+      // console.log("test",analyze[i].createdAt,analyze[i].amount)
+      // console.log("test",analyze[i+1].createdAt,analyze[i+1].amount)
       if(analyze[i].createdAt===analyze[i+1].createdAt){
         sum=sum+analyze[i+1].amount
       }
@@ -191,8 +191,8 @@ const BarChartDaily = () => {
     weeksum=weeks[0].amount
     console.log("amt",weeks[0].createdAt)
     for(let i=0;i<weeks.length-1;i++){
-      console.log("weektest",weeks[i].createdAt,weeks[i].amount)
-      console.log("weektesttest",weeks[i+1].createdAt,weeks[i+1].amount)
+      // console.log("weektest",weeks[i].createdAt,weeks[i].amount)
+      // console.log("weektesttest",weeks[i+1].createdAt,weeks[i+1].amount)
       if(weeks[i].createdAt===weeks[i+1].createdAt){
         weeksum=weeksum+weeks[i+1].amount
       }

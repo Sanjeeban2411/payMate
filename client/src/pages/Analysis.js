@@ -15,7 +15,8 @@ const Analysis = () => {
   const [data, setdata] = useState("");
   const [expenseData, setExpenseData] = useState("");
   const [allExpenses, setAllExpenses] = useState([]);
-  // const [pagination, setPagination] = useState([]);
+
+  // const [graphView, setGraphView] = useState("daily");
 
   const x = localStorage.getItem("jwt_token");
   // console.log(x)
@@ -46,7 +47,7 @@ const Analysis = () => {
       },
     })
       .then((response) => {
-        setAllExpenses(response.data);
+        setAllExpenses(response.data.reverse());
         // setAllExpenses(allExpenses.reverse())
         console.log("paisa", response.data);
       })
@@ -214,14 +215,17 @@ const Analysis = () => {
   // console.log("allexpense",allExpenses)
 
 
-  const [ddd,setDDD]=useState()
+  const [view, setView] = useState('Daily')
 
-  const handleoption=(e)=>{
-    const getvalue=e.target.value
-    let show=getvalue
-    setDDD(show)
-  }
-  console.log(ddd)
+  // useEffect(() => {
+  const handleoption = (e) => {
+      const getvalue = e.target.value
+      let show = getvalue
+      setView(show)
+
+    }
+  // }, [0]);
+  console.log("view", view)
 
   const total = allExpenses.map(item => item.amount).reduce((prev, curr) => prev + curr, 0);
 
@@ -231,10 +235,10 @@ const Analysis = () => {
     console.log("date", a.toLocaleDateString("en-US"))
   }
 
-//  const h = window.screen.availHeight
-//  const w = window.screen.availWidth
-//   console.log("H",h)
-//   console.log("W",w)
+  //  const h = window.screen.availHeight
+  //  const w = window.screen.availWidth
+  //   console.log("H",h)
+  //   console.log("W",w)
 
   return (
     <>
@@ -256,30 +260,31 @@ const Analysis = () => {
                     <img src='./assests/Vector-14.png' alt="" className='w-80 ml-40' />
                   </div>
                   <div className=" relative text-white  h-[400px] ">
-                  <img src="./assests/Wallet-1.jpeg" alt="" className=" h-[420px] bg-black" />
-                  <div className=" absolute top-[40%] right-[45%] ">
-                  <h2 className="p-2">Total Amount Spent</h2>
-                  <p className="text-[#E18A07] text-4xl font-extrabold">₹{total}</p>
+                    <img src="./assests/Wallet-1.jpeg" alt="" className=" h-[420px] bg-black" />
+                    <div className=" absolute top-[40%] right-[45%] ">
+                      <h2 className="p-2">Total Amount Spent</h2>
+                      <p className="text-[#E18A07] text-4xl font-extrabold">₹{total}</p>
+                    </div>
                   </div>
-                </div>
                 </div>
                 <div className='flex flex-col'>
                   <div className=' rounded-tl-xl p-14 bg-slate-300 ml-3 w-[800px] flex flex-col'>
                     <div className='right-0'>
-                    <select onChange={(e)=>handleoption(e)}>
-        <option value="Monthly">Monthly</option>
-        <option value="Weekly">Weekly</option>
-        <option value="Daily">Daily</option>
-      </select>
+                      <select onChange={(e) => handleoption(e)}>
+                        <option value="Daily">Daily</option>
+                        <option value="Weekly">Weekly</option>
+                        <option value="Monthly">Monthly</option>
+                      </select>
                     </div>
                     <div className=''>
-                      
+
                       <div className="mx-auto bg-white">
+                        {view === "Daily" ? (<BarChartDaily />) : view === "Weekly" ? (<BarChartWeek />) : (<BarChartAnalyze/>)}
                         {/* <BarChartAnalyze /> */}
                         {/* ({<BarChartWeek/>}) */}
-                        <BarChartDaily/>
+                        {/* // <BarChartDaily /> */}
                       </div>
-                      
+
                     </div>
 
                   </div>
@@ -296,7 +301,7 @@ const Analysis = () => {
                 </div>
                 <div className="mt-6  mx-20">
                   {/* {limit && pagination.reverse().map((name) => { */}
-                  {limit && allExpenses.reverse().filter((name, idx) => idx < 5).map((name) => {
+                  {limit && allExpenses.filter((name, idx) => idx < 5).map((name) => {
                     return (
                       <>
                         <div className=' p-2 flex justify-between'>
@@ -314,7 +319,7 @@ const Analysis = () => {
                     );
                   })}
 
-                  {!limit && allExpenses.reverse().map((name) => {
+                  {!limit && allExpenses.map((name) => {
                     return (
                       <>
                         <div className=' p-2 flex justify-between'>
