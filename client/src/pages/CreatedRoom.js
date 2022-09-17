@@ -20,7 +20,6 @@ const CreatedRoom = () => {
   const x = localStorage.getItem("jwt_token");
   const room = localStorage.getItem("room");
   // console.log(x)
-  //   console.log("aaa");
   useEffect(() => {
     axios({
       method: "get",
