@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 // const http = require('http')
 // const cors = require('cors')
 // const socket = require('socket.io')
@@ -32,9 +33,16 @@ app.use(expenseRouter)
 app.use(roomRouter)
 // app.use(room)  
 
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/build'))
+
+    app.get('*', (req,res)=>{
+        res.sendFile(path.join(__dirname,'client', 'build', 'index.html'))
+    })
+}
 
 
-
-app.listen(8000,()=>{
-    console.log("Server up and running at port 8000")
+const port = process.env.PORT || 8000
+app.listen(port,()=>{
+    console.log(`Server up and running at port ${port}`)
 })
