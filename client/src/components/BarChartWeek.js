@@ -197,12 +197,17 @@ const BarChartWeek = () => {
       }]}
       options={{
         title:{text:"",style:{fontSize:25}},
-        colors: ['#0C090A'],
+        colors: ['#02A9EA','#0C090A'],
+        plotOptions: {
+          bar: {
+            distributed: true
+          }
+        },
         theme:{mode:'light'},
         xaxis:{
           labels:{style:{fontSize:17}},
           categories: weedata,
-          title:{text:'Week',style:{fontSize:25}}
+          title:{text:'',style:{fontSize:25}}
         },
         yaxis:{
           labels:{formatter:(val)=>{return `₹${val}`},style:{fontSize:17}},

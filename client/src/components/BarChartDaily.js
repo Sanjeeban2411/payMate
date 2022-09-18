@@ -244,8 +244,16 @@ const BarChartDaily = () => {
         
       }]}
       options={{
+        
+        
         title:{text:"",style:{fontSize:25}},
-        colors: ['#0C090A'],
+        colors: ['#02A9EA','#0C090A'],
+        plotOptions: {
+          bar: {
+            distributed: true
+          }
+        }  ,
+        // distributed: true,
         theme:{mode:'light'},
         xaxis:{
           labels:{style:{fontSize:17}},
@@ -253,7 +261,8 @@ const BarChartDaily = () => {
           title:{text:'',style:{fontSize:25}}
         },
         yaxis:{
-          labels:{formatter:(val)=>{return `₹${val}`},style:{fontSize:17}},
+          // labels:none,
+          show: false,
           title:{text:'',style:{fontSize:25}}
         },
         dataLabels:{

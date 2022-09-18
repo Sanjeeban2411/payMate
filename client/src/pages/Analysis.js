@@ -260,7 +260,7 @@ const Analysis = () => {
                     <img src='./assests/Vector-14.png' alt="" className='w-80 ml-40' />
                   </div>
                   <div className=" relative text-white  h-[400px] ">
-                    <img src="./assests/Wallet-1.jpeg" alt="" className=" h-[420px] bg-black" />
+                    <img src="./assests/Wallet-1.png" alt="" className=" h-[420px]" />
                     <div className=" absolute top-[40%] right-[45%] ">
                       <h2 className="p-2">Total Amount Spent</h2>
                       <p className="text-[#E18A07] text-4xl font-extrabold">₹{total}</p>
@@ -269,8 +269,8 @@ const Analysis = () => {
                 </div>
                 <div className='flex flex-col'>
                   <div className=' rounded-tl-xl p-14 bg-slate-300 ml-3 w-[800px] flex flex-col'>
-                    <div className='right-0'>
-                      <select onChange={(e) => handleoption(e)}>
+                    <div className='right-0 '>
+                      <select onChange={(e) => handleoption(e)} className='bg-slate-300 text-2xl'>
                         <option value="Daily">Daily</option>
                         <option value="Weekly">Weekly</option>
                         <option value="Monthly">Monthly</option>
@@ -278,7 +278,7 @@ const Analysis = () => {
                     </div>
                     <div className=''>
 
-                      <div className="mx-auto bg-white">
+                      <div className="mx-auto bg-slate-300">
                         {view === "Daily" ? (<BarChartDaily />) : view === "Weekly" ? (<BarChartWeek />) : (<BarChartAnalyze/>)}
                         {/* <BarChartAnalyze /> */}
                         {/* ({<BarChartWeek/>}) */}
@@ -309,7 +309,16 @@ const Analysis = () => {
                             {name.purpose}
                           </div>
                           <div>
-                            {name.updatedAt}
+
+                              {/* {name.rooms.map((namesp) => {
+                  return (
+                    <div className=''>
+                      {namesp.name}
+                    </div>
+                  );
+                })} */}
+ 
+                            {name.updatedAt.slice(0,10)}  {name.updatedAt.slice(11,16)}
                             {/* {new Date(name.updatedAt)} */}
                           </div>
                           <div>₹{name.amount}</div>
@@ -326,8 +335,16 @@ const Analysis = () => {
                           <div>
                             {name.purpose}
                           </div>
-                          <div>
-                            {name.updatedAt}
+                          <div className='p-2'>
+                              {/* {name.rooms.map((names) => {
+                  return (
+                    <div className=''>
+                      {names}
+                    </div>
+                  );
+                })} */}
+                            
+                            {name.updatedAt.slice(0,10)}  {name.updatedAt.slice(11,16)}
                           </div>
                           <div>₹{name.amount}</div>
                         </div>

@@ -141,7 +141,12 @@ const BarChartAnalyze = () => {
       }]}
       options={{
         title:{text:"",style:{fontSize:25}},
-        colors: ['#0C090A'],
+        colors: ['#02A9EA','#0C090A'],
+        plotOptions: {
+          bar: {
+            distributed: true
+          }
+        },
         theme:{mode:'light'},
         xaxis:{
           labels:{style:{fontSize:17}},

@@ -103,7 +103,7 @@ console.log("todays date",currentDate);
                   <h2 className="ml-24 font-black">“Add all your <span className="text-[#2176AE]">expenses</span> and keep <span className="text-[#2176AE]">keep track</span> of your budget” </h2>
                 </div>
                 <div className=" relative text-white  h-[400px] ">
-                  <img src="./assests/Wallet-1.jpeg" alt="" className=" h-[420px]" />
+                  <img src="./assests/Wallet-1.png" alt="" className=" h-[420px]" />
                   <div className=" absolute top-[40%] right-[45%] ">
                   <h2 className="p-2">Total Amount Spent</h2>
                   <p className="text-[#E18A07] text-4xl font-extrabold">₹{total}</p>
