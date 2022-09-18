@@ -187,8 +187,8 @@ const BarChartWeek = () => {
       <div>
       <Chart
       type="bar"
-      width={1100}
-      height={500}
+      width={700}
+      height={300}
 
       series={[{
         name: "Expenses",
@@ -196,7 +196,7 @@ const BarChartWeek = () => {
         
       }]}
       options={{
-        title:{text:"Weekly Expense Chart",style:{fontSize:25}},
+        title:{text:"",style:{fontSize:25}},
         colors: ['#0C090A'],
         theme:{mode:'light'},
         xaxis:{
@@ -206,7 +206,7 @@ const BarChartWeek = () => {
         },
         yaxis:{
           labels:{formatter:(val)=>{return `₹${val}`},style:{fontSize:17}},
-          title:{text:'Expenses',style:{fontSize:25}}
+          title:{text:'',style:{fontSize:25}}
         },
         dataLabels:{
           formatter:(val)=>{return `₹${val}`}

@@ -225,7 +225,7 @@ const BarChartDaily = () => {
         // kharcha.push(sum)
       }
     }
-    weekkharcha.push(sum)
+    dailykharcha.push(sum)
   }
     console.log("sm-daily",dailysum)
     console.log("y axis daily",dailykharcha)
