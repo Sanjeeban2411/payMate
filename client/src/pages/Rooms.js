@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar'
 const Rooms = (props) => {
   let navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [user, setUser] = useState();
   console.log("userNames", data)
   const x = localStorage.getItem("jwt_token")
   useEffect(() => {
@@ -18,6 +19,7 @@ const Rooms = (props) => {
     })
       .then((response) => {
         setData(response.data.r)
+        setUser(response.data.user)
         console.log("res", response)
       })
 
@@ -56,9 +58,9 @@ const Rooms = (props) => {
   }
 
   const shareRoom = (event, val) => {
-    const joinLink = `PayMate/joinroombysharedlink/Room=${val.name}&Password=${val.password}&`
-    // console.log(joinLink)
-    alert(joinLink)
+    const joinLink = `PayMate/joinroombysharedlink/${user._id}/Room=${val.name}&Password=${val.password}&`
+    console.log(joinLink)
+    alert(joinLink.toString())
   }
 
   return (

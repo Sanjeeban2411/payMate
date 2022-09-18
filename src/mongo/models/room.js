@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
 require('../db')
 
 const roomSchema = new mongoose.Schema({
@@ -31,6 +32,11 @@ roomSchema.virtual('user', {
     ref: 'Users',
     localField: '_id',
     foreignField: 'room'
+})
+
+roomSchema.pre('save', async function (next) {
+    this.password = await bcrypt.hash(this.password, 8)
+    next()
 })
 
 const Room = mongoose.model('Room', roomSchema)
