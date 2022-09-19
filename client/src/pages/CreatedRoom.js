@@ -136,8 +136,8 @@ const CreatedRoom = () => {
       <Navbar />
       <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black px-10">
         <div className="font-extrabold mb-5 pb-10">ROOM - {roomName}</div>
-        <div className="flex flex-col justify-center items-center h-full ">
-          <div className="mx-auto mt-14 md:mt-6">
+        <div className="flex flex-col justify-center items-center h-full bg-[#DEF6F9]">
+          <div className="mx-auto bg-transparent mt-14 md:mt-6">
             <BarChart />
           </div>
 

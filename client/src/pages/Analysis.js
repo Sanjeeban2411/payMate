@@ -278,7 +278,7 @@ const Analysis = () => {
                     </div>
                     <div className=''>
 
-                      <div className="mx-auto bg-slate-300">
+                      <div className="mx-auto  bg-transparent">
                         {view === "Daily" ? (<BarChartDaily />) : view === "Weekly" ? (<BarChartWeek />) : (<BarChartAnalyze/>)}
                         {/* <BarChartAnalyze /> */}
                         {/* ({<BarChartWeek/>}) */}
