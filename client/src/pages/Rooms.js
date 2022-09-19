@@ -34,6 +34,10 @@ const Rooms = (props) => {
 
       .catch((err) => {
         console.log(err)
+        if (err.response.status === 401) {
+          console.log("unauth")
+          navigate(`/signin`)
+        }
       })
 
   }, []);
@@ -63,7 +67,14 @@ const Rooms = (props) => {
         console.log(response)
         console.log(response.data.user.token)
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+        if (error.response.status === 401) {
+          console.log("unauth")
+          navigate(`/signin`)
+        }
+      })
+      
   }
 
 
@@ -99,7 +110,7 @@ const Rooms = (props) => {
                   }
                   modal
                   closeOnDocumentClick
-                  contentStyle={{width:"70vw", height:"100px", position:"relative", margin:"auto"}}
+                  contentStyle={{ width: "70vw", height: "100px", position: "relative", margin: "auto" }}
                 >
                   <div>
                     {`http://192.168.1.5:3000/joinroom?user=${user._id}&room=${val.name}&pass=${val.password}`}
@@ -111,7 +122,7 @@ const Rooms = (props) => {
                         closeTooltip()
                       }}
                     >
-                      copy  
+                      copy
                     </button>
                   </div>
                 </Popup>

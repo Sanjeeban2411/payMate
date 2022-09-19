@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { FaUserSecret } from "react-icons/fa";
@@ -17,6 +18,7 @@ const CreatedRoom = () => {
   const [expenseData, setExpenseData] = useState({});
   const [allExpenses, setAllExpenses] = useState([]);
 
+  let navigate = useNavigate();
   const x = localStorage.getItem("jwt_token");
   const room = localStorage.getItem("room");
   // console.log(x)
@@ -34,7 +36,13 @@ const CreatedRoom = () => {
         console.log("data", response.data.room);
         console.log("username", response.data.userNames);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error)
+        if (error.response.status === 401) {
+          console.log("unauth")
+          navigate(`/signin`)
+        }
+      });
   }, [0]);
   // const getExp = () => {
   // function getExp(){
@@ -51,7 +59,13 @@ const CreatedRoom = () => {
         setAllExpenses(response.data);
         console.log("paisa", response.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error)
+        if (error.response.status === 401) {
+          console.log("unauth")
+          navigate(`/signin`)
+        }
+      });
   }, []);
 
 
@@ -84,7 +98,13 @@ const CreatedRoom = () => {
         setpurpose("")
         console.log(response);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error)
+        if (error.response.status === 401) {
+          console.log("unauth")
+          navigate(`/signin`)
+        }
+      });
   };
 
   // console.log("dataexp",roomName)
@@ -107,27 +127,27 @@ const CreatedRoom = () => {
   // }
 
 
-//   let sum
-//   let kharcha = []
-//   if(allExpenses.length>0){
-//   sum=allExpenses[0].amount
-//   console.log("amt",analyze[0].createdAt)
-//   for(let i=0;i<allExpenses.length-1;i++){
-//     console.log("test",analyze[i].createdAt,analyze[i].amount)
-//     console.log("test",analyze[i+1].createdAt,analyze[i+1].amount)
-//     if(allExpenses[i].owner.name===allExpenses[i+1].owner.name){
-//       sum=sum+allExpenses[i+1].amount
-//     }
-//     else{
-//       kharcha.push(sum)
-//       sum = allExpenses[i+1].amount
-//       kharcha.push(sum)
-//     }
-//   }
-//   kharcha.push(sum)
-// }
-// console.log("kkk",kharcha)
-// console.log("sm",sum)
+  //   let sum
+  //   let kharcha = []
+  //   if(allExpenses.length>0){
+  //   sum=allExpenses[0].amount
+  //   console.log("amt",analyze[0].createdAt)
+  //   for(let i=0;i<allExpenses.length-1;i++){
+  //     console.log("test",analyze[i].createdAt,analyze[i].amount)
+  //     console.log("test",analyze[i+1].createdAt,analyze[i+1].amount)
+  //     if(allExpenses[i].owner.name===allExpenses[i+1].owner.name){
+  //       sum=sum+allExpenses[i+1].amount
+  //     }
+  //     else{
+  //       kharcha.push(sum)
+  //       sum = allExpenses[i+1].amount
+  //       kharcha.push(sum)
+  //     }
+  //   }
+  //   kharcha.push(sum)
+  // }
+  // console.log("kkk",kharcha)
+  // console.log("sm",sum)
 
 
 

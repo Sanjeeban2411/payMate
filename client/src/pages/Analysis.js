@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import Navbar from '../components/Navbar'
 import axios, { Axios } from "axios";
 // import BarChart from '../components/BarChart'
@@ -17,6 +18,7 @@ const Analysis = () => {
   const [allExpenses, setAllExpenses] = useState([]);
 
   // const [graphView, setGraphView] = useState("daily");
+  let navigate = useNavigate();
 
   const x = localStorage.getItem("jwt_token");
   // console.log(x)
@@ -35,7 +37,13 @@ const Analysis = () => {
         setdata(response.data);
         // console.log("16", response.data)
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error)
+        if (error.response.status === 401) {
+          console.log("unauth")
+          navigate(`/signin`)
+        }
+      });
   }, []);
 
   useEffect(() => {
@@ -51,7 +59,13 @@ const Analysis = () => {
         // setAllExpenses(allExpenses.reverse())
         console.log("paisa", response.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) =>{ 
+        console.log(error)
+        if (error.response.status === 401) {
+          console.log("unauth")
+          navigate(`/signin`)
+        }
+      });
   }, []);
 
 
@@ -73,7 +87,13 @@ const Analysis = () => {
       .then((response) => {
         console.log(response);
       })
-      .catch((error) => console.log(error));
+      .catch((error) =>{
+         console.log(error)
+         if (error.response.status === 401) {
+          console.log("unauth")
+          navigate(`/signin`)
+        }
+        });
   };
 
 
@@ -279,7 +299,7 @@ const Analysis = () => {
                     <div className=''>
 
                       <div className="mx-auto  bg-transparent">
-                        {view === "Daily" ? (<BarChartDaily />) : view === "Weekly" ? (<BarChartWeek />) : (<BarChartAnalyze/>)}
+                        {view === "Daily" ? (<BarChartDaily />) : view === "Weekly" ? (<BarChartWeek />) : (<BarChartAnalyze />)}
                         {/* <BarChartAnalyze /> */}
                         {/* ({<BarChartWeek/>}) */}
                         {/* // <BarChartDaily /> */}
@@ -317,7 +337,7 @@ const Analysis = () => {
                             )
                             } */}
                             {/* <p>{names.rooms}</p> */}
-                            {names.updatedAt.slice(0,10)}  {names.updatedAt.slice(11,16)}
+                            {names.updatedAt.slice(0, 10)}  {names.updatedAt.slice(11, 16)}
                             {/* {new Date(name.updatedAt)} */}
                           </div>
                           <div>₹{names.amount}</div>

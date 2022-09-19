@@ -33,13 +33,24 @@ export default function JoinRoom() {
                 // 'params': { name }
             }
         })
-            .then((response) => {
+        .then((response) => {
+                localStorage.setItem("url", window.location.href)
+                console.log("URL", window.location.href)
                 localStorage.setItem("room", queries.room)
                 navigate(`/createdroom `)
                 console.log(response)
                 console.log(response.data.user.token)
             })
-            .catch(error => console.log(error))
+            .catch((error) => {
+                console.log(error)
+                if (error.response.status === 401) {
+                    localStorage.setItem("url", window.location.href)
+                    console.log("URL", window.location.href)
+                    console.log("unauth")
+                    navigate(`/signin`)
+                  }
+                // console.log("unauth")
+            })
     }
 
 
