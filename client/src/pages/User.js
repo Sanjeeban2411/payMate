@@ -110,19 +110,18 @@ console.log("todays date",currentDate);
                   </div>
                 </div>
               </div>
-              <div className=" mx-4 flex flex-row  h-[480px]">
-                <div className=" bg-[#113248] w-[50px] h-[480px] rounded-tl-lg rounded-bl-lg">
-
+              <div className=" mx-4 flex flex-row  h-[100%]">
+                <div className=" bg-[#113248] w-[30px] h-[100%] rounded-l-xl">
                 </div>
               <div className=" flex flex-col">
-                <div className="w-[500px] h-[100px] bg-[#113248] text-white rounded-tr-lg" >
+                <div className="w-[450px] h-[20%] bg-[#113248] text-white rounded-tr-xl" >
                 <h2 className="ml-4 text-[#9FD7FC]">Hey There!!!</h2>
                 <div className=" flex flex-row justify-between mx-3">
                 <p className="">{data.name}</p>
                 <p className="">{currentDate}</p>
                 </div>
                 </div>
-                <div className="flex flex-col  w-[500px] h-[380px] rounded-br-lg " id="bg-form">
+                <div className="flex flex-col  w-[100%] h-[100%] rounded-br-xl " id="bg-form">
                 <label className="mt-10 mx-24">Amount</label>
                     <input
                       className="relative border-b-2 border-black bg-transparent p-2 w-[300px] mx-auto placeholder-white"

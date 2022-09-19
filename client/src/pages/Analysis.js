@@ -301,27 +301,26 @@ const Analysis = () => {
                 </div>
                 <div className="mt-6  mx-20">
                   {/* {limit && pagination.reverse().map((name) => { */}
-                  {limit && allExpenses.filter((name, idx) => idx < 5).map((name) => {
+                  {limit && allExpenses.filter((name, idx) => idx < 5).map((names) => {
                     return (
                       <>
                         <div className=' p-2 flex justify-between'>
                           <div>
-                            {name.purpose}
+                            {names.purpose}
                           </div>
                           <div>
-
-                              {/* {name.rooms.map((namesp) => {
-                  return (
-                    <div className=''>
-                      {namesp.name}
-                    </div>
-                  );
-                })} */}
- 
-                            {name.updatedAt.slice(0,10)}  {name.updatedAt.slice(11,16)}
+                            {/* { names.room &&( {
+                              return (
+                                {names.room.name}
+                              )
+                            }
+                            )
+                            } */}
+                            {/* <p>{names.rooms}</p> */}
+                            {names.updatedAt.slice(0,10)}  {names.updatedAt.slice(11,16)}
                             {/* {new Date(name.updatedAt)} */}
                           </div>
-                          <div>₹{name.amount}</div>
+                          <div>₹{names.amount}</div>
                         </div>
                         <hr className='' />
                       </>
