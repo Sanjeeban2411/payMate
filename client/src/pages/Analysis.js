@@ -278,8 +278,8 @@ const Analysis = () => {
                     </div>
                     <div className=''>
 
-                      <div className="mx-auto bg-slate-300">
-                        {view === "Daily" ? (<BarChartDaily />) : view === "Weekly" ? (<BarChartWeek />) : (<BarChartAnalyze />)}
+                      <div className="mx-auto  bg-transparent">
+                        {view === "Daily" ? (<BarChartDaily />) : view === "Weekly" ? (<BarChartWeek />) : (<BarChartAnalyze/>)}
                         {/* <BarChartAnalyze /> */}
                         {/* ({<BarChartWeek/>}) */}
                         {/* // <BarChartDaily /> */}
@@ -301,27 +301,26 @@ const Analysis = () => {
                 </div>
                 <div className="mt-6  mx-20">
                   {/* {limit && pagination.reverse().map((name) => { */}
-                  {limit && allExpenses.filter((name, idx) => idx < 5).map((e) => {
+                  {limit && allExpenses.filter((name, idx) => idx < 5).map((names) => {
                     return (
                       <>
                         <div className=' p-2 flex justify-between'>
                           <div>
-                            {e.purpose}
+                            {names.purpose}
                           </div>
                           <div>
-                            {/* {e.room.name} */}
-                            {/* {name.rooms.map((namesp) => {
+                            {/* { names.room &&( {
                               return (
-                                <div className=''>
-                                  {namesp.name}
-                                </div>
-                              );
-                            })} */}
-
-                            {e.updatedAt.slice(0, 10)}  {e.updatedAt.slice(11, 16)}
+                                {names.room.name}
+                              )
+                            }
+                            )
+                            } */}
+                            {/* <p>{names.rooms}</p> */}
+                            {names.updatedAt.slice(0,10)}  {names.updatedAt.slice(11,16)}
                             {/* {new Date(name.updatedAt)} */}
                           </div>
-                          <div>₹{e.amount}</div>
+                          <div>₹{names.amount}</div>
                         </div>
                         <hr className='' />
                       </>
