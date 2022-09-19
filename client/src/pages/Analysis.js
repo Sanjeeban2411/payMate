@@ -219,11 +219,11 @@ const Analysis = () => {
 
   // useEffect(() => {
   const handleoption = (e) => {
-      const getvalue = e.target.value
-      let show = getvalue
-      setView(show)
+    const getvalue = e.target.value
+    let show = getvalue
+    setView(show)
 
-    }
+  }
   // }, [0]);
   console.log("view", view)
 
@@ -279,7 +279,7 @@ const Analysis = () => {
                     <div className=''>
 
                       <div className="mx-auto bg-slate-300">
-                        {view === "Daily" ? (<BarChartDaily />) : view === "Weekly" ? (<BarChartWeek />) : (<BarChartAnalyze/>)}
+                        {view === "Daily" ? (<BarChartDaily />) : view === "Weekly" ? (<BarChartWeek />) : (<BarChartAnalyze />)}
                         {/* <BarChartAnalyze /> */}
                         {/* ({<BarChartWeek/>}) */}
                         {/* // <BarChartDaily /> */}
@@ -301,27 +301,27 @@ const Analysis = () => {
                 </div>
                 <div className="mt-6  mx-20">
                   {/* {limit && pagination.reverse().map((name) => { */}
-                  {limit && allExpenses.filter((name, idx) => idx < 5).map((name) => {
+                  {limit && allExpenses.filter((name, idx) => idx < 5).map((e) => {
                     return (
                       <>
                         <div className=' p-2 flex justify-between'>
                           <div>
-                            {name.purpose}
+                            {e.purpose}
                           </div>
                           <div>
+                            {/* {e.room.name} */}
+                            {/* {name.rooms.map((namesp) => {
+                              return (
+                                <div className=''>
+                                  {namesp.name}
+                                </div>
+                              );
+                            })} */}
 
-                              {/* {name.rooms.map((namesp) => {
-                  return (
-                    <div className=''>
-                      {namesp.name}
-                    </div>
-                  );
-                })} */}
- 
-                            {name.updatedAt.slice(0,10)}  {name.updatedAt.slice(11,16)}
+                            {e.updatedAt.slice(0, 10)}  {e.updatedAt.slice(11, 16)}
                             {/* {new Date(name.updatedAt)} */}
                           </div>
-                          <div>₹{name.amount}</div>
+                          <div>₹{e.amount}</div>
                         </div>
                         <hr className='' />
                       </>
@@ -336,15 +336,15 @@ const Analysis = () => {
                             {name.purpose}
                           </div>
                           <div className='p-2'>
-                              {/* {name.rooms.map((names) => {
+                            {/* {name.rooms.map((names) => {
                   return (
                     <div className=''>
                       {names}
                     </div>
                   );
                 })} */}
-                            
-                            {name.updatedAt.slice(0,10)}  {name.updatedAt.slice(11,16)}
+
+                            {name.updatedAt.slice(0, 10)}  {name.updatedAt.slice(11, 16)}
                           </div>
                           <div>₹{name.amount}</div>
                         </div>

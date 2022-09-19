@@ -1,9 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import Popup from 'reactjs-popup'
+import 'reactjs-popup/dist/index.css'
+
 import Navbar from '../components/Navbar'
 
 const Rooms = (props) => {
+
+  const ref = useRef();
+  // const openTooltip = () => ref.current.open();
+  const closeTooltip = () => ref.current.close();
+  // const toggleTooltip = () => ref.current.toggle();
+
   let navigate = useNavigate();
   const [data, setData] = useState([]);
   const [user, setUser] = useState();
@@ -57,11 +66,6 @@ const Rooms = (props) => {
       .catch(error => console.log(error))
   }
 
-  const shareRoom = (event, val) => {
-    const joinLink = `PayMate/joinroombysharedlink/${user._id}/Room=${val.name}&Password=${val.password}&`
-    console.log(joinLink)
-    alert(joinLink.toString())
-  }
 
   return (
     <div>
@@ -79,27 +83,39 @@ const Rooms = (props) => {
             return (
               <div className='flex flex-col bg-black  relative box-border items-center mx-auto rounded-full min-w-[200px] min-h-[200px] border-2 border-black '>
                 <p className='relative text-center my-6 text-white font-extrabold'>{val.name}</p>
-                {/* <p className='relative text-center my-3 text-white font-extrabold'></p> */}
                 <button
                   className='bg-white hover:bg-slate-500 hover:text-white text-black mx-auto p-2 my-3 rounded-md'
                   onClick={event => enterRoom(event, val)}
                 >
-                  {/* () => {
-                   props.setRoom(val)
-                   navigate('/createdroom')
-                   }
-                 }> */}
-                  {/* <a href = '/roomlogin'> */}
                   Enter
-                  {/* </a> */}
                 </button>
 
-                <button 
-                className='bg-white'
-                onClick={event => shareRoom(event, val)}
+                <Popup
+                  ref={ref}
+                  trigger={
+                    <button className='bg-white'>
+                      Share
+                    </button>
+                  }
+                  modal
+                  closeOnDocumentClick
+                  contentStyle={{width:"70vw", height:"100px", position:"relative", margin:"auto"}}
                 >
-                  Share
-                </button>
+                  <div>
+                    {`http://192.168.1.5:3000/joinroom?user=${user._id}&room=${val.name}&pass=${val.password}`}
+                    <br />
+                    <button
+                      className='bg-black text-white'
+                      onClick={() => {
+                        navigator.clipboard.writeText(`http://192.168.1.5:3000/joinroom?user=${user._id}&room=${val.name}&pass=${val.password}`)
+                        closeTooltip()
+                      }}
+                    >
+                      copy  
+                    </button>
+                  </div>
+                </Popup>
+
               </div>
             )
           })}

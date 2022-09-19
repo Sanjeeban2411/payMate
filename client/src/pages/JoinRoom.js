@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import queryString from 'query-string'
+
 
 export default function JoinRoom() {
     const navigate = useNavigate()
@@ -9,64 +11,64 @@ export default function JoinRoom() {
     const [link, setLink] = useState('');
     const [data, setData] = useState('');
 
+    const x = localStorage.getItem("jwt_token")
+
+
+    // const value = queryString.parse(this.props.location.search);
+    // const token = value.room;
+    // console.log('token', token)
+    const queries = queryString.parse(window.location.search)
+    console.log('token', queries)
+    if (queries.room && queries.pass) {
+        axios({
+            method: 'post',
+            url: '/room/join',
+            data:
+            {
+                "name": queries.room,
+                "password": queries.pass.toString(),
+            },
+            headers: {
+                'Authorization': `Bearer ${x}`
+                // 'params': { name }
+            }
+        })
+            .then((response) => {
+                localStorage.setItem("room", queries.room)
+                navigate(`/createdroom `)
+                console.log(response)
+                console.log(response.data.user.token)
+            })
+            .catch(error => console.log(error))
+    }
+
+
     const create = (e) => {
         e.preventDefault();
-        const x = localStorage.getItem("jwt_token")
         console.log(x)
-        // setData({
-        //     "name": name,
-        //     "password": password.toString()
-        // })
         console.log(data)
-        if (link.length > 0) {
-            const roomIndex = link.search("Room=") + 5
-            const firstAmp = link.indexOf("&")
-            // setName(link.slice(roomIndex, firstAmp))
-            console.log("name", link.slice(roomIndex, firstAmp))
-            axios({
-                method: 'post',
-                url: '/room/join',
-                data:
-                // link.length > 0 ? {"join_link":link} : 
-                {
-                    "join_link": link
-                },
-                headers: {
-                    'Authorization': `Bearer ${x}`,
-                    // 'params': { name }
-                }
+
+        axios({
+            method: 'post',
+            url: '/room/join',
+            data:
+            // link.length > 0 ? {"join_link":link} : 
+            {
+                "name": name,
+                "password": password.toString(),
+            },
+            headers: {
+                'Authorization': `Bearer ${x}`
+                // 'params': { name }
+            }
+        })
+            .then((response) => {
+                localStorage.setItem("room", name)
+                navigate(`/createdroom `)
+                console.log(response)
+                console.log(response.data.user.token)
             })
-                .then((response) => {
-                    localStorage.setItem("room", link.slice(roomIndex, firstAmp))
-                    navigate(`/createdroom `)
-                    console.log(response)
-                    console.log(response.data.user.token)
-                })
-                .catch(error => console.log(error))
-        }
-        else {
-            axios({
-                method: 'post',
-                url: '/room/join',
-                data:
-                // link.length > 0 ? {"join_link":link} : 
-                {
-                    "name": name,
-                    "password": password.toString(),
-                },
-                headers: {
-                    'Authorization': `Bearer ${x}`
-                    // 'params': { name }
-                }
-            })
-                .then((response) => {
-                    localStorage.setItem("room", name)
-                    navigate(`/createdroom `)
-                    console.log(response)
-                    console.log(response.data.user.token)
-                })
-                .catch(error => console.log(error))
-        }
+            .catch(error => console.log(error))
     }
     console.log("link", link)
 
