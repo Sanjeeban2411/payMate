@@ -33,9 +33,9 @@ export default function JoinRoom() {
                 // 'params': { name }
             }
         })
-        .then((response) => {
-                localStorage.setItem("url", window.location.href)
-                console.log("URL", window.location.href)
+            .then((response) => {
+                // localStorage.setItem("url", window.location.href)
+                // console.log("URL", window.location.href)
                 localStorage.setItem("room", queries.room)
                 navigate(`/createdroom `)
                 console.log(response)
@@ -44,11 +44,25 @@ export default function JoinRoom() {
             .catch((error) => {
                 console.log(error)
                 if (error.response.status === 401) {
-                    localStorage.setItem("url", window.location.href)
+
+                    // function setWithExpiry(key, value, ttl) {
+                    const now = new Date()
+
+                    // `item` is an object which contains the original value
+                    // as well as the time when it's supposed to expire
+                    const item = {
+                        value: window.location.href,
+                        expiry: now.getTime() + 5000,
+                    }
+                    const u = localStorage.setItem("url", JSON.stringify(item))
+                    console.log("url/join", u)
+                    // }
+
+                    // localStorage.setItem("url", window.location.href)
                     console.log("URL", window.location.href)
                     console.log("unauth")
                     navigate(`/signin`)
-                  }
+                }
                 // console.log("unauth")
             })
     }

@@ -12,6 +12,7 @@
     "bootstrap": "^5.2.1",
     "chart.js": "^3.9.1",
     "jwt-decode": "^3.1.2",
+    "qrcode.react": "^3.1.0",
     "query-string": "^7.1.1",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",

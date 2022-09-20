@@ -118,7 +118,7 @@ const Rooms = (props) => {
                   trigger={
                     <button 
                 className=' bg-transparent hover:bg-slate-500 hover:text-white text-black mx-auto p-2 my-3 rounded-md'
-                onClick={event => shareRoom(event, val)} 
+                // onClick={event => shareRoom(event, val)} 
                 >
                   <div className='flex flex-row'><h3>Share</h3><h3 className='p-1 '><BiShareAlt/></h3></div> 
                 </button>

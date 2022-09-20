@@ -16,7 +16,7 @@ const Signin = () => {
   const [data, setData] = useState({});
 
   console.log("out", data);
-  console.log("his",window.location.href)
+  // console.log("his", window.location.href)
   // console.log("his",window.history.state.prevUrl)
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,16 +36,38 @@ const Signin = () => {
     })
       .then((response) => {
         localStorage.setItem("jwt_token", response.data.user.token);
+        // localStorage.removeItem("url")
+
         let url = localStorage.getItem("url")
-        if(url){
-          const i = url.indexOf("/joinroom")
-          url = url.slice(i)
-          console.log("signinURL", url)
-          navigate(url); 
-        }
-        else{
+        // console.log("url",url)
+        // console.log("urlparsed",JSON.parse(url))
+
+        // const itemStr = localStorage.getItem(key)
+        // if the item doesn't exist, return null
+        if (!url) {
           navigate("/user");
         }
+        const item = JSON.parse(url)
+        const now = new Date()
+        // compare the expiry time of the item with the current time
+        if (now.getTime() > item.expiry) {
+          // If the item is expired, delete the item from storage
+          // and return null
+          localStorage.removeItem("url")
+          // return null
+          navigate("/user");
+        }
+        // return item.value
+        // if (url) {
+        // else{
+        const i = url.indexOf("/joinroom")
+        url = url.slice(i)
+        console.log("signinURL", url)
+        navigate(url);
+        // }
+        // else {
+        //   navigate("/user");
+        // }
         // console.log(".then",data)
         console.log(response);
         console.log(response.data.user.token);
@@ -59,9 +81,9 @@ const Signin = () => {
       <div className="bg-[#DEF6F9] h-screen px-11 py-8">
         <section className="flex flex-col md:flex-row h-full items-center rounded-2xl bg-white">
           <div className="h-screen hidden lg:w-1/2 md:block xl:w-[60%]">
-            <CarouselComp/>
+            <CarouselComp />
             {/* <div className="flex flex-col"> */}
-          {/* <Carousel > */}
+            {/* <Carousel > */}
             {/* <img
               className="w-[60%] h-[40%] object-center flex items-center justify-center mt-40 mx-auto"
               src="/assests/log-1.png"
@@ -76,7 +98,7 @@ const Signin = () => {
             {/* </div> */}
             <div className="text-center text-[30px] font-extrabold">Split expenses with your <p>friends easily with our <spam className="text-[#02A9EA]">Rooms</spam></p></div>
             {/* <img src="/assests/indicator.png" alt="" className="mx-auto mt-8"/> */}
-            <CarouselIndicater/>
+            <CarouselIndicater />
           </div>
           <div id="bg"
             className=" w-full md:max-w-md lg:max-w-4xl md:mx-0 md:w-2/3 xl:w-[40%] h-[100%] px-2 lg:px-16 xl:px-28
@@ -84,7 +106,7 @@ const Signin = () => {
           >
             <div className="w-full h-full text-center">
               <div className="rounded-full flex items-center justify-center mt-7 bg-white mx-48  relative box-border min-w-[70px] min-h-[70px]">
-                <img src="/assests/logo.png" alt="" className="ml-2 object-cover w-[30%] h-[30%]"/>
+                <img src="/assests/logo.png" alt="" className="ml-2 object-cover w-[30%] h-[30%]" />
               </div>
               <h1 className="text-2xl font-bold mt-3">Hello There!</h1>
               <h1 className=" text-lg md:text-xl font-bold leading-tight mt-1 text-white">
@@ -110,7 +132,7 @@ const Signin = () => {
                       setEmail(e.target.value);
                     }}
                     value={email}
-                    //   value={data.email}
+                  //   value={data.email}
                   />
                 </div>
                 <div className="mt-3">
@@ -125,13 +147,13 @@ const Signin = () => {
                       setPassword(e.target.value);
                     }}
                     value={password}
-                    //   onChange={(e) => {
-                    //     setData({
-                    //         email:data.email ,
-                    //         password:e.target.value
-                    //     });
-                    //   }}
-                    //   value={data.password}
+                  //   onChange={(e) => {
+                  //     setData({
+                  //         email:data.email ,
+                  //         password:e.target.value
+                  //     });
+                  //   }}
+                  //   value={data.password}
                   />
                 </div>
                 {/* <p className=' flex items-center mt-2'><input className='mr-2' type="checkbox" />Remember Me</p> */}
@@ -157,7 +179,7 @@ const Signin = () => {
                 >
                   Sign In with Google
                 </button>
-                
+
 
               </form>
               <p className="mt-4">

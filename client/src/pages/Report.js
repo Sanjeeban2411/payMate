@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import Navbar from "../components/Navbar";
 import axios from "axios";
+import { QRCodeSVG } from 'qrcode.react';
 import Navbar from "../components/Navbar";
 
 export default function Report() {
@@ -31,11 +32,12 @@ export default function Report() {
       .catch((error) => {
         console.log(error)
         if (error.response.status === 401) {
-            console.log("unauth")
-            navigate(`/signin`)
-          }
+          console.log("unauth")
+          navigate(`/signin`)
+        }
         // console.log("unauth")
-    })  }, [0]);
+      })
+  }, [0]);
 
   console.log("token", x)
 
@@ -97,6 +99,7 @@ export default function Report() {
         user: transactions[lenden.indexOf(min)].user,
         amount: max + min < 0 ? max : min,
         _id: transactions[lenden.indexOf(min)]._id,
+        token: transactions[lenden.indexOf(min)].token,
       };
       transactions[lenden.indexOf(max)].transact.push(tran);
       lenden[lenden.indexOf(max)] = max + min > 0 ? max + min : 0;
@@ -147,7 +150,8 @@ export default function Report() {
 
 
 
-  const handleClick = (event, parent, child) => {
+
+  const handleClear = (event, parent, child) => {
     // console.log(event);
     console.log(parent._id);
     console.log(child._id);
@@ -177,11 +181,11 @@ export default function Report() {
       .catch((error) => {
         console.log(error)
         if (error.response.status === 401) {
-            console.log("unauth")
-            navigate(`/signin`)
-          }
+          console.log("unauth")
+          navigate(`/signin`)
+        }
         // console.log("unauth")
-    })
+      })
 
     console.log("after", transactions)
   };
@@ -235,15 +239,17 @@ export default function Report() {
         .catch((error) => {
           console.log(error)
           if (error.response.status === 401) {
-              console.log("unauth")
-              navigate(`/signin`)
-            }
+            console.log("unauth")
+            navigate(`/signin`)
+          }
           // console.log("unauth")
-      })    }
+        })
+    }
   }
 
-  // clearTotal()
+  const [qr, setqr] = useState(false);
 
+console.log("x",x)
   return (
     <>
       <Navbar />
@@ -259,10 +265,22 @@ export default function Report() {
                   return (
                     <div className=' bg-slate-400 pl-40'>
                       {names.user} -- ₹{Math.abs((names.amount).toFixed(2))}
+                      <span className={names.token === x ? 'block' : 'hidden'}>
+                        <button className="bg-black text-white">
+                          pay
+                        </button>
+                      </span>
                       <span className={name.token === x ? 'block' : 'hidden'}>
-                        <button className="bg-black text-white" onClick={event => handleClick(event, name, names)}>
+                        <button className="bg-black text-white" onClick={event => handleClear(event, name, names)}>
                           done
                         </button>
+                        <br /><br />
+                        <button className="bg-red-700" onClick={() => setqr(!qr)}>
+                          QR
+                        </button>
+                        {qr &&
+                          <QRCodeSVG value={`upi://pay?pa=sanju.sanjeeban.sp@oksbi&pn=Sanjeeban&am=${Math.abs(names.amount)}&cu=INR`} />
+                        }
                       </span>
                     </div>
                   );
