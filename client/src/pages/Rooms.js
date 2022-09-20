@@ -84,11 +84,17 @@ const Rooms = (props) => {
     <div>
       <Navbar />
       <div className=' absolute w-full h-[60%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black px-10'>
-        <div className=''>ROOMS</div>
-        <div className='mt-12  bg-black text-white m-auto rounded-lg p-2 hover:bg-gray-400 hover:text-black'><div><a href="/createroom">Create a Room</a></div></div>
-          
-        
-        <div className='mt-8 bg-black text-white m-auto rounded-lg p-2 hover:bg-gray-400 hover:text-black'><a href="/joinroom">Join a Room</a></div>
+        <div className=' flex flex-row'>
+          <div className=' w-1/2'>
+          Rooms enable you to divide and keep track of everything you have spent with your roomates
+          </div>
+          <div className=''>
+            <div className=' mx-32'>
+        <div className=' mt-12 '><div><a href="/createroom" className=' bg-black text-white  rounded-lg p-2 hover:bg-gray-400 hover:text-black no-underline'>Create a Room</a></div></div>
+        <div className=' mt-12 mx-3'><a href="/joinroom" className=' bg-black text-white  rounded-lg p-2 hover:bg-gray-400 hover:text-black no-underline'>Join a Room</a></div>
+        </div>
+        </div>
+        </div>
         <div className='mt-12 mb-6 font-extrabold'>Your Rooms</div>
         <div className='grid grid-cols-2 md:grid-cols-3 gap-4 sm:grid-cols-3'>
           {/* {data.map(card)} */}
