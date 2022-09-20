@@ -89,10 +89,10 @@ const Rooms = (props) => {
           <div className=' w-1/2 font-extrabold ml-10'>
           Rooms enable you to <span className='text-[#02A9EA]'>divide</span> and keep <span className='text-[#02A9EA]'>track</span> of everything you have spent with your <span className='text-[#02A9EA]'>roomates</span>
           </div>
-          <div className=''>
-            <div className=' mx-32'>
-        <div className=' mt-6 '><div><a href="/createroom" className=' bg-black text-white  rounded-lg p-2 hover:bg-gray-400 hover:text-black no-underline'>Create a Room</a></div></div>
-        <div className=' mt-12 mx-3'><a href="/joinroom" className=' bg-black text-white  rounded-lg p-2 hover:bg-gray-400 hover:text-black no-underline'>Join a Room</a></div>
+          <div className='  h-[30vh]'>
+            <div className=' mx-32 '>
+        <div className=' mt-6 '><div><a href="/createroom" className=' bg-black text-white  rounded-lg p-2 px-33 hover:bg-gray-400 hover:text-black no-underline'>Create a Room</a></div></div>
+        <div className=' mt-12 mx-2'><a href="/joinroom" className=' bg-black text-white  rounded-lg p-2 px-3 hover:bg-gray-400 hover:text-black no-underline'>Join a Room</a></div>
         </div>
         </div>
         </div>
