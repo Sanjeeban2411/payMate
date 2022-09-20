@@ -14,126 +14,75 @@ const router = new express.Router()
 router.post('/room/create', auth, async (req, res) => {
     console.log("hi")
     const user = req.user
-    // try {
-    const room = new Room(req.body)
-    console.log(user._id)
-    room.users.push(user._id)
-    await room.save()
+    try {
+        const room = new Room(req.body)
+        console.log(user._id)
+        room.users.push(user._id)
+        await room.save()
 
-    const ourUser = await User.findById(user._id)
-    ourUser.rooms.push(room._id)
-    await ourUser.save()
-    console.log(ourUser)
+        const ourUser = await User.findById(user._id)
+        ourUser.rooms.push(room._id)
+        await ourUser.save()
+        console.log(ourUser)
 
-    const total = new Total({
-        room: room._id,
-        user: user._id
-    })
-    await total.save()
+        const total = new Total({
+            room: room._id,
+            user: user._id
+        })
+        await total.save()
 
-    res.send(room)
-    // } catch (error) {
-    //     res.status(500).send(error)
-    // }
+        res.send(room)
+    } catch (error) {
+        res.status(500).send(error)
+    }
 })
 
 router.post('/room/join', auth, async (req, res) => {
     console.log('hi', req.user)
     const user = req.user
 
-    // try {
+    try {
         let name
         let password
 
-        if (req.body.join_link) {
-            const link = req.body.join_link
-            const roomIndex = link.search("Room=") + 5
-            const passwordIndex = link.search("Password=") + 9
-            const firstAmp = link.indexOf("&")
-            const lastAmp = link.lastIndexOf("/")
-            name = link.slice(roomIndex, firstAmp)
-            password = link.slice(passwordIndex, lastAmp)
-            console.log("roomIndex", roomIndex, "passwordIndex", passwordIndex, "firstAmp", firstAmp, "lastAmp", lastAmp, "name", name, "password", password)
-            // res.send({room, pass})
+        name = req.body.name
+        password = req.body.password
 
-            const room = await Room.findOne({ name })
-            console.log("ROOM", room)
-            if (!room) {
-                res.status(404).send("Room not found")
-                // console.log("no")
-            }
-            else {
-                const ourUser = await User.findById(user._id)
-                const isMatch = await bcrypt.compare(password, room.password)
-                console.log(isMatch)
-                // if (room.password === password) {
-                if (!isMatch) {
-                    // console.log("yes")
-                    if (!room.users.includes(user._id)) {
-                        room.users.push(user._id)
-                        await room.save()
-
-                        ourUser.rooms.push(room._id)
-                        await ourUser.save()
-
-                        const total = new Total({
-                            room: room._id,
-                            user: user._id,
-                            total: 0
-                        })
-                        await total.save()
-                    }
-                    res.send({ room, user })
-                }
-                else {
-                    res.status(404).send("Room not found")
-                }
-            }
-
+        const room = await Room.findOne({ name })
+        if (!room) {
+            res.status(404).send("Room not found")
         }
-
         else {
-            name = req.body.name
-            password = req.body.password
+            const ourUser = await User.findById(user._id)
+            // if (room.password === password) {
+            const isMatch = await bcrypt.compare(req.body.password, room.password)
+            console.log(isMatch)
+            if (!isMatch) {
 
-            const room = await Room.findOne({ name })
-            if (!room) {
-                res.status(404).send("Room not found")
+                if (!room.users.includes(user._id)) {
+                    room.users.push(user._id)
+                    await room.save()
+
+                    ourUser.rooms.push(room._id)
+                    await ourUser.save()
+
+                    const total = new Total({
+                        room: room._id,
+                        user: user._id,
+                        total: 0
+                    })
+                    await total.save()
+                }
+                res.send({ room, user })
             }
             else {
-                const ourUser = await User.findById(user._id)
-                // if (room.password === password) {
-                const isMatch = await bcrypt.compare(req.body.password, room.password)
-                console.log(isMatch)
-                if (!isMatch) {
-
-                    if (!room.users.includes(user._id)) {
-                        room.users.push(user._id)
-                        await room.save()
-
-                        ourUser.rooms.push(room._id)
-                        await ourUser.save()
-
-                        const total = new Total({
-                            room: room._id,
-                            user: user._id,
-                            total: 0
-                        })
-                        await total.save()
-                    }
-                    res.send({ room, user })
-                }
-                else {
-                    res.status(404).send("Room not found")
-                }
+                res.status(404).send("Room not found")
             }
         }
 
-
-
-    // } catch (error) {
-    //     res.status(500).send(error)
-    // }
+    } catch (error) {
+        res.status(500).send(error)
+    }
 })
 
 router.get('/:room/users', auth, async (req, res) => {

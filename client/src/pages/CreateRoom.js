@@ -33,7 +33,14 @@ const CreateRoom = () => {
             console.log(response)
             console.log(response.data.user.token)
         })
-        .catch(error => console.log(error))
+        .catch((error) => {
+            console.log(error)
+            if (error.response.status === 401) {
+                console.log("unauth")
+                navigate(`/signin`)
+              }
+            // console.log("unauth")
+        })
     }
 
 

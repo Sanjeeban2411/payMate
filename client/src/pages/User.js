@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios, { Axios } from "axios";
 import Navbar from "../components/Navbar";
 
@@ -9,6 +10,8 @@ const User = () => {
   const [data, setdata] = useState("");
   const [expenseData, setExpenseData] = useState("");
   const [allExpenses, setAllExpenses] = useState([]);
+
+  const navigate = useNavigate()
 
   const x = localStorage.getItem("jwt_token");
   // console.log(x)
@@ -27,8 +30,15 @@ const User = () => {
         setdata(response.data);
         // console.log("16", response.data)
       })
-      .catch((error) => console.log(error));
-  }, []);
+      .catch((error) => {
+        console.log(error)
+        if (error.response.status === 401) {
+            console.log("unauth")
+            navigate(`/signin`)
+          }
+        // console.log("unauth")
+    })
+    }, []);
 
   useEffect(() => {
     axios({
@@ -42,8 +52,15 @@ const User = () => {
         setAllExpenses(response.data);
         console.log("paisa", response.data);
       })
-      .catch((error) => console.log(error));
-  }, []);
+      .catch((error) => {
+        console.log(error)
+        if (error.response.status === 401) {
+            console.log("unauth")
+            navigate(`/signin`)
+          }
+        // console.log("unauth")
+    })
+    }, []);
 
   
   const addExpense = (e) => {
@@ -75,8 +92,15 @@ const User = () => {
         // })
         console.log(response);
       })
-      .catch((error) => console.log(error));
-  };
+      .catch((error) => {
+        console.log(error)
+        if (error.response.status === 401) {
+            console.log("unauth")
+            navigate(`/signin`)
+          }
+        // console.log("unauth")
+    })
+    };
 
   const total = allExpenses.map(item => item.amount).reduce((prev, curr) => prev + curr, 0);
   // console.log("tt",purpose)

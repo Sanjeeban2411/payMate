@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // import Navbar from "../components/Navbar";
 import axios from "axios";
 import Navbar from "../components/Navbar";
@@ -6,6 +7,8 @@ import Navbar from "../components/Navbar";
 export default function Report() {
   const [totalData, setTotalData] = useState([]);
   const [check, setCheck] = useState(false)
+
+  const navigate = useNavigate()
 
   console.log("tot", totalData)
   const x = localStorage.getItem("jwt_token");
@@ -25,8 +28,14 @@ export default function Report() {
         console.log("total", response.data);
       })
       // .then(() => {report()})
-      .catch((error) => console.log(error));
-  }, [0]);
+      .catch((error) => {
+        console.log(error)
+        if (error.response.status === 401) {
+            console.log("unauth")
+            navigate(`/signin`)
+          }
+        // console.log("unauth")
+    })  }, [0]);
 
   console.log("token", x)
 
@@ -165,8 +174,14 @@ export default function Report() {
         // clearTotal()
         // console.log(response.data.user.token);
       })
-      .catch((error) => console.log(error));
-
+      .catch((error) => {
+        console.log(error)
+        if (error.response.status === 401) {
+            console.log("unauth")
+            navigate(`/signin`)
+          }
+        // console.log("unauth")
+    })
 
     console.log("after", transactions)
   };
@@ -217,8 +232,14 @@ export default function Report() {
           // window.location.reload()
           // console.log(response.data.user.token);
         })
-        .catch((error) => console.log(error));
-    }
+        .catch((error) => {
+          console.log(error)
+          if (error.response.status === 401) {
+              console.log("unauth")
+              navigate(`/signin`)
+            }
+          // console.log("unauth")
+      })    }
   }
 
   // clearTotal()

@@ -16,6 +16,8 @@ const Signin = () => {
   const [data, setData] = useState({});
 
   console.log("out", data);
+  console.log("his",window.location.href)
+  // console.log("his",window.history.state.prevUrl)
   const handleSubmit = (e) => {
     e.preventDefault();
     // setData({
@@ -23,6 +25,7 @@ const Signin = () => {
     //   password: password.toString(),
     // });
     console.log("in", data);
+    console.log("url", localStorage.getItem("url"));
     // useEffect(() => {
 
     axios({
@@ -33,7 +36,16 @@ const Signin = () => {
     })
       .then((response) => {
         localStorage.setItem("jwt_token", response.data.user.token);
-        navigate("/user");
+        let url = localStorage.getItem("url")
+        if(url){
+          const i = url.indexOf("/joinroom")
+          url = url.slice(i)
+          console.log("signinURL", url)
+          navigate(url); 
+        }
+        else{
+          navigate("/user");
+        }
         // console.log(".then",data)
         console.log(response);
         console.log(response.data.user.token);
