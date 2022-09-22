@@ -80,8 +80,8 @@ const BarChart = () => {
     <div>
       <Chart
       type="bar"
-      width={1100}
-      height={500}
+      width={1000}
+      height={400}
 
       series={[{
         name: "Expenses",
@@ -89,17 +89,23 @@ const BarChart = () => {
         
       }]}
       options={{
-        title:{text:"Expense Chart",style:{fontSize:25}},
-        colors: ['#0C090A'],
+        title:{text:"",style:{fontSize:25}},
+        colors: ['#02A9EA','#0C090A'],
+        plotOptions: {
+          bar: {
+            distributed: true
+          }
+        }  ,
         theme:{mode:'light'},
         xaxis:{
           labels:{style:{fontSize:17}},
           categories: userNames,
-          title:{text:'Members',style:{fontSize:25}}
+          title:{text:'',style:{fontSize:25}}
         },
         yaxis:{
-          labels:{formatter:(val)=>{return `₹${val}`},style:{fontSize:17}},
-          title:{text:'Expenses',style:{fontSize:25}}
+          // labels:none,
+          show: false,
+          title:{text:'',style:{fontSize:25}}
         },
         dataLabels:{
           formatter:(val)=>{return `₹${val}`}

@@ -155,12 +155,13 @@ const CreatedRoom = () => {
     <>
       <Navbar />
       <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black px-10">
-        <div className="font-extrabold mb-5 pb-10">ROOM - {roomName}</div>
-        <div className="flex flex-col justify-center items-center h-full bg-[#DEF6F9]">
-          <div className="mx-auto bg-transparent mt-14 md:mt-6">
+        
+        <div className="flex flex-col justify-center items-center h-full ">
+        <div className="  h-[80%] w-[80%] ml-48 box-border border-[4px] border-[#42BFEF] " id="crroom-bg"><div className=" font-extrabold ml-10">{roomName}</div>
+          <div className="mx-10 bg-transparent my-14 md:my-6 ">
             <BarChart />
           </div>
-
+          </div>
           <div className="max-w-[1150px] mx-auto w-full rounded-md border-2 border-black p-3 mt-12">
             <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-3 mt-1">
               <h2 className="text-4xl font-bold text-center py-6">
