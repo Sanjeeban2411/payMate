@@ -33,12 +33,12 @@ const User = () => {
       .catch((error) => {
         console.log(error)
         if (error.response.status === 401) {
-            console.log("unauth")
-            navigate(`/signin`)
-          }
+          console.log("unauth")
+          navigate(`/signin`)
+        }
         // console.log("unauth")
-    })
-    }, []);
+      })
+  }, []);
 
   useEffect(() => {
     axios({
@@ -55,21 +55,21 @@ const User = () => {
       .catch((error) => {
         console.log(error)
         if (error.response.status === 401) {
-            console.log("unauth")
-            navigate(`/signin`)
-          }
+          console.log("unauth")
+          navigate(`/signin`)
+        }
         // console.log("unauth")
-    })
-    }, []);
+      })
+  }, []);
 
-  
+
   const addExpense = (e) => {
     e.preventDefault();
     // setExpenseData({
     //   purpose: purpose,
     //   amount: amount,
     // });
-    if(amount <=0 ){
+    if (amount <= 0) {
       setamount("")
       setpurpose("")
       return alert("You cannot enter 0 or negative amount")
@@ -77,8 +77,10 @@ const User = () => {
     axios({
       method: "post",
       url: "/addexpense",
-      data: {purpose: purpose,
-          amount: amount,},
+      data: {
+        purpose: purpose,
+        amount: amount,
+      },
       headers: {
         Authorization: `Bearer ${x}`,
       },
@@ -95,24 +97,24 @@ const User = () => {
       .catch((error) => {
         console.log(error)
         if (error.response.status === 401) {
-            console.log("unauth")
-            navigate(`/signin`)
-          }
+          console.log("unauth")
+          navigate(`/signin`)
+        }
         // console.log("unauth")
-    })
-    };
+      })
+  };
 
   const total = allExpenses.map(item => item.amount).reduce((prev, curr) => prev + curr, 0);
   // console.log("tt",purpose)
 
   const date = new Date();
 
-let day = date.getDate();
-let month = date.getMonth() + 1;
-let year = date.getFullYear();
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
 
-let currentDate = `${day}/${month}/${year}`;
-console.log("todays date",currentDate);
+  let currentDate = `${day}/${month}/${year}`;
+  console.log("todays date", currentDate);
 
   return (
     <>
@@ -129,24 +131,24 @@ console.log("todays date",currentDate);
                 <div className=" relative text-white  h-[400px] ">
                   <img src="./assests/Wallet-1.png" alt="" className=" h-[420px]" />
                   <div className=" absolute top-[40%] right-[45%] ">
-                  <h2 className="p-2">Total Amount Spent</h2>
-                  <p className="text-[#E18A07] text-4xl font-extrabold">₹{total}</p>
+                    <h2 className="p-2">Total Amount Spent</h2>
+                    <p className="text-[#E18A07] text-4xl font-extrabold">₹{total}</p>
                   </div>
                 </div>
               </div>
               <div className=" mx-4 flex flex-row  h-[100%]">
                 <div className=" bg-[#113248] w-[30px] h-[100%] rounded-l-xl">
                 </div>
-              <div className=" flex flex-col">
-                <div className="w-[450px] h-[20%] bg-[#113248] text-white rounded-tr-xl" >
-                <h2 className="ml-4 text-[#9FD7FC]">Hey There!!!</h2>
-                <div className=" flex flex-row justify-between mx-3">
-                <p className="">{data.name}</p>
-                <p className="">{currentDate}</p>
-                </div>
-                </div>
-                <div className="flex flex-col  w-[100%] h-[100%] rounded-br-xl " id="bg-form">
-                <label className="mt-10 mx-24">Amount</label>
+                <div className=" flex flex-col">
+                  <div className="w-[450px] h-[20%] bg-[#113248] text-white rounded-tr-xl" >
+                    <h2 className="ml-4 text-[#9FD7FC]">Hey There!!!</h2>
+                    <div className=" flex flex-row justify-between mx-3">
+                      <p className="">{data.name}</p>
+                      <p className="">{currentDate}</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col  w-[100%] h-[100%] rounded-br-xl " id="bg-form">
+                    <label className="mt-10 mx-24">Amount</label>
                     <input
                       className="relative border-b-2 border-black bg-transparent p-2 w-[300px] mx-auto placeholder-white"
                       type="number"
@@ -177,19 +179,19 @@ console.log("todays date",currentDate);
                       value={purpose}
                     />
                     <button
-                  className="flex justify-center items-center bg-black text-xl text-white mx-auto p-2 px-4 rounded-md my-5"
-                  onClick={addExpense}
-                >
-                  Add Spend
-                </button>
+                      className="flex justify-center items-center bg-black text-xl text-white mx-auto p-2 px-4 rounded-md my-5"
+                      onClick={addExpense}
+                    >
+                      Add Spend
+                    </button>
+                  </div>
                 </div>
-              </div>
-              
+
               </div>
             </div>
-            </div>
+          </div>
         </div>
-      )} 
+      )}
     </>
   );
 };

@@ -247,9 +247,9 @@ export default function Report() {
     }
   }
 
-  const [qr, setqr] = useState(false);
+  const [qr, setqr] = useState("");
 
-console.log("x",x)
+  console.log("x", x)
   return (
     <>
       <Navbar />
@@ -275,10 +275,13 @@ console.log("x",x)
                           done
                         </button>
                         <br /><br />
-                        <button className="bg-red-700" onClick={() => setqr(!qr)}>
+                        <button className="bg-red-700" onClick={() => {
+                          setqr(names.user)
+                          // console.log(qr)
+                        }}>
                           QR
                         </button>
-                        {qr &&
+                        {qr === names.user &&
                           <QRCodeSVG value={`upi://pay?pa=sanju.sanjeeban.sp@oksbi&pn=Sanjeeban&am=${Math.abs(names.amount)}&cu=INR`} />
                         }
                       </span>

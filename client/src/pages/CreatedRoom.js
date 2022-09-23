@@ -18,6 +18,8 @@ const CreatedRoom = () => {
   const [expenseData, setExpenseData] = useState({});
   const [allExpenses, setAllExpenses] = useState([]);
 
+  const [splitInto, setSplitInto] = useState([]);
+
   let navigate = useNavigate();
   const x = localStorage.getItem("jwt_token");
   const room = localStorage.getItem("room");
@@ -33,6 +35,7 @@ const CreatedRoom = () => {
       .then((response) => {
         setRoomName(response.data.room);
         setUserNames(response.data.userNames);
+        setSplitInto(response.data.userNames)
         console.log("data", response.data.room);
         console.log("username", response.data.userNames);
       })
@@ -71,40 +74,42 @@ const CreatedRoom = () => {
 
   const addExpense = (e) => {
     e.preventDefault();
-    // setExpenseData({
-    //   purpose: purpose,
-    //   amount: Number(amount),
-    // });
-    if (amount <= 0) {
-      setamount("")
-      setpurpose("")
-      return alert("You cannot enter 0 or negative amount")
-    }
-    axios({
-      method: "post",
-      url: `/${room}/addexpense`,
-      data: {
-        purpose: purpose,
-        amount: Number(amount),
-      },
-      headers: {
-        Authorization: `Bearer ${x}`,
-      },
-    })
-      .then((response) => {
-        // getExp()
-        setExpenseData({})
-        setamount("")
-        setpurpose("")
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error)
-        if (error.response.status === 401) {
-          console.log("unauth")
-          navigate(`/signin`)
-        }
-      });
+
+    // const arr = []
+    // arr.push(e)
+    // console.log(splitInto)
+
+
+    // if (amount <= 0) {
+    //   setamount("")
+    //   setpurpose("")
+    //   return alert("You cannot enter 0 or negative amount")
+    // }
+    // axios({
+    //   method: "post",
+    //   url: `/${room}/addexpense`,
+    //   data: {
+    //     purpose: purpose,
+    //     amount: Number(amount),
+    //   },
+    //   headers: {
+    //     Authorization: `Bearer ${x}`,
+    //   },
+    // })
+    //   .then((response) => {
+    //     // getExp()
+    //     setExpenseData({})
+    //     setamount("")
+    //     setpurpose("")
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error)
+    //     if (error.response.status === 401) {
+    //       console.log("unauth")
+    //       navigate(`/signin`)
+    //     }
+    //   });
   };
 
   // console.log("dataexp",roomName)
@@ -148,19 +153,20 @@ const CreatedRoom = () => {
   // }
   // console.log("kkk",kharcha)
   // console.log("sm",sum)
-
-
+  
+  
+  console.log("splitInto",splitInto)
 
   return (
     <>
       <Navbar />
       <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black px-10">
-        
+
         <div className="flex flex-col justify-center items-center h-full ">
-        <div className="  h-[80%] w-[80%] ml-48 box-border border-[4px] border-[#42BFEF] " id="crroom-bg"><div className=" font-extrabold ml-10">{roomName}</div>
-          <div className="mx-10 bg-transparent my-14 md:my-6 ">
-            <BarChart />
-          </div>
+          <div className="  h-[80%] w-[80%] ml-48 box-border border-[4px] border-[#42BFEF] " id="crroom-bg"><div className=" font-extrabold ml-10">{roomName}</div>
+            <div className="mx-10 bg-transparent my-14 md:my-6 ">
+              <BarChart />
+            </div>
           </div>
           <div className="max-w-[1150px] mx-auto w-full rounded-md border-2 border-black p-3 mt-12">
             <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-3 mt-1">
@@ -192,6 +198,28 @@ const CreatedRoom = () => {
                     }}
                     value={purpose}
                   />
+                </div>
+                <div>
+                  <label className="text-center">Divided into</label>
+                  <br />
+                  {userNames.map((e) => {
+                    return (
+                      <div>
+                        <input
+                          type="checkbox"
+                          name={e}
+                          value={e}
+                          onChange={()=>{
+                            setSplitInto(splitInto.filter((item)=>{item !== name}))
+                          }}
+                        />
+                        <label for="element" style={{ fontSize: 35 }}>
+                          {e}
+                        </label>
+                      </div>
+                    );
+                    // console.log(e)
+                  })}
                 </div>
               </div>
               <button
