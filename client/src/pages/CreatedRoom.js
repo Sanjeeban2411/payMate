@@ -78,25 +78,36 @@ const CreatedRoom = () => {
 
   for(var checkbox of checkboxs){
     checkbox.addEventListener('click',function(){
-      if(this.checked==false){
+      for(let i=0;i<userNames.length;i++){
+      if(userNames[i]==this.value){
         listarray = listarray.filter(e => e !== this.value)
         // listarray.push(this.value)
       }
-      else if(this.checked==true){
+      else if(userNames[i]!=this.value){
         listarray.push(this.value)
+
+        // if(!listarray.includes(this.value)){
+        //   listarray.push(this.value)
+        // }
         // listarray = listarray.filter(e => e !== this.value)
         // console.log('you unchecked')
       }
+    }
+      console.log("ck",this.checked)
+      console.log("st",listarray)
     })
   }
   // console.log("arraylist",listarray)
  
-
+  const [check,setCheck]=useState(true)
   const addExpense = (e) => {
     e.preventDefault();
 
     setSplitInto(listarray)
-
+    
+    // setCheck('.checkbox'==true)
+    
+    // setCheck(true)
 
     // if (amount <= 0) {
     //   setamount("")
@@ -187,7 +198,7 @@ const CreatedRoom = () => {
   //   console.log(e.target.value)
   // })
 
-  const [state,setState]=useState([])
+  
 
   // const handlcheck =(e)=>{
   //   let arr=[]
@@ -255,7 +266,7 @@ const CreatedRoom = () => {
                         <div>
                         <input
                           type="checkbox"
-                          defaultChecked
+                          defaultChecked={check}
                           id={user}
                           name={user}
                           value={user}
@@ -274,7 +285,8 @@ const CreatedRoom = () => {
               </div>
               <button
                 className="flex justify-center items-center bg-black text-white mx-auto p-2 rounded-md my-2"
-                onClick={addExpense}
+                onClick={addExpense} 
+                // onSubmit={()=> setChecked(true)}
               >
                 Add Spend
               </button>
