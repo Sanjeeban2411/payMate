@@ -75,9 +75,7 @@ const CreatedRoom = () => {
   const addExpense = (e) => {
     e.preventDefault();
 
-    // const arr = []
-    // arr.push(e)
-    // console.log(splitInto)
+    setSplitInto(listarray)
 
 
     // if (amount <= 0) {
@@ -154,8 +152,51 @@ const CreatedRoom = () => {
   // console.log("kkk",kharcha)
   // console.log("sm",sum)
   
-  
-  console.log("splitInto",splitInto)
+  // const getval = (e) =>{
+  //   const {value,checked}=e.target
+  //   console.log(`${value} is ${checked}`)
+  //   if(checked){
+  //     setSplitInto([...splitInto, value])
+  //   } else{
+  //     setSplitInto(splitInto.filter((e)=> e!==value))
+  //   }
+  // }
+  // const handlecheck((e)=>{
+  //   console.log(e.target.value)
+  // })
+
+  const [state,setState]=useState([])
+
+  // const handlcheck =(e)=>{
+  //   let arr=[]
+  //   for(var checkbox of checkboxs){
+  //     if(e.target.checked==true){
+  //       arr.push(e.target.value)
+  //     }
+  //     else{
+  //       console.log("unchecked")
+  //     }
+      
+  //   }
+  //   console.log("listarr",arr)
+  // }
+  var listarray=[]
+  var checkboxs=document.querySelectorAll('.checkbox')
+
+  for(var checkbox of checkboxs){
+    checkbox.addEventListener('click',function(){
+      if(this.checked==true){
+        listarray.push(this.value)
+      }
+      else{
+        listarray = listarray.filter(e => e !== this.value)
+        console.log('you unchecked')
+      }
+    })
+  }
+  console.log("arraylist",listarray)
+  console.log("splitinto",splitInto)
+
 
   return (
     <>
@@ -202,20 +243,22 @@ const CreatedRoom = () => {
                 <div>
                   <label className="text-center">Divided into</label>
                   <br />
-                  {userNames.map((e) => {
+                  {userNames.map((user,index) => {
                     return (
-                      <div>
+                      <div className="">
+                        <div>
                         <input
                           type="checkbox"
-                          name={e}
-                          value={e}
-                          onChange={()=>{
-                            setSplitInto(splitInto.filter((item)=>{item !== name}))
-                          }}
+                          id={user}
+                          name={user}
+                          value={user}
+                          class="checkbox"
+                          // onChange={handlcheck}
                         />
-                        <label for="element" style={{ fontSize: 35 }}>
-                          {e}
+                        <label for={user} style={{ fontSize: 35 }}>
+                          {user}
                         </label>
+                        </div>
                       </div>
                     );
                     // console.log(e)
