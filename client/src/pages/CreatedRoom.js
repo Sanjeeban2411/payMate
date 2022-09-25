@@ -72,6 +72,26 @@ const CreatedRoom = () => {
   }, []);
 
 
+  var listarray=userNames
+  console.log("ls",listarray)
+  var checkboxs=document.querySelectorAll('.checkbox')
+
+  for(var checkbox of checkboxs){
+    checkbox.addEventListener('click',function(){
+      if(this.checked==false){
+        listarray = listarray.filter(e => e !== this.value)
+        // listarray.push(this.value)
+      }
+      else if(this.checked==true){
+        listarray.push(this.value)
+        // listarray = listarray.filter(e => e !== this.value)
+        // console.log('you unchecked')
+      }
+    })
+  }
+  // console.log("arraylist",listarray)
+ 
+
   const addExpense = (e) => {
     e.preventDefault();
 
@@ -109,6 +129,8 @@ const CreatedRoom = () => {
     //     }
     //   });
   };
+
+  console.log("splitinto",splitInto)
 
   // console.log("dataexp",roomName)
   console.log("users", allExpenses);
@@ -180,23 +202,7 @@ const CreatedRoom = () => {
   //   }
   //   console.log("listarr",arr)
   // }
-  var listarray=[]
-  var checkboxs=document.querySelectorAll('.checkbox')
-
-  for(var checkbox of checkboxs){
-    checkbox.addEventListener('click',function(){
-      if(this.checked==true){
-        listarray.push(this.value)
-      }
-      else{
-        listarray = listarray.filter(e => e !== this.value)
-        console.log('you unchecked')
-      }
-    })
-  }
-  console.log("arraylist",listarray)
-  console.log("splitinto",splitInto)
-
+  
 
   return (
     <>
@@ -249,6 +255,7 @@ const CreatedRoom = () => {
                         <div>
                         <input
                           type="checkbox"
+                          defaultChecked
                           id={user}
                           name={user}
                           value={user}
