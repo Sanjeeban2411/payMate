@@ -44,18 +44,18 @@ export default function Report() {
   // const report = ()=>{
 
   let lenden = [];
-  let totAmount = 0;
+  // let totAmount = 0;
   let transactions = [];
 
-  totalData.forEach((amount) => {
-    // total.push(amount.total)
-    totAmount += amount.total;
-  });
+  // totalData.forEach((amount) => {
+  //   totAmount += amount.total;
+  // });
 
   totalData.forEach((e) => {
     let tran = {
       user: e.user.name,
-      amount: e.total - totAmount / totalData.length,
+      // amount: e.total - totAmount / totalData.length,
+      amount:e.total - e.dues,
       status: " ", //pay or recieve
       transact: [], //transaction with
       _id: e._id,
@@ -63,6 +63,7 @@ export default function Report() {
     };
     transactions.push(tran);
   });
+  console.log("xy", transactions)
 
   transactions.forEach((tran) => {
     lenden.push(tran.amount);

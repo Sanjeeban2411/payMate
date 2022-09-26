@@ -88,7 +88,7 @@ router.post('/room/join', auth, async (req, res) => {
 router.get('/:room/users', auth, async (req, res) => {
     // console.log(req.params.room)
     const room = await Room.findOne({ name: req.params.room })
-    console.log("R",room)
+    // console.log("R",room)
     if (room) {
         const users = await room.populate('users')
         console.log("uu",users)
@@ -170,7 +170,9 @@ router.patch('/:room/settleTransaction', auth, async (req, res) => {
 
         let count = 0
         total.forEach((e) => {
-            if (Math.round(e.total) === Math.round(avg)) {
+            // if (Math.round(e.total) === Math.round(avg)) {
+                console.log("cede", e.dues)
+            if (Math.round(e.total) === Math.round(e.dues)) {
                 count += 1
             }
         })
@@ -178,8 +180,8 @@ router.patch('/:room/settleTransaction', auth, async (req, res) => {
         console.log("len", total.length)
 
         if (count === total.length) {
-            const total = await Total.updateMany({ total: 0 })
-            console.log("xxxxx", total)
+            const total = await Total.updateMany({ total: 0, dues:0 })
+            // console.log("xxxxx", total)
             return res.send(total)
         }
 
