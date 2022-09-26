@@ -47,6 +47,8 @@ const CreatedRoom = () => {
         }
       });
   }, [0]);
+
+
   // const getExp = () => {
   // function getExp(){
 
@@ -72,41 +74,43 @@ const CreatedRoom = () => {
   }, []);
 
 
-  var listarray=userNames
-  console.log("ls",listarray)
-  var checkboxs=document.querySelectorAll('.checkbox')
+  var listarray = userNames
+  console.log("ls", listarray)
+  // console.log("tst", userNames)
+  var checkboxs = document.querySelectorAll('.checkbox')
 
-  for(var checkbox of checkboxs){
-    checkbox.addEventListener('click',function(){
-      for(let i=0;i<userNames.length;i++){
-      if(userNames[i]==this.value){
-        listarray = listarray.filter(e => e !== this.value)
-        // listarray.push(this.value)
-      }
-      else if(userNames[i]!=this.value){
-        listarray.push(this.value)
+  // for(var checkbox of checkboxs){
+  //   checkbox.addEventListener('click',function(){
+  //     for(let i=0;i<userNames.length;i++){
+  //     if(userNames[i]==this.value){
+  //       listarray = listarray.filter(e => e !== this.value)
+  //       // listarray.push(this.value)
+  //     }
+  //     else if(userNames[i]!=this.value){
+  //       listarray.push(this.value)
 
-        // if(!listarray.includes(this.value)){
-        //   listarray.push(this.value)
-        // }
-        // listarray = listarray.filter(e => e !== this.value)
-        // console.log('you unchecked')
-      }
-    }
-      console.log("ck",this.checked)
-      console.log("st",listarray)
-    })
-  }
+  //       // if(!listarray.includes(this.value)){
+  //       //   listarray.push(this.value)
+  //       // }
+  //       // listarray = listarray.filter(e => e !== this.value)
+  //       // console.log('you unchecked')
+  //     }
+  //   }
+  //     // console.log("ck",this.checked)
+  //     // console.log("st",listarray)
+  //   })
+  // }
   // console.log("arraylist",listarray)
- 
-  const [check,setCheck]=useState(true)
-  const addExpense = (e) => {
-    e.preventDefault();
 
-    setSplitInto(listarray)
-    
+  // const [check,setCheck]=useState(true)
+  const addExpense = (e) => {
+    // e.preventDefault();
+
+    // setSplitInto(arr)
+
     // setCheck('.checkbox'==true)
-    
+    console.log("e", e)
+
     // setCheck(true)
 
     // if (amount <= 0) {
@@ -114,34 +118,34 @@ const CreatedRoom = () => {
     //   setpurpose("")
     //   return alert("You cannot enter 0 or negative amount")
     // }
-    // axios({
-    //   method: "post",
-    //   url: `/${room}/addexpense`,
-    //   data: {
-    //     purpose: purpose,
-    //     amount: Number(amount),
-    //   },
-    //   headers: {
-    //     Authorization: `Bearer ${x}`,
-    //   },
-    // })
-    //   .then((response) => {
-    //     // getExp()
-    //     setExpenseData({})
-    //     setamount("")
-    //     setpurpose("")
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error)
-    //     if (error.response.status === 401) {
-    //       console.log("unauth")
-    //       navigate(`/signin`)
-    //     }
-    //   });
+    axios({
+      method: "post",
+      url: `/${room}/addexpense`,
+      data: {
+        purpose: purpose,
+        amount: Number(amount),
+      },
+      headers: {
+        Authorization: `Bearer ${x}`,
+      },
+    })
+      .then((response) => {
+        // getExp()
+        setExpenseData({})
+        setamount("")
+        setpurpose("")
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error)
+        if (error.response.status === 401) {
+          console.log("unauth")
+          navigate(`/signin`)
+        }
+      });
   };
 
-  console.log("splitinto",splitInto)
+  console.log("splitinto", splitInto)
 
   // console.log("dataexp",roomName)
   console.log("users", allExpenses);
@@ -184,7 +188,7 @@ const CreatedRoom = () => {
   // }
   // console.log("kkk",kharcha)
   // console.log("sm",sum)
-  
+
   // const getval = (e) =>{
   //   const {value,checked}=e.target
   //   console.log(`${value} is ${checked}`)
@@ -198,7 +202,7 @@ const CreatedRoom = () => {
   //   console.log(e.target.value)
   // })
 
-  
+
 
   // const handlcheck =(e)=>{
   //   let arr=[]
@@ -209,11 +213,41 @@ const CreatedRoom = () => {
   //     else{
   //       console.log("unchecked")
   //     }
-      
+
   //   }
   //   console.log("listarr",arr)
   // }
-  
+
+  // const [check, setCheck] = useState([]);
+  let check = []
+  var arr = []
+  arr = userNames
+  const l = userNames.length
+  for (let i = 0; i < l; i++) {
+    check.push("true")
+  }
+  const handleCheckbox = (e) => {
+    const index = splitInto.indexOf(e.target.value)
+    console.log("i", index)
+    // if(arr.includes(e.target.value)){
+    // check[index] = "false"
+    if (index > -1) {
+      check.splice(1);
+      arr.splice(index, 1);
+    }
+    // }
+    else {
+      // check[index] = "true"
+      arr.push(e.target.value)
+      check.push("true")
+      console.log("checkkkk", check)
+
+    }
+    console.log("ARR", arr)
+    // console.log("un", dup)
+    console.log("check", check)
+  }
+
 
   return (
     <>
@@ -260,22 +294,23 @@ const CreatedRoom = () => {
                 <div>
                   <label className="text-center">Divided into</label>
                   <br />
-                  {userNames.map((user,index) => {
+                  {userNames.map((user, index) => {
                     return (
                       <div className="">
                         <div>
-                        <input
-                          type="checkbox"
-                          defaultChecked={check}
-                          id={user}
-                          name={user}
-                          value={user}
-                          class="checkbox"
-                          // onChange={handlcheck}
-                        />
-                        <label for={user} style={{ fontSize: 35 }}>
-                          {user}
-                        </label>
+                          <input
+                            type="checkbox"
+                            defaultChecked={check}
+                            id={user}
+                            name={user}
+                            value={user}
+                            class="checkbox"
+                            // onChange={handlcheck}
+                            onClick={handleCheckbox}
+                          />
+                          <label for={user} style={{ fontSize: 35 }}>
+                            {user}
+                          </label>
                         </div>
                       </div>
                     );
@@ -285,8 +320,8 @@ const CreatedRoom = () => {
               </div>
               <button
                 className="flex justify-center items-center bg-black text-white mx-auto p-2 rounded-md my-2"
-                onClick={addExpense} 
-                // onSubmit={()=> setChecked(true)}
+                onClick={addExpense}
+              // onSubmit={()=> setChecked(true)}
               >
                 Add Spend
               </button>
