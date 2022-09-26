@@ -12,6 +12,10 @@ const expenseSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    splitInto:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
     owner:{
         type:mongoose.Schema.Types.ObjectId,
         required:true,

@@ -12,6 +12,10 @@ const totalSchema = new mongoose.Schema({
         required:true,
         ref: "User"
     },
+    dues:{
+        type:Number,
+        default:0
+    },
     total:{
         type:Number,
         default:0

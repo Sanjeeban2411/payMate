@@ -23,7 +23,7 @@ const CreatedRoom = () => {
   let navigate = useNavigate();
   const x = localStorage.getItem("jwt_token");
   const room = localStorage.getItem("room");
-  // console.log(x)
+  console.log('x',room)
   useEffect(() => {
     axios({
       method: "get",
@@ -35,8 +35,8 @@ const CreatedRoom = () => {
       .then((response) => {
         setRoomName(response.data.room);
         setUserNames(response.data.userNames);
-        setSplitInto(response.data.userNames)
-        console.log("data", response.data.room);
+        // setSplitInto(response.data.userNames)
+        console.log("data", response.data);
         console.log("username", response.data.userNames);
       })
       .catch((error) => {
@@ -104,7 +104,7 @@ const CreatedRoom = () => {
 
   // const [check,setCheck]=useState(true)
   const addExpense = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     // setSplitInto(arr)
 
@@ -118,12 +118,14 @@ const CreatedRoom = () => {
     //   setpurpose("")
     //   return alert("You cannot enter 0 or negative amount")
     // }
+    // console.log("helloooooo", arr)
     axios({
       method: "post",
       url: `/${room}/addexpense`,
       data: {
         purpose: purpose,
         amount: Number(amount),
+        splitInto: arr
       },
       headers: {
         Authorization: `Bearer ${x}`,
@@ -159,7 +161,7 @@ const CreatedRoom = () => {
     // })
     // console.log("indie",indieExpenses)
     setIndie(true)
-    setName(name)
+    setName(name.name)
   }
 
   // function onlyUnique(value, index, self) {
@@ -218,34 +220,26 @@ const CreatedRoom = () => {
   //   console.log("listarr",arr)
   // }
 
-  // const [check, setCheck] = useState([]);
-  let check = []
+
+
   var arr = []
-  arr = userNames
-  const l = userNames.length
-  for (let i = 0; i < l; i++) {
-    check.push("true")
-  }
+  for(let i=0; i<userNames.length; i++){
+    arr.push(userNames[i]._id)
+  }  
+
   const handleCheckbox = (e) => {
-    const index = splitInto.indexOf(e.target.value)
+    const index = arr.indexOf(e.target.value)
     console.log("i", index)
-    // if(arr.includes(e.target.value)){
-    // check[index] = "false"
+
     if (index > -1) {
-      check.splice(1);
       arr.splice(index, 1);
     }
-    // }
     else {
-      // check[index] = "true"
       arr.push(e.target.value)
-      check.push("true")
-      console.log("checkkkk", check)
-
     }
     console.log("ARR", arr)
     // console.log("un", dup)
-    console.log("check", check)
+    // console.log("check", check)
   }
 
 
@@ -300,16 +294,16 @@ const CreatedRoom = () => {
                         <div>
                           <input
                             type="checkbox"
-                            defaultChecked={check}
-                            id={user}
-                            name={user}
-                            value={user}
+                            defaultChecked="true"
+                            id={user.name}
+                            name={user.name}
+                            value={user._id}
                             class="checkbox"
                             // onChange={handlcheck}
                             onClick={handleCheckbox}
                           />
-                          <label for={user} style={{ fontSize: 35 }}>
-                            {user}
+                          <label for={user.name} style={{ fontSize: 35 }}>
+                            {user.name}
                           </label>
                         </div>
                       </div>
@@ -333,19 +327,19 @@ const CreatedRoom = () => {
           <> */}
         <div className=" mt-32 md:mt-14 font-extrabold">Members</div>
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {userNames.map((name) => {
+          {/* {userNames.map((name) => {
             return (
               <div className="flex flex-col border-2 border-black">
                 <div className="m-auto mt-4">
                   <FaUserSecret />
                 </div>
-                <div className="p-4 text-center">{name}</div>
+                <div className="p-4 text-center">{name.name}</div>
                 <button className="bg-black text-white mx-auto p-2 my-3 rounded-md" onClick={event => expenseDetails(event, name)}>
                   Expense Details
                 </button>
               </div>
             );
-          })}
+          })} */}
         </div>
         {/* </>
         } */}

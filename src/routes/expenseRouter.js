@@ -40,6 +40,7 @@ router.get('/getexpenses', auth, async (req, res) => {
 router.post('/:room/addexpense', auth, async (req, res) => {
     try {
         const room = await Room.findOne({ name: req.params.room })
+        console.log("Room",room)
         if (!room) {
             return res.status(404).send("No room found")
         }
@@ -50,15 +51,24 @@ router.post('/:room/addexpense', auth, async (req, res) => {
         const expense = new Expense({
             purpose: req.body.purpose,
             amount: req.body.amount,
+            splitInto: req.body.splitInto,
             owner: req.user._id,
             room: room._id
         })
         await expense.save()
 
         const tot = await Total.findOne({ $and: [{ room: room._id }, { user: req.user._id }] })
-        // const tot = await Total.findOne({ room: room._id }, { user: req.user._id })
         tot.total = tot.total + req.body.amount
         await tot.save()
+
+        // const split = await Total.updateMany()
+        const split = req.body.amount / req.body.splitInto.length
+        console.log("split",split)
+        for(let i = 0; i<req.body.splitInto.length; i++){
+            const due = await Total.findOne({ $and: [{ room: room._id }, { user: req.body.splitInto[i] }] })
+            due.dues += split
+            await due.save()
+        }
 
         // console.log(tot.total)
         // console.log(req.body.amount)
@@ -67,7 +77,7 @@ router.post('/:room/addexpense', auth, async (req, res) => {
         // res.send("expense")
 
     } catch (e) {
-        res.status(404).send("No room found")
+        res.status(500).send(e)
     }
 })
 

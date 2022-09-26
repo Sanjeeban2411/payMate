@@ -88,14 +88,19 @@ router.post('/room/join', auth, async (req, res) => {
 router.get('/:room/users', auth, async (req, res) => {
     // console.log(req.params.room)
     const room = await Room.findOne({ name: req.params.room })
-
+    console.log("R",room)
     if (room) {
         const users = await room.populate('users')
-        // console.log(users)
+        console.log("uu",users)
         const userNames = []
         for (let i = 0; i < users.users.length; i++) {
             // res.send(rooms.rooms[i])
-            userNames.push(users.users[i].name)
+            let details = {
+                name : users.users[i].name,
+                _id : users.users[i]._id
+            }
+            userNames.push(details)
+            // userNames.push(users.users[i].name)
         }
         res.send({ room: room.name, userNames })
         // console.log({ room: room.name, userNames })
