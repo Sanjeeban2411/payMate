@@ -9,6 +9,7 @@ import IndieExpenses from "../components/IndieExpenses";
 const CreatedRoom = () => {
   const [purpose, setpurpose] = useState();
   const [amount, setamount] = useState();
+  const [limit, setLimit] = useState(true);
 
   const [indie, setIndie] = useState(false);
   const [name, setName] = useState();
@@ -219,6 +220,7 @@ const CreatedRoom = () => {
   //   }
   //   console.log("listarr",arr)
   // }
+  const [show,setShow]=useState(false)
 
 
 
@@ -246,27 +248,36 @@ const CreatedRoom = () => {
   return (
     <>
       <Navbar />
-      <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black px-10">
-
+      <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-20 font-Montserrat text-3xl  text-black px-10">
+        <div className="flex flex-row">
+        <div  className=" ml-14  text-right  object-cover"><img src="./assests/rooms-ava.png" className="mt-20 object-cover h-[80%] justify-center"/></div>
         <div className="flex flex-col justify-center items-center h-full ">
-          <div className="  h-[80%] w-[80%] ml-48 box-border border-[4px] border-[#42BFEF] " id="crroom-bg"><div className=" font-extrabold ml-10">{roomName}</div>
+          <div className=" p-3  h-[75%] w-[100%] ml-6 box-border border-[4px] border-[#42BFEF] " id="crroom-bg"><div className=" font-extrabold ml-10 text-4xl">{roomName}</div>
             <div className="mx-10 bg-transparent my-14 md:my-6 ">
               <BarChart />
             </div>
           </div>
-          <div className="max-w-[1150px] mx-auto w-full rounded-md border-2 border-black p-3 mt-12">
-            <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-3 mt-1">
-              <h2 className="text-4xl font-bold text-center py-6">
+          </div>
+          </div>
+          <div className=" flex flex-row mx-20">
+          <div className="max-w-[400px] border-[3px] border-[#42BFEF] rounded-[30px] mt-12 px-14  py-4  mr-6 ">
+            <p className="  w-52 mx-auto  ">Add Expense</p>
+            <div className=""><img src="./assests/hand-room.png" className="  mt-14 ml-14"/></div>
+          </div>
+          <div className="max-w-[1000px] mx-auto w-full  border-[3px] border-[#42BFEF] rounded-[30px] p-10 mt-12 ">
+            <form className="max-w-[950px] mx-auto  p-3 mt-1">
+              {/* <h2 className="text-4xl font-bold text-center py-6">
                 ENTER YOUR EXPENSES
-              </h2>
+              </h2> */}
+              <div className=" flex flex-col">
               <div className="flex flex-col md:flex-row justify-between">
                 <div className="flex  flex-col mb-4">
-                  <label className="text-center">Amount</label>
+                  <label className="text-center text-[#2176AE]">Amount</label>
                   <input
-                    className="relative border-2 border-black bg-gray-100 p-2 w-[300px] mx-auto"
+                    className="relative border-b-2 border-black  p-2 w-[250px] mx-auto placeholder:text-black"
                     type="number"
                     min={0}
-                    placeholder="₹ Amount"
+                    placeholder="₹"
                     onChange={(e) => {
                       setamount(e.target.value);
                     }}
@@ -274,24 +285,26 @@ const CreatedRoom = () => {
                   />
                 </div>
                 <div className="flex flex-col mb-4">
-                  <label className="text-center">Category</label>
+                  <label className="text-center text-[#2176AE]">Category</label>
                   <input
-                    className="border-2 border-black relative bg-gray-100 p-2 w-[300px] mx-auto"
+                    className="border-b-2 border-black relative placeholder:text-black  p-2 w-[250px] mx-auto"
                     type="text"
-                    placeholder="Food"
+                    placeholder="🡇 Food"
                     onChange={(e) => {
                       setpurpose(e.target.value);
                     }}
                     value={purpose}
                   />
                 </div>
-                <div>
-                  <label className="text-center">Divided into</label>
+                </div>
+                <div className="mx-auto mt-4">
+                  <label className="text-center text-[#2176AE]" onClick={()=>setShow(!show)}>Split With</label>
                   <br />
+                  
                   {userNames.map((user, index) => {
                     return (
-                      <div className="">
-                        <div>
+                     <div className="">
+                         { show && (<div>
                           <input
                             type="checkbox"
                             defaultChecked="true"
@@ -305,41 +318,46 @@ const CreatedRoom = () => {
                           <label for={user.name} style={{ fontSize: 35 }}>
                             {user.name}
                           </label>
-                        </div>
+                        </div>)
+                    }
                       </div>
                     );
                     // console.log(e)
                   })}
                 </div>
-              </div>
+              
+              <div>
               <button
-                className="flex justify-center items-center bg-black text-white mx-auto p-2 rounded-md my-2"
+                className="flex justify-center items-center bg-[#2176AE] mt-5 text-white mx-auto p-3 px-5  rounded-[20px] "
                 onClick={addExpense}
               // onSubmit={()=> setChecked(true)}
               >
-                Add Spend
+                Add Amount
               </button>
+              </div>
+              </div>
             </form>
           </div>
-        </div>
+          </div>
+        
 
         {/* {!indie &&
           <> */}
-        <div className=" mt-32 md:mt-14 font-extrabold">Members</div>
+        <div className=" mt-32 md:mt-14 font-extrabold mx-auto text-4xl text-[#2176AE]">Mates</div>
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* {userNames.map((name) => {
+          {userNames.map((name) => {
             return (
-              <div className="flex flex-col border-2 border-black">
+              <div className="flex flex-col border-[3px] border-[#42BFEF] rounded-[30px]">
                 <div className="m-auto mt-4">
                   <FaUserSecret />
                 </div>
                 <div className="p-4 text-center">{name.name}</div>
-                <button className="bg-black text-white mx-auto p-2 my-3 rounded-md" onClick={event => expenseDetails(event, name)}>
+                <button className="bg-[#2176AE] text-white mx-auto p-2 px-3 my-3 rounded-md" onClick={event => expenseDetails(event, name)}>
                   Expense Details
                 </button>
               </div>
             );
-          })} */}
+          })}
         </div>
         {/* </>
         } */}
@@ -348,10 +366,76 @@ const CreatedRoom = () => {
             <IndieExpenses indie={indie} setIndie={setIndie} name={name} all={allExpenses} />
           </>
         }
-        <button className="bg-black text-white mx-auto p-2 my-4 mt-10 rounded-md">
-          <a href="/report">Report</a>
+        <button className="bg-[#2176AE] text-white mx-auto p-2 my-4 mt-10 rounded-md">
+          <a href="/report" className="text-white no-underline">Settle Up</a>
         </button>
-        <div>
+        <div className='border-2  my-24 mx-32 rounded-t-xl bg-white' id="tranbg">
+                <div className="p-4 bg-[#E18A07] rounded-t-xl">
+                  <h2 className='text-center'>Previous Transaction</h2>
+                </div>
+                <div className="mt-6  mx-20">
+                  {/* {limit && pagination.reverse().map((name) => { */}
+                  {limit && allExpenses.filter((name, idx) => idx < 5).map((names) => {
+                    return (
+                      <>
+                        <div className=' p-2 flex justify-between'>
+                          <div>
+                          {names.owner.name}
+                          </div>
+                          <div>
+                            {/* { names.room &&( {
+                              return (
+                                {names.room.name}
+                              )
+                            }
+                            )
+                            } */}
+                            {/* <p>{names.rooms}</p> */}
+                            {names.purpose}
+                            {/* {new Date(name.updatedAt)} */}
+                          </div>
+                          <div>₹{names.amount}</div>
+                        </div>
+                        <hr className='' />
+                      </>
+                    );
+                  })}
+
+                  {!indie && !limit && allExpenses.map((name) => {
+                    return (
+                      <>
+                        <div className=' p-2 flex justify-between'>
+                          <div>
+                            {name.owner.name}
+                          </div>
+                          <div className='p-2'>
+                            {/* {name.rooms.map((names) => {
+                  return (
+                    <div className=''>
+                      {names}
+                    </div>
+                  );
+                })} */}
+
+{name.purpose}
+                          </div>
+                          <div>₹{name.amount}</div>
+                        </div>
+                        <hr className='' />
+                      </>
+                    );
+                  })}
+
+                  <div className='border-1 rounded-lg border-black'>
+                    <button onClick={() => setLimit(!limit)} className=" mx-[330px] ">
+
+                      {limit ? "Show more" : "Show less"}
+
+                    </button>
+                  </div>
+                </div>
+              </div>
+        {/* <div>
           <div className="mt-8">
             <b>Expenses</b>
           </div>
@@ -369,7 +453,7 @@ const CreatedRoom = () => {
             </>
           }
           <div className='mt-2'></div>
-        </div>
+        </div> */}
       </div>
     </>
   );

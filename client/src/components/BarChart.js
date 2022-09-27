@@ -80,7 +80,7 @@ const BarChart = () => {
     <div>
       <Chart
       type="bar"
-      width={1000}
+      width={900}
       height={400}
 
       series={[{
