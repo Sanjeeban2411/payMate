@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import { FaUserAlt, FaMoneyBillWave } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai'
 import { AiOutlineMenu } from 'react-icons/ai'
@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {
 
-    const [shownav,setShowNav] = useState(false)
+    const [shownav, setShowNav] = useState(false)
     const [nav, setNav] = useState(false)
     const [logo, setLogo] = useState(false)
     const handleNav = () => {
@@ -23,18 +23,61 @@ const Navbar = () => {
                 </div>
 
                 <ul className='hidden md:flex'>
-                    <li className='p-7' ><NavLink exact to='/user' activeClassName="active-link1" className='font-bold  text-[#2176AE] cursor-pointer no-underline'><h4>Home</h4></NavLink></li>
-                    <li className='p-7'><NavLink exact to='/analysis' activeClassName="active-link2" className=' font-bold  text-[#2176AE] cursor-pointer no-underline'><h4>Analysis</h4></NavLink></li>
+                    <li className='p-7'>
+                        <NavLink
+                            to="/user"
+                            className='font-bold  text-[#2176AE] cursor-pointer no-underline'
+                            style={({ isActive }) => ({
+                                color: isActive ? 'black' : '#2176AE'
+                            })}
+                        >
+                            Home
+                        </NavLink>
+                    </li>
+                    <li className='p-7'>
+                        <NavLink
+                            to="/analysis"
+                            className='font-bold  text-[#2176AE] cursor-pointer no-underline'
+                            style={({ isActive }) => ({
+                                color: isActive ? 'black' : '#2176AE'
+                            })}
+                        >
+                            Analysis
+                        </NavLink>
+                    </li>
+                    <li className='p-7'>
+                        <NavLink
+                            to="/rooms"
+                            className='font-bold  text-[#2176AE] cursor-pointer no-underline'
+                            style={({ isActive }) => ({
+                                color: isActive ? 'black' : '#2176AE'
+                            })}
+                        >
+                            Rooms
+                        </NavLink>
+                    </li>
+                    <li className='p-7'>
+                        <NavLink
+                            to="/about"
+                            className='font-bold  text-[#2176AE] cursor-pointer no-underline'
+                            style={({ isActive }) => ({
+                                color: isActive ? 'black' : '#2176AE'
+                            })}
+                        >
+                            About Us
+                        </NavLink>
+                    </li>
+                    {/* <li className='p-7'><NavLink exact to='/analysis' activeClassName="active-link2" className=' font-bold  text-[#2176AE] cursor-pointer no-underline'><h4>Analysis</h4></NavLink></li>
                     <li className='p-7'><NavLink exact to='/rooms' activeClassName="active-link3" className=' font-bold  text-[#2176AE] cursor-pointer no-underline'><h4>Rooms</h4></NavLink></li>
-                    <li className='p-7'><NavLink exact to='/about' activeClassName="active-link4" className=' font-bold  text-[#2176AE] cursor-pointer no-underline'><h4>About Us</h4></NavLink></li>
+                    <li className='p-7'><NavLink exact to='/about' activeClassName="active-link4" className=' font-bold  text-[#2176AE] cursor-pointer no-underline'><h4>About Us</h4></NavLink></li> */}
                 </ul>
-                
+
                 <div className=' hidden md:flex md:pr-3 justify-between items-center  cursor-pointer'>
                     <button className='rounded-full p-3 bg-black text-white'><a href='/signin' className=' text-white'><FaUserAlt /></a></button>
                     <button className='bg-red-600 px-6 py-2 mx-2 rounded cursor-pointer text-white hover:bg-red-700  hover:font-bold'><a href='/signup' className=' text-white no-underline'>Sign Up</a></button>
                 </div>
-                
-                <div className='hidden md:h-3'><hr/></div>
+
+                <div className='hidden md:h-3'><hr /></div>
                 <div className='md:hidden z-10 text-red-500' onClick={handleNav}>
                     {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
                 </div>
@@ -56,9 +99,9 @@ const Navbar = () => {
                         <FaYoutube className='icon text-2xl cursor-pointer ' />
                     </div>
                 </div>
-                
+
             </div>
-            
+
             {/* <hr className='mt-16'/> */}
         </div>
     )
