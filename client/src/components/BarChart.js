@@ -82,6 +82,37 @@ const BarChart = () => {
    }
    console.log("ovtotal-user",arr)
 
+   var items=allExpenses
+
+   let ab = items.reduce(function (c, x) {
+    if (!c[x.owner.name])
+      c[x.owner.name] = {
+        name: x.owner.name,
+        total: 0,
+      }
+    c[x.owner.name].total += Number(x.amount)
+    return c
+  }, [])
+  let output = []
+let totalSum = 0
+
+for (const name in ab) {
+  let temp = {
+    name: ab[name].username,
+    total: ab[name].total,
+  }
+  totalSum = totalSum + ab[name].total
+  output.push(temp)
+}
+
+  console.log("total-user-amt",output)
+  let usertot=[]
+  for(let i=0;i<output.length;i++){
+    usertot[i]=output[i].total
+  }
+  console.log("user-total",usertot)
+  
+
 
   return (
     <div>
@@ -92,7 +123,7 @@ const BarChart = () => {
 
       series={[{
         name: "Expenses",
-        data: tt
+        data: usertot
         
       }]}
       options={{
