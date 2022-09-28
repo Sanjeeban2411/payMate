@@ -74,6 +74,13 @@ const BarChart = () => {
     );
    })
    console.log("ovtotal",tt)
+   
+
+   var arr=[]
+   for(let i=0;i<userNames.length;i++){
+    arr[i]=userNames[i].name
+   }
+   console.log("ovtotal-user",arr)
 
 
   return (
@@ -99,7 +106,7 @@ const BarChart = () => {
         theme:{mode:'light'},
         xaxis:{
           labels:{style:{fontSize:17}},
-          categories: userNames,
+          categories: arr,
           title:{text:'',style:{fontSize:25}}
         },
         yaxis:{
