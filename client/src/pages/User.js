@@ -79,7 +79,7 @@ const User = () => {
       url: "/addexpense",
       data: {
         purpose: purpose,
-        amount: amount,
+        amount: Number(amount),
       },
       headers: {
         Authorization: `Bearer ${x}`,

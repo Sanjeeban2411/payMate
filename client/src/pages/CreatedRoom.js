@@ -112,6 +112,11 @@ const CreatedRoom = () => {
     // setCheck('.checkbox'==true)
     console.log("e", e)
 
+    if (amount <= 0) {
+      setamount("")
+      setpurpose("")
+      return alert("You cannot enter 0 or negative amount")
+    }
     // setCheck(true)
 
     // if (amount <= 0) {

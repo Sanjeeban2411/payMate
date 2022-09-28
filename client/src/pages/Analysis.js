@@ -325,10 +325,10 @@ const Analysis = () => {
                     return (
                       <>
                         <div className=' p-2 flex justify-between'>
-                          <div>
+                          <div className=' text-center'>
                             {names.purpose}
                           </div>
-                          <div>
+                          <div className=' text-center'>
                             {/* { names.room &&( {
                               return (
                                 {names.room.name}
@@ -340,7 +340,7 @@ const Analysis = () => {
                             {names.updatedAt.slice(0, 10)}  {names.updatedAt.slice(11, 16)}
                             {/* {new Date(name.updatedAt)} */}
                           </div>
-                          <div>₹{names.amount}</div>
+                          <div className=' text-center'>₹{names.amount}</div>
                         </div>
                         <hr className='' />
                       </>
