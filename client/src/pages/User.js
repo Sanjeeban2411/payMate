@@ -130,7 +130,7 @@ const User = () => {
                 </div>
                 <div className=" relative text-white  h-[400px] ">
                   <img src="./assests/Wallet-1.png" alt="" className=" h-[420px]" />
-                  <div className=" absolute top-[40%] right-[45%] ">
+                  <div className=" absolute top-[40%] right-[55%] ">
                     <h2 className="p-2">Total Amount Spent</h2>
                     <p className="text-[#E18A07] text-4xl font-extrabold">₹{total}</p>
                   </div>

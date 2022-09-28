@@ -3,11 +3,12 @@ import { FaUserAlt, FaMoneyBillWave } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
+import { NavLink } from 'react-router-dom'
 
 
 const Navbar = () => {
 
-    
+    const [shownav,setShowNav] = useState(false)
     const [nav, setNav] = useState(false)
     const [logo, setLogo] = useState(false)
     const handleNav = () => {
@@ -22,10 +23,10 @@ const Navbar = () => {
                 </div>
 
                 <ul className='hidden md:flex'>
-                    <li className='p-7' ><a href='/user' className='font-bold text-[#2176AE] cursor-pointer no-underline'>Home</a></li>
-                    <li className='p-7'><a href='/analysis' className=' font-bold text-[#2176AE] cursor-pointer no-underline'>Analysis</a></li>
-                    <li className='p-7'><a href='/rooms' className=' font-bold text-[#2176AE] cursor-pointer no-underline'>Rooms</a></li>
-                    <li className='p-7'><a href='/about' className=' font-bold text-[#2176AE] cursor-pointer no-underline'>About Us</a></li>
+                    <li className='p-7' ><NavLink exact to='/user' activeClassName="active-link1" className='font-bold  text-[#2176AE] cursor-pointer no-underline'><h4>Home</h4></NavLink></li>
+                    <li className='p-7'><NavLink exact to='/analysis' activeClassName="active-link2" className=' font-bold  text-[#2176AE] cursor-pointer no-underline'><h4>Analysis</h4></NavLink></li>
+                    <li className='p-7'><NavLink exact to='/rooms' activeClassName="active-link3" className=' font-bold  text-[#2176AE] cursor-pointer no-underline'><h4>Rooms</h4></NavLink></li>
+                    <li className='p-7'><NavLink exact to='/about' activeClassName="active-link4" className=' font-bold  text-[#2176AE] cursor-pointer no-underline'><h4>About Us</h4></NavLink></li>
                 </ul>
                 
                 <div className=' hidden md:flex md:pr-3 justify-between items-center  cursor-pointer'>
