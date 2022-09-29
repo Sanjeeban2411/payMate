@@ -120,15 +120,26 @@ const Analysis = () => {
     return week[value - 1];
   }
   const date = allExpenses.map((totl) => {
+    console.log("ccc1",totl.updatedAt.slice(5,7))
     return (
       monthname(totl.updatedAt.slice(6, 7))
     );
   })
   const weekdata = allExpenses.map((tot) => {
-    return (
-      // console.log("ccc",tot.updatedAt.slice(9,10))
-      weekname(Math.ceil((tot.updatedAt.slice(8, 10)) / 7))
-    );
+   
+      console.log("cccabc",((tot.updatedAt.slice(8, 10))/7))
+      { if((tot.updatedAt.slice(8, 10)) > 28){
+        return (
+      weekname(Math.floor((tot.updatedAt.slice(8,10))/7))
+      );
+    }
+    else{
+      return(
+        weekname(Math.ceil((tot.updatedAt.slice(8, 10)) / 7))
+      )
+    }
+  }
+   
   })
   console.log("weeknam", weekdata)
   //  console.log("date",date)

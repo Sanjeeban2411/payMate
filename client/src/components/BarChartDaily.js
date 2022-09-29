@@ -82,10 +82,18 @@ const BarChartDaily = () => {
       );
      })
      const weekdata=allExpenses.map((tot)=>{
-      return(
-        // console.log("ccc",tot.updatedAt.slice(9,10))
-        weekname(Math.ceil((tot.updatedAt.slice(8,10))/7))
+      console.log("cccabc",((tot.updatedAt.slice(8, 10))/7))
+      { if((tot.updatedAt.slice(8, 10)) > 28){
+        return (
+      weekname(Math.floor((tot.updatedAt.slice(8,10))/7))
       );
+    }
+    else{
+      return(
+        weekname(Math.ceil((tot.updatedAt.slice(8, 10)) / 7))
+      )
+    }
+  }
      })
      console.log("weeknam",weekdata)
 
