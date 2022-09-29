@@ -257,14 +257,14 @@ export default function Report() {
       {/* {totalData} */}
       <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black px-10">
         <div className="font-extrabold mb-5 pb-10">
-          abc
+          <div className=" text-center text-4xl font-extrabold">Settle</div>
           {transactions.map((name) => {
             return (
-              <div className={name.status === 'pay' ? 'bg-yellow-200 pl-10' : 'bg-slate-200'}>
-                {name.user} has to {name.status} ₹{Math.abs((name.amount).toFixed(2))}
+              <div className={name.status === 'pay' ? 'bg-yellow-200 pl-10' : 'bg-blue-400'}>
+                <div className="ml-5">{name.user} has to {name.status} <span>&#10230;</span> ₹{Math.abs((name.amount).toFixed(2))}</div>
                 {name.transact.map((names) => {
                   return (
-                    <div className=' bg-slate-400 pl-40'>
+                    <div className=' bg-slate-200 pl-40 text-[#2176AE] font-extrabold'>
                       {names.user} -- ₹{Math.abs((names.amount).toFixed(2))}
                       <span className={names.token === x ? 'block' : 'hidden'}>
                         <button className="bg-black text-white">
@@ -272,15 +272,15 @@ export default function Report() {
                         </button>
                       </span>
                       <span className={name.token === x ? 'block' : 'hidden'}>
-                        <button className="bg-black text-white" onClick={event => handleClear(event, name, names)}>
-                          done
+                        <button className="bg-green-600 text-white duration-500 py-2 px-4 rounded-[15px] hover:bg-green-400 m-3" onClick={event => handleClear(event, name, names)}>
+                          Mark as Paid
                         </button>
-                        <br /><br />
-                        <button className="bg-red-700" onClick={() => {
+                        
+                        <button className="bg-[#2176AE] text-white py-2 px-4 rounded-[15px] font-semibold" onClick={() => {
                           setqr(names.user)
                           // console.log(qr)
                         }}>
-                          QR
+                          Generate QR
                         </button>
                         {qr === names.user &&
                           <QRCodeSVG value={`upi://pay?pa=sanju.sanjeeban.sp@oksbi&pn=Sanjeeban&am=${Math.abs(names.amount)}&cu=INR`} />

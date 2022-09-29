@@ -378,16 +378,16 @@ const CreatedRoom = () => {
                 <div className="p-4 bg-[#E18A07] rounded-t-xl">
                   <h2 className='text-center'>Previous Transaction</h2>
                 </div>
-                <div className="mt-6  mx-20">
+                <div className="mt-6">
                   {/* {limit && pagination.reverse().map((name) => { */}
                   {limit && allExpenses.filter((name, idx) => idx < 5).map((names) => {
                     return (
                       <>
-                        <div className=' p-2 flex justify-between'>
-                          <div>
+                        <div className=' p-2 grid grid-cols-3 gap-4'>
+                          <div className="  text-center">
                           {names.owner.name}
                           </div>
-                          <div>
+                          <div className=" text-center">
                             {/* { names.room &&( {
                               return (
                                 {names.room.name}
@@ -399,9 +399,9 @@ const CreatedRoom = () => {
                             {names.purpose}
                             {/* {new Date(name.updatedAt)} */}
                           </div>
-                          <div>₹{names.amount}</div>
+                          <div className=" text-center">₹{names.amount}</div>
                         </div>
-                        <hr className='' />
+                        <hr className='mx-16 ' />
                       </>
                     );
                   })}
@@ -409,11 +409,11 @@ const CreatedRoom = () => {
                   {!indie && !limit && allExpenses.map((name) => {
                     return (
                       <>
-                        <div className=' p-2 flex justify-between'>
-                          <div>
+                        <div className='p-2 grid grid-cols-3 gap-4'>
+                          <div className=" text-center">
                             {name.owner.name}
                           </div>
-                          <div className='p-2'>
+                          <div className="  text-center">
                             {/* {name.rooms.map((names) => {
                   return (
                     <div className=''>
@@ -424,20 +424,21 @@ const CreatedRoom = () => {
 
 {name.purpose}
                           </div>
-                          <div>₹{name.amount}</div>
+                          <div className="  text-center">₹{name.amount}</div>
                         </div>
-                        <hr className='' />
+                        <hr className='mx-16' />
                       </>
                     );
                   })}
-
-                  <div className='border-1 rounded-lg border-black'>
-                    <button onClick={() => setLimit(!limit)} className=" mx-[330px] ">
+                  
+                  <div className=' text-center'>
+                    <button onClick={() => setLimit(!limit)} className=" border-[3px] rounded-[10px] border-black py-2 px-3">
 
                       {limit ? "Show more" : "Show less"}
 
                     </button>
                   </div>
+                  
                 </div>
               </div>
         {/* <div>
