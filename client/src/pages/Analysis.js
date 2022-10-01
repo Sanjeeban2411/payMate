@@ -333,6 +333,7 @@ const Analysis = () => {
                 <div className="mt-6 ">
                   {/* {limit && pagination.reverse().map((name) => { */}
                   {limit && allExpenses.filter((name, idx) => idx < 5).map((names) => {
+                    if(allExpenses.includes(names.room)){
                     return (
                       <>
                         <div  className='p-2 grid grid-cols-3 gap-4'>
@@ -347,7 +348,7 @@ const Analysis = () => {
                             }
                             )
                             } */}
-                            {/* <p>{names.rooms}</p> */}
+                            <p>{names.room.name}</p>
                             {names.updatedAt.slice(0, 10)}  {names.updatedAt.slice(11, 16)}
                             {/* {new Date(name.updatedAt)} */}
                           </div>
@@ -356,31 +357,84 @@ const Analysis = () => {
                         <hr className='mx-16' />
                       </>
                     );
-                  })}
-
-                  {!limit && allExpenses.map((name) => {
+                  }
+                  else{
                     return (
                       <>
-                        <div className='p-2 grid grid-cols-3 gap-4'>
-                          <div  className="  text-center">
-                            {name.purpose}
+                        <div  className='p-2 grid grid-cols-3 gap-4'>
+                          <div className=' text-center'>
+                            {names.purpose}
                           </div>
-                          <div  className="  text-center">
-                            {/* {name.rooms.map((names) => {
-                  return (
-                    <div className=''>
-                      {names}
-                    </div>
-                  );
-                })} */}
-
-                            {name.updatedAt.slice(0, 10)}  {name.updatedAt.slice(11, 16)}
+                          <div className=' text-center'>
+                            {/* { names.room &&( {
+                              return (
+                                {names.room.name}
+                              )
+                            }
+                            )
+                            } */}
+                            <p>Self</p>
+                            {names.updatedAt.slice(0, 10)}  {names.updatedAt.slice(11, 16)}
+                            {/* {new Date(name.updatedAt)} */}
                           </div>
-                          <div  className="  text-center">₹{name.amount}</div>
+                          <div className=' text-center'>₹{names.amount}</div>
                         </div>
                         <hr className='mx-16' />
                       </>
                     );
+                  }
+                  })}
+
+                  {!limit && allExpenses.map((name) => {
+               if(allExpenses.includes(name.room)){
+                return (
+                  <>
+                    <div  className='p-2 grid grid-cols-3 gap-4'>
+                      <div className=' text-center'>
+                        {name.purpose}
+                      </div>
+                      <div className=' text-center'>
+                        {/* { names.room &&( {
+                          return (
+                            {names.room.name}
+                          )
+                        }
+                        )
+                        } */}
+                        <p>{name.room.name}</p>
+                        {name.updatedAt.slice(0, 10)}  {name.updatedAt.slice(11, 16)}
+                        {/* {new Date(name.updatedAt)} */}
+                      </div>
+                      <div className=' text-center'>₹{name.amount}</div>
+                    </div>
+                    <hr className='mx-16' />
+                  </>
+                );
+              }
+              else{
+                return (
+                  <>
+                    <div  className='p-2 grid grid-cols-3 gap-4'>
+                      <div className=' text-center'>
+                        {name.purpose}
+                      </div>
+                      <div className=' text-center'>
+                        {/* { names.room &&( {
+                          return (
+                            {names.room.name}
+                          )
+                        }
+                        )
+                        } */}
+                        <p>Self</p>
+                        {name.updatedAt.slice(0, 10)}  {name.updatedAt.slice(11, 16)}
+                        {/* {new Date(name.updatedAt)} */}
+                      </div>
+                      <div className=' text-center'>₹{name.amount}</div>
+                    </div>
+                    <hr className='mx-16' />
+                  </>
+                );}
                   })}
 
                   <div className='text-center'>
