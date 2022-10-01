@@ -2,19 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import Navbar from "../components/Navbar";
 import axios from "axios";
-import { QRCodeSVG } from 'qrcode.react';
+import { QRCodeSVG } from "qrcode.react";
 import Navbar from "../components/Navbar";
 
 export default function Report() {
   const [totalData, setTotalData] = useState([]);
-  const [check, setCheck] = useState(false)
+  const [check, setCheck] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  console.log("tot", totalData)
+  console.log("tot", totalData);
   const x = localStorage.getItem("jwt_token");
   const room = localStorage.getItem("room");
-
 
   useEffect(() => {
     axios({
@@ -30,16 +29,16 @@ export default function Report() {
       })
       // .then(() => {report()})
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         if (error.response.status === 401) {
-          console.log("unauth")
-          navigate(`/signin`)
+          console.log("unauth");
+          navigate(`/signin`);
         }
         // console.log("unauth")
-      })
+      });
   }, [0]);
 
-  console.log("token", x)
+  console.log("token", x);
 
   // const report = ()=>{
 
@@ -55,7 +54,7 @@ export default function Report() {
     let tran = {
       user: e.user.name,
       // amount: e.total - totAmount / totalData.length,
-      amount:e.total - e.dues,
+      amount: e.total - e.dues,
       status: " ", //pay or recieve
       transact: [], //transaction with
       _id: e._id,
@@ -63,7 +62,7 @@ export default function Report() {
     };
     transactions.push(tran);
   });
-  console.log("xy", transactions)
+  console.log("xy", transactions);
 
   transactions.forEach((tran) => {
     lenden.push(tran.amount);
@@ -82,7 +81,7 @@ export default function Report() {
   let max = getMaxOfArray(lenden);
   let min = getMinOfArray(lenden);
 
-  console.log(max, min)
+  console.log(max, min);
 
   let count;
   while (count !== lenden.length) {
@@ -135,22 +134,16 @@ export default function Report() {
   }
 
   transactions.sort(compare);
-  // transactions.sort( compare ).reverse();  
+  // transactions.sort( compare ).reverse();
 
   console.log("new", transactions);
   // }
 
-
   //   FINAL DATA : transactions
-
 
   // if (transactions.length > 0) {
   //   console.log("arr->arr", transactions[0].transact[0].user);
   // }
-
-
-
-
 
   const handleClear = (event, parent, child) => {
     // console.log(event);
@@ -167,7 +160,7 @@ export default function Report() {
       data: {
         payer: child._id,
         receiver: parent._id,
-        amount: child.amount
+        amount: child.amount,
       },
     })
       .then((response) => {
@@ -175,23 +168,22 @@ export default function Report() {
         // navigate("/user");
         // console.log(".then",data)
         console.log(response);
-        window.location.reload()
+        window.location.reload();
         // clearTotal()
         // console.log(response.data.user.token);
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         if (error.response.status === 401) {
-          console.log("unauth")
-          navigate(`/signin`)
+          console.log("unauth");
+          navigate(`/signin`);
         }
         // console.log("unauth")
-      })
+      });
 
-    console.log("after", transactions)
+    console.log("after", transactions);
   };
-  console.log("after", transactions)
-
+  console.log("after", transactions);
 
   // let countDone = 0
   // transactions.forEach((e) => {
@@ -207,15 +199,15 @@ export default function Report() {
   // }
 
   const clearTotal = () => {
-    let countDone = 0
+    let countDone = 0;
     transactions.forEach((e) => {
       if (e.amount === 0) {
-        countDone += 1
+        countDone += 1;
       }
-    })
-    console.log("fnc")
-    console.log(countDone)
-    console.log(transactions.length)
+    });
+    console.log("fnc");
+    console.log(countDone);
+    console.log(transactions.length);
 
     if (countDone === transactions.length) {
       axios({
@@ -226,7 +218,7 @@ export default function Report() {
         },
         //   data: data,
         data: {
-          command: "settleAllTransactions(aDmin)"
+          command: "settleAllTransactions(aDmin)",
         },
       })
         .then((response) => {
@@ -238,19 +230,19 @@ export default function Report() {
           // console.log(response.data.user.token);
         })
         .catch((error) => {
-          console.log(error)
+          console.log(error);
           if (error.response.status === 401) {
-            console.log("unauth")
-            navigate(`/signin`)
+            console.log("unauth");
+            navigate(`/signin`);
           }
           // console.log("unauth")
-        })
+        });
     }
-  }
+  };
 
   const [qr, setqr] = useState("");
 
-  console.log("x", x)
+  console.log("x", x);
   return (
     <>
       <Navbar />
@@ -260,31 +252,46 @@ export default function Report() {
           <div className=" text-center text-4xl font-extrabold">Settle</div>
           {transactions.map((name) => {
             return (
-              <div className={name.status === 'pay' ? 'bg-yellow-200 pl-10' : 'bg-blue-400'}>
-                <div className="ml-5">{name.user} has to {name.status} <span>&#10230;</span> ₹{Math.abs((name.amount).toFixed(2))}</div>
+              <div
+                className={
+                  name.status === "pay" ? "bg-yellow-200 pl-10" : "bg-blue-400"
+                }
+              >
+                <div className="ml-5">
+                  {name.user} has to {name.status} <span>&#10230;</span> ₹
+                  {Math.abs(name.amount.toFixed(2))}
+                </div>
                 {name.transact.map((names) => {
                   return (
-                    <div className=' bg-slate-200 pl-40 text-[#2176AE] font-extrabold'>
-                      {names.user} -- ₹{Math.abs((names.amount).toFixed(2))}
-                      <span className={names.token === x ? 'block' : 'hidden'}>
-                        <button className="bg-black text-white">
-                          pay
-                        </button>
+                    <div className=" bg-slate-200 pl-40 text-[#2176AE] font-extrabold">
+                      {names.user} -- ₹{Math.abs(names.amount.toFixed(2))}
+                      <span className={names.token === x ? "block" : "hidden"}>
+                        <button className="bg-black text-white">pay</button>
                       </span>
-                      <span className={name.token === x ? 'block' : 'hidden'}>
-                        <button className="bg-green-600 text-white duration-500 py-2 px-4 rounded-[15px] hover:bg-green-400 m-3" onClick={event => handleClear(event, name, names)}>
+                      <span className={name.token === x ? "block" : "hidden"}>
+                        <button
+                          className="bg-green-600 text-white duration-500 py-2 px-4 rounded-[15px] hover:bg-green-400 m-3"
+                          onClick={(event) => handleClear(event, name, names)}
+                        >
                           Mark as Paid
                         </button>
-                        
-                        <button className="bg-[#2176AE] text-white py-2 px-4 rounded-[15px] font-semibold" onClick={() => {
-                          setqr(names.user)
-                          // console.log(qr)
-                        }}>
+
+                        <button
+                          className="bg-[#2176AE] text-white py-2 px-4 rounded-[15px] font-semibold"
+                          onClick={() => {
+                            setqr(names.user);
+                            // console.log(qr)
+                          }}
+                        >
                           Generate QR
                         </button>
-                        {qr === names.user &&
-                          <QRCodeSVG value={`upi://pay?pa=sanju.sanjeeban.sp@oksbi&pn=Sanjeeban&am=${Math.abs(names.amount)}&cu=INR`} />
-                        }
+                        {qr === names.user && (
+                          <QRCodeSVG
+                            value={`upi://pay?pa=sanju.sanjeeban.sp@oksbi&pn=Sanjeeban&am=${Math.abs(
+                              names.amount
+                            )}&cu=INR`}
+                          />
+                        )}
                       </span>
                     </div>
                   );
@@ -298,7 +305,6 @@ export default function Report() {
               Clear
             </button>
           </span> */}
-
         </div>
       </div>
     </>
