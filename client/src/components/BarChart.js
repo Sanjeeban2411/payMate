@@ -98,7 +98,7 @@ let totalSum = 0
 
 for (const name in ab) {
   let temp = {
-    name: ab[name].username,
+    name: ab[name].name,
     total: ab[name].total,
   }
   totalSum = totalSum + ab[name].total

@@ -354,13 +354,13 @@ const CreatedRoom = () => {
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
           {userNames.map((name) => {
             return (
-              <div className="flex flex-col border-[3px] border-[#42BFEF] rounded-[30px]">
+              <div className="flex flex-col border-[3px] border-[#42BFEF] rounded-[30px] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 ">
                 <div className="m-auto mt-4">
                   <FaUserSecret />
                 </div>
                 <div className="p-4 text-center">{name.name}</div>
                 <button
-                  className="bg-[#2176AE] text-white mx-auto p-2 px-3 my-3 rounded-md"
+                  className="bg-[#2176AE] text-white mx-auto p-2 px-3 my-3 rounded-md transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
                   onClick={(event) => expenseDetails(event, name)}
                 >
                   Expense Details

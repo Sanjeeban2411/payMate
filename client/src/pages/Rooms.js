@@ -92,8 +92,8 @@ const Rooms = (props) => {
           </div>
           <div className='  h-[30vh]'>
             <div className=' mx-32 '>
-        <div className=' mt-6 '><div><a href="/createroom" className=' bg-black text-white  rounded-lg p-2 px-33 hover:bg-gray-400 hover:text-black no-underline'>Create a Room</a></div></div>
-        <div className=' mt-12 mx-2'><a href="/joinroom" className=' bg-black text-white  rounded-lg p-2 px-3 hover:bg-gray-400 hover:text-black no-underline'>Join a Room</a></div>
+        <div className=' mt-6 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300'><div><a href="/createroom" className=' bg-black text-white  rounded-lg p-2 px-33 hover:bg-gray-400 hover:text-black no-underline '>Create a Room</a></div></div>
+        <div className=' mt-12 mx-2 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300'><a href="/joinroom" className=' bg-black text-white  rounded-lg p-2 px-3 hover:bg-gray-400 hover:text-black no-underline'>Join a Room</a></div>
         </div>
         </div>
         </div>
@@ -103,14 +103,14 @@ const Rooms = (props) => {
           {/* {data.map(card)} */}
           {data.map((val) => {
             return (
-              <div className='flex flex-col   relative box-border items-center mx-auto rounded-xl min-w-[300px] min-h-[300px] border-2 border-black ' id="bg-card">
+              <div className='flex flex-col   relative box-border items-center mx-auto rounded-xl min-w-[300px] min-h-[300px] border-2 border-black transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500' id="bg-card">
                 <p className='relative text-center my-6 text-white font-extrabold'>{val.name}</p>
                 <div className=' flex flex-row'>
                 <div className='p-1'><FaUser/></div> 
                 <div className='p-1'>{val.users.length}</div>
                 </div>
                 <button
-                  className='bg-white hover:bg-slate-500 hover:text-white text-black mx-auto p-2 my-3 rounded-md '
+                  className='bg-white hover:bg-slate-500 hover:text-white text-black mx-auto p-2 my-3 rounded-md transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300'
                   onClick={event => enterRoom(event, val)} id="enter-bg"
                 >
                   Enter
