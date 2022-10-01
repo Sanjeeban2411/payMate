@@ -7,6 +7,7 @@ import 'reactjs-popup/dist/index.css'
 
 import Navbar from '../components/Navbar'
 import {BiShareAlt} from "react-icons/bi"
+import {FaUser} from "react-icons/fa"
 
 const Rooms = (props) => {
 
@@ -104,6 +105,10 @@ const Rooms = (props) => {
             return (
               <div className='flex flex-col   relative box-border items-center mx-auto rounded-xl min-w-[300px] min-h-[300px] border-2 border-black ' id="bg-card">
                 <p className='relative text-center my-6 text-white font-extrabold'>{val.name}</p>
+                <div className=' flex flex-row'>
+                <div className='p-1'><FaUser/></div> 
+                <div className='p-1'>{val.users.length}</div>
+                </div>
                 <button
                   className='bg-white hover:bg-slate-500 hover:text-white text-black mx-auto p-2 my-3 rounded-md '
                   onClick={event => enterRoom(event, val)} id="enter-bg"
