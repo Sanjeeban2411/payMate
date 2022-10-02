@@ -111,6 +111,12 @@ for (const name in ab) {
     usertot[i]=output[i].total
   }
   console.log("user-total",usertot)
+  let user=[]
+  for(let i=0;i<output.length;i++){
+    user[i]=output[i].name
+  }
+  console.log("user",user)
+
   
 
 
@@ -137,7 +143,7 @@ for (const name in ab) {
         theme:{mode:'light'},
         xaxis:{
           labels:{style:{fontSize:17}},
-          categories: arr,
+          categories: user,
           title:{text:'',style:{fontSize:25}}
         },
         yaxis:{
