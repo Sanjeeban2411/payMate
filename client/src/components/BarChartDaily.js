@@ -78,7 +78,7 @@ const BarChartDaily = () => {
       }
     const date=allExpenses.map((totl)=>{
       return(
-        monthname(totl.updatedAt.slice(6,7))
+        monthname(totl.updatedAt.slice(5,7))
       );
      })
      const weekdata=allExpenses.map((tot)=>{

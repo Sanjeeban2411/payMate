@@ -74,10 +74,10 @@ const BarChartAnalyze = () => {
     }
   const date=allExpenses.map((totl)=>{
     return(
-      monthname(totl.updatedAt.slice(6,7))
+      monthname(totl.updatedAt.slice(5,7))
     );
    })
-  //  console.log("date",date)
+  //  console.log("dateoct",monthname(10))
   // date[3]="September"
   // date[4]="September"
   // date[5]="September"
