@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import { FaUserSecret } from "react-icons/fa";
+import { HiUserCircle } from "react-icons/hi";
 import BarChart from "../components/BarChart";
 import IndieExpenses from "../components/IndieExpenses";
 
@@ -348,22 +348,26 @@ const CreatedRoom = () => {
             </form>
           </div>
         </div>
+        {/* <div className=" bg-[#C6E9FF]  absolute h-[350px] w-[1440px] top-[900px]"></div> */}
         <div className=" mt-32 md:mt-14 font-extrabold mx-auto text-4xl text-[#2176AE]">
           Mates
         </div>
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
           {userNames.map((name) => {
             return (
-              <div className="flex flex-col border-[3px] border-[#42BFEF] rounded-[30px] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 ">
-                <div className="m-auto mt-4">
-                  <FaUserSecret />
+              <div className="flex flex-col    bg-[#2176AE] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500 " id="cr-card">
+                <div className=" border-2 border-black m-3 bg-[#E9F1F7]">
+                <div className=" mt-4">
+                  <HiUserCircle size={100} className=" mx-auto "/>
                 </div>
                 <div className="p-4 text-center">{name.name}</div>
+                </div>
                 <button
-                  className="bg-[#2176AE] text-white mx-auto p-2 px-3 my-3 rounded-md transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
+                  className="bg-[#E9F1F7] text-black hover:text-white mx-auto p-2 px-3 my-3 rounded-md transition ease-in-out hover:-translate-y-1 hover:scale-110  duration-500"
                   onClick={(event) => expenseDetails(event, name)}
                 >
-                  Expense Details
+                  Spent
                 </button>
               </div>
             );

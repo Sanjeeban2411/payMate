@@ -240,6 +240,7 @@ const Analysis = () => {
   // console.log("data",data)
   // console.log("expensedata",expenseData)
   // console.log("allexpense",allExpenses)
+ 
 
   const [view, setView] = useState("Daily");
 
@@ -260,7 +261,6 @@ const Analysis = () => {
     let a = new Date(allExpenses[0].updatedAt);
     console.log("date", a.toLocaleDateString("en-US"));
   }
-
   //  const h = window.screen.availHeight
   //  const w = window.screen.availWidth
   //   console.log("H",h)
