@@ -266,7 +266,7 @@ const CreatedRoom = () => {
         </div>
         <div className=" flex flex-row mx-20">
           <div className="max-w-[400px] border-[3px] border-[#42BFEF] rounded-[30px] mt-12 px-14  py-4  mr-6 ">
-            <p className="  w-52 mx-auto  ">Add Expense</p>
+            <p className="  w-52 mx-auto font-MinionPro text-4xl ">Add Expense</p>
             <div className="">
               <img src="./assests/hand-room.png" className="  mt-14 ml-14" />
             </div>
@@ -276,9 +276,9 @@ const CreatedRoom = () => {
               <div className=" flex flex-col">
                 <div className="flex flex-col md:flex-row justify-between">
                   <div className="flex  flex-col mb-4">
-                    <label className="text-center text-[#2176AE]">Amount</label>
+                    <label className="text-center text-[#2176AE] font-MinionPro text-4xl">Amount</label>
                     <input
-                      className="relative border-b-2 border-black  p-2 w-[250px] mx-auto placeholder:text-black"
+                      className="relative border-b-2 border-black  p-2 w-[190px] mx-auto placeholder:text-black"
                       type="number"
                       min={0}
                       placeholder="₹"
@@ -289,13 +289,13 @@ const CreatedRoom = () => {
                     />
                   </div>
                   <div className="flex flex-col mb-4">
-                    <label className="text-center text-[#2176AE]">
+                    <label className="text-center text-[#2176AE] font-MinionPro text-4xl">
                       Category
                     </label>
                     <input
-                      className="border-b-2 border-black relative placeholder:text-black  p-2 w-[250px] mx-auto"
+                      className="border-b-2 border-black relative placeholder:text-black  p-2 w-[190px] mx-auto"
                       type="text"
-                      placeholder="🡇 Food"
+                      placeholder="🢓 Food"
                       onChange={(e) => {
                         setpurpose(e.target.value);
                       }}
@@ -304,19 +304,21 @@ const CreatedRoom = () => {
                   </div>
                 </div>
                 <div className="mx-auto mt-4">
+                  <div className="mx-auto">
                   <label
-                    className="text-center text-[#2176AE]"
+                    className="text-center text-black bg-[#9FD7FC] rounded-[13px] px-3 py-2 font-MinionPro"
                     onClick={() => setShow(!show)}
                   >
                     Split With
-                  </label>
-                  <br />
-
+                  </label></div>
+                  <div className="rounded-[8px] mx-auto px-2 py-1" id="split-bg">
                   {userNames.map((user, index) => {
                     return (
-                      <div className="">
+                      <div className=" ">
                         {show && (
                           <div>
+                          <div className=" flex flex-row  ">
+                            <div className=" ">
                             <input
                               type="checkbox"
                               defaultChecked="true"
@@ -325,20 +327,24 @@ const CreatedRoom = () => {
                               value={user._id}
                               class="checkbox"
                               onClick={handleCheckbox}
-                            />
-                            <label for={user.name} style={{ fontSize: 35 }}>
+                            /></div>
+                            <div className=" text-center mx-auto">
+                            <label for={user.name} style={{ fontSize: 35 }} className=" font-MinionPro">
                               {user.name}
                             </label>
-                          </div>
+                            </div>
+                            
+                          </div><hr/></div>
                         )}
                       </div>
                     );
                   })}
+                  </div>
                 </div>
 
                 <div>
                   <button
-                    className="flex justify-center items-center bg-[#2176AE] mt-5 text-white mx-auto p-3 px-5  rounded-[20px] "
+                    className="flex justify-center items-center bg-[#2176AE] mt-5 text-white mx-auto p-3 px-5 font-MinionPro text-4xl  rounded-[20px] "
                     onClick={addExpense}
                   >
                     Add Amount
@@ -361,10 +367,10 @@ const CreatedRoom = () => {
                 <div className=" mt-4">
                   <HiUserCircle size={100} className=" mx-auto "/>
                 </div>
-                <div className="p-4 text-center">{name.name}</div>
+                <div className="p-4 text-center font-MinionPro text-4xl">{name.name}</div>
                 </div>
                 <button
-                  className="bg-[#E9F1F7] text-black hover:text-white mx-auto p-2 px-3 my-3 rounded-md transition ease-in-out hover:-translate-y-1 hover:scale-110  duration-500"
+                  className="bg-[#E9F1F7] text-black  hover:text-white mx-auto p-2 px-3 my-3 rounded-md transition ease-in-out hover:-translate-y-1 hover:scale-110  duration-500"
                   onClick={(event) => expenseDetails(event, name)}
                 >
                   Spent
@@ -385,7 +391,7 @@ const CreatedRoom = () => {
             />
           </>
         )}
-        <button className="bg-[#2176AE] text-white mx-auto p-2 my-4 mt-10 rounded-md">
+        <button className="bg-[#2176AE] text-white mx-auto p-2 my-4 mt-10 rounded-md transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500">
           <a href="/report" className="text-white no-underline">
             Settle Up
           </a>

@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         Montserrat: ["Montserrat", "cursive"],
+        MinionPro: ["Minion Pro","Cond"]
       },
     },
   },
