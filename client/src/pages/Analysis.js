@@ -239,8 +239,8 @@ const Analysis = () => {
   //  console.log("month",monthName)
   // console.log("data",data)
   // console.log("expensedata",expenseData)
-  // console.log("allexpense",allExpenses)
- 
+  console.log("allexpense", allExpenses)
+
 
   const [view, setView] = useState("Daily");
 
@@ -344,83 +344,31 @@ const Analysis = () => {
                   <h2 className="text-center">Previous Transaction</h2>
                 </div>
                 <div className="mt-6 ">
-                  {limit &&
-                    allExpenses.filter((name, idx) => idx < 5).map((names) => {
-                        if (allExpenses.includes(names.room)) {
-                          return (
-                            <>
-                              <div className="p-2 grid grid-cols-3 gap-4">
-                                <div className=" text-center">
-                                  {names.purpose}
-                                </div>
-                                <div className=" text-center">
-                                  <p>{names.room.name}</p>
-                                  {names.updatedAt.slice(0, 10)}{" "}
-                                  {names.updatedAt.slice(11, 16)}
-                                </div>
-                                <div className=" text-center">
-                                  ₹{names.amount}
-                                </div>
-                              </div>
-                              <hr className="mx-16" />
-                            </>
-                          );
-                        } else {
-                          return (
-                            <>
-                              <div className="p-2 grid grid-cols-3 gap-4">
-                                <div className=" text-center">
-                                  {names.purpose}
-                                </div>
-                                <div className=" text-center">
-                                  <p>Self</p>
-                                  {names.updatedAt.slice(0, 10)}{" "}
-                                  {names.updatedAt.slice(11, 16)}
-                                </div>
-                                <div className=" text-center">
-                                  ₹{names.amount}
-                                </div>
-                              </div>
-                              <hr className="mx-16" />
-                            </>
-                          );
-                        }
-                      })}
-
-                  {!limit &&
-                    allExpenses.map((name) => {
-                      if (allExpenses.includes(name.room)) {
+                  {
+                    allExpenses.filter((name, idx) => {
+                      return (limit ? idx < 5 : name)
+                    })
+                      .map((name) => {
                         return (
                           <>
                             <div className="p-2 grid grid-cols-3 gap-4">
-                              <div className=" text-center">{name.purpose}</div>
                               <div className=" text-center">
-                                <p>{name.room.name}</p>
+                                {name.purpose}
+                              </div>
+                              <div className=" text-center">
+                                <p>{name.room ? name.room.name : "Self"}</p>
                                 {name.updatedAt.slice(0, 10)}{" "}
                                 {name.updatedAt.slice(11, 16)}
                               </div>
-                              <div className=" text-center">₹{name.amount}</div>
+                              <div className=" text-center">
+                                ₹{name.amount}
+                              </div>
                             </div>
                             <hr className="mx-16" />
                           </>
                         );
-                      } else {
-                        return (
-                          <>
-                            <div className="p-2 grid grid-cols-3 gap-4">
-                              <div className=" text-center">{name.purpose}</div>
-                              <div className=" text-center">
-                                <p>Self</p>
-                                {name.updatedAt.slice(0, 10)}{" "}
-                                {name.updatedAt.slice(11, 16)}
-                              </div>
-                              <div className=" text-center">₹{name.amount}</div>
-                            </div>
-                            <hr className="mx-16" />
-                          </>
-                        );
-                      }
-                    })}
+                      })
+                  }
 
                   <div className="text-center">
                     <button
@@ -442,42 +390,4 @@ const Analysis = () => {
 
 export default Analysis;
 
-{
-  /* <form className="max-w-[1100px] mx-auto w-full rounded-md border-2 border-black p-8 mt-2">
-            <h2 className="text-4xl font-bold text-center py-6">
-              ENTER YOUR EXPENSES
-            </h2>
-            <div className="flex flex-col md:flex-row justify-between">
-              <div className="flex flex-col mb-4">
-                <label className="text-center">Amount</label>
-                <input
-                  className="relative border-2 border-black bg-gray-100 p-2 w-[300px] mx-auto"
-                  type="number"
-                  placeholder="₹ Amount"
-                  onChange={(e) => {
-                    setamount(e.target.value);
-                  }}
-                  value={amount}
-                />
-              </div>
-              <div className="flex flex-col mb-4">
-                <label className="text-center">Category</label>
-                <input
-                  className="border-2 border-black relative bg-gray-100 p-2 w-[300px] mx-auto"
-                  type="text"
-                  placeholder="Food"
-                  onChange={(e) => {
-                    setpurpose(e.target.value);
-                  }}
-                  value={purpose}
-                />
-              </div>
-            </div>
-            <button
-              className="flex justify-center items-center bg-black text-white mx-auto p-2 rounded-md my-2"
-              onClick={addExpense}
-            >
-              Add Spend
-            </button>
-          </form> */
-}
+

@@ -103,7 +103,7 @@ const CreatedRoom = () => {
 
   // const [check,setCheck]=useState(true)
   const addExpense = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     // setSplitInto(arr)
 

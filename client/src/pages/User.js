@@ -65,10 +65,12 @@ const User = () => {
 
   const addExpense = (e) => {
     e.preventDefault();
+
     // setExpenseData({
     //   purpose: purpose,
     //   amount: amount,
     // });
+
     if (amount <= 0) {
       setamount("")
       setpurpose("")
