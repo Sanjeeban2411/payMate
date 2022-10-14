@@ -5,6 +5,8 @@ import axios from "axios";
 import { HiUserCircle } from "react-icons/hi";
 import BarChart from "../components/BarChart";
 import IndieExpenses from "../components/IndieExpenses";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreatedRoom = () => {
   const [purpose, setpurpose] = useState();
@@ -108,6 +110,10 @@ const CreatedRoom = () => {
     // setSplitInto(arr)
 
     // setCheck('.checkbox'==true)
+    toast.success('Successfully Added !', {
+      position: toast.POSITION.TOP_RIGHT
+  });
+    
     console.log("e", e);
 
     if (amount <= 0) {
@@ -115,6 +121,9 @@ const CreatedRoom = () => {
       setpurpose("");
       return alert("You cannot enter 0 or negative amount");
     }
+    // else{
+    //   return alert("Successfully Added")
+    // }
     // setCheck(true)
 
     // if (amount <= 0) {
@@ -349,6 +358,7 @@ const CreatedRoom = () => {
                   >
                     Add Amount
                   </button>
+                  <ToastContainer />
                 </div>
               </div>
             </form>
