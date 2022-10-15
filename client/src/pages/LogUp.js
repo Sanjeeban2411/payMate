@@ -1,9 +1,10 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import CarouselComp from '../components/CarouselComp';
 import CarouselIndicater from '../components/CarouselIndicater';
-
+// import GoogleLogin from 'react-google-login';
+import jwt_decode from 'jwt-decode'
 const LogUp = () => {
 
     const navigate = useNavigate();
@@ -35,6 +36,58 @@ const LogUp = () => {
             .catch(function (error) {
                 console.log(error);
             });
+            
+    }
+    // const [loginData,setLoginData]=useState(
+    //   localStorage.getItem('loginData')
+    //   ? JSON.parse(localStorage.getItem('loginData'))
+    //   : null
+    // )
+    // console.log(loginData)
+    // const handleFailure = (result)=>{
+    //   alert(result)
+    // }
+    // const handleLogup = (googledata) =>{
+    //   console.log(googledata)
+    // }
+    const[ user, setUser] = useState({})
+
+    function handleCallbackResponse(response){
+        console.log("jwt:"+response.credential)
+        var userobj=jwt_decode(response.credential)
+        console.log("data:",userobj)
+        setUser(userobj)
+        document.getElementById("signInDiv").hidden = true
+    }
+
+    useEffect(()=>{
+        google.accounts.id.initialize({
+            client_id: "173408333561-klfrlhhu2reqfmutuslfvh6g3d3i1p7f.apps.googleusercontent.com",
+            callback: handleCallbackResponse
+        })
+        google.accounts.id.renderButton(
+            document.getElementById("signInDiv"),
+            {theme: "outline", size: "large"}
+            )
+            google.accounts.id.prompt()
+    },[]);
+    const handleGoogle = (e) =>{
+      e.preventDefault();
+      axios({
+        method: 'post',
+        url: '/signup',
+        data: {"name": user.name,
+            "email": user.email,
+            "password": "cccc"}
+    })
+        .then(function (response) {
+            localStorage.setItem("jwt_token",response.data.user.token)
+            console.log(response);
+            navigate(`/user`)
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 
 
@@ -121,12 +174,28 @@ const LogUp = () => {
                     
                     <button className='w-full block bg-[#2176AE] hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
                 px-4 py-1 mt-3' onClick={handleSubmit}  >SignUp</button>
-                 <button
+                
+                  {/* {loginData ? (
+                    <div>
+                      <h3>logged in as {loginData.email}</h3>
+                    </div>
+                  ):(
+                
+                <GoogleLogin
+                clientId="173408333561-klfrlhhu2reqfmutuslfvh6g3d3i1p7f.apps.googleusercontent.com"
+                buttonText='Sign Up with Google'
+                onSuccess={handleLogup}
+                onFailure={handleFailure}
+                cookiePolicy={'single_host_origin'}
+                />
+                )} */}
+                <div className='w-full mt-3 px-8' id="signInDiv"></div>
+                 {/* <button
                   className="w-full block bg-white hover:bg-blue-400 focus:bg-blue-400 text-black font-semibold rounded-lg
                 px-4 py-1 mt-3"
                 >
                   Sign Up with Google
-                </button>
+                </button> */}
                 </form>
                 {/* <hr className='my-6 border-gray-300 w-full'/> */}
                 <p className="mt-4">

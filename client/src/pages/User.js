@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios, { Axios } from "axios";
 import Navbar from "../components/Navbar";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import GoogleLogin from 'react-google-login';
 
 const User = () => {
   const [purpose, setpurpose] = useState();
@@ -70,6 +73,9 @@ const User = () => {
     //   purpose: purpose,
     //   amount: amount,
     // });
+    toast.success('Successfully Added !', {
+      position: toast.POSITION.TOP_RIGHT
+  });
 
     if (amount <= 0) {
       setamount("")
@@ -127,10 +133,12 @@ const User = () => {
           <div className=" absolute w-full h-[60%] top-50% flex flex-col mt-24 font-Montserrat text-3xl  text-black">
             <div className="flex flex-row h-[80vh]">
               <div className="flex flex-col ">
-                <div className="">
-                  <h2 className="ml-24 font-black">“Add all your <span className="text-[#2176AE]">expenses</span> and keep <span className="text-[#2176AE]">keep track</span> of your budget” </h2>
+                <div className=" relative">
+                {/* <div className="  absolute top-[10%] w-[45%] h-[130%] bg-[#9FD7FC]"></div> */}
+                  <h1 className="  relative ml-24 mt-16 font-black ">“Add all your <span className="text-[#2176AE]">expenses</span> and keep <span className="text-[#2176AE]">keep track</span> of your budget” </h1>
+                  
                 </div>
-                <div className=" relative text-white  h-[400px] ">
+                <div className=" relative text-white  h-[400px] mt-20">
                   <img src="./assests/Wallet-1.png" alt="" className=" h-[420px]" />
                   <div className=" absolute top-[40%] right-[55%] ">
                     <h2 className="p-2">Total Amount Spent</h2>
@@ -143,16 +151,16 @@ const User = () => {
                 </div>
                 <div className=" flex flex-col">
                   <div className="w-[450px] h-[20%] bg-[#113248] text-white rounded-tr-xl" >
-                    <h2 className="ml-4 text-[#9FD7FC]">Hey There!!!</h2>
+                    <h2 className="ml-4 text-[#9FD7FC] pt-2">Hey There!!!</h2>
                     <div className=" flex flex-row justify-between mx-3">
                       <p className="">{data.name}</p>
                       <p className="">{currentDate}</p>
                     </div>
                   </div>
                   <div className="flex flex-col  w-[100%] h-[100%] rounded-br-xl " id="bg-form">
-                    <label className="mt-10 mx-24">Amount</label>
+                    <label className="mt-20 mx-24 font-bold">Amount</label>
                     <input
-                      className="relative border-b-2 border-black bg-transparent p-2 w-[300px] mx-auto placeholder-white"
+                      className="relative border-b-2 border-black bg-transparent p-2 w-[300px] mx-auto placeholder-black placeholder:font-bold"
                       type="number"
                       min={0}
                       placeholder="₹"
@@ -165,9 +173,9 @@ const User = () => {
                       }}
                       value={amount}
                     />
-                    <label className=" mt-8 mx-24 ">Category</label>
+                    <label className=" mt-8 mx-24 font-bold">Category</label>
                     <input
-                      className=" relative border-b-2 border-black bg-transparent p-2 w-[300px] mx-auto placeholder-white"
+                      className=" relative border-b-2 border-black bg-transparent p-2 w-[300px] mx-auto placeholder-black placeholder:font-bold"
                       type="text"
                       placeholder="Travel"
                       onChange={(e) => {
@@ -186,6 +194,7 @@ const User = () => {
                     >
                       Add Spend
                     </button>
+                    <ToastContainer />
                   </div>
                 </div>
 

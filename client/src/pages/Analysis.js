@@ -337,13 +337,13 @@ const Analysis = () => {
                 </div>
               </div>
               <div
-                className="border-2  my-24 mx-32 rounded-t-xl bg-white"
+                className="border-2  my-24 mx-52 rounded-t-xl bg-white"
                 id="tranbg"
               >
                 <div className="p-4 bg-[#E18A07] rounded-t-xl">
                   <h2 className="text-center">Previous Transaction</h2>
                 </div>
-                <div className="mt-6 ">
+                <div className="mt-6 font-MinionPro">
                   {
                     allExpenses.filter((name, idx) => {
                       return (limit ? idx < 5 : name)
@@ -356,8 +356,11 @@ const Analysis = () => {
                                 {name.purpose}
                               </div>
                               <div className=" text-center">
-                                <p>{name.room ? name.room.name : "Self"}</p>
-                                {name.updatedAt.slice(0, 10)}{" "}
+                                <div className=" flex flex-row justify-around mx-auto">
+                                <div className="mx-auto">{name.room ? name.room.name : "Self"}</div>
+                                <div className= {name.room  ? name.room.name :"hidden mx-auto"}><img src="./assests/Vector.png" alt="" className=""/></div>
+                                </div>
+                                {name.updatedAt.slice(0, 10)}{"  "}
                                 {name.updatedAt.slice(11, 16)}
                               </div>
                               <div className=" text-center">
