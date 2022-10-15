@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CarouselComp from "../components/CarouselComp";
 import CarouselIndicater from "../components/CarouselIndicater";
-
+import jwt_decode from 'jwt-decode'
 
 
 
@@ -74,6 +74,80 @@ const Signin = () => {
       })
       .catch((error) => console.log(error));
     // }, [0]);
+
+
+
+    
+    }
+    const[ user, setUser] = useState({})
+
+    function handleCallbackResponse(response){
+        console.log("jwt:"+response.credential)
+        var userobj=jwt_decode(response.credential)
+        console.log("data:",userobj)
+        setUser(userobj)
+        document.getElementById("signInDiv").hidden = true
+    }
+
+    useEffect(()=>{
+        google.accounts.id.initialize({
+            client_id: "173408333561-klfrlhhu2reqfmutuslfvh6g3d3i1p7f.apps.googleusercontent.com",
+            callback: handleCallbackResponse
+        })
+        google.accounts.id.renderButton(
+            document.getElementById("signInDiv"),
+            {theme: "outline", size: "large"}
+            )
+            google.accounts.id.prompt()
+    },[]);
+
+
+    if(user.email_verified=true){
+      axios({
+        method: "post",
+        url: "/login",
+        //   data: data,
+        data: { email: user.email, password: "cccc" },
+      })
+        .then((response) => {
+          localStorage.setItem("jwt_token", response.data.user.token);
+          // localStorage.removeItem("url")
+  
+          let url = localStorage.getItem("url")
+          // console.log("url",url)
+          // console.log("urlparsed",JSON.parse(url))
+  
+          // const itemStr = localStorage.getItem(key)
+          // if the item doesn't exist, return null
+          if (!url) {
+            navigate("/user");
+          }
+          const item = JSON.parse(url)
+          const now = new Date()
+          // compare the expiry time of the item with the current time
+          if (now.getTime() > item.expiry) {
+            // If the item is expired, delete the item from storage
+            // and return null
+            localStorage.removeItem("url")
+            // return null
+            navigate("/user");
+          }
+          // return item.value
+          // if (url) {
+          // else{
+          const i = url.indexOf("/joinroom")
+          url = url.slice(i)
+          console.log("signinURL", url)
+          navigate(url);
+          // }
+          // else {
+          //   navigate("/user");
+          // }
+          // console.log(".then",data)
+          console.log(response);
+          console.log(response.data.user.token);
+        })
+        .catch((error) => console.log(error));
   };
 
   return (
@@ -173,12 +247,13 @@ const Signin = () => {
                 >
                   Login
                 </button>
-                <button
+                <div id="signInDiv"></div>
+                {/* <button
                   className="w-full block bg-white hover:bg-blue-400 focus:bg-blue-400 text-black font-semibold rounded-lg
                 px-4 py-1 mt-3"
                 >
                   Sign In with Google
-                </button>
+                </button> */}
 
 
               </form>

@@ -57,7 +57,7 @@ const LogUp = () => {
         var userobj=jwt_decode(response.credential)
         console.log("data:",userobj)
         setUser(userobj)
-        document.getElementById("signInDiv").hidden = true
+        document.getElementById("signOutDiv").hidden = true
     }
 
     useEffect(()=>{
@@ -66,13 +66,12 @@ const LogUp = () => {
             callback: handleCallbackResponse
         })
         google.accounts.id.renderButton(
-            document.getElementById("signInDiv"),
+            document.getElementById("signOutDiv"),
             {theme: "outline", size: "large"}
             )
             google.accounts.id.prompt()
     },[]);
-    const handleGoogle = (e) =>{
-      e.preventDefault();
+    if(user.email_verified=true){
       axios({
         method: 'post',
         url: '/signup',
@@ -189,7 +188,7 @@ const LogUp = () => {
                 cookiePolicy={'single_host_origin'}
                 />
                 )} */}
-                <div className='w-full mt-3 px-8' id="signInDiv"></div>
+                <div className='w-full mt-3 px-8' id="signOutDiv"></div>
                  {/* <button
                   className="w-full block bg-white hover:bg-blue-400 focus:bg-blue-400 text-black font-semibold rounded-lg
                 px-4 py-1 mt-3"
