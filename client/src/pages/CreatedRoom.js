@@ -112,8 +112,8 @@ const CreatedRoom = () => {
     // setCheck('.checkbox'==true)
     toast.success('Successfully Added !', {
       position: toast.POSITION.TOP_RIGHT
-  });
-    
+    });
+
     console.log("e", e);
 
     if (amount <= 0) {
@@ -273,6 +273,15 @@ const CreatedRoom = () => {
             </div>
           </div>
         </div>
+
+        <div>
+          <button
+            className="bg-black text-white"
+          >
+            Leave Room
+          </button>
+        </div>
+
         <div className=" flex flex-row mx-20">
           <div className="max-w-[400px] border-[3px] border-[#42BFEF] rounded-[30px] mt-12 px-14  py-4  mr-6 ">
             <p className="  w-52 mx-auto font-MinionPro text-4xl ">Add Expense</p>
@@ -314,40 +323,40 @@ const CreatedRoom = () => {
                 </div>
                 <div className="mx-auto mt-4">
                   <div className="mx-auto">
-                  <label
-                    className="text-center text-black bg-[#9FD7FC] rounded-[13px] px-3 py-2 font-MinionPro"
-                    onClick={() => setShow(!show)}
-                  >
-                    Split With
-                  </label></div>
+                    <label
+                      className="text-center text-black bg-[#9FD7FC] rounded-[13px] px-3 py-2 font-MinionPro"
+                      onClick={() => setShow(!show)}
+                    >
+                      Split With
+                    </label></div>
                   <div className="rounded-[8px] mx-auto px-2 py-1" id="split-bg">
-                  {userNames.map((user, index) => {
-                    return (
-                      <div className=" ">
-                        {show && (
-                          <div>
-                          <div className=" flex flex-row  ">
-                            <div className=" ">
-                            <input
-                              type="checkbox"
-                              defaultChecked="true"
-                              id={user.name}
-                              name={user.name}
-                              value={user._id}
-                              class="checkbox"
-                              onClick={handleCheckbox}
-                            /></div>
-                            <div className=" text-center mx-auto">
-                            <label for={user.name} style={{ fontSize: 35 }} className=" font-MinionPro">
-                              {user.name}
-                            </label>
-                            </div>
-                            
-                          </div><hr/></div>
-                        )}
-                      </div>
-                    );
-                  })}
+                    {userNames.map((user, index) => {
+                      return (
+                        <div className=" ">
+                          {show && (
+                            <div>
+                              <div className=" flex flex-row  ">
+                                <div className=" ">
+                                  <input
+                                    type="checkbox"
+                                    defaultChecked="true"
+                                    id={user.name}
+                                    name={user.name}
+                                    value={user._id}
+                                    class="checkbox"
+                                    onClick={handleCheckbox}
+                                  /></div>
+                                <div className=" text-center mx-auto">
+                                  <label for={user.name} style={{ fontSize: 35 }} className=" font-MinionPro">
+                                    {user.name}
+                                  </label>
+                                </div>
+
+                              </div><hr /></div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -368,16 +377,16 @@ const CreatedRoom = () => {
         <div className=" mt-32 md:mt-14 font-extrabold mx-auto text-4xl text-[#2176AE]">
           Mates
         </div>
-        
+
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
           {userNames.map((name) => {
             return (
               <div className="flex flex-col    bg-[#2176AE] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500 " id="cr-card">
                 <div className=" border-2 border-black m-3 bg-[#E9F1F7]">
-                <div className=" mt-4">
-                  <HiUserCircle size={100} className=" mx-auto "/>
-                </div>
-                <div className="p-4 text-center font-MinionPro text-4xl">{name.name}</div>
+                  <div className=" mt-4">
+                    <HiUserCircle size={100} className=" mx-auto " />
+                  </div>
+                  <div className="p-4 text-center font-MinionPro text-4xl">{name.name}</div>
                 </div>
                 <button
                   className="bg-[#E9F1F7] text-black  hover:text-white mx-auto p-2 px-3 my-3 rounded-md transition ease-in-out hover:-translate-y-1 hover:scale-110  duration-500"
@@ -416,19 +425,19 @@ const CreatedRoom = () => {
           <div className="mt-6">
             {limit &&
               allExpenses.filter((name, idx) => idx < 5).map((names) => {
-                  return (
-                    <>
-                      <div className=" p-2 grid grid-cols-3 gap-4">
-                        <div className="  text-center">{names.owner.name}</div>
-                        <div className=" text-center">
-                          {names.purpose}
-                        </div>
-                        <div className=" text-center">₹{names.amount}</div>
+                return (
+                  <>
+                    <div className=" p-2 grid grid-cols-3 gap-4">
+                      <div className="  text-center">{names.owner.name}</div>
+                      <div className=" text-center">
+                        {names.purpose}
                       </div>
-                      <hr className="mx-16 " />
-                    </>
-                  );
-                })}
+                      <div className=" text-center">₹{names.amount}</div>
+                    </div>
+                    <hr className="mx-16 " />
+                  </>
+                );
+              })}
 
             {!indie &&
               !limit &&
