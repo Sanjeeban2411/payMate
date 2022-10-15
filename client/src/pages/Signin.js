@@ -89,66 +89,66 @@ const Signin = () => {
         document.getElementById("signInDiv").hidden = true
     }
 
-    useEffect(()=>{
-        google.accounts.id.initialize({
-            client_id: "173408333561-klfrlhhu2reqfmutuslfvh6g3d3i1p7f.apps.googleusercontent.com",
-            callback: handleCallbackResponse
-        })
-        google.accounts.id.renderButton(
-            document.getElementById("signInDiv"),
-            {theme: "outline", size: "large"}
-            )
-            google.accounts.id.prompt()
-    },[]);
+  //   useEffect(()=>{
+  //       google.accounts.id.initialize({
+  //           client_id: "173408333561-klfrlhhu2reqfmutuslfvh6g3d3i1p7f.apps.googleusercontent.com",
+  //           callback: handleCallbackResponse
+  //       })
+  //       google.accounts.id.renderButton(
+  //           document.getElementById("signInDiv"),
+  //           {theme: "outline", size: "large"}
+  //           )
+  //           google.accounts.id.prompt()
+  //   },[]);
 
 
-    if(user.email_verified=true){
-      axios({
-        method: "post",
-        url: "/login",
-        //   data: data,
-        data: { email: user.email, password: "cccc" },
-      })
-        .then((response) => {
-          localStorage.setItem("jwt_token", response.data.user.token);
-          // localStorage.removeItem("url")
+  //   if(user.email_verified=true){
+  //     axios({
+  //       method: "post",
+  //       url: "/login",
+  //       //   data: data,
+  //       data: { email: user.email, password: "cccc" },
+  //     })
+  //       .then((response) => {
+  //         localStorage.setItem("jwt_token", response.data.user.token);
+  //         // localStorage.removeItem("url")
   
-          let url = localStorage.getItem("url")
-          // console.log("url",url)
-          // console.log("urlparsed",JSON.parse(url))
+  //         let url = localStorage.getItem("url")
+  //         // console.log("url",url)
+  //         // console.log("urlparsed",JSON.parse(url))
   
-          // const itemStr = localStorage.getItem(key)
-          // if the item doesn't exist, return null
-          if (!url) {
-            navigate("/user");
-          }
-          const item = JSON.parse(url)
-          const now = new Date()
-          // compare the expiry time of the item with the current time
-          if (now.getTime() > item.expiry) {
-            // If the item is expired, delete the item from storage
-            // and return null
-            localStorage.removeItem("url")
-            // return null
-            navigate("/user");
-          }
-          // return item.value
-          // if (url) {
-          // else{
-          const i = url.indexOf("/joinroom")
-          url = url.slice(i)
-          console.log("signinURL", url)
-          navigate(url);
-          // }
-          // else {
-          //   navigate("/user");
-          // }
-          // console.log(".then",data)
-          console.log(response);
-          console.log(response.data.user.token);
-        })
-        .catch((error) => console.log(error));
-  };
+  //         // const itemStr = localStorage.getItem(key)
+  //         // if the item doesn't exist, return null
+  //         if (!url) {
+  //           navigate("/user");
+  //         }
+  //         const item = JSON.parse(url)
+  //         const now = new Date()
+  //         // compare the expiry time of the item with the current time
+  //         if (now.getTime() > item.expiry) {
+  //           // If the item is expired, delete the item from storage
+  //           // and return null
+  //           localStorage.removeItem("url")
+  //           // return null
+  //           navigate("/user");
+  //         }
+  //         // return item.value
+  //         // if (url) {
+  //         // else{
+  //         const i = url.indexOf("/joinroom")
+  //         url = url.slice(i)
+  //         console.log("signinURL", url)
+  //         navigate(url);
+  //         // }
+  //         // else {
+  //         //   navigate("/user");
+  //         // }
+  //         // console.log(".then",data)
+  //         console.log(response);
+  //         console.log(response.data.user.token);
+  //       })
+  //       .catch((error) => console.log(error));
+  // };
 
   return (
     <>

@@ -34,18 +34,18 @@ const Googlelogin = () => {
 
 
 
-  return (
-    <div>
-      <div id="signInDiv"></div>
-      {
-        user &&
-        <div className='text-center items-center'>
-            <img src={user.picture} className='mx-auto'/>
-            <h2>{user.name}</h2>
-        </div>
-      }
-    </div>
-  )
+  // return (
+  //   <div>
+  //     <div id="signInDiv"></div>
+  //     {
+  //       user &&
+  //       <div className='text-center items-center'>
+  //           <img src={user.picture} className='mx-auto'/>
+  //           <h2>{user.name}</h2>
+  //       </div>
+  //     }
+  //   </div>
+  // )
 }
 
 export default Googlelogin
