@@ -77,7 +77,6 @@ const Rooms = (props) => {
           navigate(`/signin`)
         }
       })
-      
   }
 
 
@@ -100,7 +99,6 @@ const Rooms = (props) => {
         
         <div className='my-12 font-extrabold text-center' >Your Rooms</div>
         <div className='grid grid-cols-2 md:grid-cols-3 gap-4 sm:grid-cols-3'>
-          {/* {data.map(card)} */}
           {data.map((val) => {
             return (
               <div className='flex flex-col   relative box-border items-center mx-auto rounded-xl min-w-[300px] min-h-[300px] border-2 border-black transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500' id="bg-card">

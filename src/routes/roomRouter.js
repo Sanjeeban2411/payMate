@@ -192,6 +192,33 @@ router.patch('/:room/settleTransaction', auth, async (req, res) => {
     }
 })
 
+router.patch('/:room/leave/:user', auth, async(req,res)=>{
+    const room = await Room.findOne({name:req.params.room})
+    if (!room) {
+        return res.status(404).send("Room not found")
+    }
+    const owner = await User.findOne({_id:req.params.user})
+    const total = await Total.findOne({ $and: [{ room: room._id }, { user: req.params.user }] })
+    if(!total){
+        return res.status(400).send("You are not in the room")
+    }
+    if(total.total !== total.dues){
+        return res.status(400).send("Settle transactions in room before leaving")
+    }
+    
+    const users = room.users.filter((e)=> e.toString() !== req.params.user.toString())
+    room.users = users
+    const rooms = owner.rooms.filter((e)=> e.toString() !== room._id.toString())
+    owner.rooms = rooms
+    
+    await Total.findOneAndDelete({ $and: [{ room: room._id }, { user: req.params.user }] })
+    await room.save()
+    await owner.save()
+
+    // res.send({users:room, owner:owner, total:total})
+    res.send({users:room, owner:owner})
+})
+
 
 
 module.exports = router
