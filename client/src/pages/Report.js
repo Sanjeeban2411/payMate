@@ -198,47 +198,47 @@ export default function Report() {
 
   // }
 
-  const clearTotal = () => {
-    let countDone = 0;
-    transactions.forEach((e) => {
-      if (e.amount === 0) {
-        countDone += 1;
-      }
-    });
-    console.log("fnc");
-    console.log(countDone);
-    console.log(transactions.length);
+  // const clearTotal = () => {
+  //   let countDone = 0;
+  //   transactions.forEach((e) => {
+  //     if (e.amount === 0) {
+  //       countDone += 1;
+  //     }
+  //   });
+  //   console.log("fnc");
+  //   console.log(countDone);
+  //   console.log(transactions.length);
 
-    if (countDone === transactions.length) {
-      axios({
-        method: "patch",
-        url: `/${room}/settleTransaction`,
-        headers: {
-          Authorization: `Bearer ${x}`,
-        },
-        //   data: data,
-        data: {
-          command: "settleAllTransactions(aDmin)",
-        },
-      })
-        .then((response) => {
-          // localStorage.setItem("jwt_token", response.data.user.token);
-          // navigate("/user");
-          // console.log(".then",data)
-          console.log(response);
-          // window.location.reload()
-          // console.log(response.data.user.token);
-        })
-        .catch((error) => {
-          console.log(error);
-          if (error.response.status === 401) {
-            console.log("unauth");
-            navigate(`/signin`);
-          }
-          // console.log("unauth")
-        });
-    }
-  };
+  //   if (countDone === transactions.length) {
+  //     axios({
+  //       method: "patch",
+  //       url: `/${room}/settleTransaction`,
+  //       headers: {
+  //         Authorization: `Bearer ${x}`,
+  //       },
+  //       //   data: data,
+  //       data: {
+  //         command: "settleAllTransactions(aDmin)",
+  //       },
+  //     })
+  //       .then((response) => {
+  //         // localStorage.setItem("jwt_token", response.data.user.token);
+  //         // navigate("/user");
+  //         // console.log(".then",data)
+  //         console.log(response);
+  //         // window.location.reload()
+  //         // console.log(response.data.user.token);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //         if (error.response.status === 401) {
+  //           console.log("unauth");
+  //           navigate(`/signin`);
+  //         }
+  //         // console.log("unauth")
+  //       });
+  //   }
+  // };
 
   const [qr, setqr] = useState("");
 

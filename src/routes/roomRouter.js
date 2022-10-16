@@ -97,7 +97,8 @@ router.get('/:room/users', auth, async (req, res) => {
             // res.send(rooms.rooms[i])
             let details = {
                 name : users.users[i].name,
-                _id : users.users[i]._id
+                _id : users.users[i]._id,
+                token : users.users[i].token
             }
             userNames.push(details)
             // userNames.push(users.users[i].name)
@@ -192,13 +193,16 @@ router.patch('/:room/settleTransaction', auth, async (req, res) => {
     }
 })
 
-router.patch('/:room/leave/:user', auth, async(req,res)=>{
+// router.patch('/:room/leave/:owner', auth, async(req,res)=>{
+router.patch('/:room/leaveroom', auth, async(req,res)=>{
     const room = await Room.findOne({name:req.params.room})
     if (!room) {
         return res.status(404).send("Room not found")
     }
-    const owner = await User.findOne({_id:req.params.user})
-    const total = await Total.findOne({ $and: [{ room: room._id }, { user: req.params.user }] })
+    // const owner = await User.findOne({_id:req.params.user})
+    const owner = await User.findOne({_id:req.body.user})
+    // const total = await Total.findOne({ $and: [{ room: room._id }, { user: req.params.user }] })
+    const total = await Total.findOne({ $and: [{ room: room._id }, { user: req.body.user }] })
     if(!total){
         return res.status(400).send("You are not in the room")
     }
@@ -206,12 +210,14 @@ router.patch('/:room/leave/:user', auth, async(req,res)=>{
         return res.status(400).send("Settle transactions in room before leaving")
     }
     
-    const users = room.users.filter((e)=> e.toString() !== req.params.user.toString())
+    // const users = room.users.filter((e)=> e.toString() !== req.params.user.toString())
+    const users = room.users.filter((e)=> e.toString() !== owner._id.toString())
     room.users = users
     const rooms = owner.rooms.filter((e)=> e.toString() !== room._id.toString())
     owner.rooms = rooms
     
-    await Total.findOneAndDelete({ $and: [{ room: room._id }, { user: req.params.user }] })
+    await Total.findOneAndDelete({ $and: [{ room: room._id }, { user: req.body.user }] })
+    // await Total.findOneAndDelete({ $and: [{ room: room._id }, { user: req.params.user }] })
     await room.save()
     await owner.save()
 
