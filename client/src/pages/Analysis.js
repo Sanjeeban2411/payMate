@@ -336,6 +336,8 @@ const Analysis = () => {
                   <div className="w-[800px] h-10 ml-3 rounded-bl-3xl bg-black"></div>
                 </div>
               </div>
+              <div className=" text-center">
+                <a href="/analloghis" ><button className=" rounded-3xl border-2 border-black p-2">View Complete Transaction History &rarr;</button></a></div>
               <div
                 className="border-2  my-24 mx-52 rounded-t-xl bg-white"
                 id="tranbg"
@@ -346,7 +348,7 @@ const Analysis = () => {
                 <div className="mt-6 font-MinionPro">
                   {
                     allExpenses.filter((name, idx) => {
-                      return (limit ? idx < 5 : name)
+                      return (limit ? idx < 5 : idx < 50)
                     })
                       .map((name) => {
                         return (
