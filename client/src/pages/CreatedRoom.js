@@ -51,8 +51,6 @@ const CreatedRoom = () => {
       });
   }, [0]);
 
-  // const getExp = () => {
-  // function getExp(){
 
   useEffect(() => {
     axios({
@@ -80,30 +78,7 @@ const CreatedRoom = () => {
   // console.log("tst", userNames)
   var checkboxs = document.querySelectorAll(".checkbox");
 
-  // for(var checkbox of checkboxs){
-  //   checkbox.addEventListener('click',function(){
-  //     for(let i=0;i<userNames.length;i++){
-  //     if(userNames[i]==this.value){
-  //       listarray = listarray.filter(e => e !== this.value)
-  //       // listarray.push(this.value)
-  //     }
-  //     else if(userNames[i]!=this.value){
-  //       listarray.push(this.value)
 
-  //       // if(!listarray.includes(this.value)){
-  //       //   listarray.push(this.value)
-  //       // }
-  //       // listarray = listarray.filter(e => e !== this.value)
-  //       // console.log('you unchecked')
-  //     }
-  //   }
-  //     // console.log("ck",this.checked)
-  //     // console.log("st",listarray)
-  //   })
-  // }
-  // console.log("arraylist",listarray)
-
-  // const [check,setCheck]=useState(true)
   const addExpense = (e) => {
     // e.preventDefault();
 
@@ -121,17 +96,7 @@ const CreatedRoom = () => {
       setpurpose("");
       return alert("You cannot enter 0 or negative amount");
     }
-    // else{
-    //   return alert("Successfully Added")
-    // }
-    // setCheck(true)
 
-    // if (amount <= 0) {
-    //   setamount("")
-    //   setpurpose("")
-    //   return alert("You cannot enter 0 or negative amount")
-    // }
-    // console.log("helloooooo", arr)
     axios({
       method: "post",
       url: `/${room}/addexpense`,
@@ -162,73 +127,15 @@ const CreatedRoom = () => {
 
   console.log("splitinto", splitInto);
 
-  // console.log("dataexp",roomName)
   console.log("users", allExpenses);
 
   const expenseDetails = (event, name) => {
-    // let indieExpenses = []
-    // allExpenses.forEach((e)=>{
-    //   if(e.owner.name === name){
-    //     indieExpenses.push(e)
-    //   }
-    // })
-    // console.log("indie",indieExpenses)
+
     setIndie(true);
     setName(name.name);
   };
 
-  // function onlyUnique(value, index, self) {
-  //   return self.indexOf(value) === index;
-  // }
 
-  //   let sum
-  //   let kharcha = []
-  //   if(allExpenses.length>0){
-  //   sum=allExpenses[0].amount
-  //   console.log("amt",analyze[0].createdAt)
-  //   for(let i=0;i<allExpenses.length-1;i++){
-  //     console.log("test",analyze[i].createdAt,analyze[i].amount)
-  //     console.log("test",analyze[i+1].createdAt,analyze[i+1].amount)
-  //     if(allExpenses[i].owner.name===allExpenses[i+1].owner.name){
-  //       sum=sum+allExpenses[i+1].amount
-  //     }
-  //     else{
-  //       kharcha.push(sum)
-  //       sum = allExpenses[i+1].amount
-  //       kharcha.push(sum)
-  //     }
-  //   }
-  //   kharcha.push(sum)
-  // }
-  // console.log("kkk",kharcha)
-  // console.log("sm",sum)
-
-  // const getval = (e) =>{
-  //   const {value,checked}=e.target
-  //   console.log(`${value} is ${checked}`)
-  //   if(checked){
-  //     setSplitInto([...splitInto, value])
-  //   } else{
-  //     setSplitInto(splitInto.filter((e)=> e!==value))
-  //   }
-  // }
-  // const handlecheck((e)=>{
-  //   console.log(e.target.value)
-  // })
-
-  // const handlcheck =(e)=>{
-  //   let arr=[]
-  //   for(var checkbox of checkboxs){
-  //     if(e.target.checked==true){
-  //       arr.push(e.target.value)
-  //     }
-  //     else{
-  //       console.log("unchecked")
-  //     }
-
-  //   }
-  //   console.log("listarr",arr)
-  // }
   const [show, setShow] = useState(false);
 
   var arr = [];
@@ -249,6 +156,50 @@ const CreatedRoom = () => {
     // console.log("un", dup)
     // console.log("check", check)
   };
+
+  // const [owner, setOwner] = useState("");
+  let owner
+  const leaveRoom = () => {
+    if (userNames.length > 0) {
+      console.log("UN",userNames)
+      userNames.forEach((user) => {
+        if (user.token === x) {
+          console.log("UNSERS",user)
+          // setOwner(user._id.toString())
+          owner = user._id.toString()
+        }
+        
+      })
+      console.log("yooyooo", owner)
+    }
+
+    if(owner){
+      axios({
+        method: "patch",
+        // url: `/${room}/leave/${owner}`,
+        url: `/${room}/leaveroom`,
+        headers: {
+          Authorization: `Bearer ${x}`,
+        },
+        data:{
+          user:owner
+        }
+      })
+      .then((response)=>{
+        console.log(response)
+        navigate(`/rooms`);
+      })
+      .catch((error) => {
+        console.log(error);
+        // if (error.response.status === 401) {
+        //   console.log("unauth");
+        //   navigate(`/signin`);
+        // }
+      });
+    }
+
+    // }
+  }
 
   return (
     <>
@@ -275,11 +226,15 @@ const CreatedRoom = () => {
         </div>
 
         <div>
-          <button
-            className="bg-black text-white"
-          >
-            Leave Room
-          </button>
+          {
+            userNames.length > 0 &&
+            <button
+              className="bg-black text-white"
+              onClick={leaveRoom}
+            >
+              Leave Room
+            </button>
+          }
         </div>
 
         <div className=" flex flex-row mx-20">
