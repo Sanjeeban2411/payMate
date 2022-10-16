@@ -19,6 +19,7 @@ import Signin from "./pages/Signin";
 import LogUp from "./pages/LogUp";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Googlelogin from "./components/Googlelogin";
+import AnalysisLog from "./pages/AnalysisLog";
 
 // import io from 'socket.io-client'
 
@@ -54,7 +55,7 @@ function App() {
           <Route exact path="/report" element={<Report/>} />
           <Route exact path="/roomlogin" element={<EnterRoom room={room}/>} />
           <Route exact path="/signin" element={<Signin/>} />
-          <Route exact path="/googlesignin" element={<Googlelogin/>} />
+          <Route exact path="/analloghis" element={<AnalysisLog/>} />
           
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>

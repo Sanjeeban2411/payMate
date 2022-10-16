@@ -60,35 +60,35 @@ const LogUp = () => {
         document.getElementById("signOutDiv").hidden = true
     }
 
-    // useEffect(()=>{
-    //     google.accounts.id.initialize({
-    //         client_id: "173408333561-klfrlhhu2reqfmutuslfvh6g3d3i1p7f.apps.googleusercontent.com",
-    //         callback: handleCallbackResponse
-    //     })
-    //     google.accounts.id.renderButton(
-    //         document.getElementById("signOutDiv"),
-    //         {theme: "outline", size: "large"}
-    //         )
-    //         google.accounts.id.prompt()
-    // },[]);
+    useEffect(()=>{
+        google.accounts.id.initialize({
+            client_id: "173408333561-klfrlhhu2reqfmutuslfvh6g3d3i1p7f.apps.googleusercontent.com",
+            callback: handleCallbackResponse
+        })
+        google.accounts.id.renderButton(
+            document.getElementById("signOutDiv"),
+            {theme: "outline", size: "large"}
+            )
+            google.accounts.id.prompt()
+    },[]);
 
-    // if(user.email_verified=true){
-    //   axios({
-    //     method: 'post',
-    //     url: '/signup',
-    //     data: {"name": user.name,
-    //         "email": user.email,
-    //         "password": "googleAuthenticated"}
-    // })
-    //     .then(function (response) {
-    //         localStorage.setItem("jwt_token",response.data.user.token)
-    //         console.log(response);
-    //         navigate(`/user`)
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     });
-    // }
+    if(user.email_verified=true){
+      axios({
+        method: 'post',
+        url: '/signup',
+        data: {"name": user.name,
+            "email": user.email,
+            "password": "googleAuthenticated"}
+    })
+        .then(function (response) {
+            localStorage.setItem("jwt_token",response.data.user.token)
+            console.log(response);
+            navigate(`/user`)
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
 
 
   return (
