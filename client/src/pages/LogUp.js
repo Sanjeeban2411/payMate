@@ -68,7 +68,7 @@ const LogUp = () => {
         })
         google.accounts.id.renderButton(
             document.getElementById("signOutDiv"),
-            {theme: "outline", size: "large"}
+            {theme: "outline", size: "large",width: "500px",text: "signup_with"}
             )
             google.accounts.id.prompt()
     },[]);
@@ -190,7 +190,7 @@ const LogUp = () => {
                 cookiePolicy={'single_host_origin'}
                 />
                 )} */}
-                <div className='w-full mt-3 px-8' id="signOutDiv"></div>
+                <div className='w-full mt-3 px-3' id="signOutDiv"></div>
                  {/* <button
                   className="w-full block bg-white hover:bg-blue-400 focus:bg-blue-400 text-black font-semibold rounded-lg
                 px-4 py-1 mt-3"
