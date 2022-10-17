@@ -6,7 +6,9 @@ import CarouselIndicater from '../components/CarouselIndicater';
 // import GoogleLogin from 'react-google-login';
 import jwt_decode from 'jwt-decode'
 const LogUp = () => {
+
   const google=window.google
+
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");

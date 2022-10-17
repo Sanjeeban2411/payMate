@@ -10,7 +10,9 @@ import jwt_decode from 'jwt-decode'
 
 
 const Signin = () => {
+
   const google=window.google
+
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
