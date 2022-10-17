@@ -68,6 +68,36 @@ border-radius: 20px;}
   box-shadow: 6px 6px 16px rgba(160, 160, 160, 0.65);
 }
 #split-bg{background: linear-gradient(180deg, rgba(159, 215, 252, 0.52) 0%, rgba(171, 214, 231, 0.17) 55.73%, rgba(254, 254, 254, 0.61) 100%);}
+#nav-links{
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  color: #2176AE;
+  font-weight: 700;
+}
+#nav-links.active::after{
+  content: "";
+  position: absolute;
+  background-color: #2176AE;
+  height: 3px;
+  width: 100%;
+  left: 0;
+  bottom: -10px;
+  transition: 0.3s;
+  animation: appear 0.3s linear;
+}
+@keyframes appear {
+  from{
+    width: 0;
+  }
+  to{
+    width: 100%;
+  }
+  
+}
+#nav-links:hover::after{
+  width: 0%;
+}
 
 
 

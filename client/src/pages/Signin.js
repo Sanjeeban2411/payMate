@@ -10,6 +10,7 @@ import jwt_decode from 'jwt-decode'
 
 
 const Signin = () => {
+  const google=window.google
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -96,7 +97,7 @@ const Signin = () => {
         })
         google.accounts.id.renderButton(
             document.getElementById("signInDiv"),
-            {theme: "outline", size: "large",width:"500px",text: "signin_with"}
+            {theme: "outline", size: "large",width:400, shape: "pill" ,text: "signin_with"}
             )
             google.accounts.id.prompt()
     },[]);
@@ -187,7 +188,7 @@ const Signin = () => {
                 Welcome to Paymate
               </h1>
 
-              <form action="submit" className="mt-6 px-5">
+              <form action="submit" className="mt-6 px-10">
                 {/* <h2 className='text-4xl font-bold text-center py-8'>LOGIN</h2> */}
                 <div className="">
                   {/* <label className="block text-gray-700">E-mail</label> */}
@@ -242,12 +243,12 @@ const Signin = () => {
                 {/* <p className=''>Not a member? SignUp Now</p> */}
                 <button
                   className="w-full block bg-[#2176AE] hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
-                px-4 py-1 mt-3"
+                px-1 py-1 mt-3"
                   onClick={handleSubmit}
                 >
                   Login
                 </button>
-                <div className='w-full mt-3 px-3' id="signInDiv"></div>
+                <div className='w-full mt-3 px-4  ' id="signInDiv"></div>
                 {/* <button
                   className="w-full block bg-white hover:bg-blue-400 focus:bg-blue-400 text-black font-semibold rounded-lg
                 px-4 py-1 mt-3"

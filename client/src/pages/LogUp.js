@@ -6,7 +6,7 @@ import CarouselIndicater from '../components/CarouselIndicater';
 // import GoogleLogin from 'react-google-login';
 import jwt_decode from 'jwt-decode'
 const LogUp = () => {
-
+  const google=window.google
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -67,7 +67,7 @@ const LogUp = () => {
         })
         google.accounts.id.renderButton(
             document.getElementById("signOutDiv"),
-            {theme: "outline", size: "large",width: "500px",text: "signup_with"}
+            {theme: "outline", size: "large",width:400, shape:"pill" ,text: "signup_with"}
             )
             google.accounts.id.prompt()
     },[]);

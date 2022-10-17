@@ -15,9 +15,12 @@ const Navbar = () => {
         setNav(!nav)
         setLogo(!logo)
     }
+
+    const  activeLink = "absolute  border-b-[3px] font-bold border-[#2176AE] px-1  text-[#2176AE] cursor-pointer no-underline  "
+    const normalLink = " relative font-bold  text-[#2176AE] cursor-pointer no-underline"
     return (
         <div className='flex flex-col'>
-            <div className='flex flex-row w-full justify-between items-center h-20 px-10 absolute z-10 font-Montserrat '>
+            <div className='flex flex-row w-full justify-between   items-center h-20 px-10 absolute z-10 font-Montserrat '>
                 <div className='text-[#2176AE]' >
                     <h1 onClick={handleNav} className={logo ? ' hidden' : 'flex text-3xl font-black  '} ><a href='/' onClick={handleNav} className={logo ? ' hidden' : 'flex text-[#2176AE] text-3xl font-black no-underline  '}>Paymate</a> <div className='p-2 m-auto'><FaMoneyBillWave /></div></h1>
                 </div>
@@ -26,10 +29,12 @@ const Navbar = () => {
                     <li className='p-7'>
                         <NavLink
                             to="/user"
-                            className='font-bold  text-[#2176AE] cursor-pointer no-underline'
-                            style={({ isActive }) => ({
-                                color: isActive ? 'black' : '#2176AE'
-                            })}
+                            class="active"
+                            id="nav-links"
+                            // className={({ isActive }) => ( isActive ? activeLink : normalLink)}
+                            // style={({ isActive }) => ({
+                            //     color: isActive ? 'black' : '#2176AE'
+                            // })}
                         >
                             Home
                         </NavLink>
@@ -37,10 +42,11 @@ const Navbar = () => {
                     <li className='p-7'>
                         <NavLink
                             to="/analysis"
-                            className='font-bold  text-[#2176AE] cursor-pointer no-underline'
-                            style={({ isActive }) => ({
-                                color: isActive ? 'black' : '#2176AE'
-                            })}
+                            id="nav-links"
+                            // className={({ isActive }) => ( isActive ? activeLink : normalLink)}
+                            // style={({ isActive }) => ({
+                            //     color: isActive ? 'black' : '#2176AE'
+                            // })}
                         >
                             Analysis
                         </NavLink>
@@ -48,10 +54,11 @@ const Navbar = () => {
                     <li className='p-7'>
                         <NavLink
                             to="/rooms"
-                            className='font-bold  text-[#2176AE] cursor-pointer no-underline'
-                            style={({ isActive }) => ({
-                                color: isActive ? 'black' : '#2176AE'
-                            })}
+                            id="nav-links"
+                            // className={({ isActive }) => ( isActive ? activeLink : normalLink)}
+                            // style={({ isActive }) => ({
+                            //     color: isActive ? 'black' : '#2176AE'
+                            // })}
                         >
                             Rooms
                         </NavLink>
@@ -59,10 +66,11 @@ const Navbar = () => {
                     <li className='p-7'>
                         <NavLink
                             to="/about"
-                            className='font-bold  text-[#2176AE] cursor-pointer no-underline'
-                            style={({ isActive }) => ({
-                                color: isActive ? 'black' : '#2176AE'
-                            })}
+                            id="nav-links"
+                            // className={({ isActive }) => ( isActive ? activeLink : normalLink)}
+                            // style={({ isActive }) => ({
+                            //     color: isActive ? 'black' : '#2176AE'
+                            // })}
                         >
                             About Us
                         </NavLink>
