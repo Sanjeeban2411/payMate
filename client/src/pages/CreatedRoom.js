@@ -161,19 +161,19 @@ const CreatedRoom = () => {
   let owner
   const leaveRoom = () => {
     if (userNames.length > 0) {
-      console.log("UN",userNames)
+      console.log("UN", userNames)
       userNames.forEach((user) => {
         if (user.token === x) {
-          console.log("UNSERS",user)
+          console.log("UNSERS", user)
           // setOwner(user._id.toString())
           owner = user._id.toString()
         }
-        
+
       })
       console.log("yooyooo", owner)
     }
 
-    if(owner){
+    if (owner) {
       axios({
         method: "patch",
         // url: `/${room}/leave/${owner}`,
@@ -181,13 +181,40 @@ const CreatedRoom = () => {
         headers: {
           Authorization: `Bearer ${x}`,
         },
-        data:{
-          user:owner
+        data: {
+          user: owner
         }
       })
-      .then((response)=>{
-        console.log(response)
-        navigate(`/rooms`);
+        .then((response) => {
+          console.log(response)
+          navigate(`/rooms`);
+        })
+        .catch((error) => {
+          console.log(error);
+          // if (error.response.status === 401) {
+          //   console.log("unauth");
+          //   navigate(`/signin`);
+          // }
+        });
+    }
+
+    // }
+  }
+
+  const handleDelete = (event, exp) => {
+    console.log(exp)
+    axios({
+      method: "delete",
+      url: `/deleteexpense/${exp._id}`,
+      headers: {
+        Authorization: `Bearer ${x}`,
+      },
+    })
+      .then((response) => {
+        console.log("done");
+        // console.log(response)
+        // setdata(response.data);
+        // console.log("16", response.data)
       })
       .catch((error) => {
         console.log(error);
@@ -196,9 +223,6 @@ const CreatedRoom = () => {
         //   navigate(`/signin`);
         // }
       });
-    }
-
-    // }
   }
 
   return (
@@ -387,7 +411,15 @@ const CreatedRoom = () => {
                       <div className=" text-center">
                         {names.purpose}
                       </div>
-                      <div className=" text-center">₹{names.amount}</div>
+                      <div className=" text-center">
+                        ₹{names.amount}
+                        <button
+                          className="bg-black text-red-300"
+                          onClick={(event) => handleDelete(event, names)}
+                        >
+                          X
+                        </button>
+                      </div>
                     </div>
                     <hr className="mx-16 " />
                   </>
@@ -404,7 +436,15 @@ const CreatedRoom = () => {
                       <div className="  text-center">
                         {name.purpose}
                       </div>
-                      <div className="  text-center">₹{name.amount}</div>
+                      <div className="  text-center">
+                        ₹{name.amount}
+                        <button
+                          className="bg-black text-red-300"
+                          onClick={(event) => handleDelete(event, name)}
+                        >
+                          X
+                        </button>
+                      </div>
                     </div>
                     <hr className="mx-16" />
                   </>

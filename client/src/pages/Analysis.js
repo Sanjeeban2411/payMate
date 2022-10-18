@@ -266,6 +266,29 @@ const Analysis = () => {
   //   console.log("H",h)
   //   console.log("W",w)
 
+  const handleDelete = (e, name) => {
+    console.log(name)
+    axios({
+      method: "delete",
+      url: `/deleteexpense/${name._id}`,
+      headers: {
+        Authorization: `Bearer ${x}`,
+      },
+    })
+      .then((response) => {
+        console.log("done");
+        // console.log(response)
+        // setdata(response.data);
+        // console.log("16", response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status === 401) {
+          console.log("unauth");
+          navigate(`/signin`);
+        }
+      });
+  }
   return (
     <>
       {data && (
@@ -359,14 +382,20 @@ const Analysis = () => {
                               </div>
                               <div className=" text-center">
                                 <div className=" flex flex-row justify-around mx-auto">
-                                <div className="mx-auto">{name.room ? name.room.name : "Self"}</div>
-                                <div className= {name.room  ? name.room.name :"hidden mx-auto"}><img src="./assests/Vector.png" alt="" className=""/></div>
+                                  <div className="mx-auto">{name.room ? name.room.name : "Self"}</div>
+                                  <div className={name.room ? name.room.name : "hidden mx-auto"}><img src="./assests/Vector.png" alt="" className="" /></div>
                                 </div>
                                 {name.updatedAt.slice(0, 10)}{"  "}
                                 {name.updatedAt.slice(11, 16)}
                               </div>
                               <div className=" text-center">
                                 ₹{name.amount}
+                                <button
+                                  className="bg-black text-red-300"
+                                  onClick={(event) => handleDelete(event, name)}
+                                >
+                                  X
+                                </button>
                               </div>
                             </div>
                             <hr className="mx-16" />
