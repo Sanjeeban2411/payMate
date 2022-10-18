@@ -25,22 +25,65 @@ router.post('/addexpense', auth, async (req, res) => {
 })
 
 router.get('/getexpenses', auth, async (req, res) => {
-    const user = req.user
+    try {
+        const user = req.user
 
-    const expenses = await Expense.find({ owner: user._id }).populate('room')
-    // const owner = await expenses.populate("owner")
-    // const users = await room.populate('room')
+        const expenses = await Expense.find({ owner: user._id }).populate('room')
+        // const owner = await expenses.populate("owner")
+        // const users = await room.populate('room')
 
+        // console.log(expenses)
+        res.send(expenses)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+})
 
-    // console.log(expenses)
-    res.send(expenses)
+router.delete('/deleteexpense/:id', auth, async (req, res) => {
+    try {
+        const expense = await Expense.findById(req.params.id)
+        if(!expense){
+            return res.status(404).send("No expense found")
+        }
+        if(expense.owner.toString() !== req.user._id.toString()){
+            // return res.send({user:req.user._id, owner:expense.owner})
+            return res.status(400).send("Not your expense")
+        }
+        if(!expense.room){
+            // await expense.populate("room")
+            // return res.send(expense.room)
+            // DELETE THE EXPENSE FROM EXPENSE COLLECTION DIRECTLY
+            const exp = await Expense.findOneAndDelete({_id:req.params.id})
+            // console.log(exp)
+            return res.send(exp)
+        }
+
+        const tot = await Total.findOne({ $and: [{ room: expense.room }, { user: expense.owner }] })
+        tot.total = tot.total - expense.amount
+        await tot.save()
+
+        const splitwith = expense.splitInto
+        const split = expense.amount / splitwith.length
+
+        for (let i = 0; i < splitwith.length; i++) {
+            const due = await Total.findOne({ $and: [{ room: expense.room }, { user: splitwith[i] }] })
+            due.dues -= split
+            await due.save()
+        }
+
+        const exp = await Expense.findOneAndDelete({_id:req.params.id})
+
+        res.send({tot, exp})
+    } catch (error) {
+        res.status(500).send(error)
+    }
 })
 
 
 router.post('/:room/addexpense', auth, async (req, res) => {
     try {
         const room = await Room.findOne({ name: req.params.room })
-        console.log("Room",room)
+        console.log("Room", room)
         if (!room) {
             return res.status(404).send("No room found")
         }
@@ -63,8 +106,8 @@ router.post('/:room/addexpense', auth, async (req, res) => {
 
         // const split = await Total.updateMany()
         const split = req.body.amount / req.body.splitInto.length
-        console.log("split",split)
-        for(let i = 0; i<req.body.splitInto.length; i++){
+        console.log("split", split)
+        for (let i = 0; i < req.body.splitInto.length; i++) {
             const due = await Total.findOne({ $and: [{ room: room._id }, { user: req.body.splitInto[i] }] })
             due.dues += split
             await due.save()
@@ -74,8 +117,6 @@ router.post('/:room/addexpense', auth, async (req, res) => {
         // console.log(req.body.amount)
 
         res.send(expense)
-        // res.send("expense")
-
     } catch (e) {
         res.status(500).send(e)
     }
@@ -97,7 +138,6 @@ router.get('/:room/getexpenses', auth, async (req, res) => {
         //     const obj = {
         //         amount:val.amount,
         //         purpose:val.purpose,
-
         //     }
         // })
         const tot = await Total.find({ $and: [{ room: room._id }, { user: req.user._id }] })
