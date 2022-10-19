@@ -10,7 +10,7 @@ const Total = require('../mongo/models/total')
 
 const router = new express.Router()
 
-// create room
+// CREATE ROOM
 router.post('/room/create', auth, async (req, res) => {
     console.log("hi")
     const user = req.user
@@ -37,6 +37,7 @@ router.post('/room/create', auth, async (req, res) => {
     }
 })
 
+//JOIN ROOM
 router.post('/room/join', auth, async (req, res) => {
     console.log('hi', req.user)
     const user = req.user
@@ -85,6 +86,8 @@ router.post('/room/join', auth, async (req, res) => {
     }
 })
 
+
+// GET USERS INSIDE A ROOM
 router.get('/:room/users', auth, async (req, res) => {
     // console.log(req.params.room)
     const room = await Room.findOne({ name: req.params.room })
@@ -111,6 +114,8 @@ router.get('/:room/users', auth, async (req, res) => {
     }
 })
 
+
+// GET TOTAL AND DUES FOR REPORT
 router.get('/:room/analyze', auth, async (req, res) => {
     const room = await Room.findOne({ name: req.params.room })
 
@@ -125,6 +130,8 @@ router.get('/:room/analyze', auth, async (req, res) => {
     res.send({ expense, total })
 })
 
+
+//SETTLE TRANSACTION / MARK AS DONE (ONLY BY RECIEVER)
 router.patch('/:room/settleTransaction', auth, async (req, res) => {
     try {
         const room = await Room.findOne({ name: req.params.room })
@@ -193,6 +200,8 @@ router.patch('/:room/settleTransaction', auth, async (req, res) => {
     }
 })
 
+
+// EXIT/LEAVE ROOM
 // router.patch('/:room/leave/:owner', auth, async(req,res)=>{
 router.patch('/:room/leaveroom', auth, async(req,res)=>{
     const room = await Room.findOne({name:req.params.room})

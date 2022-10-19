@@ -10,6 +10,7 @@ const auth = require('../middlewares/auth')
 
 const router = new express.Router()
 
+//USER SIGN UP
 router.post('/signup', async (req, res) => {
     const user = new User(req.body)
     try {
@@ -26,6 +27,7 @@ router.post('/signup', async (req, res) => {
     }
 })
 
+//USER LOG IN
 router.post('/login', async (req, res) => {
     const email = req.body.email
     const user = await User.findOne({ email })
@@ -50,6 +52,8 @@ router.post('/login', async (req, res) => {
     }
 })
 
+
+// USER UPLOAD PROFILE PIC
 const upload = multer({
     // dest:'./pics',
     // fileFilter(req, file, cb){
@@ -73,6 +77,8 @@ router.post('/addavatar', auth, upload.single('avatar'), async (req, res) => {
     // res.send(req.file.buffer)
 })
 
+
+//SHOW ALL ROOMS OF USER
 router.get('/showrooms', auth, async (req, res) => {
     try {
         // const user = req.user
@@ -94,6 +100,9 @@ router.get('/showrooms', auth, async (req, res) => {
     }
 })
 
+
+
+//TEST APIS
 router.get('/user', auth, (req, res) => {
     // res.json({msg:"Hiii"})
     console.log("test api", req.user)
@@ -104,8 +113,5 @@ router.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });
 });
 
-// router.get('/',(req,res)=>{
-//     res.send("hello world")
-// })
 
 module.exports = router
