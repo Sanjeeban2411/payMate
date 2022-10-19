@@ -18,6 +18,7 @@
    
   <title>Paymate</title>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -98,7 +99,28 @@ border-radius: 20px;}
 #nav-links:hover::after{
   width: 0%;
 }
+#card-rm-btn:hover{
+  color: white;
+  background-color: black;
+  
+}
+#card-room:hover #cr-card:not(:hover){
+  filter: grayscale(100%);
+}
+.active-1 {
+  background-color: black !important;
+  color: white !important;
+}
+/* .active-1[id="button"]{
+  filter: grayscale(100%);
+} */
+/* .active-1:not([class="active-1"])[id="button"] #cr-card{
+  filter: grayscale(100%);
+} */
 
+/* #card-room .active:not(::after){
+  filter: grayscale(100%);
+} */
 
 
   </style>

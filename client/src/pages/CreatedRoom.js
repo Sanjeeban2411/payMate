@@ -78,6 +78,7 @@ const CreatedRoom = () => {
   // console.log("tst", userNames)
   var checkboxs = document.querySelectorAll(".checkbox");
 
+  const [isActive, setIsActive] = useState(false);
 
   const addExpense = (e) => {
     // e.preventDefault();
@@ -85,6 +86,8 @@ const CreatedRoom = () => {
     // setSplitInto(arr)
 
     // setCheck('.checkbox'==true)
+    
+
     toast.success('Successfully Added !', {
       position: toast.POSITION.TOP_RIGHT
     });
@@ -133,6 +136,7 @@ const CreatedRoom = () => {
 
     setIndie(true);
     setName(name.name);
+    setIsActive(current => !current);
   };
 
 
@@ -224,6 +228,11 @@ const CreatedRoom = () => {
         // }
       });
   }
+
+  $("button").click(function(){
+    $("button").removeClass("active-1");
+    $(this).addClass("active-1");
+  });
 
   return (
     <>
@@ -357,19 +366,25 @@ const CreatedRoom = () => {
           Mates
         </div>
 
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div id="card-room"  className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
           {userNames.map((name) => {
             return (
-              <div className="flex flex-col    bg-[#2176AE] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500 " id="cr-card">
+              // <div  className="flex flex-col    bg-[#2176AE] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500 " id="cr-card">
+                <div   className="flex flex-col  bg-[#2176AE] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500" id="cr-card">
                 <div className=" border-2 border-black m-3 bg-[#E9F1F7]">
                   <div className=" mt-4">
-                    <HiUserCircle size={100} className=" mx-auto " />
+                    <HiUserCircle size={200} className=" mx-auto " />
                   </div>
                   <div className="p-4 text-center font-MinionPro text-4xl">{name.name}</div>
                 </div>
                 <button
-                  className="bg-[#E9F1F7] text-black  hover:text-white mx-auto p-2 px-3 my-3 rounded-md transition ease-in-out hover:-translate-y-1 hover:scale-110  duration-500"
+                id="button"
+                  className="bg-[#E9F1F7] text-[#2176AE] text-2xl   hover:text-white mx-auto p-2 px-4 my-3 rounded-md transition ease-in-out hover:-translate-y-1 hover:scale-110  duration-500"
                   onClick={(event) => expenseDetails(event, name)}
+                  // style={{
+                  //   backgroundColor: isActive ? 'black' : '',
+                  //   color: isActive ? 'white' : '',
+                  // }}
                 >
                   Spent
                 </button>
@@ -394,6 +409,7 @@ const CreatedRoom = () => {
             Settle Up
           </a>
         </button>
+        {!indie &&
         <div
           className="border-2  my-24 mx-32 rounded-t-xl bg-white"
           id="tranbg"
@@ -402,8 +418,11 @@ const CreatedRoom = () => {
             <h2 className="text-center">Previous Transaction</h2>
           </div>
           <div className="mt-6">
-            {limit &&
-              allExpenses.filter((name, idx) => idx < 5).map((names) => {
+            { 
+              allExpenses.filter((name, idx) => {
+                return (limit ? idx < 5 : name)
+              })
+                .map((names) => {
                 return (
                   <>
                     <div className=" p-2 grid grid-cols-3 gap-4">
@@ -426,31 +445,6 @@ const CreatedRoom = () => {
                 );
               })}
 
-            {!indie &&
-              !limit &&
-              allExpenses.map((name) => {
-                return (
-                  <>
-                    <div className="p-2 grid grid-cols-3 gap-4">
-                      <div className=" text-center">{name.owner.name}</div>
-                      <div className="  text-center">
-                        {name.purpose}
-                      </div>
-                      <div className="  text-center">
-                        ₹{name.amount}
-                        <button
-                          className="bg-black text-red-300"
-                          onClick={(event) => handleDelete(event, name)}
-                        >
-                          X
-                        </button>
-                      </div>
-                    </div>
-                    <hr className="mx-16" />
-                  </>
-                );
-              })}
-
             <div className=" text-center">
               <button
                 onClick={() => setLimit(!limit)}
@@ -460,7 +454,7 @@ const CreatedRoom = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div>}
       </div>
     </>
   );

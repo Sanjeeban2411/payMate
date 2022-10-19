@@ -91,8 +91,8 @@ const Rooms = (props) => {
           </div>
           <div className='  h-[30vh]'>
             <div className=' mx-32 '>
-        <div className=' mt-6 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300'><div><a href="/createroom" className=' bg-black text-white  rounded-lg p-2 px-33 hover:bg-gray-400 hover:text-black no-underline '>Create a Room</a></div></div>
-        <div className=' mt-12 mx-2 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300'><a href="/joinroom" className=' bg-black text-white  rounded-lg p-2 px-3 hover:bg-gray-400 hover:text-black no-underline'>Join a Room</a></div>
+        <div className=' text-2xl  mt-6 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300'><div><a href="/createroom" className=' bg-black text-white  rounded-lg p-3 px-33 hover:bg-gray-400 hover:text-black no-underline '>Create a Room</a></div></div>
+        <div className='text-2xl mt-12 mx-2 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300'><a href="/joinroom" className=' bg-black text-white  rounded-lg p-3 px-3 hover:bg-gray-400 hover:text-black no-underline'>Join a Room</a></div>
         </div>
         </div>
         </div>

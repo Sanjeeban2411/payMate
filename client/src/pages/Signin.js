@@ -99,7 +99,7 @@ const Signin = () => {
         })
         google.accounts.id.renderButton(
             document.getElementById("signInDiv"),
-            {theme: "outline", size: "large",width:400, shape: "pill" ,text: "signin_with"}
+            {theme: "outline", size: "large",width:394, shape: "pill" ,text: "signin_with"}
             )
             google.accounts.id.prompt()
     },[]);
@@ -250,7 +250,7 @@ const Signin = () => {
                 >
                   Login
                 </button>
-                <div className='w-full mt-3 px-4  ' id="signInDiv"></div>
+                <div className='w-full mt-3  ' id="signInDiv"></div>
                 {/* <button
                   className="w-full block bg-white hover:bg-blue-400 focus:bg-blue-400 text-black font-semibold rounded-lg
                 px-4 py-1 mt-3"
