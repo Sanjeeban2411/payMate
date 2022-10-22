@@ -249,37 +249,47 @@ export default function Report() {
       {/* {totalData} */}
       <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black px-10">
         <div className="font-extrabold mb-5 pb-10">
-          <div className=" text-center text-4xl font-extrabold">Settle</div>
+          <div className=" text-center text-4xl font-extrabold mb-2">Settle</div>
+          <div className="mx-auto">
           {transactions.map((name) => {
             return (
               <div
                 className={
-                  name.status === "pay" ? "bg-yellow-200 pl-10" : "bg-blue-400"
+                  name.status === "pay"
+                    ? " hidden"
+                    : " flex flex-row text-center mb-2"
                 }
               >
-                <div className="ml-5">
-                  {name.user} has to {name.status} <span>&#10230;</span> ₹
-                  {Math.abs(name.amount.toFixed(2))}
+                <div className="w-[380px] rounded-l-[20px] border-2 border-y-[#2176AE] border-l-[#2176AE]">
+                  <div className="flex flex-col my-24">
+                  <div className=" font-bold">{name.user}</div>
+                  <div className=" text-lg">has to {name.status}</div>
+                  <div className=" text-2xl">₹{Math.abs(name.amount.toFixed(2))}</div>
+                  </div>
                 </div>
+                <div id="settle-card-bg" className="grid grid-rows-2 grid-flow-col">
                 {name.transact.map((names) => {
                   return (
-                    <div className=" bg-slate-200 pl-40 text-[#2176AE] font-extrabold">
-                      {names.user} -- ₹{Math.abs(names.amount.toFixed(2))}
+                    
+                    <div className="  py-3 px-1 text-[#2176AE] font-extrabold flex flex-col">
+                      <div className=" text-xl">{names.user}</div>
+                      <div className=" text-xl">₹{Math.abs(names.amount.toFixed(2))}<span className="w-2"><img src="/assests/down.png" alt="" className=""/></span></div>
                       <span className={names.token === x ? "block" : "hidden"}>
                         <button className="bg-black text-white">pay</button>
                       </span>
-                      <span className={name.token === x ? "block" : "hidden"}>
+                      <span className={name.token === x ? "block" : ""}>
                         <button
-                          className="bg-green-600 text-white duration-500 py-2 px-4 rounded-[15px] hover:bg-green-400 m-3"
+                          className="bg-green-600 text-white duration-500 py-2 px-4 rounded-[15px] text-xs hover:bg-green-400 m-3"
                           onClick={(event) => handleClear(event, name, names)}
                         >
                           Mark as Paid
                         </button>
 
                         <button
-                          className="bg-[#2176AE] text-white py-2 px-4 rounded-[15px] font-semibold"
+                          className="bg-[#2176AE] text-white text-xs py-2 px-4 rounded-[15px] font-semibold"
                           onClick={() => {
                             setqr(names.user);
+                            // setqr(false)
                             // console.log(qr)
                           }}
                         >
@@ -294,11 +304,14 @@ export default function Report() {
                         )}
                       </span>
                     </div>
+                    
                   );
                 })}
+                </div>
               </div>
             );
           })}
+          </div>
 
           {/* <span className={countDone === transactions.length ? 'block' : 'hidden'}>
             <button className="bg-black text-white px-10 py-2" onClick={handleClear}>
