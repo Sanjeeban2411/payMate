@@ -229,10 +229,10 @@ const CreatedRoom = () => {
       });
   }
 
-  $("button").click(function(){
-    $("button").removeClass("active-1");
-    $(this).addClass("active-1");
-  });
+  // $("button").click(function(){
+  //   $("button").removeClass("active-1");
+  //   $(this).addClass("active-1");
+  // });
 
   return (
     <>
