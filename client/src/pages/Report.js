@@ -273,7 +273,9 @@ export default function Report() {
                     
                     <div className="  py-3 px-1 text-[#2176AE] font-extrabold flex flex-col">
                       <div className=" text-xl">{names.user}</div>
-                      <div className=" text-xl">₹{Math.abs(names.amount.toFixed(2))}<span className="w-2"><img src="/assests/down.png" alt="" className=""/></span></div>
+                      <div className=" text-xl">₹{Math.abs(names.amount.toFixed(2))}
+                      {/* <span className="w-2"><img src="/assests/down.png" alt="" className=""/></span> */}
+                      </div>
                       <span className={names.token === x ? "block" : "hidden"}>
                         <button className="bg-black text-white">pay</button>
                       </span>
