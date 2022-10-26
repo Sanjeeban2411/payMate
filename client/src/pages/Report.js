@@ -250,18 +250,21 @@ export default function Report() {
       <div className=" absolute w-full h-[120%] top-50% flex flex-col mt-28 font-Montserrat text-3xl  text-black px-10">
         <div className="font-extrabold mb-5 pb-10">
           <div className=" text-center text-4xl font-extrabold mb-2">Settle</div>
-          <div className="mx-auto">
+          
           {transactions.map((name) => {
             return (
+              <div className="mr-auto">
               <div
                 className={
                   name.status === "pay"
                     ? " hidden"
-                    : " flex flex-row text-center mb-2"
+                    : name.status === "recieve"
+                    ? " flex flex-row text-center mb-2"
+                    : "hidden"
                 }
               >
-                <div className="w-[380px] rounded-l-[20px] border-2 border-y-[#2176AE] border-l-[#2176AE]">
-                  <div className="flex flex-col my-24">
+                <div className="w-[380px] h-[10%] rounded-l-[20px] border-2 border-y-[#2176AE] border-l-[#2176AE]">
+                  <div className="flex flex-col my-12">
                   <div className=" font-bold">{name.user}</div>
                   <div className=" text-lg">has to {name.status}</div>
                   <div className=" text-2xl">₹{Math.abs(name.amount.toFixed(2))}</div>
@@ -271,15 +274,15 @@ export default function Report() {
                 {name.transact.map((names) => {
                   return (
                     
-                    <div className="  py-3 px-1 text-[#2176AE] font-extrabold flex flex-col">
+                    <div className="  py-3 pl-5 pr-2 text-[#2176AE] font-extrabold flex flex-col">
                       <div className=" text-xl">{names.user}</div>
                       <div className=" text-xl">₹{Math.abs(names.amount.toFixed(2))}</div>
                       {/* <span className="w-2"><img src="/assests/down.png" alt="" className=""/></span> */}
                       
-                      <span className={names.token === x ? "block" : "hidden"}>
+                      {/* <div className={names.token === x ? "block" : "hidden"}>
                         <button className="bg-black text-white">pay</button>
-                      </span>
-                      <span className={name.token === x ? "block" : "hidden"}>
+                      </div> */}
+                      <div className={name.token === x ? "block" : "hidden"}>
                         <button
                           className="bg-green-600 text-white duration-500 py-2 px-4 rounded-[15px] text-xs hover:bg-green-400 m-3"
                           onClick={(event) => handleClear(event, name, names)}
@@ -304,16 +307,17 @@ export default function Report() {
                             )}&cu=INR`}
                           />
                         )}
-                      </span>
+                      </div>
                     </div>
                     
                   );
                 })}
                 </div>
               </div>
+              </div>
             );
           })}
-          </div>
+          
 
           {/* <span className={countDone === transactions.length ? 'block' : 'hidden'}>
             <button className="bg-black text-white px-10 py-2" onClick={handleClear}>
