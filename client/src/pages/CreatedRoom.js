@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+// import { SlOptionsVertical } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import axios from "axios";
@@ -86,7 +87,7 @@ const CreatedRoom = () => {
     // setSplitInto(arr)
 
     // setCheck('.checkbox'==true)
-    
+
 
     toast.success('Successfully Added !', {
       position: toast.POSITION.TOP_RIGHT
@@ -169,10 +170,8 @@ const CreatedRoom = () => {
       userNames.forEach((user) => {
         if (user.token === x) {
           console.log("UNSERS", user)
-          // setOwner(user._id.toString())
           owner = user._id.toString()
         }
-
       })
       console.log("yooyooo", owner)
     }
@@ -180,7 +179,6 @@ const CreatedRoom = () => {
     if (owner) {
       axios({
         method: "patch",
-        // url: `/${room}/leave/${owner}`,
         url: `/${room}/leaveroom`,
         headers: {
           Authorization: `Bearer ${x}`,
@@ -195,14 +193,39 @@ const CreatedRoom = () => {
         })
         .catch((error) => {
           console.log(error);
-          // if (error.response.status === 401) {
-          //   console.log("unauth");
-          //   navigate(`/signin`);
-          // }
+          if (error.response.status === 401) {
+            console.log("unauth");
+            navigate(`/signin`);
+          }
         });
     }
-
-    // }
+  }
+  const [showOp, setShowOp] = useState({
+    id:"",
+    status: false
+  });
+  
+  const [detail, setDetail] = useState({});
+  const handleDetail = (event, exp) => {
+    console.log(exp)
+    axios({
+      method: "get",
+      url: `/detailedexpense/${exp._id}`,
+      headers: {
+        Authorization: `Bearer ${x}`,
+      },
+    })
+      .then((response) => {
+        setDetail(response.data);
+        console.log("detail",response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status === 401) {
+          console.log("unauth");
+          navigate(`/signin`);
+        }
+      });
   }
 
   const handleDelete = (event, exp) => {
@@ -216,23 +239,15 @@ const CreatedRoom = () => {
     })
       .then((response) => {
         console.log("done");
-        // console.log(response)
-        // setdata(response.data);
-        // console.log("16", response.data)
       })
       .catch((error) => {
         console.log(error);
-        // if (error.response.status === 401) {
-        //   console.log("unauth");
-        //   navigate(`/signin`);
-        // }
+        if (error.response.status === 401) {
+          console.log("unauth");
+          navigate(`/signin`);
+        }
       });
   }
-
-  // $("button").click(function(){
-  //   $("button").removeClass("active-1");
-  //   $(this).addClass("active-1");
-  // });
 
   return (
     <>
@@ -366,11 +381,11 @@ const CreatedRoom = () => {
           Mates
         </div>
 
-        <div id="card-room"  className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div id="card-room" className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
           {userNames.map((name) => {
             return (
               // <div  className="flex flex-col    bg-[#2176AE] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500 " id="cr-card">
-                <div   className="flex flex-col  bg-[#2176AE] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500" id="cr-card">
+              <div className="flex flex-col  bg-[#2176AE] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500" id="cr-card">
                 <div className=" border-2 border-black m-3 bg-[#E9F1F7]">
                   <div className=" mt-4">
                     <HiUserCircle size={200} className=" mx-auto " />
@@ -378,13 +393,13 @@ const CreatedRoom = () => {
                   <div className="p-4 text-center font-MinionPro text-4xl">{name.name}</div>
                 </div>
                 <button
-                id="button"
+                  id="button"
                   className="bg-[#E9F1F7] text-[#2176AE] text-2xl   hover:text-white mx-auto p-2 px-4 my-3 rounded-md transition ease-in-out hover:-translate-y-1 hover:scale-110  duration-500"
                   onClick={(event) => expenseDetails(event, name)}
-                  // style={{
-                  //   backgroundColor: isActive ? 'black' : '',
-                  //   color: isActive ? 'white' : '',
-                  // }}
+                // style={{
+                //   backgroundColor: isActive ? 'black' : '',
+                //   color: isActive ? 'white' : '',
+                // }}
                 >
                   Spent
                 </button>
@@ -394,6 +409,11 @@ const CreatedRoom = () => {
         </div>
         {/* </>
         } */}
+        <button className="bg-[#2176AE] text-white mx-auto p-2 my-4 mt-10 rounded-md transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500">
+          <a href="/report" className="text-white no-underline">
+            Settle Up
+          </a>
+        </button>
         {indie && (
           <>
             <IndieExpenses
@@ -404,57 +424,83 @@ const CreatedRoom = () => {
             />
           </>
         )}
-        <button className="bg-[#2176AE] text-white mx-auto p-2 my-4 mt-10 rounded-md transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500">
-          <a href="/report" className="text-white no-underline">
-            Settle Up
-          </a>
-        </button>
-        {!indie &&
-        <div
-          className="border-2  my-24 mx-32 rounded-t-xl bg-white"
-          id="tranbg"
-        >
-          <div className="p-4 bg-[#E18A07] rounded-t-xl">
-            <h2 className="text-center">Previous Transaction</h2>
-          </div>
-          <div className="mt-6">
-            { 
-              allExpenses.filter((name, idx) => {
-                return (limit ? idx < 5 : name)
-              })
-                .map((names) => {
-                return (
-                  <>
-                    <div className=" p-2 grid grid-cols-3 gap-4">
-                      <div className="  text-center">{names.owner.name}</div>
-                      <div className=" text-center">
-                        {names.purpose}
-                      </div>
-                      <div className=" text-center">
-                        ₹{names.amount}
-                        <button
-                          className="bg-black text-red-300"
-                          onClick={(event) => handleDelete(event, names)}
-                        >
-                          X
-                        </button>
-                      </div>
-                    </div>
-                    <hr className="mx-16 " />
-                  </>
-                );
-              })}
 
-            <div className=" text-center">
-              <button
-                onClick={() => setLimit(!limit)}
-                className=" border-[3px] rounded-[10px] border-black py-2 px-3"
-              >
-                {limit ? "Show more" : "Show less"}
-              </button>
+        {!indie &&
+          <div
+            className="border-2  my-24 mx-32 rounded-t-xl bg-white"
+            id="tranbg"
+          >
+            <div className="p-4 bg-[#E18A07] rounded-t-xl">
+              <h2 className="text-center">Previous Transaction</h2>
             </div>
-          </div>
-        </div>}
+            <div className="mt-6">
+              {
+                allExpenses.filter((name, idx) => {
+                  return (limit ? idx < 5 : name)
+                })
+                  .map((names) => {
+                    return (
+                      <>
+                        <div className=" p-2 grid grid-cols-3 gap-4">
+                          <div className="  text-center">{names.owner.name}</div>
+                          <div className=" text-center">
+                            {names.purpose}
+                          </div>
+                          <div className=" text-center">
+                            ₹{names.amount}
+                            <button
+                              className="bg-black text-red-300"
+                              // onClick={(event) => handleDelete(event, names)}
+                              onClick={()=>{
+                                setShowOp({
+                                id:`${names._id}`,
+                                status: true
+                              })
+                              console.log("OP",showOp)
+                            }}
+                              
+                            >
+                              {/* {SlOptionsVertical} */}
+                              X
+                            </button>
+                            {showOp.status && showOp.id === names._id && 
+                            <div className="flex flex-col">
+                              <button
+                                className="bg-black text-white"
+                                // onClick={(event) => handleDelete(event, names)}
+                              >
+                              Edit
+                              </button>
+                              <button
+                                className="bg-black text-white"
+                                onClick={(event) => handleDetail(event, names)}
+                              >
+                              Details
+                              </button>
+                              <button
+                                className="bg-black text-white"
+                                // onClick={(event) => handleDelete(event, names)}
+                              >
+                              Delete
+                              </button>
+                            </div>}
+                          </div>
+                        </div>
+                        <hr className="mx-16 " />
+                      </>
+                    );
+                  })}
+
+              <div className=" text-center">
+                <button
+                  onClick={() => setLimit(!limit)}
+                  className=" border-[3px] rounded-[10px] border-black py-2 px-3"
+                >
+                  {limit ? "Show more" : "Show less"}
+                </button>
+              </div>
+            </div>
+          </div>}
       </div>
     </>
   );

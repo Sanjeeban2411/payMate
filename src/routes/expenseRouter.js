@@ -115,6 +115,23 @@ router.get('/:room/getexpenses', auth, async (req, res) => {
 })
 
 
+//VIEW EXPENSE DETAILS
+router.get('/detailedexpense/:id', auth, async(req,res)=>{
+    const expense = await Expense.findById(req.params.id)
+    if (!expense) {
+        return res.status(404).send("No expense found")
+    }
+    const exp = await (await expense.populate('owner')).populate('splitInto')
+    let split = []
+    exp.splitInto.forEach((val)=>{
+        split.push(val.name)
+    })
+    const share = expense.amount / expense.splitInto.length
+    
+    res.send({exp, split, share})
+})
+
+
 //DELETE EXPENSE
 router.delete('/deleteexpense/:id', auth, async (req, res) => {
     try {
