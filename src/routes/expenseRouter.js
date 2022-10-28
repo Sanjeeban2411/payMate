@@ -92,7 +92,7 @@ router.get('/:room/getexpenses', auth, async (req, res) => {
     // console.log(room)
     if (room) {
         // res.send(room.users)
-        const expense = await Expense.find({ room: room._id }).populate('owner')
+        const expense = await Expense.find({ room: room._id }).populate('owner').populate('room').populate('splitInto')
         console.log(expense)
         // const ofRoom = await expense.populated()
         // console.log(ofRoom)
