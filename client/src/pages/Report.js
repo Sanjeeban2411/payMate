@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { QRCodeSVG } from "qrcode.react";
 import Navbar from "../components/Navbar";
+import { HiUserCircle } from "react-icons/hi";
 
 export default function Report() {
   const [totalData, setTotalData] = useState([]);
@@ -263,20 +264,31 @@ export default function Report() {
                     : "hidden"
                 }
               >
-                <div className="w-[380px] h-[10%] rounded-l-[20px] border-2 border-y-[#2176AE] border-l-[#2176AE]">
-                  <div className="flex flex-col my-12">
+                <div className="w-[380px] h-[270px] rounded-l-[20px] border-2 border-y-[#2176AE] border-l-[#2176AE]">
+                  <div className="flex flex-col py-3">
+                  <div className="">
+                    <HiUserCircle size={100} className="mx-auto" />
+                  </div>
                   <div className=" font-bold">{name.user}</div>
                   <div className=" text-lg">has to {name.status}</div>
                   <div className=" text-2xl">₹{Math.abs(name.amount.toFixed(2))}</div>
                   </div>
                 </div>
-                <div id="settle-card-bg" className="grid grid-rows-2 grid-flow-col">
+                <div id="settle-card-bg" className="flex flex-col flex-wrap w-[900px] h-[270px]">
+                  <hr className=" absolute bottom-10 left-20"/>
                 {name.transact.map((names) => {
                   return (
                     
-                    <div className="  py-3 pl-5 pr-2 text-[#2176AE] font-extrabold flex flex-col">
-                      <div className=" text-xl">{names.user}</div>
+                    <div className="relative pl-5 pr-2 m-auto text-[#2176AE] font-extrabold flex flex-col">
+                      <div className="flex flex-row">
+                      <div>
+                      <HiUserCircle size={70} color="black" className="mx-auto" />
+                      </div>
+                      <div className="flex flex-col mt-2 ml-3">
+                      <div className=" text-xl text-black">{names.user}</div>
                       <div className=" text-xl">₹{Math.abs(names.amount.toFixed(2))}</div>
+                      </div>
+                      </div>
                       {/* <span className="w-2"><img src="/assests/down.png" alt="" className=""/></span> */}
                       
                       {/* <div className={names.token === x ? "block" : "hidden"}>
@@ -284,14 +296,14 @@ export default function Report() {
                       </div> */}
                       <div className={name.token === x ? "block" : "hidden"}>
                         <button
-                          className="bg-green-600 text-white duration-500 py-2 px-4 rounded-[15px] text-xs hover:bg-green-400 m-3"
+                          className="bg-white text-black duration-500 py-2 px-2 rounded-[15px] text-xs hover:bg-green-400 m-3"
                           onClick={(event) => handleClear(event, name, names)}
                         >
                           Mark as Paid
                         </button>
 
                         <button
-                          className="bg-[#2176AE] text-white text-xs py-2 px-4 rounded-[15px] font-semibold"
+                          className="bg-[#2176AE] text-white text-xs py-2 px-3 rounded-[15px] font-semibold"
                           onClick={() => {
                             setqr(names.user);
                             // setqr(false)
