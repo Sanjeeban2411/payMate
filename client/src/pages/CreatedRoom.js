@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { HiUserCircle } from "react-icons/hi";
+import {GiHamburgerMenu} from "react-icons/gi"
+import {AiOutlineMore} from "react-icons/ai"
 import BarChart from "../components/BarChart";
 import IndieExpenses from "../components/IndieExpenses";
 import { ToastContainer, toast } from 'react-toastify';
@@ -381,14 +383,14 @@ const CreatedRoom = () => {
           Mates
         </div>
 
-        <div id="card-room" className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div id="card-room" className="mt-6 grid grid-cols-1 md:grid-cols-5 gap-5">
           {userNames.map((name) => {
             return (
               // <div  className="flex flex-col    bg-[#2176AE] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500 " id="cr-card">
               <div className="flex flex-col  bg-[#2176AE] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500" id="cr-card">
-                <div className=" border-2 border-black m-3 bg-[#E9F1F7]">
+                <div className=" border-2 border-black m-4 bg-[#E9F1F7]">
                   <div className=" mt-4">
-                    <HiUserCircle size={200} className=" mx-auto " />
+                    <HiUserCircle size={100} className=" mx-auto " />
                   </div>
                   <div className="p-4 text-center font-MinionPro text-4xl">{name.name}</div>
                 </div>
@@ -446,10 +448,10 @@ const CreatedRoom = () => {
                           <div className=" text-center">
                             {names.purpose}
                           </div>
-                          <div className=" text-center">
+                          <div className="text-center">
                             ₹{names.amount}
                             <button
-                              className="bg-black text-red-300"
+                              className=""
                               // onClick={(event) => handleDelete(event, names)}
                               onClick={()=>{
                                 setShowOp({
@@ -458,10 +460,12 @@ const CreatedRoom = () => {
                               })
                               console.log("OP",showOp)
                             }}
-                              
+
                             >
-                              {/* {SlOptionsVertical} */}
-                              X
+                              
+                              {/* <GiHamburgerMenu style={{top: '300px',right: '20px',}}/> */}
+                              <AiOutlineMore style={{  marginLeft: '20px',}}/>
+                          
                             </button>
                             {showOp.status && showOp.id === names._id && 
                             <div className="flex flex-col">
