@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineMore } from "react-icons/ai";
+import {MdOutlineEdit} from "react-icons/md"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -150,23 +151,26 @@ export default function ExpenseLog(props) {
         </>
       )}
       {editMode.status && (
-        <div className="grid grid-rows-2">
-          <div className=" p-2 grid grid-cols-3 ">
-            {/* <div className="  text-center">{editMode.details.owner.name}</div> */}
-            {/* <div className=" text-center">{editMode.details.purpose}</div> */}
-            <input type="text" value={editMode.details.purpose}/>
-            <input type="number" value={editMode.details.amount}/>
-            {/* <div className="text-center">₹{editMode.details.amount}</div> */}
-          </div>
-          <div className=" flex flex-row">
-            Split With --
+        <div className="mt-2">
+          <div className="grid grid-cols-2 gap-36 p-2 ">
+          <div className="">
+          <span><MdOutlineEdit/></span><input type="text" value={editMode.details.purpose}/>
+            </div>
+            <div className="">
+            <span><MdOutlineEdit/></span><span>₹</span><input type="number" value={editMode.details.amount} className=""/><span className=" text-red-600 ml-10">x</span>
+            </div>
+            </div>
+          <div className=" text-[#02A9EA]">
+            Split With &rarr;
+            <div className=" flex flex-row">
             {editMode.details.splitInto.map((split)=>{
               return(
-                <div className="px-2">
-                {split.name}
+                <div className="px-4 py-2 m-2 bg-[#2176AE] text-white rounded-[15px] ">
+                {split.name}<span className="text-white ml-4 font-thin ">x</span>
                 </div>
               )
             })}
+            </div>
           </div>
         </div>
       )}

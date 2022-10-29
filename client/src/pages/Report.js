@@ -265,9 +265,12 @@ export default function Report() {
                 }
               >
                 <div className="w-[380px] h-[270px] rounded-l-[20px] border-2 border-y-[#2176AE] border-l-[#2176AE]">
-                  <div className="flex flex-col py-3">
+                  <div className="flex flex-col">
                   <div className="">
-                    <HiUserCircle size={100} className="mx-auto" />
+                  <img
+              src="./assests/avatar.png"
+              className="mx-auto"
+            />
                   </div>
                   <div className=" font-bold">{name.user}</div>
                   <div className=" text-lg">has to {name.status}</div>
@@ -282,9 +285,13 @@ export default function Report() {
                     <div className="relative pl-5 pr-2 m-auto text-[#2176AE] font-extrabold flex flex-col">
                       <div className="flex flex-row">
                       <div>
-                      <HiUserCircle size={70} color="black" className="mx-auto" />
+                      <img
+              src="./assests/avatar.png"
+              className="mx-auto"
+            />
+                      {/* <HiUserCircle size={70} color="black" className="mx-auto" /> */}
                       </div>
-                      <div className="flex flex-col mt-2 ml-3">
+                      <div className="flex flex-col mt-16 ml-3">
                       <div className=" text-xl text-black">{names.user}</div>
                       <div className=" text-xl">₹{Math.abs(names.amount.toFixed(2))}</div>
                       </div>

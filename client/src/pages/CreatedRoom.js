@@ -343,7 +343,10 @@ const CreatedRoom = () => {
               <div className="flex flex-col  bg-[#2176AE] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500" id="cr-card">
                 <div className=" border-2 border-black m-4 bg-[#E9F1F7]">
                   <div className=" mt-4">
-                    <HiUserCircle size={100} className=" mx-auto " />
+                  <img
+              src="./assests/avatar.png"
+              className="mx-auto"
+            />
                   </div>
                   <div className="p-4 text-center font-MinionPro text-4xl">{name.name}</div>
                 </div>
