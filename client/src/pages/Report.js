@@ -264,21 +264,31 @@ export default function Report() {
                     : "hidden"
                 }
               >
-                <div className="w-[380px] h-[270px] rounded-l-[20px] border-2 border-y-[#2176AE] border-l-[#2176AE]">
+                <div className="w-[380px] h-[300px] rounded-l-[20px] border-2 border-y-[#2176AE] border-l-[#2176AE]">
                   <div className="flex flex-col">
                   <div className="">
                   <img
               src="./assests/avatar.png"
-              className="mx-auto"
+              className="mx-auto "
             />
                   </div>
+                  <div className=" flex flex-row mx-auto">
+                    <div className="ml-16">
                   <div className=" font-bold">{name.user}</div>
                   <div className=" text-lg">has to {name.status}</div>
                   <div className=" text-2xl">₹{Math.abs(name.amount.toFixed(2))}</div>
                   </div>
+                  <div>
+                      <img
+              src="./assests/plus.png"
+              className="ml-16 w-16 h-16"
+            />
+                      </div>
+                  </div>
+                  </div>
                 </div>
-                <div id="settle-card-bg" className="flex flex-col flex-wrap w-[900px] h-[270px]">
-                  <hr className=" absolute bottom-10 left-20"/>
+                <div id="settle-card-bg" className="flex flex-row flex-wrap w-[900px] h-[300px]">
+                  {/* <hr className=" absolute bottom-10 left-20"/> */}
                 {name.transact.map((names) => {
                   return (
                     
@@ -287,13 +297,18 @@ export default function Report() {
                       <div>
                       <img
               src="./assests/avatar.png"
-              className="mx-auto"
+              className="mx-auto w-20 h-20"
             />
-                      {/* <HiUserCircle size={70} color="black" className="mx-auto" /> */}
                       </div>
-                      <div className="flex flex-col mt-16 ml-3">
+                      <div className="flex flex-col mt-6 ml-3">
                       <div className=" text-xl text-black">{names.user}</div>
                       <div className=" text-xl">₹{Math.abs(names.amount.toFixed(2))}</div>
+                      </div>
+                      <div>
+                      <img
+              src="./assests/down.png"
+              className="ml-2 w-5 h-5 mt-7"
+            />
                       </div>
                       </div>
                       {/* <span className="w-2"><img src="/assests/down.png" alt="" className=""/></span> */}

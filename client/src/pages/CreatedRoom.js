@@ -336,7 +336,7 @@ const CreatedRoom = () => {
           Mates
         </div>
 
-        <div id="card-room" className="mt-6 grid grid-cols-1 md:grid-cols-5 gap-5">
+        <div id="card-room" className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-5">
           {userNames.map((name) => {
             return (
               // <div  className="flex flex-col    bg-[#2176AE] transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-500 " id="cr-card">
