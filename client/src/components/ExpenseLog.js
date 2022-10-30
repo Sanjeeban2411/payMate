@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineMore } from "react-icons/ai";
-import {MdOutlineEdit} from "react-icons/md"
+import { MdOutlineEdit } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -65,10 +65,18 @@ export default function ExpenseLog(props) {
   // };
 
   const [editMode, setEditMode] = useState({
-    name: " ",
-    purpose: " ",
-    amount: 0,
+    details:{},
     status: false,
+  });
+  const [editAmount, setEditAmount] = useState(false);
+  const [editPurpose, setEditPurpose] = useState(false);
+  const [purpose, setPurpose] = useState(" ");
+  const [amount, setAmount] = useState( );
+
+  const [editedData, setEditedData] = useState({
+    pupose: editMode.purpose,
+    amount: editMode.amount,
+    splitInto: [],
   });
 
   return (
@@ -109,13 +117,15 @@ export default function ExpenseLog(props) {
                             <button
                               className="bg-black text-white"
                               // onClick={(event) => handleDelete(event, names)}
-                              onClick={() => setEditMode({
-                                // name: names.owner.name,
-                                // purpose: names.purpose,
-                                // amount: names.amount,
-                                details:names,
-                                status: true
-                              })}
+                              onClick={() =>
+                                setEditMode({
+                                  // name: names.owner.name,
+                                  // purpose: names.purpose,
+                                  // amount: names.amount,
+                                  details: names,
+                                  status: true,
+                                })
+                              }
                             >
                               Edit
                             </button>
@@ -153,23 +163,77 @@ export default function ExpenseLog(props) {
       {editMode.status && (
         <div className="mt-2">
           <div className="grid grid-cols-2 gap-36 p-2 ">
-          <div className="">
-          <span><MdOutlineEdit/></span><input type="text" value={editMode.details.purpose}/>
+            <div className="flex flex-row">
+              <span
+                onClick={() => {
+                  setEditPurpose(true);
+                  setPurpose(editMode.details.purpose)
+                }}
+              >
+                <MdOutlineEdit />
+              </span>
+              {!editPurpose && <div>{editMode.details.purpose}</div>}
+              {editPurpose && (
+                <input type="text" value={purpose} onChange={(e)=>{setPurpose(e.target.value)}}/>
+              )}
             </div>
-            <div className="">
-            <span><MdOutlineEdit/></span><span>₹</span><input type="number" value={editMode.details.amount} className=""/><span className=" text-red-600 ml-10">x</span>
+            <div className="flex flex-row">
+              <span
+                onClick={() => {
+                  setEditAmount(true);
+                  setAmount(editMode.details.amount)
+                }}
+              >
+                <MdOutlineEdit />
+              </span>
+              <span>₹</span>
+              {!editAmount && <div>{editMode.details.amount}</div>}
+              {editAmount && (
+                <input type="number" value={amount} onChange={(e)=>{setAmount(e.target.value)}} />
+              )}
+              <span
+                className=" text-red-600 mx-10"
+                onClick={() => {
+                  setEditMode({
+                    details: " ",
+                    status: false,
+                  });
+                  setEditPurpose(false)
+                  setEditAmount(false)
+                  setPurpose(" ")
+                  setAmount()
+                  console.log("close", editedData);
+                }}
+              >
+                x
+              </span>
+              <span
+                onClick={() => {
+                  let splitArr = []
+                  editMode.details.splitInto.forEach((e)=>{splitArr.push(e.name)})
+                  setEditedData({
+                    purpose: editPurpose ? purpose : editMode.details.purpose,
+                    amount: editAmount ? amount : editMode.details.amount,
+                    splitInto: splitArr
+                  })
+                  console.log("done", editedData);
+                }}
+              >
+                V
+              </span>
             </div>
-            </div>
+          </div>
           <div className=" text-[#02A9EA]">
             Split With &rarr;
             <div className=" flex flex-row">
-            {editMode.details.splitInto.map((split)=>{
-              return(
-                <div className="px-4 py-2 m-2 bg-[#2176AE] text-white rounded-[15px] ">
-                {split.name}<span className="text-white ml-4 font-thin ">x</span>
-                </div>
-              )
-            })}
+              {editMode.details.splitInto.map((split) => {
+                return (
+                  <div className="px-4 py-2 m-2 bg-[#2176AE] text-white rounded-[15px] ">
+                    {split.name}
+                    <span className="text-white ml-4 font-thin ">x</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
