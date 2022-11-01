@@ -81,6 +81,8 @@ export default function ExpenseLog(props) {
 
   const [remaining, setRemaining] = useState([]);
 
+  const [add, setAdd] = useState(false);
+
   return (
     <div className="border-2  my-24 mx-32 rounded-t-xl bg-white" id="tranbg">
       {!editMode.status && (
@@ -103,12 +105,22 @@ export default function ExpenseLog(props) {
                         ₹{names.amount}
                         <button
                           className=""
-                          // onClick={(event) => handleDelete(event, names)}
                           onClick={() => {
                             setShowOp({
                               id: `${names._id}`,
                               status: !showOp.status,
                             });
+                            let splituser = [];
+                            for (let i = 0; i < names.splitInto.length; i++) {
+                              splituser[i] = names.splitInto[i]._id;
+                            }
+                            console.log("ssss", splituser);
+
+                            const rem = props.users.filter(
+                              (user) => !splituser.includes(user._id)
+                            );
+                            setRemaining(rem);
+                            console.log("state", remaining);
                             console.log("OP", showOp);
                           }}
                         >
@@ -118,38 +130,12 @@ export default function ExpenseLog(props) {
                           <div className="flex flex-col">
                             <button
                               className="bg-black text-white"
-                              // onClick={(event) => handleDelete(event, names)}
                               onClick={() => {
                                 setEditMode({
                                   details: names,
                                   status: true,
                                 });
-                                // setRemaining(props.users.filter((e)=>{
-                                //   return(e===editMode.details.splitInto)
-                                // }))
-
-                                // let rem = [];
-                                // props.users.forEach((user)=>{
-                                //   for(let i = 0; i<names.splitInto.length; i++){
-                                //     if(user._id===names.splitInto[i]._id){
-                                //       rem.push(user)
-                                //     }
-                                //   }
-                                //   // rem.push(user._id !== names.splitInto._id ? )
-                                // })
-
-                                // let rem = props.users
-                                let splituser = []
-                                for(let i=0;i<names.splitInto.length;i++){
-                                  splituser[i]=names.splitInto[i]._id
-                                }
-                                console.log("ssss",splituser)
-
-                                const rem = props.users.filter((user) => !splituser.includes(user._id))
-                                  // console.log("users", user._id, names.splitInto[0]._id)
-                                  // user.name !== names.splitInto.name
-                                console.log("remaining", props.users, names.splitInto);
-                                console.log("state",rem);
+                                console.log("state", remaining);
                               }}
                             >
                               Edit
@@ -290,7 +276,18 @@ export default function ExpenseLog(props) {
                           },
                           status: true,
                         });
-                        console.log("delete", detail);
+                        const user = {
+                          name: split.name,
+                          _id: split._id,
+                          token: split.token,
+                        };
+                        let newArr = remaining
+                        setRemaining(newArr.push({
+                          name: split.name,
+                          _id: split._id,
+                          token: split.token,
+                        }))
+                        console.log("delete", newArr);
                       }}
                     >
                       x
@@ -299,8 +296,47 @@ export default function ExpenseLog(props) {
                 );
               })}
               {props.users.length !== editMode.details.splitInto.length && (
-                <div onClick={() => {}}>
+                <div
+                  onClick={() => {
+                    setAdd(true);
+                  }}
+                >
                   <AiFillPlusCircle size={70} />
+                  {add && (
+                    <div>
+                      {remaining.map((user) => {
+                        return (
+                          <div>
+                            <div className=" ">
+                              <input
+                                type="checkbox"
+                                id={user.name}
+                                name={user.name}
+                                value={user._id}
+                                class="checkbox"
+                                // onClick={(e,user)=>{
+                                //   if(e.target.checked){
+                                //     // setRemaining(remaining.push(user))
+                                //   }
+                                //   console.log("check",remaining)
+                                //   // setAdd(true)
+                                // }}
+                              />
+                            </div>
+                            <div className=" text-center mx-auto">
+                              <label
+                                for={user.name}
+                                style={{ fontSize: 35 }}
+                                className=" font-MinionPro"
+                              >
+                                {user.name}
+                              </label>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
