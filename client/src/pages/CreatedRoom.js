@@ -137,7 +137,6 @@ const CreatedRoom = () => {
   console.log("users", allExpenses);
 
   const expenseDetails = (event, name) => {
-
     setIndie(true);
     setName(name.name);
     setIsActive(current => !current);
@@ -389,6 +388,7 @@ const CreatedRoom = () => {
             all={allExpenses}
             limit={limit}
             setLimit={setLimit}
+            users={userNames}
           />
         </>
         }

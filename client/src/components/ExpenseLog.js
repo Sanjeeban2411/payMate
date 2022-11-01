@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AiOutlineMore } from "react-icons/ai";
+import { AiOutlineMore, AiFillPlusCircle } from "react-icons/ai";
 import { MdOutlineEdit } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -65,19 +65,21 @@ export default function ExpenseLog(props) {
   // };
 
   const [editMode, setEditMode] = useState({
-    details:{},
+    details: {},
     status: false,
   });
   const [editAmount, setEditAmount] = useState(false);
   const [editPurpose, setEditPurpose] = useState(false);
   const [purpose, setPurpose] = useState(" ");
-  const [amount, setAmount] = useState( );
+  const [amount, setAmount] = useState();
 
   const [editedData, setEditedData] = useState({
     pupose: editMode.purpose,
     amount: editMode.amount,
     splitInto: [],
   });
+
+  const [remaining, setRemaining] = useState([]);
 
   return (
     <div className="border-2  my-24 mx-32 rounded-t-xl bg-white" id="tranbg">
@@ -117,15 +119,38 @@ export default function ExpenseLog(props) {
                             <button
                               className="bg-black text-white"
                               // onClick={(event) => handleDelete(event, names)}
-                              onClick={() =>
+                              onClick={() => {
                                 setEditMode({
-                                  // name: names.owner.name,
-                                  // purpose: names.purpose,
-                                  // amount: names.amount,
                                   details: names,
                                   status: true,
-                                })
-                              }
+                                });
+                                // setRemaining(props.users.filter((e)=>{
+                                //   return(e===editMode.details.splitInto)
+                                // }))
+
+                                // let rem = [];
+                                // props.users.forEach((user)=>{
+                                //   for(let i = 0; i<names.splitInto.length; i++){
+                                //     if(user._id===names.splitInto[i]._id){
+                                //       rem.push(user)
+                                //     }
+                                //   }
+                                //   // rem.push(user._id !== names.splitInto._id ? )
+                                // })
+
+                                // let rem = props.users
+                                let splituser = []
+                                for(let i=0;i<names.splitInto.length;i++){
+                                  splituser[i]=names.splitInto[i]._id
+                                }
+                                console.log("ssss",splituser)
+
+                                const rem = props.users.filter((user) => !splituser.includes(user._id))
+                                  // console.log("users", user._id, names.splitInto[0]._id)
+                                  // user.name !== names.splitInto.name
+                                console.log("remaining", props.users, names.splitInto);
+                                console.log("state",rem);
+                              }}
                             >
                               Edit
                             </button>
@@ -167,21 +192,27 @@ export default function ExpenseLog(props) {
               <span
                 onClick={() => {
                   setEditPurpose(true);
-                  setPurpose(editMode.details.purpose)
+                  setPurpose(editMode.details.purpose);
                 }}
               >
                 <MdOutlineEdit />
               </span>
               {!editPurpose && <div>{editMode.details.purpose}</div>}
               {editPurpose && (
-                <input type="text" value={purpose} onChange={(e)=>{setPurpose(e.target.value)}}/>
+                <input
+                  type="text"
+                  value={purpose}
+                  onChange={(e) => {
+                    setPurpose(e.target.value);
+                  }}
+                />
               )}
             </div>
             <div className="flex flex-row">
               <span
                 onClick={() => {
                   setEditAmount(true);
-                  setAmount(editMode.details.amount)
+                  setAmount(editMode.details.amount);
                 }}
               >
                 <MdOutlineEdit />
@@ -189,19 +220,25 @@ export default function ExpenseLog(props) {
               <span>₹</span>
               {!editAmount && <div>{editMode.details.amount}</div>}
               {editAmount && (
-                <input type="number" value={amount} onChange={(e)=>{setAmount(e.target.value)}} />
+                <input
+                  type="number"
+                  value={amount}
+                  onChange={(e) => {
+                    setAmount(e.target.value);
+                  }}
+                />
               )}
               <span
                 className=" text-red-600 mx-10"
                 onClick={() => {
                   setEditMode({
-                    details: " ",
+                    details: {},
                     status: false,
                   });
-                  setEditPurpose(false)
-                  setEditAmount(false)
-                  setPurpose(" ")
-                  setAmount()
+                  setEditPurpose(false);
+                  setEditAmount(false);
+                  setPurpose(" ");
+                  setAmount();
                   console.log("close", editedData);
                 }}
               >
@@ -209,13 +246,15 @@ export default function ExpenseLog(props) {
               </span>
               <span
                 onClick={() => {
-                  let splitArr = []
-                  editMode.details.splitInto.forEach((e)=>{splitArr.push(e.name)})
+                  let splitArr = [];
+                  editMode.details.splitInto.forEach((e) => {
+                    splitArr.push(e._id);
+                  });
                   setEditedData({
                     purpose: editPurpose ? purpose : editMode.details.purpose,
                     amount: editAmount ? amount : editMode.details.amount,
-                    splitInto: splitArr
-                  })
+                    splitInto: splitArr,
+                  });
                   console.log("done", editedData);
                 }}
               >
@@ -230,10 +269,40 @@ export default function ExpenseLog(props) {
                 return (
                   <div className="px-4 py-2 m-2 bg-[#2176AE] text-white rounded-[15px] ">
                     {split.name}
-                    <span className="text-white ml-4 font-thin ">x</span>
+                    <span
+                      className="text-white ml-4 font-thin "
+                      onClick={() => {
+                        let detail = editMode.details;
+                        detail.splitInto = editMode.details.splitInto.filter(
+                          (e) => e._id !== split._id
+                        );
+                        // setEditedData(editedData.splitInto.filter((e)=>{return(e!==split.name)}))
+                        // setEditMode({details:{splitInto:editMode.details.splitInto.filter((e)=>e._id!==split._id)}})
+                        setEditMode({
+                          details: {
+                            purpose: editPurpose
+                              ? purpose
+                              : editMode.details.purpose,
+                            amount: editAmount
+                              ? amount
+                              : editMode.details.amount,
+                            splitInto: detail.splitInto,
+                          },
+                          status: true,
+                        });
+                        console.log("delete", detail);
+                      }}
+                    >
+                      x
+                    </span>
                   </div>
                 );
               })}
+              {props.users.length !== editMode.details.splitInto.length && (
+                <div onClick={() => {}}>
+                  <AiFillPlusCircle size={70} />
+                </div>
+              )}
             </div>
           </div>
         </div>
