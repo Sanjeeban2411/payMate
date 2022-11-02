@@ -80,6 +80,7 @@ export default function ExpenseLog(props) {
   });
 
   const [remaining, setRemaining] = useState([]);
+  const [rems,setRems] = useState([])
 
   const [add, setAdd] = useState(false);
 
@@ -119,6 +120,7 @@ export default function ExpenseLog(props) {
                             const rem = props.users.filter(
                               (user) => !splituser.includes(user._id)
                             );
+                            console.log("rem",rem)
                             setRemaining(rem);
                             console.log("state", remaining);
                             console.log("OP", showOp);
@@ -282,7 +284,7 @@ export default function ExpenseLog(props) {
                           token: split.token,
                         };
                         let newArr = remaining
-                        setRemaining(newArr.push({
+                        setRems(newArr.push({
                           name: split.name,
                           _id: split._id,
                           token: split.token,
