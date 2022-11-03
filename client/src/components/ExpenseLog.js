@@ -79,10 +79,13 @@ export default function ExpenseLog(props) {
     splitInto: [],
   });
 
+  const [splitInto, setSplitInto] = useState([]);
+
   const [remaining, setRemaining] = useState([]);
-  const [rems,setRems] = useState([])
+  const [user, setUser] = useState();
 
   const [add, setAdd] = useState(false);
+  let ss =[]
 
   return (
     <div className="border-2  my-24 mx-32 rounded-t-xl bg-white" id="tranbg">
@@ -96,12 +99,12 @@ export default function ExpenseLog(props) {
               .filter((name, idx) => {
                 return props.limit ? idx < 5 : name;
               })
-              .map((names) => {
+              .map((names, index) => {
                 return (
                   <>
                     <div className=" p-2 grid grid-cols-3 gap-4">
-                      <div className="  text-center">{names.owner.name}</div>
-                      <div className=" text-center">{names.purpose}</div>
+                      <div className="text-center">{names.owner.name}</div>
+                      <div className="text-center">{names.purpose}</div>
                       <div className="text-center">
                         ₹{names.amount}
                         <button
@@ -120,8 +123,11 @@ export default function ExpenseLog(props) {
                             const rem = props.users.filter(
                               (user) => !splituser.includes(user._id)
                             );
-                            console.log("rem",rem)
+
+                            console.log("rem", rem);
                             setRemaining(rem);
+                            setUser(index);
+                            ss = props.all[index]
                             console.log("state", remaining);
                             console.log("OP", showOp);
                           }}
@@ -137,7 +143,10 @@ export default function ExpenseLog(props) {
                                   details: names,
                                   status: true,
                                 });
-                                console.log("state", remaining);
+                                setSplitInto(names.splitInto);
+                                // setRems(names)
+                                // ss = props.all[user]
+                                console.log("state", editMode);
                               }}
                             >
                               Edit
@@ -227,7 +236,18 @@ export default function ExpenseLog(props) {
                   setEditAmount(false);
                   setPurpose(" ");
                   setAmount();
-                  console.log("close", editedData);
+
+                  setSplitInto(props.all[user].splitInto);
+                  let splituser = [];
+                  for (let i = 0; i < props.all[user].splitInto.length; i++) {
+                    splituser[i] = props.all[user].splitInto[i]._id;
+                  }
+                  const rem = props.users.filter(
+                    (user) => !splituser.includes(user._id)
+                  );
+                  setRemaining(rem);
+                  // console.log("close", props.all[user]);
+                  console.log("close", ss);
                 }}
               >
                 x
@@ -253,7 +273,7 @@ export default function ExpenseLog(props) {
           <div className=" text-[#02A9EA]">
             Split With &rarr;
             <div className=" flex flex-row">
-              {editMode.details.splitInto.map((split) => {
+              {splitInto.map((split) => {
                 return (
                   <div className="px-4 py-2 m-2 bg-[#2176AE] text-white rounded-[15px] ">
                     {split.name}
@@ -278,17 +298,15 @@ export default function ExpenseLog(props) {
                           },
                           status: true,
                         });
-                        const user = {
+                        setSplitInto(detail.splitInto);
+                        let newArr = remaining;
+                        // setRems(
+                        newArr.push({
                           name: split.name,
                           _id: split._id,
                           token: split.token,
-                        };
-                        let newArr = remaining
-                        setRems(newArr.push({
-                          name: split.name,
-                          _id: split._id,
-                          token: split.token,
-                        }))
+                        });
+                        // );
                         console.log("delete", newArr);
                       }}
                     >
@@ -327,7 +345,7 @@ export default function ExpenseLog(props) {
                             </div>
                             <div className=" text-center mx-auto">
                               <label
-                                for={user.name}
+                                htlmFor={user.name}
                                 style={{ fontSize: 35 }}
                                 className=" font-MinionPro"
                               >
