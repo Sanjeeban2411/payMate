@@ -27,6 +27,8 @@ const CreatedRoom = () => {
 
   const [splitInto, setSplitInto] = useState([]);
 
+  //console.log("testparent", allExpenses) 
+
   let navigate = useNavigate();
   const x = localStorage.getItem("jwt_token");
   const room = localStorage.getItem("room");

@@ -68,6 +68,7 @@ export default function ExpenseLog(props) {
     details: {},
     status: false,
   });
+
   const [editAmount, setEditAmount] = useState(false);
   const [editPurpose, setEditPurpose] = useState(false);
   const [purpose, setPurpose] = useState(" ");
@@ -85,7 +86,7 @@ export default function ExpenseLog(props) {
   const [user, setUser] = useState();
 
   const [add, setAdd] = useState(false);
-  let ss =[]
+  let ss = [];
 
   return (
     <div className="border-2  my-24 mx-32 rounded-t-xl bg-white" id="tranbg">
@@ -127,7 +128,9 @@ export default function ExpenseLog(props) {
                             console.log("rem", rem);
                             setRemaining(rem);
                             setUser(index);
-                            ss = props.all[index]
+                            setSplitInto(names.splitInto);
+
+                            ss = props.all[index];
                             console.log("state", remaining);
                             console.log("OP", showOp);
                           }}
@@ -143,7 +146,7 @@ export default function ExpenseLog(props) {
                                   details: names,
                                   status: true,
                                 });
-                                setSplitInto(names.splitInto);
+                                // setSplitInto(names.splitInto);
                                 // setRems(names)
                                 // ss = props.all[user]
                                 console.log("state", editMode);
@@ -316,12 +319,13 @@ export default function ExpenseLog(props) {
                 );
               })}
               {props.users.length !== editMode.details.splitInto.length && (
-                <div
-                  onClick={() => {
-                    setAdd(true);
-                  }}
-                >
-                  <AiFillPlusCircle size={70} />
+                <div>
+                  <AiFillPlusCircle
+                    size={70}
+                    onClick={() => {
+                      setAdd(!add);
+                    }}
+                  />
                   {add && (
                     <div>
                       {remaining.map((user) => {
@@ -334,13 +338,23 @@ export default function ExpenseLog(props) {
                                 name={user.name}
                                 value={user._id}
                                 class="checkbox"
-                                // onClick={(e,user)=>{
-                                //   if(e.target.checked){
-                                //     // setRemaining(remaining.push(user))
-                                //   }
-                                //   console.log("check",remaining)
-                                //   // setAdd(true)
-                                // }}
+                                onClick={(e, user) => {
+                                  if (e.target.checked) {
+                                    // setRemaining(remaining.push(user))
+                                    // setSplitInto(splitInto.push(user))
+                                    // setEditMode({
+                                    //   details: {
+                                    //     purpose: purpose,
+                                    //     amount: amount,
+                                    //     splitInto: splitInto.push(user),
+                                    //   },
+                                    //   status: true,
+                                    // });
+                                    console.log("editMode: ",editMode, "splitInto: ", splitInto)
+                                  }
+                                  console.log("check", remaining);
+                                  // setAdd(true)
+                                }}
                               />
                             </div>
                             <div className=" text-center mx-auto">
