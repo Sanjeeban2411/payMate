@@ -92,9 +92,9 @@ const Rooms = (props) => {
               </div>
             </div>
             <div className=" flex flex-row mt-14 mx-auto text-center">
-              <div className=" w-[400px] h-[320px] border-[3px] rounded-[40px] border-[#2176AE] mr-20">
-                <div className="h-[160px]"></div>
-                <div className=" text-2xl transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300">
+              <div className=" w-[400px] h-[360px] border-[3px] rounded-[40px] border-[#2176AE] mr-20">
+                <div className="h-[180px]"><img src="./assests/Create.png" alt="" /></div>
+                <div className=" text-2xl mt-3 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300">
                   <div>
                     <a
                       href="/createroom"
@@ -106,9 +106,9 @@ const Rooms = (props) => {
                 </div>
                 <div className=" text-center pt-10 w-[200px] mx-auto text-sm">Create a new room for a new purpose</div>
               </div>
-              <div className="w-[400px] h-[320px] border-[3px] rounded-[40px] border-[#2176AE]">
-                <div className="h-[160px]"></div>
-                <div className="text-2xl  transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300">
+              <div className="w-[400px] h-[360px] border-[3px] rounded-[40px] border-[#2176AE]">
+                <div className="h-[180px]"><img src="./assests/Join.png" alt="" /></div>
+                <div className="text-2xl mt-3 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300">
                   <a
                     href="/joinroom"
                     className=" bg-[#02A9EA] text-white px-4 py-2  rounded-lg  hover:bg-gray-400 hover:text-black no-underline"

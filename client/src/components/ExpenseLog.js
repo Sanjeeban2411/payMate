@@ -81,7 +81,7 @@ export default function ExpenseLog(props) {
   });
 
   const [splitInto, setSplitInto] = useState([]);
-
+  const [memsplit,setMemsplit] = useState([])
   const [remaining, setRemaining] = useState([]);
   const [user, setUser] = useState();
 
@@ -339,7 +339,9 @@ export default function ExpenseLog(props) {
                                 value={user._id}
                                 class="checkbox"
                                 onClick={(e, user) => {
-                                  if (e.target.checked) {
+                                  let memarr=[]
+                                  
+                                  // if (e.target.checked === true) {
                                     // setRemaining(remaining.push(user))
                                     // setSplitInto(splitInto.push(user))
                                     // setEditMode({
@@ -350,9 +352,22 @@ export default function ExpenseLog(props) {
                                     //   },
                                     //   status: true,
                                     // });
+                                    const index = remaining.indexOf(e.target.value)
+                                    if(index > -1){
+                                      splitInto.splice(index,1)
+                                    }
+                                    else{
+                                      splitInto.push({_id: e.target.value, name: e.target.name} )
+                                    }
+                                    console.log("rrrrr",splitInto)
+                                    
+                                    memarr.push(e.target.name)
+                                    console.log("mem",e.target.name)
+                                                                      
                                     console.log("editMode: ",editMode, "splitInto: ", splitInto)
-                                  }
-                                  console.log("check", remaining);
+                                  // }
+                                  console.log("memb",memarr)
+                                  // console.log("check", remaining);
                                   // setAdd(true)
                                 }}
                               />
