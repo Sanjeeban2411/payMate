@@ -352,21 +352,25 @@ export default function ExpenseLog(props) {
                                     //   },
                                     //   status: true,
                                     // });
+                                    let myarr=[]
                                     const index = remaining.indexOf(e.target.value)
                                     if(index > -1){
                                       splitInto.splice(index,1)
                                     }
                                     else{
                                       splitInto.push({_id: e.target.value, name: e.target.name} )
+                                      myarr = remaining.filter((n) => n._id !== splitInto._id);
+                                      
                                     }
                                     console.log("rrrrr",splitInto)
                                     
+                                    console.log("mem",myarr)
                                     memarr.push(e.target.name)
-                                    console.log("mem",e.target.name)
+                                    
                                                                       
                                     console.log("editMode: ",editMode, "splitInto: ", splitInto)
                                   // }
-                                  console.log("memb",memarr)
+                                  console.log("memb",remaining)
                                   // console.log("check", remaining);
                                   // setAdd(true)
                                 }}
