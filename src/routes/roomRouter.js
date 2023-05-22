@@ -86,7 +86,6 @@ router.post('/room/join', auth, async (req, res) => {
     }
 })
 
-
 // GET USERS INSIDE A ROOM
 router.get('/:room/users', auth, async (req, res) => {
     // console.log(req.params.room)
