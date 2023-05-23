@@ -1,7 +1,7 @@
 const express = require('express')
 // const path = require('path')
 // const http = require('http')
-// const cors = require('cors')
+const cors = require('cors')
 // const socket = require('socket.io')
 require('./mongo/db')
 
@@ -25,7 +25,7 @@ const app = express()
 
 // const room = require('./routes/room')(io)
 
-// app.use(cors())
+app.use(cors())
 app.use(express.json())
 app.use(express.static('../client'))
 app.use(userRouter)  
