@@ -52,7 +52,7 @@ const Rooms = (props) => {
 
     axios({
       method: "post",
-      url: "/room/join",
+      url: "https://paymate-back.onrender.com/room/join",
       data: {
         name: value.name,
         password: value.password,

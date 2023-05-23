@@ -24,7 +24,7 @@ export default function JoinRoom() {
     if (queries.room && queries.pass) {
         axios({
             method: 'post',
-            url: '/room/join',
+            url: 'https://paymate-back.onrender.com/room/join',
             data:
             {
                 "name": queries.room,
@@ -77,7 +77,7 @@ export default function JoinRoom() {
 
         axios({
             method: 'post',
-            url: '/room/join',
+            url: 'https://paymate-back.onrender.com/room/join',
             data:
             // link.length > 0 ? {"join_link":link} : 
             {

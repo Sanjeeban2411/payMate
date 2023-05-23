@@ -19,7 +19,7 @@ export default function Report() {
   useEffect(() => {
     axios({
       method: "get",
-      url: `/${room}/analyze`,
+      url: `https://paymate-back.onrender.com/${room}/analyze`,
       headers: {
         Authorization: `Bearer ${x}`,
       },
@@ -153,7 +153,7 @@ export default function Report() {
 
     axios({
       method: "patch",
-      url: `/${room}/settleTransaction`,
+      url: `https://paymate-back.onrender.com/${room}/settleTransaction`,
       headers: {
         Authorization: `Bearer ${x}`,
       },

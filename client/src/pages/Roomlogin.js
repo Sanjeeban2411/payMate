@@ -21,7 +21,7 @@ export default function Roomlogin() {
         // useEffect(() => {
             axios({
                 method: 'post',
-                url: '/room/join',
+                url: 'https://paymate-back.onrender.com/room/join',
                 data: data,
                 headers: {
                     'Authorization': `Bearer ${x}`,

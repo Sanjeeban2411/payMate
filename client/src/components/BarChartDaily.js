@@ -17,7 +17,7 @@ const BarChartDaily = () => {
     useEffect(() => {
       axios({
         method: "get",
-        url: "/user",
+        url: "https://paymate-back.onrender.com/user",
         headers: {
           Authorization: `Bearer ${x}`,
         },
@@ -34,7 +34,7 @@ const BarChartDaily = () => {
     useEffect(() => {
       axios({
         method: "get",
-        url: "/getexpenses",
+        url: "https://paymate-back.onrender.com/getexpenses",
         headers: {
           Authorization: `Bearer ${x}`,
         },
@@ -55,7 +55,7 @@ const BarChartDaily = () => {
   
       axios({
         method: "post",
-        url: "/addexpense",
+        url: "https://paymate-back.onrender.com/addexpense",
         data: expenseData,
         headers: {
           Authorization: `Bearer ${x}`,

@@ -19,7 +19,7 @@ export default function Signup() {
         console.log(data)
         axios({
             method: 'post',
-            url: '/signup',
+            url: 'https://paymate-back.onrender.com/signup',
             data: data
         })
             .then(function (response) {
