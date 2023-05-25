@@ -58,7 +58,7 @@ router.post('/room/join', auth, async (req, res) => {
             // if (room.password === password) {
             const isMatch = await bcrypt.compare(req.body.password, room.password)
             console.log(isMatch)
-            if (!isMatch) {
+            if (isMatch) {
 
                 if (!room.users.includes(user._id)) {
                     room.users.push(user._id)
