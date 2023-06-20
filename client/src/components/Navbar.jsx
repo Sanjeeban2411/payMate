@@ -31,10 +31,7 @@ const Navbar = () => {
                             to="/user"
                             class="active"
                             id="nav-links"
-                            // className={({ isActive }) => ( isActive ? activeLink : normalLink)}
-                            // style={({ isActive }) => ({
-                            //     color: isActive ? 'black' : '#2176AE'
-                            // })}
+                           
                         >
                             Home
                         </NavLink>
@@ -43,10 +40,7 @@ const Navbar = () => {
                         <NavLink
                             to="/analysis"
                             id="nav-links"
-                            // className={({ isActive }) => ( isActive ? activeLink : normalLink)}
-                            // style={({ isActive }) => ({
-                            //     color: isActive ? 'black' : '#2176AE'
-                            // })}
+                         
                         >
                             Analysis
                         </NavLink>
@@ -55,10 +49,7 @@ const Navbar = () => {
                         <NavLink
                             to="/rooms"
                             id="nav-links"
-                            // className={({ isActive }) => ( isActive ? activeLink : normalLink)}
-                            // style={({ isActive }) => ({
-                            //     color: isActive ? 'black' : '#2176AE'
-                            // })}
+                           
                         >
                             Rooms
                         </NavLink>
@@ -67,17 +58,12 @@ const Navbar = () => {
                         <NavLink
                             to="/about"
                             id="nav-links"
-                            // className={({ isActive }) => ( isActive ? activeLink : normalLink)}
-                            // style={({ isActive }) => ({
-                            //     color: isActive ? 'black' : '#2176AE'
-                            // })}
+                           
                         >
                             About Us
                         </NavLink>
                     </li>
-                    {/* <li className='p-7'><NavLink exact to='/analysis' activeClassName="active-link2" className=' font-bold  text-[#2176AE] cursor-pointer no-underline'><h4>Analysis</h4></NavLink></li>
-                    <li className='p-7'><NavLink exact to='/rooms' activeClassName="active-link3" className=' font-bold  text-[#2176AE] cursor-pointer no-underline'><h4>Rooms</h4></NavLink></li>
-                    <li className='p-7'><NavLink exact to='/about' activeClassName="active-link4" className=' font-bold  text-[#2176AE] cursor-pointer no-underline'><h4>About Us</h4></NavLink></li> */}
+                   
                 </ul>
 
                 <div className=' hidden md:flex md:pr-3 justify-between items-center  cursor-pointer'>

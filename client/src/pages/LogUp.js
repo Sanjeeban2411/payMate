@@ -115,9 +115,9 @@ const LogUp = () => {
               <h1 className="text-lg md:text-xl font-bold leading-tight mt-1 text-white">
                 Welcome to Paymate
               </h1>
-                <form action='submit' className='mt-2 px-5'>
+                <form action='submit' className='mt-2 px-5 flex flex-col justify-center '>
                     
-                    <div className=''>
+                    <div className=' w-full'>
                         {/* <label className='block text-gray-700'>Username</label> */}
                         <input className=' w-full px-4 py-1 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none'
                             type="text"
@@ -135,7 +135,7 @@ const LogUp = () => {
                             value={name}
                         />
                     </div>
-                    <div className='mt-3'>
+                    <div className='mt-3 w-full'>
                         {/* <label className='block text-gray-700'>E-mail</label> */}
                         <input className='w-full px-4 py-1 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none'
                             type="text"
@@ -152,7 +152,7 @@ const LogUp = () => {
                         value={email}
                         />
                     </div>
-                    <div className='mt-3'>
+                    <div className='mt-3 w-full'>
                         {/* <label className='block text-gray-700'>Password</label> */}
                         <input className='w-full px-4 py-1 rounded-lg bg-white placeholder-[#40B3BE] mt-2 border focus:border-blue-500
                   focus:bg-white focus:outline-none'
@@ -190,8 +190,12 @@ const LogUp = () => {
                 onFailure={handleFailure}
                 cookiePolicy={'single_host_origin'}
                 />
+                
                 )} */}
-                <div className='w-full mt-3  px-3' id="signOutDiv"></div>
+                <div className='w-full mt-3 flex justify-center items-center  px-4' >
+                  <div id="signOutDiv" className=""></div>
+                </div>
+               
                  {/* <button
                   className="w-full block bg-white hover:bg-blue-400 focus:bg-blue-400 text-black font-semibold rounded-lg
                 px-4 py-1 mt-3"

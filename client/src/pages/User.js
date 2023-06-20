@@ -126,7 +126,7 @@ const User = () => {
 
   return (
     <>
-      {/* {data && total && allExpenses && ( */}
+      
       {data && (
         <div>
           <Navbar />
@@ -166,10 +166,7 @@ const User = () => {
                       placeholder="₹"
                       onChange={(e) => {
                         setamount(e.target.value);
-                        // setExpenseData({
-                        //   purpose: expenseData.purpose,
-                        //   amount: e.target.value,
-                        // });
+                    
                       }}
                       value={amount}
                     />
@@ -180,10 +177,7 @@ const User = () => {
                       placeholder="Travel"
                       onChange={(e) => {
                         setpurpose(e.target.value);
-                        // setExpenseData({
-                        //   purpose: e.target.value,
-                        //   amount: expenseData.amount,
-                        // });
+                    
 
                       }}
                       value={purpose}
