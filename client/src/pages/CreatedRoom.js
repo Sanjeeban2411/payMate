@@ -36,7 +36,7 @@ const CreatedRoom = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `/${room}/users`,
+      url: `https://paymate-back.onrender.com/${room}/users`,
       headers: {
         Authorization: `Bearer ${x}`,
       },
@@ -61,7 +61,7 @@ const CreatedRoom = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `/${room}/getexpenses`,
+      url: `https://paymate-back.onrender.com/${room}/getexpenses`,
       headers: {
         Authorization: `Bearer ${x}`,
       },
@@ -108,7 +108,7 @@ const CreatedRoom = () => {
 
     axios({
       method: "post",
-      url: `/${room}/addexpense`,
+      url: `https://paymate-back.onrender.com/${room}/addexpense`,
       data: {
         purpose: purpose,
         amount: Number(amount),
@@ -183,7 +183,7 @@ const CreatedRoom = () => {
     if (owner) {
       axios({
         method: "patch",
-        url: `/${room}/leaveroom`,
+        url: `https://paymate-back.onrender.com/${room}/leaveroom`,
         headers: {
           Authorization: `Bearer ${x}`,
         },

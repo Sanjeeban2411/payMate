@@ -19,11 +19,12 @@ const Rooms = (props) => {
   const [data, setData] = useState([]);
   const [user, setUser] = useState();
   console.log("userNames", data);
+  console.log("users", user);
   const x = localStorage.getItem("jwt_token");
   useEffect(() => {
     axios({
       method: "get",
-      url: `/showrooms`,
+      url: `https://paymate-back.onrender.com/showrooms`,
       headers: {
         Authorization: `Bearer ${x}`,
       },
@@ -52,7 +53,7 @@ const Rooms = (props) => {
 
     axios({
       method: "post",
-      url: "/room/join",
+      url: "https://paymate-back.onrender.com/room/join",
       data: {
         name: value.name,
         password: value.password,

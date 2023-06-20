@@ -18,7 +18,7 @@ const CreateRoom = () => {
         console.log(data)
         axios({
             method: 'post',
-            url: '/room/create',
+            url: 'https://paymate-back.onrender.com/room/create',
             data: {"name": name,
                 "password": password.toString()},
             headers: {

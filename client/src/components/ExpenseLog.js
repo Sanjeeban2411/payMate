@@ -19,7 +19,7 @@ export default function ExpenseLog(props) {
     console.log(exp);
     axios({
       method: "get",
-      url: `/detailedexpense/${exp._id}`,
+      url: `https://paymate-back.onrender.com/detailedexpense/${exp._id}`,
       headers: {
         Authorization: `Bearer ${x}`,
       },
@@ -41,7 +41,7 @@ export default function ExpenseLog(props) {
     console.log(exp);
     axios({
       method: "delete",
-      url: `/deleteexpense/${exp._id}`,
+      url: `https://paymate-back.onrender.com/deleteexpense/${exp._id}`,
       headers: {
         Authorization: `Bearer ${x}`,
       },

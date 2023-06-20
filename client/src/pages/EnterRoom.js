@@ -21,7 +21,7 @@ export default function EnterRoom(props) {
         // useEffect(() => {
         axios({
             method: 'post',
-            url: '/room/join',
+            url: 'https://paymate-back.onrender.com/room/join',
             data: {
                 "name": name,
                 "password": password.toString()

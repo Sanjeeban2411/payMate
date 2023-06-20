@@ -19,7 +19,7 @@ const BarChart = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `/${room}/users`,
+      url: `https://paymate-back.onrender.com/${room}/users`,
       headers: {
         Authorization: `Bearer ${x}`,
       },
@@ -37,7 +37,7 @@ const BarChart = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `/${room}/getexpenses`,
+      url: `https://paymate-back.onrender.com/${room}/getexpenses`,
       headers: {
         Authorization: `Bearer ${x}`,
       },
@@ -52,7 +52,7 @@ const BarChart = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `/${room}/analyze`,
+      url: `https://paymate-back.onrender.com/${room}/analyze`,
       headers: {
         Authorization: `Bearer ${x}`,
       },

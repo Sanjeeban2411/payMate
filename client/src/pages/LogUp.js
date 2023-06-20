@@ -25,7 +25,7 @@ const LogUp = () => {
         console.log(data)
         axios({
             method: 'post',
-            url: '/signup',
+            url: 'https://paymate-back.onrender.com/signup',
             data: {"name": name,
                 "email": email,
                 "password": password.toString()}
@@ -77,7 +77,7 @@ const LogUp = () => {
     if(user.email_verified=true){
       axios({
         method: 'post',
-        url: '/signup',
+        url: 'https://paymate-back.onrender.com/signup',
         data: {"name": user.given_name,
             "email": user.email,
             "password": "googleAuthenticated"}

@@ -29,7 +29,7 @@ const Signin = () => {
 
     axios({
       method: "post",
-      url: "/login",
+      url: 'https://paymate-back.onrender.com/login',
       //   data: data,
       data: { email: email, password: password.toString() },
     })
@@ -93,7 +93,7 @@ const Signin = () => {
     if(user.email_verified=true){
       axios({
         method: "post",
-        url: "/login",
+        url: 'https://paymate-back.onrender.com/login',
         //   data: data,
         data: { email: user.email, password: "cccc" },
       })
