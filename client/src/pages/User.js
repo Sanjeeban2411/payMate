@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import GoogleLogin from 'react-google-login';
+import wallet from "../assests/Wallet-1.png"
 
 const User = () => {
   const [purpose, setpurpose] = useState();
@@ -128,19 +129,76 @@ const User = () => {
     <>
       
       {data && (
-        <div>
+        <div className=" flex flex-col">
           <Navbar />
-          <div className=" absolute w-full h-[60%] top-50% flex flex-col mt-24 font-Montserrat text-3xl  text-black">
-            <div className="flex flex-row h-[80vh]">
+          <div className=" w-full h-[100vh] pt-20 grid grid-cols-5 ">
+            <div className=" relative col-span-3 w-full h-full flex flex-col ">
+              <div className=" px-24 py-6"><div className=" font-black text-3xl ">“Add all your <span className="text-[#2176AE]">expenses</span> and <span className="text-[#2176AE]">keep track</span> of your budget” </div></div>
+              <div className="   w-[60%] h-[40%] wallet-bg">
+                {/* <img src={wallet} alt="" className=" " /> */}
+              </div>
+              <div className="  flex flex-col">
+              <div>Total Amount Spent</div>
+              <div>₹{total}</div>
+              </div>
+            </div>
+            <div className=" col-span-2 py-3 px-12 w-full h-full flex">
+              <div className=" bg-black w-[5%] rounded-l-[20px] h-full "></div>
+              <div className=" w-full h-full flex flex-col">
+                <div className=" bg-[#113248] w-full rounded-tr-[20px] h-24 py-3 px-3 flex flex-col justify-around">
+                  <div className=" text-[#9FD7FC] text-xl font-semibold">Hey There!</div>
+                  <div className=" w-full flex justify-between text-white ">
+                    <div className=" text-xl">{data.name}</div>
+                    <div className="text-xl ">{currentDate}</div>
+                  </div>
+                </div>
+                <div className=" w-full h-full  flex flex-col justify-around py-10 px-16" id="bg-form">
+                  <div className="">
+                    <label className=" text-3xl ">Amount</label>
+                    <div className=" my-2"><input
+                      className=" border-b-2 border-black focus:outline-none bg-transparent w-full placeholder-black placeholder:font-bold placeholder:text-xl"
+                      type="number"
+                      min={0}
+                      placeholder="₹"
+                      onChange={(e) => {
+                        setamount(e.target.value);
+                    
+                      }}
+                      value={amount}
+                    /></div>
+                  </div>
+                  <div className=" ">
+                    <label className=" text-3xl ">Category</label>
+                    <div className=" my-2"><input
+                      className=" border-b-2 border-black focus:outline-none bg-transparent w-full placeholder-black placeholder:font-bold placeholder:text-xl"
+                      type="text"
+                      placeholder="Travel"
+                      onChange={(e) => {
+                        setpurpose(e.target.value);
+                    
+
+                      }}
+                      value={purpose}
+                    /></div>
+                  </div>
+                  <div className=" w-full flex justify-center items-center ">
+                    <div><button className=" px-3 py-2 text-white bg-black rounded-lg">Add Spend</button></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <div className=" absolute w-full h-[80vh]   mt-24 font-Montserrat text-3xl  text-black">
+            <div className="flex flex-row ">
               <div className="flex flex-col ">
-                <div className=" relative">
-                {/* <div className="  absolute top-[10%] w-[45%] h-[130%] bg-[#9FD7FC]"></div> */}
+                <div className="">
+                
                   <h1 className="  relative ml-24 mt-16 font-black ">“Add all your <span className="text-[#2176AE]">expenses</span> and keep <span className="text-[#2176AE]">keep track</span> of your budget” </h1>
                   
                 </div>
-                <div className=" relative text-white  h-[400px] mt-20">
-                  <img src="./assests/Wallet-1.png" alt="" className=" h-[420px]" />
-                  <div className=" absolute top-[40%] right-[55%] ">
+                <div className=" absolute text-white bottom-0 left-0  h-[200px]">
+                  <div><img src="./assests/Wallet-1.png" alt="" className=" h-full " /></div>
+                  <div className="  ">
                     <h2 className="p-2">Total Amount Spent</h2>
                     <p className="text-[#E18A07] text-4xl font-extrabold">₹{total}</p>
                   </div>
@@ -194,7 +252,7 @@ const User = () => {
 
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       )}
     </>

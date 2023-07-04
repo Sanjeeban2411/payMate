@@ -15,11 +15,8 @@ const Navbar = () => {
         setNav(!nav)
         setLogo(!logo)
     }
-
-    const  activeLink = "absolute  border-b-[3px] font-bold border-[#2176AE] px-1  text-[#2176AE] cursor-pointer no-underline  "
-    const normalLink = " relative font-bold  text-[#2176AE] cursor-pointer no-underline"
     return (
-        <div className='flex flex-col'>
+        <div className=''>
             <div className='flex flex-row w-full justify-between   items-center h-20 px-10 absolute z-10 font-Montserrat '>
                 <div className='text-[#2176AE]' >
                     <h1 onClick={handleNav} className={logo ? ' hidden' : 'flex text-3xl font-black  '} ><a href='/' onClick={handleNav} className={logo ? ' hidden' : 'flex text-[#2176AE] text-3xl font-black no-underline  '}>Paymate</a> <div className='p-2 m-auto'><FaMoneyBillWave /></div></h1>
@@ -95,8 +92,6 @@ const Navbar = () => {
                 </div>
 
             </div>
-
-            {/* <hr className='mt-16'/> */}
         </div>
     )
 }
